@@ -1,5 +1,5 @@
-# PV179-project
-PV179 Project
+# PV179
+Authors: Márius Molčány 456350, Peter Baltazarovič 456213
 
 -will be private when activated student license
 
