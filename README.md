@@ -4,7 +4,7 @@ Authors: Márius Molčány 456350, Peter Baltazarovič 456213
 -will be private when activated student license
 
 RPG hra s 1 postavou 
-User stories:
+User stories: (beta)
 - pri vytváraní postavy si navolíš skills (s.p.e.c.i.a.l)
 - napádanie ostatných hráčov 
 - tréning (zvyšovanie stats)
