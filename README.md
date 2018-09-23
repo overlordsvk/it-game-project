@@ -24,3 +24,8 @@ User stories:
     - klanová nástenka + zákledné info 
     - klan management (správa členov klanu, upravovanie práv členov, úprava popisu, zrušenie klanu)
     - scóre list klanov
+
+  Admin options:
+    - správa itemov (vytváranie nových itemov, mazanie, drop chance pri lootboxoch)
+    - správa užívateľov
+    
