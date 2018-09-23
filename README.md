@@ -26,6 +26,7 @@ User stories:
     - scóre list klanov
 
   Admin options:
+  
     - správa itemov (vytváranie nových itemov, mazanie, drop chance pri lootboxoch)
     - správa užívateľov
     
