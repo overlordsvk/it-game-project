@@ -14,7 +14,7 @@ User stories:
     - pri vytváraní postavy si navolíš skills (s.p.e.c.i.a.l)
     - napádanie ostatných hráčov - získavanie bodov pre zlepšenie skills
     - tréning (zvyšovanie stats)
-    - itemy možno získať z bitiek alebo z lootboxov
+    - itemy možno získať z bitiek z ktorých sa získa lootbox
     - trading itemov
     - direct chat (posielanie správ podla nicku)
 
