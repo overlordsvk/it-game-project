@@ -1,8 +1,6 @@
 # PV179
 Authors: Márius Molčány 456350, Peter Baltazarovič 456213
 
--will be private when activated student license
-
 <b>Browser RPG hra s 1 postavou - IT game theme</b>
 
 User stories:
