@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dal.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class Account
+    public class Account : IEntity
     {
         public int Id { get; set; }
         [Required]
