@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace dal.Repository
-{
+{/*
     public class Repository<TEntity> : IRepository<TEntity>
     {
 
@@ -33,5 +33,5 @@ namespace dal.Repository
         {
             throw new NotImplementedException();
         }
-    }
+    }*/
 }

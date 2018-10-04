@@ -20,7 +20,7 @@ namespace DAL
         public DbSet<Message> Messages { get; set; }
         public DbSet<WeaponType> WeaponTypes { get; set; }
 
-        public GameDbContext() : base("BrowserGame")
+        public GameDbContext() : base("Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
         {
             Database.SetInitializer(new Initializer());
         }

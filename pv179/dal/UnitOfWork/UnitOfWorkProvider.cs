@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace dal.UnitOfWork
-{
+{/*
     public class UnitOfWorkProvider : IUnitOfWorkProvider
     {
         protected readonly AsyncLocal<IUnitOfWork> UowLocalInstance = new AsyncLocal<IUnitOfWork>();
@@ -33,5 +33,5 @@ namespace dal.UnitOfWork
         {
             throw new NotImplementedException();
         }
-    }
+    }*/
 }
