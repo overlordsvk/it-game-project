@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbFactory\UnitOfWorkProviderFactory.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
     <Compile Include="Entities\Fight.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="UnitOfWork\IUnitOfWorkProvider.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkProviderFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

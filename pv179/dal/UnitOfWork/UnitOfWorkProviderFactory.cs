@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dal.DbFactory
+namespace dal.UnitOfWork
 {
     public static class UnitOfWorkProviderFactory
     {
-        public static GameDbContext DbContext()
+        public static IUnitOfWorkProvider Create()
         {
-            return new GameDbContext();
+            return new UnitOfWorkProvider(() => new GameDbContext());
         }
     }
 }

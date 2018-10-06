@@ -1,7 +1,11 @@
-﻿using DAL;
+﻿using dal.Repository;
+using dal.UnitOfWork;
+using DAL;
 using DAL.Entities;
 using System;
 using System.Linq;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PV179Console
 {
@@ -9,20 +13,39 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("Player:");
 
-            using (var db = new GameDbContext())
-            {
-                var accounts = db.Accounts.ToList();
-                //Console.WriteLine(teams.Last().Character.Name);
-                
-                foreach (var account in accounts)
-                {
-                    Console.WriteLine(account.Username);
-                }
-            }
+            Console.WriteLine("Add new teams:");
+            var newTeam = Console.ReadLine();
+
+            CreateTeam(newTeam).Wait();
+            Console.WriteLine(GetFirstTeamName().Result);
+
             Console.ReadKey();
         }
+
+        public static async Task CreateTeam(string newTeam)
+        {
+            var provider = UnitOfWorkProviderFactory.Create();
+
+            using (var unitOfWork = provider.Create())
+            {
+                var repo = new Repository<Account>(provider);
+                repo.Create(new Account() { Username = newTeam, Email = "jano@jano.com", Password = "123456", IsAdmin = false });
+                await unitOfWork.Commit();
+            }
+        }
+
+        public static async Task<string> GetFirstTeamName()
+        {
+            var provider = UnitOfWorkProviderFactory.Create();
+
+            using (var unitOfWork = provider.Create())
+            {
+                var repo = new Repository<Account>(provider);
+                var a = await repo.GetAsync(1);
+                return a.Username;
+            }
+        }
+
     }
 }

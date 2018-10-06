@@ -1,37 +1,61 @@
-﻿using System;
+﻿using dal.Entities;
+using dal.UnitOfWork;
+using DAL;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dal.Repository
-{/*
-    public class Repository<TEntity> : IRepository<TEntity>
+{
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
+        private readonly IUnitOfWorkProvider provider;
+
+        protected GameDbContext Context => ((UnitOfWork.UnitOfWork)provider.GetUnitOfWorkInstance()).Context;
+
+        public Repository(IUnitOfWorkProvider provider)
+        {
+            this.provider = provider;
+        }
 
         public void Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Add(entity);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var entity = Context.Set<TEntity>().Find(id);
+            if (entity != null)
+            {
+                Context.Set<TEntity>().Remove(entity);
+            }
         }
 
-        public Task<TEntity> GetAsync(int id)
+        public async Task<TEntity> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
-        public Task<TEntity> GetAsync(int id, params string[] includes)
+        public async Task<TEntity> GetAsync(int id, params string[] includes)
         {
-            throw new NotImplementedException();
+            DbQuery<TEntity> ctx = Context.Set<TEntity>();
+            foreach (var include in includes)
+            {
+                ctx = ctx.Include(include);
+            }
+            return await ctx
+                .SingleOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var foundEntity = Context.Set<TEntity>().Find(entity.Id);
+            Context.Entry(foundEntity).CurrentValues.SetValues(entity);
         }
-    }*/
+    }
 }

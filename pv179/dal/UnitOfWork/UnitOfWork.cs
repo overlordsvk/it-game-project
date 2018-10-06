@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,33 @@ namespace dal.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public Task Commit()
+        private readonly IList<Action> afterCommitActions = new List<Action>();
+
+        public GameDbContext Context { get; }
+
+        public UnitOfWork(Func<GameDbContext> dbContextFactory)
         {
-            throw new NotImplementedException();
+            this.Context = dbContextFactory?.Invoke() ?? throw new ArgumentException("Db context factory cant be null!");
         }
 
-        public void Dispose()
+        public async Task Commit()
         {
-            throw new NotImplementedException();
+            await Context.SaveChangesAsync();
+            foreach (var action in afterCommitActions)
+            {
+                action();
+            }
+            afterCommitActions.Clear();
         }
 
         public void RegisterAction(Action action)
         {
-            throw new NotImplementedException();
+            afterCommitActions.Add(action);
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
         }
     }
 }

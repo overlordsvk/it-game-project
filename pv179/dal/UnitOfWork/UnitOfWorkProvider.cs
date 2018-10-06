@@ -7,15 +7,17 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace dal.UnitOfWork
-{/*
+{
     public class UnitOfWorkProvider : IUnitOfWorkProvider
     {
-        protected readonly AsyncLocal<IUnitOfWork> UowLocalInstance = new AsyncLocal<IUnitOfWork>();
+        protected readonly AsyncLocal<IUnitOfWork> UowLocalInstance
+            = new AsyncLocal<IUnitOfWork>();
 
         private readonly Func<GameDbContext> dbContextFactory;
-        public UnitOfWorkProvider(Func<GameDbContext> DbContextFactory)
+
+        public UnitOfWorkProvider(Func<GameDbContext> dbContextFactory)
         {
-            dbContextFactory = DbContextFactory;
+            this.dbContextFactory = dbContextFactory;
         }
 
         public IUnitOfWork Create()
@@ -23,15 +25,16 @@ namespace dal.UnitOfWork
             UowLocalInstance.Value = new UnitOfWork(dbContextFactory);
             return UowLocalInstance.Value;
         }
-        
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
 
         public IUnitOfWork GetUnitOfWorkInstance()
         {
-            throw new NotImplementedException();
+            return UowLocalInstance != null ? UowLocalInstance.Value : throw new InvalidOperationException("UoW not created");
         }
-    }*/
+
+        public void Dispose()
+        {
+            UowLocalInstance.Value?.Dispose();
+            UowLocalInstance.Value = null;
+        }
+    }
 }
