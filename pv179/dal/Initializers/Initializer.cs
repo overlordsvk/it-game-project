@@ -8,7 +8,7 @@ using DAL.Entities;
 
 namespace DAL.Initializers
 {
-    public class Initializer : CreateDatabaseIfNotExists<GameDbContext>
+    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {
