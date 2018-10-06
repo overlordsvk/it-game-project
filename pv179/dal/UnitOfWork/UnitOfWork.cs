@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dal.UnitOfWork
+namespace DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

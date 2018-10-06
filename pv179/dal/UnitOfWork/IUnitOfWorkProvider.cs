@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace dal.UnitOfWork
+namespace DAL.UnitOfWork
 {
     public interface IUnitOfWorkProvider : IDisposable
     {

@@ -1,5 +1,5 @@
-﻿using dal.Repository;
-using dal.UnitOfWork;
+﻿using DAL.Repository;
+using DAL.UnitOfWork;
 using DAL;
 using DAL.Entities;
 using System;

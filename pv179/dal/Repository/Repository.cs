@@ -1,6 +1,4 @@
-﻿using dal.Entities;
-using dal.UnitOfWork;
-using DAL;
+﻿using DAL;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,18 +6,20 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
+using DAL.UnitOfWork;
 
-namespace dal.Repository
+namespace DAL.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        private readonly IUnitOfWorkProvider provider;
+        private readonly IUnitOfWorkProvider _provider;
 
-        protected GameDbContext Context => ((UnitOfWork.UnitOfWork)provider.GetUnitOfWorkInstance()).Context;
+        protected GameDbContext Context => ((UnitOfWork.UnitOfWork)_provider.GetUnitOfWorkInstance()).Context;
 
         public Repository(IUnitOfWorkProvider provider)
         {
-            this.provider = provider;
+            this._provider = provider;
         }
 
         public void Create(TEntity entity)
