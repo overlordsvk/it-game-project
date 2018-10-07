@@ -12,9 +12,9 @@ namespace DAL
     public class GameDbContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
-        //public DbSet<Fight> Fights { get; set; }
-        //public DbSet<Group> Groups { get; set; }
-        //public DbSet<GroupPost> GroupPosts { get; set; }
+        public DbSet<Fight> Fights { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupPost> GroupPosts { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Message> Messages { get; set; }

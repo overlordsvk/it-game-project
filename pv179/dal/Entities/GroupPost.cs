@@ -10,9 +10,11 @@ namespace DAL.Entities
     public class GroupPost : IEntity
     {
         public int Id { get; set; }
-        public Character Author { get; set; }
+        public int? CharacterId { get; set; }
+        public virtual Character Author { get; set; }
         public string Text { get; set; }
-        public Group Group { get; set; }
+        public int GroupId { get; set; }
+        public virtual Group Group { get; set; }
         public DateTime Timestamp { get; set; }
     }
 }

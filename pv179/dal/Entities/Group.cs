@@ -11,7 +11,7 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Character> Members { get; set; }
-        public List<GroupPost> Wall { get; set; }
+        public virtual ICollection<Character> Members { get; set; }
+        public virtual ICollection<GroupPost> Wall { get; set; }
     }
 }

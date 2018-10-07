@@ -23,7 +23,7 @@ namespace PV179Console
                 Console.WriteLine("\nCharacters: ");
                 foreach (var ch in db.Characters)
                 {
-                    Console.WriteLine(ch.Id + "\t" + ch.Name + "\t \t Owner: " + ch.Account.Username);
+                    Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t  Owner:  {ch.Account.Username}");
                 }
 
                 Console.WriteLine("\nWeapon Types: ");
@@ -37,6 +37,31 @@ namespace PV179Console
                 {
                     Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}  \t \t  Owner: {i.Owner?.Name}");
                 }
+
+                Console.WriteLine("\nMessages: ");
+                foreach (var m in db.Messages)
+                {
+                    Console.WriteLine($"{m.Id} \t {m.Sender.Name}  \t  {m.Receiver.Name} \t Sub: {m.Subject} \t  Text: {m.Text} ");
+                }
+
+                Console.WriteLine("\nGroups: ");
+                foreach (var g in db.Groups)
+                {
+                    Console.WriteLine($"{g.Id} \t {g.Name} Members: {g.Members.Count} ");
+                }
+
+                Console.WriteLine("\nGroupPosts: ");
+                foreach (var g in db.GroupPosts)
+                {
+                    Console.WriteLine($"{g.Id} \t {g.Author.Name} : {g.Text} ");
+                }
+
+                Console.WriteLine("\nFights: ");
+                foreach (var f in db.Fights)
+                {
+                    Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerItem.Name} \t Di: {f.DefenderItem.Name} \t Succ: {f.AttackSuccess}");
+                }
+
             }
 
             /*

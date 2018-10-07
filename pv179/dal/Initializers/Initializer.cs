@@ -1,6 +1,7 @@
 ﻿using DAL.Entities;
 using System;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace DAL.Initializers
 {
@@ -39,6 +40,15 @@ namespace DAL.Initializers
                 WeaponType = wtypeAxe
             };
 
+            var itemAxe2 = new Item
+            {
+                Name = "Lepsia Sekera",
+                Attack = 25,
+                Defense = 10,
+                Weight = 8,
+                WeaponType = wtypeAxe
+            };
+
             var itemBow = new Item
             {
                 Name = "Luk",
@@ -63,7 +73,7 @@ namespace DAL.Initializers
                 Luck = 9,
                 //Equiped = itemAxe
             };
-            characterSlayer.Items = new System.Collections.Generic.List<Item>
+            characterSlayer.Items = new List<Item>
             {
                 itemAxe
             };
@@ -83,9 +93,15 @@ namespace DAL.Initializers
                 Luck = 4,
                 //Equiped = itemBow
             };
-            characterWalker.Items = new System.Collections.Generic.List<Item>
+
+            characterWalker.Items = new List<Item>
             {
                 itemBow
+            };
+
+            characterWalker.Shop = new List<Item>
+            {
+                itemAxe2
             };
 
             Account accountPeter = new Account
@@ -135,6 +151,7 @@ namespace DAL.Initializers
                 Defender = characterWalker,
                 AttackerItem = itemAxe,
                 DefenderItem = itemBow,
+                Timestamp = DateTime.Now,
                 AttackSuccess = true
             };
 
@@ -142,13 +159,15 @@ namespace DAL.Initializers
             {
                 Author = characterSlayer,
                 Group = group1,
-                Text = "Hi"
+                Text = "Hi",
+                Timestamp = DateTime.Now
             };
 
             var message1 = new Message
             {
                 Sender = characterSlayer,
                 Receiver = characterWalker,
+                Timestamp = DateTime.Now,
                 Subject = "Destruction",
                 Text = "I will destroy you"
             };
@@ -158,6 +177,7 @@ namespace DAL.Initializers
             context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
+            context.Items.Add(itemAxe2);
             context.Items.Add(itemBow);
             
             context.Characters.Add(characterSlayer);
@@ -166,16 +186,15 @@ namespace DAL.Initializers
             context.Accounts.Add(accountPeter);
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
-            /*
+
+            context.Messages.Add(message1);
+            
+            context.Fights.Add(fight1);
+            
             context.Groups.Add(group1);
 
             context.GroupPosts.Add(gpost);
 
-            context.Fights.Add(fight1);
-
-            context.Messages.Add(message1);
-            
-            */
             base.Seed(context);
         }
     }

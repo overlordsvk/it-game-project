@@ -13,10 +13,10 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         [ForeignKey(nameof(Sender))]
-        public int SenderId { get; set; }
+        public int? SenderId { get; set; }
         public virtual Character Sender { get; set; }
         [ForeignKey(nameof(Receiver))]
-        public int ReceiverId { get; set; }
+        public int? ReceiverId { get; set; }
         public virtual Character Receiver { get; set; }
         public string Subject { get; set; }
         public string Text { get; set; }
