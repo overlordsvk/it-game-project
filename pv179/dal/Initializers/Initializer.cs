@@ -8,7 +8,7 @@ namespace DAL.Initializers
     {
         protected override void Seed(GameDbContext context)
         {
-            WeaponType wtypeAxe = new WeaponType
+            var wtypeAxe = new WeaponType
             {
                 ItemName = "Axe",
                 MaxAttack = 100,
@@ -155,7 +155,7 @@ namespace DAL.Initializers
             context.Accounts.Add(accountPeter);
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
-            /*
+            
             context.GroupPosts.Add(gpost);
 
             context.Groups.Add(group1);
@@ -164,7 +164,7 @@ namespace DAL.Initializers
 
             context.Messages.Add(message1);
 
-            */
+            
             base.Seed(context);
         }
     }
