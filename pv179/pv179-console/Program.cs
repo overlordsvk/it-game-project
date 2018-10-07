@@ -14,11 +14,11 @@ namespace PV179Console
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Add new teams:");
+            Console.WriteLine("Add new Account:");
             var newTeam = Console.ReadLine();
 
             CreateAccount(newTeam).Wait();
-            Console.WriteLine(GetAccountById(3).Result ?? "null");
+            Console.WriteLine(GetAccountById(1).Result ?? "null");
 
             Console.ReadKey();
         }
