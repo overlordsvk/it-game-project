@@ -14,7 +14,10 @@ namespace DAL.Entities
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Weight { get; set; }
-        public Character Owner { get; set; }
-        public WeaponType Type { get; set; }
+        public int Price { get; set; }
+        public int? OwnerId { get; set; }
+        public virtual Character Owner { get; set; }
+        public int WeaponTypeId { get; set; }
+        public virtual WeaponType WeaponType { get; set; }
     }
 }

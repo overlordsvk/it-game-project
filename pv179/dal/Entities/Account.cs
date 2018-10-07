@@ -25,9 +25,6 @@ namespace DAL.Entities
 
         public bool IsAdmin { get; set; }
 
-        //[ForeignKey(nameof(Character))]
-        //public Character CharacterId { get; set; }
-
         public virtual Character Character { get; set; }
 
     }

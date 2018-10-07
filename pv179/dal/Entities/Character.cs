@@ -26,7 +26,12 @@ namespace DAL.Entities
         public int Intelligence { get; set; }
         public int Agility { get; set; }
         public int Luck { get; set; }
-        //public List<Item> Inventory { get; set; }
+        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<Message> ReceivedMessages { get; set; }
+        public virtual ICollection<Message> SentMessages { get; set; }
+
+        //[ForeignKey(nameof(Equiped))]
+        //public int? ItemId { get; set; }
         //public Item Equiped { get; set; }
         //public Group Group { get; set; }
 

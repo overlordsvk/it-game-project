@@ -16,9 +16,9 @@ namespace DAL
         //public DbSet<Group> Groups { get; set; }
         //public DbSet<GroupPost> GroupPosts { get; set; }
         public DbSet<Character> Characters { get; set; }
-        //public DbSet<Item> Items { get; set; }
-        //public DbSet<Message> Messages { get; set; }
-        //public DbSet<WeaponType> WeaponTypes { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<WeaponType> WeaponTypes { get; set; }
 
         public GameDbContext() : base()//"Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
         {

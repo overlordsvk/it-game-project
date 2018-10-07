@@ -36,7 +36,7 @@ namespace DAL.Initializers
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
-                Type = wtypeAxe
+                WeaponType = wtypeAxe
             };
 
             var itemBow = new Item
@@ -45,7 +45,7 @@ namespace DAL.Initializers
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
-                Type = wtypeBow
+                WeaponType = wtypeBow
             };
 
             Character characterSlayer = new Character
@@ -62,7 +62,10 @@ namespace DAL.Initializers
                 Agility = 5,
                 Luck = 9,
                 //Equiped = itemAxe
-
+            };
+            characterSlayer.Items = new System.Collections.Generic.List<Item>
+            {
+                itemAxe
             };
 
             var characterWalker = new Character
@@ -80,6 +83,10 @@ namespace DAL.Initializers
                 Luck = 4,
                 //Equiped = itemBow
             };
+            characterWalker.Items = new System.Collections.Generic.List<Item>
+            {
+                itemBow
+            };
 
             Account accountPeter = new Account
             {
@@ -93,6 +100,7 @@ namespace DAL.Initializers
 
             var accountIvan = new Account
             {
+                Id = 200,
                 Username = "Ivan",
                 Email = "navi@ivan.com",
                 Password = "IvanJeBoh",
@@ -145,13 +153,13 @@ namespace DAL.Initializers
                 Text = "I will destroy you"
             };
 
-            /*
+            
             context.WeaponTypes.Add(wtypeAxe);
             context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemBow);
-            */
+            
             context.Characters.Add(characterSlayer);
             context.Characters.Add(characterWalker);
             

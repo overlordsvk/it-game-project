@@ -11,15 +11,34 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Accounts: ");
 
             using (var db = new GameDbContext())
             {
+                Console.WriteLine("\nAccounts: ");
                 foreach (var acc in db.Accounts)
                 {
-                    Console.WriteLine(acc.Id + "\t" + acc.Username + "\t" + acc.Email);
+                    Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
+                }
+
+                Console.WriteLine("\nCharacters: ");
+                foreach (var ch in db.Characters)
+                {
+                    Console.WriteLine(ch.Id + "\t" + ch.Name + "\t \t Owner: " + ch.Account.Username);
+                }
+
+                Console.WriteLine("\nWeapon Types: ");
+                foreach (var wt in db.WeaponTypes)
+                {
+                    Console.WriteLine($"{wt.Id} \t {wt.ItemName} \t MA: {wt.MaxAttack:5} MD: {wt.MinDeffense:5}");
+                }
+
+                Console.WriteLine("\nItems: ");
+                foreach (var i in db.Items)
+                {
+                    Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}  \t \t  Owner: {i.Owner?.Name}");
                 }
             }
+
             /*
             Console.WriteLine("Add new Account:");
             var accountName = Console.ReadLine();
