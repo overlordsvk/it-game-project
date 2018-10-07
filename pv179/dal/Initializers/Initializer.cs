@@ -48,14 +48,6 @@ namespace DAL.Initializers
                 Type = wtypeBow
             };
 
-            Account accountPeter = new Account
-            {
-                Username = "Pieter",
-                Email = "pieter@gmail.com",
-                Password = "12345678",
-                IsAdmin = true
-            };
-
             Character characterSlayer = new Character
             {
                 Name = "KingSlayer",
@@ -69,8 +61,8 @@ namespace DAL.Initializers
                 Intelligence = 1,
                 Agility = 5,
                 Luck = 9,
-                Equiped = itemAxe
-                
+                //Equiped = itemAxe
+
             };
 
             var characterWalker = new Character
@@ -85,9 +77,19 @@ namespace DAL.Initializers
                 Charisma = 0,
                 Intelligence = 2,
                 Agility = 6,
-                Luck = 4, 
-                Equiped = itemBow
+                Luck = 4,
+                //Equiped = itemBow
             };
+
+            Account accountPeter = new Account
+            {
+                Username = "Pieter",
+                Email = "pieter@gmail.com",
+                Password = "12345678",
+                IsAdmin = true
+            };
+
+            
 
             var accountIvan = new Account
             {
@@ -103,7 +105,8 @@ namespace DAL.Initializers
                 Username = "Vedro",
                 Email = "vedro@vemail.com",
                 Password = "QWE123975",
-                IsAdmin = false
+                IsAdmin = false,
+                Character = characterWalker
             };
 
             var group1 = new Group
@@ -142,29 +145,29 @@ namespace DAL.Initializers
                 Text = "I will destroy you"
             };
 
-
+            /*
             context.WeaponTypes.Add(wtypeAxe);
             context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemBow);
-
+            */
             context.Characters.Add(characterSlayer);
             context.Characters.Add(characterWalker);
             
             context.Accounts.Add(accountPeter);
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
-            
-            context.GroupPosts.Add(gpost);
-
+            /*
             context.Groups.Add(group1);
+
+            context.GroupPosts.Add(gpost);
 
             context.Fights.Add(fight1);
 
             context.Messages.Add(message1);
-
             
+            */
             base.Seed(context);
         }
     }

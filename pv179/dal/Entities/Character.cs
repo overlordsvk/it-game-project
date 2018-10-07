@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ namespace DAL.Entities
 {
     public class Character : IEntity
     {
+        [Key, ForeignKey("Account")]
         public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         public int Money { get; set; }
@@ -23,8 +26,12 @@ namespace DAL.Entities
         public int Intelligence { get; set; }
         public int Agility { get; set; }
         public int Luck { get; set; }
-        public List<Item> Inventory { get; set; }
-        public Item Equiped { get; set; }
-        public Group Group { get; set; }
+        //public List<Item> Inventory { get; set; }
+        //public Item Equiped { get; set; }
+        //public Group Group { get; set; }
+
+        //[ForeignKey("Account")]
+        //public int AccountId { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using DAL.UnitOfWork;
 using DAL.Entities;
 using System;
 using System.Threading.Tasks;
+using DAL;
 
 namespace PV179Console
 {
@@ -10,13 +11,22 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Accounts: ");
 
+            using (var db = new GameDbContext())
+            {
+                foreach (var acc in db.Accounts)
+                {
+                    Console.WriteLine(acc.Id + "\t" + acc.Username + "\t" + acc.Email);
+                }
+            }
+            /*
             Console.WriteLine("Add new Account:");
             var accountName = Console.ReadLine();
 
             CreateAccount(accountName).Wait();
             Console.WriteLine(GetAccountById(1).Result ?? "null");
-
+            */
             Console.ReadKey();
         }
 
