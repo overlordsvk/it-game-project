@@ -70,8 +70,7 @@ namespace DAL.Initializers
                 Charisma = 8,
                 Intelligence = 1,
                 Agility = 5,
-                Luck = 9,
-                //Equiped = itemAxe
+                Luck = 9
             };
             characterSlayer.Items = new List<Item>
             {
@@ -90,8 +89,7 @@ namespace DAL.Initializers
                 Charisma = 0,
                 Intelligence = 2,
                 Agility = 6,
-                Luck = 4,
-                //Equiped = itemBow
+                Luck = 4
             };
 
             characterWalker.Items = new List<Item>
