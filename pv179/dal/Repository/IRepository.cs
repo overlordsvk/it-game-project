@@ -19,6 +19,8 @@ namespace DAL.Repository
         /// </summary>
         Task<TEntity> GetAsync(int id, params string[] includes);
 
+        Task<ICollection<TEntity>> GetAllAsync();
+
         /// <summary>
         /// Persists the given entity.
         /// </summary>

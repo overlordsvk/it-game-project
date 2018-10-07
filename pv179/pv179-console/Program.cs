@@ -11,9 +11,12 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
+            WriteTable().Wait();
 
             using (var db = new GameDbContext())
             {
+
+
                 Console.WriteLine("\nAccounts: ");
                 foreach (var acc in db.Accounts)
                 {
@@ -72,6 +75,19 @@ namespace PV179Console
             Console.WriteLine(GetAccountById(1).Result ?? "null");
             */
             Console.ReadKey();
+        }
+        public static async Task WriteTable()
+        {
+            var provider = UnitOfWorkProviderFactory.Create();
+            using (var unitOfWork = provider.Create())
+            {
+                var repo = new Repository<Account>(provider);
+                var data = await repo.GetAllAsync();
+                foreach (var d in data)
+                {
+                    Console.WriteLine(d.Id + " " + d.Username);
+                }
+            }
         }
 
         public static async Task CreateAccount(string accountName)

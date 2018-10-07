@@ -52,6 +52,11 @@ namespace DAL.Repository
                 .SingleOrDefaultAsync(entity => entity.Id.Equals(id));
         }
 
+        public async Task<ICollection<TEntity>> GetAllAsync()
+        {
+            return await Context.Set<TEntity>().ToListAsync();
+        }
+
         public void Update(TEntity entity)
         {
             var foundEntity = Context.Set<TEntity>().Find(entity.Id);
