@@ -33,10 +33,8 @@ namespace DAL.Entities
         //[ForeignKey(nameof(Equiped))]
         //public int? ItemId { get; set; }
         //public Item Equiped { get; set; }
-        //public Group Group { get; set; }
+        public virtual Group Group { get; set; }
 
-        //[ForeignKey("Account")]
-        //public int AccountId { get; set; }
         public virtual Account Account { get; set; }
     }
 }

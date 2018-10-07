@@ -23,7 +23,7 @@ namespace PV179Console
                 Console.WriteLine("\nCharacters: ");
                 foreach (var ch in db.Characters)
                 {
-                    Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t  Owner:  {ch.Account.Username}");
+                    Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t  Owner:  {ch.Account.Username}");
                 }
 
                 Console.WriteLine("\nWeapon Types: ");
