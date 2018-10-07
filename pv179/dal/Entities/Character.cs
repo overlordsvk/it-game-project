@@ -30,11 +30,7 @@ namespace DAL.Entities
         public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<Message> SentMessages { get; set; }
         public virtual ICollection<Item> Shop { get; set; }
-        //[ForeignKey(nameof(Equiped))]
-        //public int? ItemId { get; set; }
-        //public Item Equiped { get; set; }
         public virtual Group Group { get; set; }
-
         public virtual Account Account { get; set; }
     }
 }

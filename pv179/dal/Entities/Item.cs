@@ -16,6 +16,7 @@ namespace DAL.Entities
         public int Weight { get; set; }
         public int Price { get; set; }
         public int? OwnerId { get; set; }
+        public bool Equipped { get; set; }
         public virtual Character Owner { get; set; }
         public int WeaponTypeId { get; set; }
         public virtual WeaponType WeaponType { get; set; }
