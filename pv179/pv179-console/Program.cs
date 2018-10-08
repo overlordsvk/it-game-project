@@ -32,7 +32,7 @@ namespace PV179Console
                 Console.WriteLine("\nWeapon Types: ");
                 foreach (var wt in db.WeaponTypes)
                 {
-                    Console.WriteLine($"{wt.Id} \t {wt.ItemName} \t MA: {wt.MaxAttack:5} MD: {wt.MinDeffense:5}");
+                    Console.WriteLine($"{wt.Id} \t {wt.ItemName} \t MA: {wt.MaxAttack:5} MD: {wt.MinDefense:5}");
                 }
 
                 Console.WriteLine("\nItems: ");

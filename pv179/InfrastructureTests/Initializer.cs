@@ -1,14 +1,43 @@
-﻿using DAL.Entities;
+﻿using DAL.UnitOfWork;
 using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DAL.Entities;
+using DAL.Repository;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using DAL;
 
-namespace DAL.Initializers
+namespace InfrastructureTests
 {
-    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
+    public class Initializer
     {
-        protected override void Seed(GameDbContext context)
+        private const string TestDbConnectionString = "InMemoryTestDBGame";
+
+        internal static readonly IUnitOfWorkProvider Provider = UnitOfWorkProviderFactory.Create();
+
+        public void InitializeBusinessLayerTests()
         {
+            Effort.Provider.EffortProviderConfiguration.RegisterProvider();
+            Database.SetInitializer(new DropCreateDatabaseAlways<GameDbContext>());
+        }
+
+        private static DbContext InitializeDatabase()
+        {
+            var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent(TestDbConnectionString));
+            context.Accounts.RemoveRange(context.Accounts);
+            context.Characters.RemoveRange(context.Characters);
+            context.Fights.RemoveRange(context.Fights);
+            context.GroupPosts.RemoveRange(context.GroupPosts);
+            context.Groups.RemoveRange(context.Groups);
+            context.Items.RemoveRange(context.Items);
+            context.Messages.RemoveRange(context.Messages);
+            context.WeaponTypes.RemoveRange(context.WeaponTypes);
+            context.SaveChanges();
+
+
             var wtypeAxe = new WeaponType
             {
                 ItemName = "Axe",
@@ -110,7 +139,7 @@ namespace DAL.Initializers
                 IsAdmin = true
             };
 
-            
+
 
             var accountIvan = new Account
             {
@@ -170,30 +199,34 @@ namespace DAL.Initializers
                 Text = "I will destroy you"
             };
 
-            
+
             context.WeaponTypes.Add(wtypeAxe);
             context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemAxe2);
             context.Items.Add(itemBow);
-            
+
             context.Characters.Add(characterSlayer);
             context.Characters.Add(characterWalker);
-            
+
             context.Accounts.Add(accountPeter);
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
 
             context.Messages.Add(message1);
-            
+
             context.Fights.Add(fight1);
-            
+
             context.Groups.Add(group1);
 
             context.GroupPosts.Add(gpost);
 
-            base.Seed(context);
+
+            context.SaveChanges();
+
+            return context;
         }
+
     }
 }
