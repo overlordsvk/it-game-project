@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DAL.Initializers
 {
-    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
+    public class Initializer : CreateDatabaseIfNotExists<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {
