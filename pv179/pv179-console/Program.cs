@@ -52,7 +52,7 @@ namespace PV179Console
                 Console.WriteLine("\nCharacters: ");
                 foreach (var ch in characters)
                 {
-                    Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.ReceivedMessages.Count} \t Owner:  {ch.Account.Username}");
+                    Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.ReceivedMessages.Count} \t SM: {ch.SentMessages.Count} \t Owner:  {ch.Account.Username}");
                 }
 
                 Console.WriteLine("\nWeapon Types: ");
@@ -64,7 +64,7 @@ namespace PV179Console
                 Console.WriteLine("\nItems: ");
                 foreach (var i in items)
                 {
-                    Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}  \t \t  Owner: {i.Owner?.Name}");
+                    Console.WriteLine($"{i.Id} \t {i.Name}  \t  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
                 }
 
                 Console.WriteLine("\nMessages: ");
@@ -76,13 +76,13 @@ namespace PV179Console
                 Console.WriteLine("\nGroups: ");
                 foreach (var g in groups)
                 {
-                    Console.WriteLine($"{g.Id} \t {g.Name} Members: {g.Members.Count} ");
+                    Console.WriteLine($"{g.Id} \t {g.Name}  Members: {g.Members.Count}  Wall: {g.Wall.Count} ");
                 }
 
                 Console.WriteLine("\nGroupPosts: ");
                 foreach (var g in groupposts)
                 {
-                    Console.WriteLine($"{g.Id} \t {g.Author.Name} : {g.Text} ");
+                    Console.WriteLine($"{g.Id} \t {g.Group.Name} \t {g.Author.Name} : {g.Text} ");
                 }
 
                 Console.WriteLine("\nFights: ");

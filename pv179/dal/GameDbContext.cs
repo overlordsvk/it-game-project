@@ -21,7 +21,7 @@ namespace DAL
         public DbSet<Message> Messages { get; set; }
         public DbSet<WeaponType> WeaponTypes { get; set; }
 
-        public GameDbContext() : base("Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
+        public GameDbContext() : base()//"Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
         {
             Database.SetInitializer(new Initializer());
         }
@@ -38,15 +38,27 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Message>()
-                .HasRequired<Character>(m => m.Receiver)
+                .HasOptional<Character>(m => m.Receiver)
                 .WithMany(ch => ch.ReceivedMessages)
                 .HasForeignKey<int?>(m => m.ReceiverId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Message>()
-                .HasRequired<Character>(m => m.Sender)
+                .HasOptional<Character>(m => m.Sender)
                 .WithMany(ch => ch.SentMessages)
                 .HasForeignKey<int?>(m => m.SenderId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Item>()
+                .HasOptional<Character>(i => i.Owner)
+                .WithMany(ch => ch.Items)
+                .HasForeignKey<int?>(i => i.OwnerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Item>()
+                .HasOptional<Character>(i => i.ShopOwner)
+                .WithMany(ch => ch.Shop)
+                .HasForeignKey<int?>(i => i.ShopOwnerId)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

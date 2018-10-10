@@ -34,6 +34,10 @@ namespace DAL.Entities
         public int? OwnerId { get; set; }
         public virtual Character Owner { get; set; }
 
+        [ForeignKey(nameof(ShopOwner))]
+        public int? ShopOwnerId { get; set; }
+        public virtual Character ShopOwner { get; set; }
+
         public int WeaponTypeId { get; set; }
         public virtual WeaponType WeaponType { get; set; }
     }

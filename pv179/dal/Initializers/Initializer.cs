@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DAL.Initializers
 {
-    public class Initializer : CreateDatabaseIfNotExists<GameDbContext>
+    public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {
@@ -136,7 +136,7 @@ namespace DAL.Initializers
                 Name = "Prva skupina"
             };
 
-            group1.Members = new System.Collections.Generic.List<Character>
+            group1.Members = new List<Character>
             {
                 characterSlayer,
                 characterWalker
