@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DynamicRepository.Contract;
+using Game.DAL.Entity;
 using Game.DAL.Entity.Entities;
+using DynamicRepository.Concrete;
 
 namespace Game.Infrastructure.Entity.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class, IEntity, new()
+    public interface IEntityRepository<TEntity> : IEntityRepository<TEntity, GameDbContext> where TEntity : class, IEntity, new()
     {
         /// <summary>
         /// Gets the entity with given id.

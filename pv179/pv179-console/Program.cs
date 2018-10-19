@@ -3,6 +3,10 @@ using System;
 using System.Threading.Tasks;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
+using Game.Infrastructure.Entity.Counter;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace PV179Console
 {
@@ -24,14 +28,26 @@ namespace PV179Console
             var provider = EntityUnitOfWorkProviderFactory.Create();
             using (var unitOfWork = provider.Create())
             {
-                var accountRepo = new Repository<Account>(provider);
-                var fightRepo = new Repository<Fight>(provider);
-                var groupRepo = new Repository<Group>(provider);
-                var characterRepo = new Repository<Character>(provider);
-                var grouppostRepo = new Repository<GroupPost>(provider);
-                var itemRepo = new Repository<Item>(provider);
-                var messageRepo = new Repository<Message>(provider);
-                var wtypeRepo = new Repository<WeaponType>(provider);
+                var accountRepo = new EntityRepository<Account>(provider, false, false);
+                var accountCounter = new EntityCounter<Account>(false, false);
+                var clauses = new List<string> { "Password.Contains(\"123\")" };
+                var users = accountRepo.FindAll(clauses);
+                Console.WriteLine("\nAccounts: ");
+                foreach (var acc in users)
+                {
+                    Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
+                }
+
+
+                /*
+                var accountRepo = new EntityRepository<Account>(provider);
+                var fightRepo = new EntityRepository<Fight>(provider);
+                var groupRepo = new EntityRepository<Group>(provider);
+                var characterRepo = new EntityRepository<Character>(provider);
+                var grouppostRepo = new EntityRepository<GroupPost>(provider);
+                var itemRepo = new EntityRepository<Item>(provider);
+                var messageRepo = new EntityRepository<Message>(provider);
+                var wtypeRepo = new EntityRepository<WeaponType>(provider);
 
                 var accounts = await accountRepo.GetAllAsync();
                 var fights = await fightRepo.GetAllAsync();
@@ -89,6 +105,7 @@ namespace PV179Console
                 {
                     Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerItem.Name} \t Di: {f.DefenderItem.Name} \t Succ: {f.AttackSuccess}");
                 }
+                */
             }
         }
 
@@ -98,7 +115,7 @@ namespace PV179Console
 
             using (var unitOfWork = provider.Create())
             {
-                var repo = new Repository<Account>(provider);
+                var repo = new EntityRepository<Account>(provider, false, false);
                 repo.Create(new Account() { Username = accountName, Email = accountName+"@gmail.com", Password = "12345d6789", IsAdmin = false });
                 await unitOfWork.Commit();
             }
@@ -110,7 +127,7 @@ namespace PV179Console
 
             using (var unitOfWork = provider.Create())
             {
-                var repo = new Repository<Account>(provider);
+                var repo = new EntityRepository<Account>(provider, false, false);
                 var a = await repo.GetAsync(3);
                 return a.Username;
             }

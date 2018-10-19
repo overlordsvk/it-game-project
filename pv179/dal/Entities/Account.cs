@@ -1,4 +1,5 @@
-﻿using Game.DAL.Entity.Entities;
+﻿using DynamicRepository.Contract;
+using Game.DAL.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Game.DAL.Entity.Entities
 {
-    public class Account : IEntity
+    public class Account : IEntity, IIdentifiableEntity
     {
         [Key]
         public int Id { get; set; }

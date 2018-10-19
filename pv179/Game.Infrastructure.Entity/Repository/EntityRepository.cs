@@ -5,16 +5,29 @@ using Game.Infrastructure.UnitOfWork;
 using Game.Infrastructure.Entity.UnitOfWork;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System;
+using System.Linq;
+using System.Collections;
+using System.Linq.Expressions;
+using Game.DAL.Entity;
+using DynamicRepository.Concrete;
 
 namespace Game.Infrastructure.Entity.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
+    public class EntityRepository<TEntity> : EntityRepository<TEntity, GameDbContext>, IEntityRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly IUnitOfWorkProvider _provider;
 
         protected DbContext Context => ((EntityUnitOfWork)_provider.GetUnitOfWorkInstance()).Context;
 
-        public Repository(IUnitOfWorkProvider provider)
+        public Expression Expression => throw new NotImplementedException();
+
+        public Type ElementType => throw new NotImplementedException();
+
+        public IQueryProvider Provider => throw new NotImplementedException();
+
+        public EntityRepository(IUnitOfWorkProvider provider, bool lazyLoadingEnabled, bool proxyCreationEnabled)
+            : base(lazyLoadingEnabled, proxyCreationEnabled)
         {
             this._provider = provider;
         }
