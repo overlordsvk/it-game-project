@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DAL.Entities;
+using Game.DAL.Entity.Entities;
 
-namespace DAL.Repository
+namespace Game.Infrastructure.Entity.Repository
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {

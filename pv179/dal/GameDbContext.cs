@@ -1,14 +1,14 @@
-﻿using DAL.Entities;
-using DAL.Initializers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game.DAL.Entity.Entities;
+using Game.DAL.Entity.Initializers;
 
-namespace DAL
+namespace Game.DAL.Entity
 {
     public class GameDbContext : DbContext
     {

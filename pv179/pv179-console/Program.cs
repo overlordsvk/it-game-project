@@ -1,9 +1,8 @@
-﻿using DAL.Repository;
-using DAL.UnitOfWork;
-using DAL.Entities;
+﻿using Game.DAL.Entity.Entities;
 using System;
 using System.Threading.Tasks;
-using DAL;
+using Game.Infrastructure.Entity.UnitOfWork;
+using Game.Infrastructure.Entity.Repository;
 
 namespace PV179Console
 {
@@ -22,7 +21,7 @@ namespace PV179Console
         }
         public static async Task PrintDbContent()
         {
-            var provider = UnitOfWorkProviderFactory.Create();
+            var provider = EntityUnitOfWorkProviderFactory.Create();
             using (var unitOfWork = provider.Create())
             {
                 var accountRepo = new Repository<Account>(provider);
@@ -95,7 +94,7 @@ namespace PV179Console
 
         public static async Task CreateAccount(string accountName)
         {
-            var provider = UnitOfWorkProviderFactory.Create();
+            var provider = EntityUnitOfWorkProviderFactory.Create();
 
             using (var unitOfWork = provider.Create())
             {
@@ -107,7 +106,7 @@ namespace PV179Console
 
         public static async Task<string> GetAccountById(int id)
         {
-            var provider = UnitOfWorkProviderFactory.Create();
+            var provider = EntityUnitOfWorkProviderFactory.Create();
 
             using (var unitOfWork = provider.Create())
             {

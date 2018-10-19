@@ -76,9 +76,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dal\DAL.csproj">
+    <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
       <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
-      <Name>DAL</Name>
+      <Name>Game.DAL.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Game.Infrastructure.csproj">
+      <Project>{06a08b9f-d4b4-4e48-b7a3-6dd5b957e493}</Project>
+      <Name>Game.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

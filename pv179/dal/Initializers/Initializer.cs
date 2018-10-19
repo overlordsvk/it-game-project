@@ -1,9 +1,9 @@
-﻿using DAL.Entities;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using Game.DAL.Entity.Entities;
 
-namespace DAL.Initializers
+namespace Game.DAL.Entity.Initializers
 {
     public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
     {

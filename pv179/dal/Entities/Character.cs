@@ -1,4 +1,4 @@
-﻿using DAL.Entities;
+﻿using Game.DAL.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace Game.DAL.Entity.Entities
 {
     public class Character : IEntity
     {
@@ -58,5 +58,8 @@ namespace DAL.Entities
         public virtual Group Group { get; set; }
 
         public virtual Account Account { get; set; }
+
+        [NotMapped]
+        public string TableName { get; } = nameof(GameDbContext.Characters);
     }
 }

@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.DAL.Entity.Entities
+namespace Infrastructure.Query.Predicates
 {
-    public interface IEntity
+    public interface IPredicate
     {
-        int Id { get; set; }
-
-        string TableName { get; }
     }
 }

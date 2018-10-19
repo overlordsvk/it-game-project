@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB6A1C17-8C36-4D4E-98F2-FB873AB7498D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>pv179_console</RootNamespace>
-    <AssemblyName>pv179-console</AssemblyName>
+    <ProjectGuid>{06A08B9F-D4B4-4E48-B7A3-6DD5B957E493}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infrastructure</RootNamespace>
+    <AssemblyName>Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,14 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,34 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <Compile Include="Query\IQuery.cs" />
+    <Compile Include="Query\Predicates\CompositePredicate.cs" />
+    <Compile Include="Query\Predicates\IPredicate.cs" />
+    <Compile Include="Query\Predicates\Operators\LogicalOperators.cs" />
+    <Compile Include="Query\Predicates\Operators\ValueComparingOperator.cs" />
+    <Compile Include="Query\Predicates\SimplePredicate.cs" />
+    <Compile Include="Query\QueryBase.cs" />
+    <Compile Include="Query\QueryResult.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkBase.cs" />
+    <Compile Include="UnitOfWork\UnitOfWorkProviderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
-      <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
+      <Project>{30b51413-6302-4022-8fa0-074b2cc94c20}</Project>
       <Name>Game.DAL.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Game.Infrastructure.Entity\Game.Infrastructure.Entity.csproj">
-      <Project>{3e82adad-a5a6-4225-aa60-4c56aa4df207}</Project>
-      <Name>Game.Infrastructure.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Infrastructure\Game.Infrastructure.csproj">
-      <Project>{06a08b9f-d4b4-4e48-b7a3-6dd5b957e493}</Project>
-      <Name>Game.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

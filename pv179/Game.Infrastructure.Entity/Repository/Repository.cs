@@ -1,21 +1,18 @@
-﻿using DAL;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Game.DAL.Entity.Entities;
+using Game.Infrastructure.UnitOfWork;
+using Game.Infrastructure.Entity.UnitOfWork;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Entities;
-using DAL.UnitOfWork;
 
-namespace DAL.Repository
+namespace Game.Infrastructure.Entity.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly IUnitOfWorkProvider _provider;
 
-        protected GameDbContext Context => ((UnitOfWork.UnitOfWork)_provider.GetUnitOfWorkInstance()).Context;
+        protected DbContext Context => ((EntityUnitOfWork)_provider.GetUnitOfWorkInstance()).Context;
 
         public Repository(IUnitOfWorkProvider provider)
         {

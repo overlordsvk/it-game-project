@@ -1,12 +1,13 @@
-﻿using DAL.Entities;
+﻿using Game.DAL.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace Game.DAL.Entity.Entities
 {
     public class WeaponType : IEntity
     {
@@ -27,5 +28,8 @@ namespace DAL.Entities
         public int MinDefense { get; set; }
         [Range(0,100)]
         public int MinWeight { get; set; }
+
+        [NotMapped]
+        public string TableName { get; } = nameof(GameDbContext.WeaponTypes);
     }
 }

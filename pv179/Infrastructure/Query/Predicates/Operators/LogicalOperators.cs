@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.DAL.Entity.Entities
+namespace Infrastructure.Query.Predicates.Operators
 {
-    public interface IEntity
+    public enum LogicalOperator
     {
-        int Id { get; set; }
-
-        string TableName { get; }
+        AND, OR
     }
 }

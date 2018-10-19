@@ -1,14 +1,13 @@
-﻿using DAL.UnitOfWork;
-using System;
+﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DAL.Entities;
-using DAL.Repository;
+using Game.DAL.Entity.Entities;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using DAL;
+using Game.DAL.Entity;
+using Infrastructure.UnitOfWork;
 
 namespace InfrastructureTests
 {

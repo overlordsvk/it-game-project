@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB6A1C17-8C36-4D4E-98F2-FB873AB7498D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>pv179_console</RootNamespace>
-    <AssemblyName>pv179-console</AssemblyName>
+    <ProjectGuid>{3E82ADAD-A5A6-4225-AA60-4C56AA4DF207}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Game.Infrastructure.Entity</RootNamespace>
+    <AssemblyName>Game.Infrastructure.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,35 +48,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <Compile Include="EntityQuery.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="UnitOfWork\EntityUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\EntityUnitOfWorkProvider.cs" />
+    <Compile Include="UnitOfWork\EntityUnitOfWorkProviderFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
       <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
       <Name>Game.DAL.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Game.Infrastructure.Entity\Game.Infrastructure.Entity.csproj">
-      <Project>{3e82adad-a5a6-4225-aa60-4c56aa4df207}</Project>
-      <Name>Game.Infrastructure.Entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Game.Infrastructure.csproj">
-      <Project>{06a08b9f-d4b4-4e48-b7a3-6dd5b957e493}</Project>
+      <Project>{06A08B9F-D4B4-4E48-B7A3-6DD5B957E493}</Project>
       <Name>Game.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
