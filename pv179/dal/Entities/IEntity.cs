@@ -9,8 +9,6 @@ namespace Game.DAL.Entity.Entities
 {
     public interface IEntity : IIdentifiableEntity
     {
-        new int Id { get; set; }
-
         string TableName { get; }
     }
 }

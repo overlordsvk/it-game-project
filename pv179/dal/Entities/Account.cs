@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Game.DAL.Entity.Entities
 {
-    public class Account : IEntity, IIdentifiableEntity
+    public class Account : IEntity
     {
         [Key]
         public int Id { get; set; }
