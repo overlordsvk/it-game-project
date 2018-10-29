@@ -52,6 +52,7 @@
     <Compile Include="EntityQuery.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="SimplePredicateExtensions.cs" />
     <Compile Include="UnitOfWork\EntityUnitOfWork.cs" />
     <Compile Include="UnitOfWork\EntityUnitOfWorkProvider.cs" />
     <Compile Include="UnitOfWork\EntityUnitOfWorkProviderFactory.cs" />

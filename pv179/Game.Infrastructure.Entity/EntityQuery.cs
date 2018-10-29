@@ -6,6 +6,7 @@ using Infrastructure.Query.Predicates;
 using Infrastructure.Query.Predicates.Operators;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -28,8 +29,29 @@ namespace Game.Infrastructure.Entity
 
         public override async Task<QueryResult<TEntity>> ExecuteAsync()
         {
-            throw new NotImplementedException();
-            //TODO
+            IQueryable<TEntity> queryable = Context.Set<TEntity>();
+
+            if (string.IsNullOrWhiteSpace(SortAccordingTo) && DesiredPage.HasValue)
+            {
+                // Sorting must always take place when paging is required
+                SortAccordingTo = nameof(IEntity.Id);
+                UseAscendingOrder = true;
+            }
+            if (SortAccordingTo != null)
+            {
+                queryable = UseSortCriteria(queryable);
+            }
+            if (Predicate != null)
+            {
+                queryable = UseFilterCriteria(queryable);
+            }
+            var itemsCount = queryable.Count();
+            if (DesiredPage.HasValue)
+            {
+                queryable = queryable.Skip(PageSize * (DesiredPage.Value - 1)).Take(PageSize);
+            }
+            var items = await queryable.ToListAsync();
+            return new QueryResult<TEntity>(items, itemsCount, PageSize, DesiredPage);
         }
 
         private IQueryable<TEntity> UseSortCriteria(IQueryable<TEntity> queryable)
@@ -51,8 +73,10 @@ namespace Game.Infrastructure.Entity
 
         private IQueryable<TEntity> UseFilterCriteria(IQueryable<TEntity> queryable)
         {
-            throw new NotImplementedException();
-            //TODO
+            var bodyExpression = Predicate is CompositePredicate composite ? CombineBinaryExpressions(composite) : BuildBinaryExpression(Predicate as SimplePredicate);
+            var lambdaExpression = Expression.Lambda<Func<TEntity, bool>>(bodyExpression, parameterExpression);
+            Debug.WriteLine(lambdaExpression.ToString());
+            return queryable.Where(lambdaExpression);
         }
 
 
@@ -85,8 +109,12 @@ namespace Game.Infrastructure.Entity
 
         private Expression BuildBinaryExpression(IPredicate predicate)
         {
-            throw new NotImplementedException();
-            //TODO
+            var simplePredicate = predicate as SimplePredicate;
+            if (simplePredicate == null)
+            {
+                throw new ArgumentException("Expected simple predicate!");
+            }
+            return simplePredicate.GetExpression(parameterExpression);
         }
     }
 }
