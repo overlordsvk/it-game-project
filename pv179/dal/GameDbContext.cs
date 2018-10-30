@@ -21,7 +21,7 @@ namespace Game.DAL.Entity
         public DbSet<Message> Messages { get; set; }
         public DbSet<WeaponType> WeaponTypes { get; set; }
 
-        public GameDbContext() : base()//"Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
+        public GameDbContext() : base("Data Source=localhost;Initial Catalog=GameDb;Integrated Security=true;")  // "Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
         {
             Database.SetInitializer(new Initializer());
         }
@@ -32,6 +32,7 @@ namespace Game.DAL.Entity
         /// <param name="connection">The database connection</param>
         public GameDbContext(DbConnection connection) : base(connection, true)
         {
+            Database.Delete();
             Database.CreateIfNotExists();
         }
 

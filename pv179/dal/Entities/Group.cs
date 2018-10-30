@@ -20,6 +20,9 @@ namespace Game.DAL.Entity.Entities
 
         public virtual ICollection<GroupPost> Wall { get; set; }
 
+        [MaxLength(2048)]
+        public string Description { get; set; }
+
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Groups);
     }

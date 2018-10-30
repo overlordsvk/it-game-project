@@ -7,7 +7,7 @@ using Game.DAL.Entity.Entities;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Game.DAL.Entity;
-using Infrastructure.UnitOfWork;
+using Game.Infrastructure.UnitOfWork;
 
 namespace InfrastructureTests
 {
@@ -15,7 +15,7 @@ namespace InfrastructureTests
     {
         private const string TestDbConnectionString = "InMemoryTestDBGame";
 
-        internal static readonly IUnitOfWorkProvider Provider = UnitOfWorkProviderFactory.Create();
+        internal static readonly IUnitOfWorkProvider Provider = EntityUnitOfWorkProviderFactory.Create();
 
         public void InitializeBusinessLayerTests()
         {
