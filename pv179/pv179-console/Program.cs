@@ -63,13 +63,14 @@ namespace PV179Console
                 Console.WriteLine("\nItems: ");
                 foreach (var i in items)
                 {
-                    Console.WriteLine($"{i.Id} \t {i.Name}  \t  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
+                    //Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
+                    Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id,i.Name,i.WeaponType.ItemName, "Owner: " + i.Owner?.Name);
                 }
 
                 Console.WriteLine("\nMessages: ");
                 foreach (var m in messages)
                 {
-                    Console.WriteLine($"{m.Id} \t {m.Sender.Name}  \t  {m.Receiver.Name} \t Sub: {m.Subject} \t  Text: {m.Text} ");
+                    Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}{4,-20}", m.Id, m.Sender.Name, m.Receiver.Name, "Sub: " + m.Subject,"Text: " + m.Text);
                 }
 
                 Console.WriteLine("\nGroups: ");
