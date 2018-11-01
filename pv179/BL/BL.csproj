@@ -67,12 +67,17 @@
     <Compile Include="DTO\Common\QueryResultDto.cs" />
     <Compile Include="DTO\FightDto.cs" />
     <Compile Include="DTO\Filters\AccountFilterDto.cs" />
+    <Compile Include="DTO\Filters\FightFilterDto.cs" />
     <Compile Include="DTO\GroupDto.cs" />
     <Compile Include="DTO\GroupInfoDto.cs" />
+    <Compile Include="DTO\GroupPostDto.cs" />
     <Compile Include="DTO\ItemDto.cs" />
+    <Compile Include="DTO\MessageDto.cs" />
+    <Compile Include="DTO\WeaponTypeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObject\AccountQueryObject.cs" />
     <Compile Include="QueryObject\Common\QueryObjectBase.cs" />
+    <Compile Include="QueryObject\FightQueryObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

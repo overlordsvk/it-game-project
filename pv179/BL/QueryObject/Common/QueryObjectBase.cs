@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using AutoMapper;
 using System.Threading.Tasks;
-using Infrastructure.Query;
+using Game.Infrastructure.Query;
 using Game.DAL.Entity.Entities;
 
 namespace BL.QueryObject
