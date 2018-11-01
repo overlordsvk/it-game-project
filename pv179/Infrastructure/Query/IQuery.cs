@@ -1,12 +1,12 @@
 ﻿using Game.DAL.Entity.Entities;
-using Infrastructure.Query.Predicates;
+using Game.Infrastructure.Query.Predicates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Query
+namespace Game.Infrastructure.Query
 {
     public interface IQuery<TEntity> where TEntity : class, IEntity, new()
     {

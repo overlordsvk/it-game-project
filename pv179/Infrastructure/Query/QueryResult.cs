@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Query
+namespace Game.Infrastructure.Query
 {
     public class QueryResult<TEntity> where TEntity : IEntity
     {

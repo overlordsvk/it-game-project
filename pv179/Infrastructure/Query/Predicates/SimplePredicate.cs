@@ -1,11 +1,11 @@
-﻿using Infrastructure.Query.Predicates.Operators;
+﻿using Game.Infrastructure.Query.Predicates.Operators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Query.Predicates
+namespace Game.Infrastructure.Query.Predicates
 {
     public class SimplePredicate : IPredicate
     {

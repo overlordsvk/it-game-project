@@ -1,13 +1,13 @@
 ﻿using Game.DAL.Entity.Entities;
 using Game.Infrastructure.UnitOfWork;
-using Infrastructure.Query.Predicates;
+using Game.Infrastructure.Query.Predicates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Query
+namespace Game.Infrastructure.Query
 {
     public abstract class QueryBase<TEntity> : IQuery<TEntity> where TEntity : class, IEntity, new()
     {

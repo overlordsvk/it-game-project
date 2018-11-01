@@ -1,9 +1,9 @@
 ﻿using Game.DAL.Entity.Entities;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
-using Infrastructure.Query;
-using Infrastructure.Query.Predicates;
-using Infrastructure.Query.Predicates.Operators;
+using Game.Infrastructure.Query;
+using Game.Infrastructure.Query.Predicates;
+using Game.Infrastructure.Query.Predicates.Operators;
 using System;
 using System.Data.Entity;
 using System.Diagnostics;

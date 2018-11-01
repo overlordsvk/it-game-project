@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.4.1.1\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -39,7 +45,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,18 +59,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityQuery.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\EntityRepository.cs" />
     <Compile Include="SimplePredicateExtensions.cs" />
     <Compile Include="UnitOfWork\EntityUnitOfWork.cs" />
     <Compile Include="UnitOfWork\EntityUnitOfWorkProvider.cs" />
-    <Compile Include="UnitOfWork\EntityUnitOfWorkProviderFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
-      <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
-      <Name>Game.DAL.Entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Game.Infrastructure.csproj">
       <Project>{06A08B9F-D4B4-4E48-B7A3-6DD5B957E493}</Project>
       <Name>Game.Infrastructure</Name>

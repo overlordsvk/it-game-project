@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Game.DAL.Entity.Entities;
-using Game.Infrastructure.UnitOfWork;
-using Game.Infrastructure.Entity.UnitOfWork;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using Game.Infrastructure.Entity.UnitOfWork;
+using Game.Infrastructure.UnitOfWork;
+using Game.DAL.Entity.Entities;
 
 namespace Game.Infrastructure.Entity.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
+    public class EntityRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly IUnitOfWorkProvider _provider;
 
         protected DbContext Context => ((EntityUnitOfWork)_provider.GetUnitOfWorkInstance()).Context;
 
-        public Repository(IUnitOfWorkProvider provider)
+        public EntityRepository(IUnitOfWorkProvider provider)
         {
             this._provider = provider;
         }
