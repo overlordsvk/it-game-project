@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game.DAL.Entity.Config;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Entity.Initializers;
 
@@ -21,8 +22,13 @@ namespace Game.DAL.Entity
         public DbSet<Message> Messages { get; set; }
         public DbSet<WeaponType> WeaponTypes { get; set; }
 
-        public GameDbContext() : base()  // "Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;")
+        /// <summary>
+        /// Non-parametric ctor used by data access layer
+        /// </summary>
+        public GameDbContext() : base(EntityInstaller.AzureDbConnection)
         {
+            // force load of EntityFramework.SqlServer.dll into build
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
             Database.SetInitializer(new Initializer());
         }
 
@@ -32,7 +38,6 @@ namespace Game.DAL.Entity
         /// <param name="connection">The database connection</param>
         public GameDbContext(DbConnection connection) : base(connection, true)
         {
-            Database.Delete();
             Database.CreateIfNotExists();
         }
 

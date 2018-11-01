@@ -1,5 +1,5 @@
-﻿using Infrastructure.Query.Predicates;
-using Infrastructure.Query.Predicates.Operators;
+﻿using Game.Infrastructure.Query.Predicates;
+using Game.Infrastructure.Query.Predicates.Operators;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

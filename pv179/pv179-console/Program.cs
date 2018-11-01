@@ -21,17 +21,18 @@ namespace PV179Console
         }
         public static async Task PrintDbContent()
         {
-            var provider = EntityUnitOfWorkProviderFactory.Create();
+            /*
+            var provider = EntityUnitOfWorkProvider.Create();
             using (var unitOfWork = provider.Create())
             {
-                var accountRepo = new Repository<Account>(provider);
-                var fightRepo = new Repository<Fight>(provider);
-                var groupRepo = new Repository<Group>(provider);
-                var characterRepo = new Repository<Character>(provider);
-                var grouppostRepo = new Repository<GroupPost>(provider);
-                var itemRepo = new Repository<Item>(provider);
-                var messageRepo = new Repository<Message>(provider);
-                var wtypeRepo = new Repository<WeaponType>(provider);
+                var accountRepo = new EntityRepository<Account>(provider);
+                var fightRepo = new EntityRepository<Fight>(provider);
+                var groupRepo = new EntityRepository<Group>(provider);
+                var characterRepo = new EntityRepository<Character>(provider);
+                var grouppostRepo = new EntityRepository<GroupPost>(provider);
+                var itemRepo = new EntityRepository<Item>(provider);
+                var messageRepo = new EntityRepository<Message>(provider);
+                var wtypeRepo = new EntityRepository<WeaponType>(provider);
 
                 var accounts = await accountRepo.GetAllAsync();
                 var fights = await fightRepo.GetAllAsync();
@@ -90,32 +91,7 @@ namespace PV179Console
                 {
                     Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerItem.Name} \t Di: {f.DefenderItem.Name} \t Succ: {f.AttackSuccess}");
                 }
-            }
+            }*/
         }
-
-        public static async Task CreateAccount(string accountName)
-        {
-            var provider = EntityUnitOfWorkProviderFactory.Create();
-
-            using (var unitOfWork = provider.Create())
-            {
-                var repo = new Repository<Account>(provider);
-                repo.Create(new Account() { Username = accountName, Email = accountName+"@gmail.com", Password = "12345d6789", IsAdmin = false });
-                await unitOfWork.Commit();
-            }
-        }
-
-        public static async Task<string> GetAccountById(int id)
-        {
-            var provider = EntityUnitOfWorkProviderFactory.Create();
-
-            using (var unitOfWork = provider.Create())
-            {
-                var repo = new Repository<Account>(provider);
-                var a = await repo.GetAsync(3);
-                return a.Username;
-            }
-        }
-
     }
 }
