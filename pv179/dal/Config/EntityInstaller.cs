@@ -2,11 +2,8 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;

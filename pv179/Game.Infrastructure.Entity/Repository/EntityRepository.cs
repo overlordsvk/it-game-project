@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
-using Game.DAL.Entity.Entities;
 
 namespace Game.Infrastructure.Entity.Repository
 {

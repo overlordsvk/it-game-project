@@ -1,10 +1,7 @@
-﻿using Game.DAL.Entity.Entities;
-using Game.Infrastructure.UnitOfWork;
+﻿using Game.Infrastructure.UnitOfWork;
 using Game.Infrastructure.Query.Predicates;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Game.Infrastructure.Query

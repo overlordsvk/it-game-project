@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Game.DAL.Entity.Entities;
 using System.Threading.Tasks;
+using Castle.Windsor;
 using NUnit.Framework;
 using Game.DAL.Entity;
+using Game.DAL.Entity.Config;
 using Game.Infrastructure.UnitOfWork;
 
 namespace InfrastructureTests
 {
     public class Initializer
     {
+        internal static readonly IWindsorContainer Container = new WindsorContainer();
+
         private const string TestDbConnectionString = "InMemoryTestDBGame";
 
-        internal static readonly IUnitOfWorkProvider Provider = EntityUnitOfWorkProviderFactory.Create();
-
-        public void InitializeBusinessLayerTests()
+        public void InitializeTests()
         {
             Effort.Provider.EffortProviderConfiguration.RegisterProvider();
             Database.SetInitializer(new DropCreateDatabaseAlways<GameDbContext>());
+            Container.Install(new EntityInstaller());
         }
 
         private static DbContext InitializeDatabase()

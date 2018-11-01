@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Threading;
 using System.Threading.Tasks;
-using Game.DAL.Entity;
 using Game.Infrastructure.UnitOfWork;
 
 namespace Game.Infrastructure.Entity.UnitOfWork
