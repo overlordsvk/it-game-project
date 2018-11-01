@@ -17,7 +17,7 @@ namespace BL.Config
             config.CreateMap<Account, AccountCreateDto>().ReverseMap();
             config.CreateMap<Fight, FightDto>().ReverseMap();
             config.CreateMap<Group, GroupDto>().ReverseMap();
-            config.CreateMap<Group, GroupInfoDto>.ForMember(groupDto => )
+            //config.CreateMap<Group, GroupInfoDto>.ForMember(groupDto => )
         }
     }
 }
