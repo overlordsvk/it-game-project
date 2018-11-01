@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.DAL.Entity.Entities
+namespace Game.Infrastructure
 {
     public interface IEntity
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Game.DAL.Entity.Entities;
 
-namespace Game.Infrastructure.Entity.Repository
+namespace Game.Infrastructure
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {

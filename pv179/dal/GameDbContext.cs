@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Game.DAL.Entity.Config;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Entity.Initializers;
@@ -25,7 +20,7 @@ namespace Game.DAL.Entity
         /// <summary>
         /// Non-parametric ctor used by data access layer
         /// </summary>
-        public GameDbContext() : base(EntityInstaller.AzureDbConnection)
+        public GameDbContext() : base(EntityInstaller.LocalDbConnection)
         {
             // force load of EntityFramework.SqlServer.dll into build
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;

@@ -1,5 +1,4 @@
-﻿using Game.DAL.Entity.Entities;
-using Game.Infrastructure.Entity.UnitOfWork;
+﻿using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
