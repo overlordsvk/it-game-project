@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BL.DTO.Common;
+using BL.DTO.Filters;
+using Game.Infrastructure.Query;
 
 namespace BL.Config
 {
@@ -17,6 +20,7 @@ namespace BL.Config
             config.CreateMap<Account, AccountCreateDto>().ReverseMap();
             config.CreateMap<Fight, FightDto>().ReverseMap();
             config.CreateMap<Group, GroupDto>().ReverseMap();
+            config.CreateMap<QueryResult<Account>, QueryResultDto<AccountDto, AccountFilterDto>>();
             //config.CreateMap<Group, GroupInfoDto>.ForMember(groupDto => )
         }
     }

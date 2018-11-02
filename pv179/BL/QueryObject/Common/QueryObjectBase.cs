@@ -7,6 +7,7 @@ using AutoMapper;
 using System.Threading.Tasks;
 using Game.Infrastructure.Query;
 using Game.DAL.Entity.Entities;
+using Game.Infrastructure;
 
 namespace BL.QueryObject
 {
