@@ -68,7 +68,11 @@
     <Compile Include="DTO\Common\QueryResultDto.cs" />
     <Compile Include="DTO\FightDto.cs" />
     <Compile Include="DTO\Filters\AccountFilterDto.cs" />
+    <Compile Include="DTO\Filters\CharacterFilterDto.cs" />
     <Compile Include="DTO\Filters\FightFilterDto.cs" />
+    <Compile Include="DTO\Filters\GroupFilterDto.cs" />
+    <Compile Include="DTO\Filters\ItemFilterDto.cs" />
+    <Compile Include="DTO\Filters\MessageFilterDto.cs" />
     <Compile Include="DTO\GroupDto.cs" />
     <Compile Include="DTO\GroupInfoDto.cs" />
     <Compile Include="DTO\GroupPostDto.cs" />

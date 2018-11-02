@@ -38,7 +38,7 @@ namespace PV179Console
                     var queryObjAccount = new AccountQueryObject(container.Resolve<IMapper>(), container.Resolve<IQuery<Account>>());
                     QueryResultDto<AccountDto,AccountFilterDto> res = queryObjAccount.ExecuteQuery(new AccountFilterDto {Email = "navi@ivan.com"}).Result;
                     
-                    Console.WriteLine(res.TotalItemsCount);
+                    Console.WriteLine("#####"+res.Items.First().Username);
                     var accountRepo = container.Resolve<IRepository<Account>>(provider);
                     var fightRepo = container.Resolve<IRepository<Fight>>(provider);
                     var groupRepo = container.Resolve<IRepository<Group>>(provider);
