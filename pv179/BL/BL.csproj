@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\BLInstaller.cs" />
     <Compile Include="Config\MappingConfig.cs" />
     <Compile Include="DTO\AccountCreateDto.cs" />
     <Compile Include="DTO\AccountDto.cs" />
