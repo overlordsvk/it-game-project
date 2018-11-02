@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BL.DTO;
+using BL.DTO.Common;
+using BL.DTO.Filters;
+using BL.QueryObject;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
+using Game.Infrastructure.Query;
 using Game.Infrastructure.UnitOfWork;
 
 namespace PV179Console
@@ -28,6 +35,10 @@ namespace PV179Console
                 //var provider = EntityUnitOfWorkProvider.Create();
                 using (var unitOfWork = provider.Create())
                 {
+                    var queryObjAccount = new AccountQueryObject(container.Resolve<IMapper>(), container.Resolve<IQuery<Account>>());
+                    QueryResultDto<AccountDto,AccountFilterDto> res = queryObjAccount.ExecuteQuery(new AccountFilterDto {Email = "navi@ivan.com"}).Result;
+                    
+                    Console.WriteLine(res.TotalItemsCount);
                     var accountRepo = container.Resolve<IRepository<Account>>(provider);
                     var fightRepo = container.Resolve<IRepository<Fight>>(provider);
                     var groupRepo = container.Resolve<IRepository<Group>>(provider);
@@ -51,6 +62,8 @@ namespace PV179Console
                     {
                         Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
                     }
+
+                    
 
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
