@@ -1,8 +1,17 @@
 ﻿using Game.DAL.Entity.Entities;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using BL.DTO.Filters;
+using BL.QueryObject;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
+using Game.Infrastructure.Query;
+using Game.Infrastructure.UnitOfWork;
 
 namespace PV179Console
 {
@@ -62,7 +71,7 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.ReceivedMessages.Count} \t SM: {ch.SentMessages.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
                     }
 
                     Console.WriteLine("\nItems: ");
