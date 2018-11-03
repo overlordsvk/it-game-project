@@ -45,11 +45,11 @@ namespace BL.QueryObject
 
         private IPredicate FilterUsername(AccountFilterDto filter)
         {
-            return string.IsNullOrWhiteSpace(filter.Usermane)
+            return string.IsNullOrWhiteSpace(filter.Username)
                 ? null
                 : new SimplePredicate(nameof(Account.Username),
                     ValueComparingOperator.Equal,
-                    filter.Usermane);
+                    filter.Username);
         }
 
         private static void AddIfDefined(IPredicate categoryPredicate, ICollection<IPredicate> definedPredicates)
