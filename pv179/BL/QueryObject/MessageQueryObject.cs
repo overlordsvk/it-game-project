@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BL.DTO;
 using BL.DTO.Filters;
-using dal.Entities;
+using Game.DAL.Entities;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;

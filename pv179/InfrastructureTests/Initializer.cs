@@ -7,7 +7,7 @@ using System.Text;
 using Game.DAL.Entity.Entities;
 using System.Threading.Tasks;
 using Castle.Windsor;
-using dal.Enums;
+using Game.DAL.Enums;
 using NUnit.Framework;
 using Game.DAL.Entity;
 using Game.DAL.Entity.Config;

@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
-using dal.Entities;
+using Game.DAL.Entities;
 using Game.DAL.Entity.Config;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Entity.Initializers;

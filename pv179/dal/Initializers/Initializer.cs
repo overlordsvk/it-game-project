@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
-using dal.Entities;
-using dal.Enums;
+using Game.DAL.Entities;
+using Game.DAL.Enums;
 using Game.DAL.Entity.Entities;
 
 namespace Game.DAL.Entity.Initializers

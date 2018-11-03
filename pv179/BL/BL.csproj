@@ -63,6 +63,7 @@
     <Compile Include="DTO\AccountCreateDto.cs" />
     <Compile Include="DTO\AccountDto.cs" />
     <Compile Include="DTO\CharacterDto.cs" />
+    <Compile Include="DTO\ChatDto.cs" />
     <Compile Include="DTO\Common\DtoBase.cs" />
     <Compile Include="DTO\Common\FilterDtoBase.cs" />
     <Compile Include="DTO\Common\QueryResultDto.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="DTO\Filters\ItemFilterDto.cs" />
     <Compile Include="DTO\Filters\MessageFilterDto.cs" />
     <Compile Include="DTO\GroupDto.cs" />
-    <Compile Include="DTO\GroupInfoDto.cs" />
     <Compile Include="DTO\GroupPostDto.cs" />
     <Compile Include="DTO\ItemDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="Services\Accounts\IAccountService.cs" />
     <Compile Include="Services\Characters\CharacterService.cs" />
     <Compile Include="Services\Characters\ICharacterService.cs" />
+    <Compile Include="Services\Chats\IChatService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
     <Compile Include="Services\Fights\FightService.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="Services\GroupPosts\IGroupPostService.cs" />
     <Compile Include="Services\Groups\GroupService.cs" />
     <Compile Include="Services\Groups\IGroupService.cs" />
+    <Compile Include="Services\Items\IItemService.cs" />
+    <Compile Include="Services\Items\ItemService.cs" />
+    <Compile Include="Services\Messsages\IMessageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,10 +126,6 @@
       <Name>Game.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Chat\" />
-    <Folder Include="Services\Item\" />
-    <Folder Include="Services\Messsage\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,8 +43,6 @@ namespace BL.DTO
         [Range(0, 10)]
         public int Luck { get; set; }
 
-        public ICollection<ItemDto> Items { get; set; }
-
         public GroupDto Group { get; set; }
 
         public AccountDto Account { get; set; }
