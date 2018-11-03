@@ -74,7 +74,7 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group.Name} \t Chats: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group.Name} \t RC: {ch.ReceiverChats.Count} \t SC: {ch.SenderChats.Count} \t Owner:  {ch.Account.Username}");
                     }
                     Console.WriteLine(("\nChats"));
                     foreach (var c in chats)

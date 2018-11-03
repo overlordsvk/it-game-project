@@ -168,9 +168,8 @@ namespace InfrastructureTests
 
             var chat = new Chat
             {
-                Chatters = new List<Character> { 
-                    characterSlayer,
-                    characterWalker},
+                Receiver = characterSlayer,
+                Sender = characterWalker,
                 Subject = "Destruction",
             };
 

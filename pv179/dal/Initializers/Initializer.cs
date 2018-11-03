@@ -139,9 +139,8 @@ namespace Game.DAL.Entity.Initializers
 
             var chat = new Chat
             {
-                Chatters = new List<Character>{
-                    characterSlayer,
-                    characterWalker},
+                Receiver = characterSlayer,
+                Sender = characterWalker,
                 Subject = "Destruction",
             };
 
