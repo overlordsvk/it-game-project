@@ -40,16 +40,15 @@ namespace Game.DAL.Entity
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Chat>()
-                .HasOptional<Character>(m => m.Receiver)
+                .HasMany<Character>(m => m.Chatters)
                 .WithMany(ch => ch.Chats)
-                .HasForeignKey<int?>(m => m.ReceiverId)
-                .WillCascadeOnDelete(false);
+                .Map(cc =>
+                {
+                    cc.MapLeftKey("ChatRefId");
+                    cc.MapRightKey("CharacterRefId");
+                    cc.ToTable("ChatCharacter");
+                });
 
-            modelBuilder.Entity<Chat>()
-                .HasOptional<Character>(m => m.Sender)
-                .WithMany(ch => ch.Chats)
-                .HasForeignKey<int?>(m => m.SenderId)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Item>()
                 .HasOptional<Character>(i => i.Owner)

@@ -7,7 +7,7 @@ using Game.DAL.Entity.Entities;
 
 namespace Game.DAL.Entity.Initializers
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
+    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {
@@ -77,10 +77,6 @@ namespace Game.DAL.Entity.Initializers
                 itemBow
             };
 
-            characterWalker.Shop = new List<Item>
-            {
-                itemAxe2
-            };
 
             Account accountPeter = new Account
             {
@@ -143,8 +139,9 @@ namespace Game.DAL.Entity.Initializers
 
             var chat = new Chat
             {
-                Sender = characterSlayer,
-                Receiver = characterWalker,
+                Chatters = new List<Character>{
+                    characterSlayer,
+                    characterWalker},
                 Subject = "Destruction",
             };
 
