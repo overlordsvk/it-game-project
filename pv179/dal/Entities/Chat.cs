@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using dal.Entities;
 using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities
@@ -21,7 +22,7 @@ namespace Game.DAL.Entity.Entities
         [MaxLength(256)]
         public string Subject { get; set; }
 
-        public virtual ICollection<Chat> Messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
 
         public DateTime LastMessage { get; set; }
         

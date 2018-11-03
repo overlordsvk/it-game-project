@@ -41,13 +41,13 @@ namespace Game.DAL.Entity
         {
             modelBuilder.Entity<Chat>()
                 .HasOptional<Character>(m => m.Receiver)
-                .WithMany(ch => ch.ReceivedMessages)
+                .WithMany(ch => ch.Chats)
                 .HasForeignKey<int?>(m => m.ReceiverId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Chat>()
                 .HasOptional<Character>(m => m.Sender)
-                .WithMany(ch => ch.SentMessages)
+                .WithMany(ch => ch.Chats)
                 .HasForeignKey<int?>(m => m.SenderId)
                 .WillCascadeOnDelete(false);
 
@@ -57,11 +57,11 @@ namespace Game.DAL.Entity
                 .HasForeignKey<int?>(i => i.OwnerId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Item>()
-                .HasOptional<Character>(i => i.ShopOwner)
-                .WithMany(ch => ch.Shop)
-                .HasForeignKey<int?>(i => i.ShopOwnerId)
-                .WillCascadeOnDelete(false);
+           modelBuilder.Entity<Message>()
+               .HasRequired<Chat>(m => m.Chat)
+               .WithMany(ch => ch.Messages)
+               .HasForeignKey<int?>(m => m.ChatId)
+               .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }

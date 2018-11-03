@@ -75,6 +75,7 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Chat.cs" />
+    <Compile Include="Enums\ItemType.cs" />
     <Compile Include="GameDbContext.cs" />
     <Compile Include="Initializers\Initializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

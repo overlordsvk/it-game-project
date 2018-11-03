@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using dal.Enums;
 using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities
@@ -29,11 +30,7 @@ namespace Game.DAL.Entity.Entities
         public int? OwnerId { get; set; }
         public virtual Character Owner { get; set; }
 
-        [ForeignKey(nameof(ShopOwner))]
-        public int? ShopOwnerId { get; set; }
-        public virtual Character ShopOwner { get; set; }
-
-        public bool IsWeapon { get; set; }
+        public ItemType ItemType { get; set; }
 
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Items);

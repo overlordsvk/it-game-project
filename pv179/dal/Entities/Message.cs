@@ -15,10 +15,13 @@ namespace dal.Entities
     {
         public int Id { get; set; }
 
+        public int ChatId { get; set; }
+        public virtual Chat Chat { get; set; }
+
         [MaxLength(2048)]
         public string Text { get; set; }
 
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
         public virtual Character Author { get; set; }
 
         public DateTime Timestamp { get; set; }

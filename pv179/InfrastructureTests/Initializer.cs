@@ -7,6 +7,7 @@ using System.Text;
 using Game.DAL.Entity.Entities;
 using System.Threading.Tasks;
 using Castle.Windsor;
+using dal.Enums;
 using NUnit.Framework;
 using Game.DAL.Entity;
 using Game.DAL.Entity.Config;
@@ -37,31 +38,8 @@ namespace InfrastructureTests
             context.Groups.RemoveRange(context.Groups);
             context.Items.RemoveRange(context.Items);
             context.Messages.RemoveRange(context.Messages);
-            context.WeaponTypes.RemoveRange(context.WeaponTypes);
             context.SaveChanges();
 
-
-            var wtypeAxe = new WeaponType
-            {
-                ItemName = "Axe",
-                MaxAttack = 100,
-                MaxDefense = 20,
-                MaxWeight = 15,
-                MinAttack = 10,
-                MinDefense = 2,
-                MinWeight = 8
-            };
-
-            var wtypeBow = new WeaponType
-            {
-                ItemName = "Bow",
-                MaxAttack = 50,
-                MaxDefense = 50,
-                MaxWeight = 9,
-                MinAttack = 3,
-                MinDefense = 0,
-                MinWeight = 1
-            };
 
             var itemAxe = new Item
             {
@@ -69,7 +47,7 @@ namespace InfrastructureTests
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
-                WeaponType = wtypeAxe
+                ItemType = ItemType.Weapon
             };
 
             var itemAxe2 = new Item
@@ -78,7 +56,7 @@ namespace InfrastructureTests
                 Attack = 25,
                 Defense = 10,
                 Weight = 8,
-                WeaponType = wtypeAxe
+                ItemType = ItemType.Weapon
             };
 
             var itemBow = new Item
@@ -87,7 +65,7 @@ namespace InfrastructureTests
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
-                WeaponType = wtypeBow
+                ItemType = ItemType.Weapon
             };
 
             Character characterSlayer = new Character
@@ -179,8 +157,8 @@ namespace InfrastructureTests
             {
                 Attacker = characterSlayer,
                 Defender = characterWalker,
-                AttackerItem = itemAxe,
-                DefenderItem = itemBow,
+                AttackerWeapon = itemAxe,
+                DefenderWeapon = itemBow,
                 Timestamp = DateTime.Now,
                 AttackSuccess = true
             };
@@ -193,18 +171,14 @@ namespace InfrastructureTests
                 Timestamp = DateTime.Now
             };
 
-            var message1 = new Chat
+            var chat = new Chat
             {
                 Sender = characterSlayer,
                 Receiver = characterWalker,
-                Timestamp = DateTime.Now,
                 Subject = "Destruction",
-                Text = "I will destroy you"
             };
 
 
-            context.WeaponTypes.Add(wtypeAxe);
-            context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemAxe2);
@@ -217,7 +191,6 @@ namespace InfrastructureTests
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
 
-            context.Messages.Add(message1);
 
             context.Fights.Add(fight1);
 

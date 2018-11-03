@@ -19,9 +19,17 @@ namespace Game.DAL.Entity.Entities
         public int? DefenderId { get; set; }
         public virtual Character Defender { get; set; }
 
-        public virtual ICollection<Item> AttackerItems { get; set; }
+        public int? AttackerWeaponId { get; set; }
+        public virtual Item AttackerWeapon { get; set; }
 
-        public virtual ICollection<Item> DefenderItems { get; set; }
+        public int? AttackerArmorId { get; set; }
+        public virtual Item AttackerArmor { get; set; }
+
+        public int? DefenderWeaponId { get; set; }
+        public virtual Item DefenderWeapon { get; set; }
+
+        public int? DefenderArmorId { get; set; }
+        public virtual Item DefenderArmor { get; set; }
 
         public bool AttackSuccess { get; set; }
 

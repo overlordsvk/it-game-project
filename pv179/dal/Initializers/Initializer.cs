@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using dal.Entities;
+using dal.Enums;
 using Game.DAL.Entity.Entities;
 
 namespace Game.DAL.Entity.Initializers
@@ -15,7 +17,7 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
-                IsWeapon = true
+                ItemType = ItemType.Weapon
             };
 
             var itemAxe2 = new Item
@@ -24,7 +26,7 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 25,
                 Defense = 10,
                 Weight = 8,
-                IsWeapon = true
+                ItemType = ItemType.Weapon
             };
 
             var itemBow = new Item
@@ -33,7 +35,7 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
-                IsWeapon = true
+                ItemType = ItemType.Weapon
             };
 
             Character characterSlayer = new Character
@@ -125,8 +127,8 @@ namespace Game.DAL.Entity.Initializers
             {
                 Attacker = characterSlayer,
                 Defender = characterWalker,
-                AttackerItem = itemAxe,
-                DefenderItem = itemBow,
+                AttackerWeapon = itemAxe,
+                DefenderWeapon = itemBow,
                 Timestamp = DateTime.Now,
                 AttackSuccess = true
             };
@@ -139,13 +141,29 @@ namespace Game.DAL.Entity.Initializers
                 Timestamp = DateTime.Now
             };
 
-            var message1 = new Chat
+            var chat = new Chat
             {
                 Sender = characterSlayer,
                 Receiver = characterWalker,
-                Timestamp = DateTime.Now,
                 Subject = "Destruction",
-                Text = "I will destroy you"
+            };
+
+            var message1 = new Message
+            {
+                Author = characterSlayer,
+                Chat = chat,
+                Text = "This is war",
+                Timestamp = DateTime.Now,
+
+            };
+
+            var message2 = new Message
+            {
+                Author = characterWalker,
+                Chat = chat,
+                Text = "ok",
+                Timestamp = DateTime.Now,
+
             };
 
             context.Items.Add(itemAxe);
@@ -160,7 +178,8 @@ namespace Game.DAL.Entity.Initializers
             context.Accounts.Add(accountVedro);
 
             context.Messages.Add(message1);
-            
+            context.Messages.Add(message2);
+
             context.Fights.Add(fight1);
             
             context.Groups.Add(group1);
