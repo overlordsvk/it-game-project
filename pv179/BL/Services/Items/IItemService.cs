@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTO;
+using BL.DTO.Common;
+using BL.DTO.Filters;
 
 namespace BL.Services.Items
 {
@@ -34,5 +36,16 @@ namespace BL.Services.Items
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
+
+        /// <summary>
+        /// Gets items according to given filter
+        /// </summary>
+        /// <param name="filter">The item filter</param>
+        /// <returns>Filtered results</returns>
+        Task<QueryResultDto<ItemDto, ItemFilterDto>> ListItemsAsync(ItemFilterDto filter);
+
+        Task<ItemDto> GetEquippedWeapon(int id);
+
+        Task<ItemDto> GetEquippedArmor(int id);
     }
 }

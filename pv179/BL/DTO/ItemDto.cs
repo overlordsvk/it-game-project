@@ -30,8 +30,5 @@ namespace BL.DTO
         public int? OwnerId { get; set; }
         public CharacterDto Owner { get; set; }
 
-        public int? ShopOwnerId { get; set; }
-        public CharacterDto ShopOwner { get; set; }
-
     }
 }
