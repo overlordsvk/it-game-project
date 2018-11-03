@@ -1,13 +1,17 @@
 ﻿using Game.DAL.Entity.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using BL.Config;
+using BL.DTO;
 using BL.DTO.Filters;
 using BL.QueryObject;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Game.DAL.Entities;
+using Game.DAL.Enums;
 using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
@@ -29,6 +33,83 @@ namespace PV179Console
             {
                 dbContext.Database.Delete();
             }*/
+
+            var mapper = new Mapper(new MapperConfiguration(MappingConfig.ConfigureMapping)).DefaultContext.Mapper;
+            var dtoChar = new CharacterDto
+            {
+                Name = "Harakter",
+            };
+            var dto = new AccountDto
+            {
+                Email = "ja@skuska.cz",
+                Character = dtoChar,
+                Id = 1,
+                IsAdmin = false,
+                Password = "123456789",
+                Username = "Jano",
+            };
+            var dto2 = new AccountDto();
+            
+            var entity = new Account();
+            var itemAxe = new Item
+            {
+                Name = "Sekera",
+                Attack = 20,
+                Defense = 5,
+                Weight = 12,
+                ItemType = ItemType.Weapon
+            };
+
+            var itemAxe2 = new Item
+            {
+                Name = "Lepsia Sekera",
+                Attack = 25,
+                Defense = 10,
+                Weight = 8,
+                ItemType = ItemType.Weapon
+            };
+
+            var itemBow = new Item
+            {
+                Name = "Luk",
+                Attack = 44,
+                Defense = 3,
+                Weight = 3,
+                ItemType = ItemType.Weapon
+            };
+
+            Character characterSlayer = new Character
+            {
+                Name = "KingSlayer",
+                Money = 666,
+                Health = 98,
+                Score = 12,
+                Strength = 5,
+                Perception = 8,
+                Endurance = 2,
+                Charisma = 8,
+                Intelligence = 1,
+                Agility = 5,
+                Luck = 9
+            };
+            characterSlayer.Items = new List<Item>
+            {
+                itemAxe,
+                itemAxe2,
+                itemBow
+            };
+            
+            var chardto = new CharacterDto();
+            mapper.Map(dto, entity);
+            Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
+            mapper.Map(entity, dto2);
+            Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
+
+            mapper.Map(characterSlayer, chardto);
+
+            Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
+
+            Console.ReadKey();
         }
         public static async Task PrintDbContent()
         {
