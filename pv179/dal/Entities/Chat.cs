@@ -11,7 +11,11 @@ namespace Game.DAL.Entity.Entities
     {
         public int Id { get; set; }
 
-        public virtual ICollection<Character> Chatters { get; set; }
+        public int? SenderId { get; set; }
+        public virtual Character Sender { get; set; }
+
+        public int? ReceiverId { get; set; }
+        public virtual Character Receiver { get; set; }
 
         [MaxLength(256)]
         public string Subject { get; set; }

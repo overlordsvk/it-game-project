@@ -45,8 +45,9 @@ namespace Game.DAL.Entity.Entities
 
         public virtual ICollection<Item> Items { get; set; }
 
-        public virtual ICollection<Chat> Chats { get; set; }
-        
+        public virtual ICollection<Chat> SenderChats { get; set; }
+        public virtual ICollection<Chat> ReceiverChats { get; set; }
+
         public int? GroupId { get; set; }
         public virtual Group Group { get; set; }
 
