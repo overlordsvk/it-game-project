@@ -13,7 +13,7 @@ using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
 
-namespace BL.Services.Group
+namespace BL.Services.Groups
 {
     public class GroupService : CrudQueryServiceBase<Group, GroupDto, GroupFilterDto>, IGroupService
     {
@@ -22,13 +22,13 @@ namespace BL.Services.Group
             return await Repository.GetAsync(entityId, nameof(Group.Members), nameof(Group.Wall));
         }
 
-        public GroupService(IMapper mapper, IRepository<Group> repository, QueryObjectBase<Group, GroupDto, GroupFilterDto, IQuery<Group>> query) : base(mapper, repository, query)
-        {
-        }
-
         public async Task<QueryResultDto<GroupDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter)
         {
             return await Query.ExecuteQuery(filter);
+        }
+
+        public GroupService(IMapper mapper, IRepository<Group> repository, QueryObjectBase<GroupDto, Group, GroupFilterDto, IQuery<Group>> query) : base(mapper, repository, query)
+        {
         }
     }
 }

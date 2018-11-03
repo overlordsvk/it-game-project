@@ -92,16 +92,16 @@
     <Compile Include="QueryObject\ItemQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
-    <Compile Include="Services\Character\CharacterService.cs" />
-    <Compile Include="Services\Character\ICharacterService.cs" />
+    <Compile Include="Services\Characters\CharacterService.cs" />
+    <Compile Include="Services\Characters\ICharacterService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
     <Compile Include="Services\Fights\FightService.cs" />
     <Compile Include="Services\Fights\IFightService.cs" />
-    <Compile Include="Services\GroupPost\GroupPostService.cs" />
-    <Compile Include="Services\GroupPost\IGroupPostService.cs" />
-    <Compile Include="Services\Group\GroupService.cs" />
-    <Compile Include="Services\Group\IGroupService.cs" />
+    <Compile Include="Services\GroupPosts\GroupPostService.cs" />
+    <Compile Include="Services\GroupPosts\IGroupPostService.cs" />
+    <Compile Include="Services\Groups\GroupService.cs" />
+    <Compile Include="Services\Groups\IGroupService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

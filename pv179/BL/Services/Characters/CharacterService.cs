@@ -7,9 +7,10 @@ using BL.DTO;
 using BL.DTO.Filters;
 using BL.Services.Common;
 
-namespace BL.Services.Character
+namespace BL.Services.Characters
 {
     public class CharacterService : CrudQueryServiceBase<Character, CharacterDto, CharacterFilterDto>, ICharacterService
     {
+
     }
 }
