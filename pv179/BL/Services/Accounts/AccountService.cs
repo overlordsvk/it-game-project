@@ -44,7 +44,8 @@ namespace BL.Services.Accounts
             {
                 Username = accountCreate.Username,
                 Email = accountCreate.Email,
-                Password = accountCreate.Password
+                Password = accountCreate.Password,
+                Id = 200
             };
             return Create(newAccount);
         }
