@@ -42,7 +42,7 @@ namespace BL.QueryObject
                 ? null
                 : new SimplePredicate(nameof(Item.Equipped),
                     ValueComparingOperator.Equal,
-                    filter.IsEquipped);
+                    filter.IsEquipped.Value);
         }
 
         private IPredicate FilterItemType(ItemFilterDto filter)
@@ -51,7 +51,7 @@ namespace BL.QueryObject
                 ? null
                 : new SimplePredicate(nameof(Item.ItemType),
                     ValueComparingOperator.Equal,
-                    filter.ItemType);
+                    filter.ItemType.Value);
         }
 
         private IPredicate FilterItemOwner(ItemFilterDto filter)
@@ -60,7 +60,7 @@ namespace BL.QueryObject
                 ? null
                 : new SimplePredicate(nameof(Item.OwnerId),
                     ValueComparingOperator.Equal,
-                    filter.OwnerId);
+                    filter.OwnerId.Value);
         }
 
         private static SimplePredicate FilterItemName(ItemFilterDto filter)

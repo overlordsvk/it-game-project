@@ -51,7 +51,7 @@ namespace BL.QueryObject
                 ? null
                 : new SimplePredicate(nameof(Character.GroupId),
                     ValueComparingOperator.Equal,
-                    filter.GroupId);
+                    filter.GroupId.Value);
         }
 
         private IPredicate FilterCharacterName(CharacterFilterDto filter)

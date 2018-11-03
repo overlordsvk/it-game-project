@@ -9,7 +9,8 @@ namespace BL.DTO.Filters
 {
     public class FightFilterDto : FilterDtoBase
     {
-        public int AttackerId { get; set; }
+        public int? AttackerId { get; set; }
+        public int? DefenderId { get; set; }
 
         public bool? AttackSuccess { get; set; }
 

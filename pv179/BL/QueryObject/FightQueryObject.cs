@@ -19,17 +19,57 @@ namespace BL.QueryObject
 
         protected override IQuery<Fight> ApplyWhereClause(IQuery<Fight> query, FightFilterDto filter)
         {
-            var attackerPredicate = new SimplePredicate(nameof(Fight.AttackerId),
-                ValueComparingOperator.Equal,
-                filter.AttackerId);
-            if (!filter.AttackSuccess.HasValue)
+            var predicates = new List<IPredicate>();
+            AddIfDefined(FilterAttackerId(filter), predicates);
+            AddIfDefined(FilterDefenderId(filter), predicates);
+            AddIfDefined(FilterSuccess(filter), predicates);
+
+            if (predicates.Count == 0)
             {
-                return query.Where(attackerPredicate);
+                return query;
             }
-            var predicate = new CompositePredicate(new List<IPredicate>(){attackerPredicate, new SimplePredicate(nameof(Fight.AttackSuccess),
-                                                                                            ValueComparingOperator.Equal, 
-                                                                                            filter.AttackSuccess.Value)});
-            return query.Where(predicate);
+            if (predicates.Count == 1)
+            {
+                return query.Where(predicates.First());
+            }
+            var wherePredicate = new CompositePredicate(predicates);
+            return query.Where(wherePredicate);
+
+        }
+
+        private IPredicate FilterSuccess(FightFilterDto filter)
+        {
+            return !filter.AttackSuccess.HasValue
+                ? null
+                : new SimplePredicate(nameof(Fight.AttackSuccess),
+                    ValueComparingOperator.Equal,
+                    filter.AttackSuccess.Value);
+        }
+
+        private IPredicate FilterDefenderId(FightFilterDto filter)
+        {
+            return !filter.DefenderId.HasValue
+                ? null
+                : new SimplePredicate(nameof(Fight.DefenderId),
+                    ValueComparingOperator.Equal,
+                    filter.DefenderId.Value);
+        }
+
+        private IPredicate FilterAttackerId(FightFilterDto filter)
+        {
+            return !filter.AttackerId.HasValue
+                ? null
+                : new SimplePredicate(nameof(Fight.AttackerId),
+                    ValueComparingOperator.Equal,
+                    filter.AttackerId.Value);
+        }
+
+        private static void AddIfDefined(IPredicate categoryPredicate, ICollection<IPredicate> definedPredicates)
+        {
+            if (categoryPredicate != null)
+            {
+                definedPredicates.Add(categoryPredicate);
+            }
         }
     }
 }

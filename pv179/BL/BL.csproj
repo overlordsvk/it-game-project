@@ -89,6 +89,7 @@
     <Compile Include="QueryObject\CharacterQueryObject.cs" />
     <Compile Include="QueryObject\Common\QueryObjectBase.cs" />
     <Compile Include="QueryObject\FightQueryObject.cs" />
+    <Compile Include="QueryObject\GroupPostQueryObject.cs" />
     <Compile Include="QueryObject\ItemQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
