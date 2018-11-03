@@ -40,7 +40,7 @@ namespace BL.Services.Accounts
 
         public int Register(AccountCreateDto accountCreate)
         {
-            var accountDto = Mapper.Map<AccountDto>(accountCreate);
+            var accountDto = Mapper.Map<AccountCreateDto, AccountDto>(accountCreate, new AccountDto());
             return Create(accountDto);
         }
     }

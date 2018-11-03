@@ -22,15 +22,28 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Gets customer according to email
+        /// Gets account according to email
         /// </summary>
         /// <param name="email"></param>
-        /// <returns>Customer with specified email</returns>
+        /// <returns>Account with specified email</returns>
         public async Task<AccountDto> GetCustomerAccordingToEmailAsync(string email)
         {
             using (UnitOfWorkProvider.Create())
             {
                 return await _accountService.GetAccountAccordingToEmailAsync(email);
+            }          
+        }
+
+        /// <summary>
+        /// Gets account according to username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Account with specified username</returns>
+        public async Task<AccountDto> GetCustomerAccordingToUsernameAsync(string username)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _accountService.GetAccountAccordingToUsernameAsync(username);
             }          
         }
 
@@ -56,14 +69,13 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                if (_accountService.GetAccountAccordingToEmailAsync(registrationDto.Email).Result != null)
+                if (GetCustomerAccordingToEmailAsync(registrationDto.Email).Result != null)
                 {
                     success = false;
                     return -1;
                 }
 
-                
-                if (_accountService.GetAccountAccordingToUsernameAsync(registrationDto.Username).Result != null)
+                if (GetCustomerAccordingToUsernameAsync(registrationDto.Username).Result != null)
                 {
                     success = false;
                     return -2;
