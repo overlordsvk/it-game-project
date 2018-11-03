@@ -29,7 +29,7 @@ namespace BL.Services.Accounts
         /// </summary>
         /// <param name="accountCreate">accountCreate</param>
         /// <returns>Registers account</returns>
-        void Register(AccountCreateDto accountCreate);
+        int Register(AccountCreateDto accountCreate);
         
         /// <summary>
         /// Gets DTO representing the entity according to ID

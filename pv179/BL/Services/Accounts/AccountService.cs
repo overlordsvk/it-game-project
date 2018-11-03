@@ -38,11 +38,10 @@ namespace BL.Services.Accounts
             return queryResult.Items.SingleOrDefault();
         }
 
-        public void Register(AccountCreateDto accountCreate)
+        public int Register(AccountCreateDto accountCreate)
         {
-            var entity = Mapper.Map<TEntity>(entityDto);
-            Repository.Create(entity);
-            return entity.Id;
+            var accountDto = Mapper.Map<AccountDto>(accountCreate);
+            return Create(accountDto);
         }
     }
 }

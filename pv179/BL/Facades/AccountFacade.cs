@@ -14,11 +14,11 @@ namespace BL.Facades
 {
     public class AccountFacade : FacadeBase
     {
-        private readonly IAccountService accountService;
+        private readonly IAccountService _accountService;
 
         public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService) : base(unitOfWorkProvider)
         {
-            this.accountService = accountService;
+            this._accountService = accountService;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await accountService.GetAccountAccordingToEmailAsync(email);
+                return await _accountService.GetAccountAccordingToEmailAsync(email);
             }          
         }
 
@@ -42,7 +42,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await accountService.ListAllAsync();
+                return await _accountService.ListAllAsync();
             }
         }
 
@@ -54,20 +54,18 @@ namespace BL.Facades
         ///// <returns>Registered account ID</returns>
         public int RegisterAccount(AccountCreateDto registrationDto, out bool success)
         {
-            if (accountService.GetAccountAccordingToEmailAsync(registrationDto.Email) != null)
+            if (_accountService.GetAccountAccordingToEmailAsync(registrationDto.Email) != null)
             {
                 success = false;
                 return -1;
             }
-            if (accountService.GetAccountAccordingToUsernameAsync(registrationDto.Username) != null)
+            if (_accountService.GetAccountAccordingToUsernameAsync(registrationDto.Username) != null)
             {
                 success = false;
                 return -2;
             }
 
-            accountService.Register(registrationDto);
-
-            customerService.CreateCustomer(accountId);
+            var accountId = _accountService.Register(registrationDto);
             success = true;
             return accountId;
         }

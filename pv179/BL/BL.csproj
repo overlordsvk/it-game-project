@@ -89,6 +89,8 @@
     <Compile Include="QueryObject\FightQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
+    <Compile Include="Services\Character\CharacterService.cs" />
+    <Compile Include="Services\Character\ICharacterService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
     <Compile Include="Services\Fights\FightService.cs" />
@@ -116,7 +118,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Character\" />
     <Folder Include="Services\Chat\" />
     <Folder Include="Services\Item\" />
     <Folder Include="Services\Messsage\" />
