@@ -9,35 +9,13 @@ namespace Game.DAL.Entity.Initializers
     {
         protected override void Seed(GameDbContext context)
         {
-            var wtypeAxe = new WeaponType
-            {
-                ItemName = "Axe",
-                MaxAttack = 100,
-                MaxDefense = 20,
-                MaxWeight = 15,
-                MinAttack = 10,
-                MinDefense = 2,
-                MinWeight = 8
-            };
-
-            var wtypeBow = new WeaponType
-            {
-                ItemName = "Bow",
-                MaxAttack = 50,
-                MaxDefense = 50,
-                MaxWeight = 9,
-                MinAttack = 3,
-                MinDefense = 0,
-                MinWeight = 1
-            };
-
             var itemAxe = new Item
             {
                 Name = "Sekera",
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
-                WeaponType = wtypeAxe
+                IsWeapon = true
             };
 
             var itemAxe2 = new Item
@@ -46,7 +24,7 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 25,
                 Defense = 10,
                 Weight = 8,
-                WeaponType = wtypeAxe
+                IsWeapon = true
             };
 
             var itemBow = new Item
@@ -55,7 +33,7 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
-                WeaponType = wtypeBow
+                IsWeapon = true
             };
 
             Character characterSlayer = new Character
@@ -161,7 +139,7 @@ namespace Game.DAL.Entity.Initializers
                 Timestamp = DateTime.Now
             };
 
-            var message1 = new Message
+            var message1 = new Chat
             {
                 Sender = characterSlayer,
                 Receiver = characterWalker,
@@ -169,10 +147,6 @@ namespace Game.DAL.Entity.Initializers
                 Subject = "Destruction",
                 Text = "I will destroy you"
             };
-
-            
-            context.WeaponTypes.Add(wtypeAxe);
-            context.WeaponTypes.Add(wtypeBow);
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemAxe2);

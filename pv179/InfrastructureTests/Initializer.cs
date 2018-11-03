@@ -193,7 +193,7 @@ namespace InfrastructureTests
                 Timestamp = DateTime.Now
             };
 
-            var message1 = new Message
+            var message1 = new Chat
             {
                 Sender = characterSlayer,
                 Receiver = characterWalker,

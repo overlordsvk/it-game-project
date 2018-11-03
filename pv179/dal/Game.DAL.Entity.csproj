@@ -73,8 +73,8 @@
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\GroupPost.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\WeaponType.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\Chat.cs" />
     <Compile Include="GameDbContext.cs" />
     <Compile Include="Initializers\Initializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

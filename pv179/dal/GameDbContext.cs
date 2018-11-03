@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Data.Entity;
+using dal.Entities;
 using Game.DAL.Entity.Config;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Entity.Initializers;
@@ -14,8 +15,8 @@ namespace Game.DAL.Entity
         public DbSet<GroupPost> GroupPosts { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Chat> Chat { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<WeaponType> WeaponTypes { get; set; }
 
         /// <summary>
         /// Non-parametric ctor used by data access layer
@@ -38,13 +39,13 @@ namespace Game.DAL.Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Message>()
+            modelBuilder.Entity<Chat>()
                 .HasOptional<Character>(m => m.Receiver)
                 .WithMany(ch => ch.ReceivedMessages)
                 .HasForeignKey<int?>(m => m.ReceiverId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Message>()
+            modelBuilder.Entity<Chat>()
                 .HasOptional<Character>(m => m.Sender)
                 .WithMany(ch => ch.SentMessages)
                 .HasForeignKey<int?>(m => m.SenderId)

@@ -85,7 +85,12 @@
     <Compile Include="QueryObject\CharacterQueryObject.cs" />
     <Compile Include="QueryObject\Common\QueryObjectBase.cs" />
     <Compile Include="QueryObject\FightQueryObject.cs" />
-    <Compile Include="QueryObject\GroupQueryObject.cs" />
+    <Compile Include="Services\Accounts\AccountService.cs" />
+    <Compile Include="Services\Accounts\IAccountService.cs" />
+    <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
+    <Compile Include="Services\Common\ServiceBase.cs" />
+    <Compile Include="Services\Fights\FightService.cs" />
+    <Compile Include="Services\Fights\IFightService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
