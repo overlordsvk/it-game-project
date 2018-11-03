@@ -20,6 +20,8 @@ namespace Game.DAL.Entity.Entities
 
         public bool IsAdmin { get; set; }
 
+        public string Picture { get; set; }
+
         public virtual Character Character { get; set; }
 
         [NotMapped]

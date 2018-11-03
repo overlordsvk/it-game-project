@@ -91,6 +91,7 @@
     <Compile Include="QueryObject\FightQueryObject.cs" />
     <Compile Include="QueryObject\GroupPostQueryObject.cs" />
     <Compile Include="QueryObject\ItemQueryObject.cs" />
+    <Compile Include="QueryObject\MessageQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
     <Compile Include="Services\Characters\CharacterService.cs" />

@@ -7,6 +7,7 @@ using BL.DTO.Filters;
 using BL.QueryObject;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using dal.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
@@ -50,7 +51,8 @@ namespace PV179Console
                     var characterRepo = container.Resolve<IRepository<Character>>(provider);
                     var testgroupRepo = container.Resolve<IRepository<GroupPost>>(provider);
                     var itemRepo = container.Resolve<IRepository<Item>>(provider);
-                    var messageRepo = container.Resolve<IRepository<Chat>>(provider);
+                    var chatRepo = container.Resolve<IRepository<Chat>>(provider);
+                    var messageRepo = container.Resolve<IRepository<Message>>(provider);
 
                     var accounts = await accountRepo.GetAllAsync();
                     var fights = await fightRepo.GetAllAsync();
@@ -58,6 +60,7 @@ namespace PV179Console
                     var characters = await characterRepo.GetAllAsync();
                     var testgroup = await testgroupRepo.GetAllAsync();
                     var items = await itemRepo.GetAllAsync();
+                    var chats = await chatRepo.GetAllAsync();
                     var messages = await messageRepo.GetAllAsync();
 
                     Console.WriteLine("\nAccounts: ");
@@ -71,7 +74,18 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group.Name} \t RM: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group.Name} \t Chats: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
+                    }
+                    Console.WriteLine(("\nChats"));
+                    foreach (var c in chats)
+                    {
+                        Console.WriteLine($"{c.Subject} \t Count: {c.Messages.Count}");
+                    }
+
+                    Console.WriteLine("\nMessages");
+                    foreach (var m in messages)
+                    {
+                        Console.WriteLine($"{m.Chat.Subject} \t Author: {m.Author.Name} \t Text: {m.Text}");
                     }
 
                     Console.WriteLine("\nItems: ");

@@ -12,6 +12,8 @@ namespace Game.DAL.Entity.Entities
         [MaxLength(256)]
         public string Name { get; set; }
 
+        public string Picture { get; set; }
+
         public virtual ICollection<Character> Members { get; set; }
 
         public virtual ICollection<GroupPost> Wall { get; set; }
