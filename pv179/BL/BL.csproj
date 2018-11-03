@@ -80,7 +80,6 @@
     <Compile Include="DTO\GroupPostDto.cs" />
     <Compile Include="DTO\ItemDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
-    <Compile Include="DTO\WeaponTypeDto.cs" />
     <Compile Include="Facades\AccountFacade.cs" />
     <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
