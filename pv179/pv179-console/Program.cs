@@ -44,7 +44,7 @@ namespace PV179Console
             {
                 Email = "ja@skuska.cz",
                 Character = dtoChar,
-                Id = 1,
+                //Id = 500,
                 IsAdmin = false,
                 Password = "123456789",
                 Username = "Jano",
@@ -110,12 +110,26 @@ namespace PV179Console
 
             Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
 
+            var acccrdto = new AccountCreateDto
+            {
+                Email = "bela@bugar",
+                Password = "147852369",
+                Username = "Bela"
+            };
 
             using (var container = new WindsorContainer())
             {
                 container.Install(FromAssembly.This());
                 var accFacade = container.Resolve<AccountFacade>();
-
+                var res = accFacade.GetCustomerAccordingToEmailAsync("navi@ivan.com");
+                var resew = accFacade.GetCustomerAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
+                Console.WriteLine(resew);
+                Console.WriteLine("AccFacUser: " + res.Result.Username);
+                bool succ;
+                var res2 = accFacade.RegisterAccount(acccrdto, out succ);
+                //Console.WriteLine("Succ: " + succ);
+                var res3 = accFacade.GetCustomerAccordingToEmailAsync("bela@bugar");
+                //Console.WriteLine("====>>>>" + res3.Result.Username);
             }
 
             Console.ReadKey();

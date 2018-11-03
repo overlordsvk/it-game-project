@@ -54,21 +54,27 @@ namespace BL.Facades
         ///// <returns>Registered account ID</returns>
         public int RegisterAccount(AccountCreateDto registrationDto, out bool success)
         {
-            if (_accountService.GetAccountAccordingToEmailAsync(registrationDto.Email) != null)
+            using (UnitOfWorkProvider.Create())
             {
-                success = false;
-                return -1;
-            }
-            if (_accountService.GetAccountAccordingToUsernameAsync(registrationDto.Username) != null)
-            {
-                success = false;
-                return -2;
-            }
+                if (_accountService.GetAccountAccordingToEmailAsync(registrationDto.Email).Result != null)
+                {
+                    success = false;
+                    return -1;
+                }
 
-            var accountId = _accountService.Register(registrationDto);
-            success = true;
-            return accountId;
+                
+                if (_accountService.GetAccountAccordingToUsernameAsync(registrationDto.Username).Result != null)
+                {
+                    success = false;
+                    return -2;
+                }
+
+                var accountId = _accountService.Register(registrationDto);
+                success = true;
+                return accountId;
+            }
         }
+
 
 
     }
