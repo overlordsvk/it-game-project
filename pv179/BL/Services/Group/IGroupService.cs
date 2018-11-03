@@ -12,7 +12,7 @@ namespace BL.Services.Group
     public interface IGroupService
     {
         /// <summary>
-        /// Gets fights according to given filter
+        /// Gets groups according to given filter
         /// </summary>
         /// <param name="filter">The fights filter</param>
         /// <returns>Filtered results</returns>
