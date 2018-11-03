@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTO.Common;
+using dal.Enums;
 
 namespace BL.DTO.Filters
 {
@@ -11,8 +12,8 @@ namespace BL.DTO.Filters
     {
         public string Name { get; set; }
         public int? OwnerId { get; set; }
-        public int? ShopOwnerId { get; set; }
-        public int? WeaponTypeId { get; set; }
+        public ItemType? ItemType { get; set; }
+        public bool? IsEquipped { get; set; }
 
     }
 }
