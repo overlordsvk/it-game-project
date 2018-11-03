@@ -66,7 +66,7 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.ReceivedMessages.Count} \t SM: {ch.SentMessages.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
                     }
 
                     Console.WriteLine("\nItems: ");

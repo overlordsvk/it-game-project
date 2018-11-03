@@ -89,6 +89,10 @@
     <Compile Include="Services\Common\ServiceBase.cs" />
     <Compile Include="Services\Fights\FightService.cs" />
     <Compile Include="Services\Fights\IFightService.cs" />
+    <Compile Include="Services\GroupPost\GroupPostService.cs" />
+    <Compile Include="Services\GroupPost\IGroupPostService.cs" />
+    <Compile Include="Services\Group\GroupService.cs" />
+    <Compile Include="Services\Group\IGroupService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -107,6 +111,11 @@
       <Name>Game.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\Character\" />
+    <Folder Include="Services\Chat\" />
+    <Folder Include="Services\Item\" />
+    <Folder Include="Services\Messsage\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
