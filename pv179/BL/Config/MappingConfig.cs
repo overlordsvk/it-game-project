@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using Game.DAL.Entities;
 using Game.Infrastructure.Query;
 
 namespace BL.Config
@@ -20,13 +21,17 @@ namespace BL.Config
             config.CreateMap<Account, AccountCreateDto>().ReverseMap();
             config.CreateMap<Fight, FightDto>().ReverseMap();
             config.CreateMap<Group, GroupDto>().ReverseMap();
+            config.CreateMap<GroupPost, GroupPostDto>().ReverseMap();
+            config.CreateMap<Character, CharacterDto>().ReverseMap();
+            config.CreateMap<Chat, ChatDto>().ReverseMap();
+            config.CreateMap<Item, ItemDto>().ReverseMap();
+            config.CreateMap<Message, MessageDto>().ReverseMap();
             config.CreateMap<QueryResult<Account>, QueryResultDto<AccountDto, AccountFilterDto>>();
             config.CreateMap<QueryResult<Fight>, QueryResultDto<FightDto, FightFilterDto>>();
             config.CreateMap<QueryResult<Group>, QueryResultDto<GroupDto, GroupFilterDto>>();
             config.CreateMap<QueryResult<Item>, QueryResultDto<ItemDto, ItemFilterDto>>();
             config.CreateMap<QueryResult<Character>, QueryResultDto<CharacterDto, CharacterFilterDto>>();
             config.CreateMap<QueryResult<Chat>, QueryResultDto<MessageDto, MessageFilterDto>>();
-            //config.CreateMap<Group, GroupInfoDto>.ForMember(groupDto => )
         }
     }
 }

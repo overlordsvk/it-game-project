@@ -9,7 +9,7 @@ using Game.DAL.Entity;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 
-namespace dal.Entities
+namespace Game.DAL.Entities
 {
     public class Message : IEntity
     {

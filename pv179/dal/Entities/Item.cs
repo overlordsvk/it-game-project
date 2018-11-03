@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using dal.Enums;
+using Game.DAL.Enums;
 using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities

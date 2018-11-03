@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.DAL.Enums
+namespace BL.Services.Items
 {
-    public enum ItemType
+    public class ItemService
     {
-        Weapon, 
-        Armor
+
     }
 }

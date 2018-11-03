@@ -10,7 +10,6 @@ using BL.DTO.Filters;
 using BL.Services.Common;
 using BL.DTO.Common;
 using BL.QueryObject;
-using BL.Services.GroupPost;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
 
@@ -23,7 +22,7 @@ namespace BL.Services.GroupPosts
             return await Query.ExecuteQuery(filter);
         }
 
-        protected override Task<GroupPost> GetWithIncludesAsync(int entityId)
+        protected override async Task<GroupPost> GetWithIncludesAsync(int entityId)
         {
             return await Repository.GetAsync(entityId, nameof(GroupPost.Author), nameof(GroupPost.Group));
         }
