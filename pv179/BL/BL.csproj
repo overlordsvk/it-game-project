@@ -80,6 +80,9 @@
     <Compile Include="DTO\GroupPostDto.cs" />
     <Compile Include="DTO\ItemDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
+    <Compile Include="DTO\WeaponTypeDto.cs" />
+    <Compile Include="Facades\AccountFacade.cs" />
+    <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObject\AccountQueryObject.cs" />
     <Compile Include="QueryObject\CharacterQueryObject.cs" />
@@ -88,6 +91,8 @@
     <Compile Include="QueryObject\ItemQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
+    <Compile Include="Services\Character\CharacterService.cs" />
+    <Compile Include="Services\Character\ICharacterService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
     <Compile Include="Services\Fights\FightService.cs" />
@@ -115,7 +120,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Character\" />
     <Folder Include="Services\Chat\" />
     <Folder Include="Services\Item\" />
     <Folder Include="Services\Messsage\" />

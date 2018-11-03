@@ -15,14 +15,14 @@ using Game.Infrastructure.Query;
 
 namespace BL.Services.Group
 {
-    public class GroupService : CrudQueryServiceBase<Game.DAL.Entity.Entities.Group, GroupDto, GroupFilterDto>, IGroupService
+    public class GroupService : CrudQueryServiceBase<Group, GroupDto, GroupFilterDto>, IGroupService
     {
-        protected override async Task<Game.DAL.Entity.Entities.Group> GetWithIncludesAsync(int entityId)
+        protected override async Task<Group> GetWithIncludesAsync(int entityId)
         {
-            return await Repository.GetAsync(entityId, nameof(Game.DAL.Entity.Entities.Group.Members), nameof(Game.DAL.Entity.Entities.Group.Wall));
+            return await Repository.GetAsync(entityId, nameof(Group.Members), nameof(Group.Wall));
         }
 
-        public GroupService(IMapper mapper, IRepository<Game.DAL.Entity.Entities.Group> repository, QueryObjectBase<GroupDto, Game.DAL.Entity.Entities.Group, GroupFilterDto, IQuery<Game.DAL.Entity.Entities.Group>> query) : base(mapper, repository, query)
+        public GroupService(IMapper mapper, IRepository<Group> repository, QueryObjectBase<Group, GroupDto, GroupFilterDto, IQuery<Group>> query) : base(mapper, repository, query)
         {
         }
 

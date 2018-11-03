@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using BL.Facades.Common;
 using BL.QueryObject;
+using BL.Services.Common;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -21,19 +23,19 @@ namespace BL.Config
                     .WithServiceBase()
                     .LifestyleTransient(),
 
-//                Classes.FromThisAssembly()
-//                    .BasedOn<ServiceBase>()
-//                    .WithServiceDefaultInterfaces()
-//                    .LifestyleTransient(),
-//
+                Classes.FromThisAssembly()
+                    .BasedOn<ServiceBase>()
+                    .WithServiceDefaultInterfaces()
+                    .LifestyleTransient(),
+
 //                Classes.FromThisAssembly()
 //                    .BasedOn<IService>()
 //                    .WithService.FromInterface()
 //                    .LifestyleSingleton(),
-//
-//                Classes.FromThisAssembly()
-//                    .BasedOn<FacadeBase>()
-//                   .LifestyleTransient(),
+
+                Classes.FromThisAssembly()
+                    .BasedOn<FacadeBase>()
+                   .LifestyleTransient(),
 
                 Component.For<IMapper>()
                     .Instance(new Mapper(new MapperConfiguration(MappingConfig.ConfigureMapping)))
