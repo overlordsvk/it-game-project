@@ -33,8 +33,7 @@ namespace Game.DAL.Entity.Entities
         public int? ShopOwnerId { get; set; }
         public virtual Character ShopOwner { get; set; }
 
-        public int WeaponTypeId { get; set; }
-        public virtual WeaponType WeaponType { get; set; }
+        public bool IsWeapon { get; set; }
 
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Items);

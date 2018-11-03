@@ -45,8 +45,7 @@ namespace PV179Console
                     var characterRepo = container.Resolve<IRepository<Character>>(provider);
                     var testgroupRepo = container.Resolve<IRepository<GroupPost>>(provider);
                     var itemRepo = container.Resolve<IRepository<Item>>(provider);
-                    var messageRepo = container.Resolve<IRepository<Message>>(provider);
-                    var typeRepo = container.Resolve<IRepository<WeaponType>>(provider);
+                    var messageRepo = container.Resolve<IRepository<Chat>>(provider);
 
                     var accounts = await accountRepo.GetAllAsync();
                     var fights = await fightRepo.GetAllAsync();
@@ -55,7 +54,6 @@ namespace PV179Console
                     var testgroup = await testgroupRepo.GetAllAsync();
                     var items = await itemRepo.GetAllAsync();
                     var messages = await messageRepo.GetAllAsync();
-                    var types = await typeRepo.GetAllAsync();
 
                     Console.WriteLine("\nAccounts: ");
                     foreach (var acc in accounts)
@@ -71,24 +69,18 @@ namespace PV179Console
                         Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.ReceivedMessages.Count} \t SM: {ch.SentMessages.Count} \t Owner:  {ch.Account.Username}");
                     }
 
-                    Console.WriteLine("\nWeapon Types: ");
-                    foreach (var wt in types)
-                    {
-                        Console.WriteLine($"{wt.Id} \t {wt.ItemName} \t MA: {wt.MaxAttack:5} MD: {wt.MinDefense:5}");
-                    }
-
                     Console.WriteLine("\nItems: ");
                     foreach (var i in items)
                     {
                         //Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
-                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id, i.Name, i.WeaponType.ItemName, "Owner: " + i.Owner?.Name);
+                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id, i.Name, i.IsWeapon.ToString(), "Owner: " + i.Owner?.Name);
                     }
 
-                    Console.WriteLine("\nMessages: ");
+                    /*Console.WriteLine("\nMessages: ");
                     foreach (var m in messages)
                     {
                         Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}{4,-20}", m.Id, m.Sender.Name, m.Receiver.Name, "Sub: " + m.Subject, "Text: " + m.Text);
-                    }
+                    }*/
 
                     Console.WriteLine("\nGroups: ");
                     foreach (var g in groups)

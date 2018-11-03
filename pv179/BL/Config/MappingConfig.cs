@@ -25,7 +25,7 @@ namespace BL.Config
             config.CreateMap<QueryResult<Group>, QueryResultDto<GroupDto, GroupFilterDto>>();
             config.CreateMap<QueryResult<Item>, QueryResultDto<ItemDto, ItemFilterDto>>();
             config.CreateMap<QueryResult<Character>, QueryResultDto<CharacterDto, CharacterFilterDto>>();
-            config.CreateMap<QueryResult<Message>, QueryResultDto<MessageDto, MessageFilterDto>>();
+            config.CreateMap<QueryResult<Chat>, QueryResultDto<MessageDto, MessageFilterDto>>();
             //config.CreateMap<Group, GroupInfoDto>.ForMember(groupDto => )
         }
     }
