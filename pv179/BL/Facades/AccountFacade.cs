@@ -65,24 +65,32 @@ namespace BL.Facades
         ///// <param name="registrationDto">Account registration details</param>
         ///// <param name="success">argument that tells whether the registration was successful</param>
         ///// <returns>Registered account ID</returns>
-        public int RegisterAccount(AccountCreateDto registrationDto, out bool success)
+        public async Task<int> RegisterAccount(AccountCreateDto registrationDto)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 if (GetCustomerAccordingToEmailAsync(registrationDto.Email).Result != null)
                 {
-                    success = false;
+                    //success = false;
                     return -1;
                 }
 
                 if (GetCustomerAccordingToUsernameAsync(registrationDto.Username).Result != null)
                 {
-                    success = false;
+                    //success = false;
                     return -2;
                 }
-
-                var accountId = _accountService.Register(registrationDto);
-                success = true;
+                var newAccount = new AccountDto()
+                {
+                    Username = registrationDto.Username,
+                    Email = registrationDto.Email,
+                    Password = registrationDto.Password,
+                    Id = 200
+                };
+                var accountId = _accountService.Create(newAccount);
+                await uow.Commit();
+                //var accountId = _accountService.Register(registrationDto);
+                //success = true;
                 return accountId;
             }
         }

@@ -112,7 +112,7 @@ namespace PV179Console
 
             var acccrdto = new AccountCreateDto
             {
-                Email = "bela@bugar",
+                Email = "bela@bugar.com",
                 Password = "147852369",
                 Username = "Bela"
             };
@@ -125,10 +125,10 @@ namespace PV179Console
                 var resew = accFacade.GetCustomerAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
                 Console.WriteLine(resew);
                 Console.WriteLine("AccFacUser: " + res.Result.Username);
-                bool succ;
-                var res2 = accFacade.RegisterAccount(acccrdto, out succ);
+                bool succ = true;
+                var res2 = accFacade.RegisterAccount(acccrdto).Result;
                 Console.WriteLine("Succ: " + succ);
-                var res3 = accFacade.GetCustomerAccordingToEmailAsync("bela@bugar").Result;
+                var res3 = accFacade.GetCustomerAccordingToEmailAsync("bela@bugar.com").Result;
                 //Console.WriteLine("====>>>>" + res3.Username);
             }
 
