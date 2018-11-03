@@ -11,7 +11,7 @@ namespace BL.Services.Accounts
     public interface IAccountService
     {
         /// <summary>
-        /// Gets customer with given email address
+        /// Gets account with given email address
         /// </summary>
         /// <param name="email">email</param>
         /// <returns>Customer with given email address</returns>
