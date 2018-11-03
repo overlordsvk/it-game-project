@@ -7,7 +7,7 @@ using BL.DTO.Filters;
 using BL.QueryObject;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using dal.Entities;
+using Game.DAL.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
