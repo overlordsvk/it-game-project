@@ -23,7 +23,7 @@ namespace BL.Services.Characters
 
         protected override async Task<Character> GetWithIncludesAsync(int entityId)
         {
-            return await Repository.GetAsync(entityId, nameof(Character.Account), nameof(Character.Group), nameof(Character.Items));
+            return await Repository.GetAsync(entityId, nameof(Character.Account), nameof(Character.Group), nameof(Character.Items), nameof(Character.ReceiverChats), nameof(Character.SenderChats));
         }
 
         public async Task<QueryResultDto<CharacterDto, CharacterFilterDto>> ListCharactersAsync(CharacterFilterDto filter)
