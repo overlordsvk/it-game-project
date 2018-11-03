@@ -22,6 +22,8 @@ namespace Game.DAL.Entity.Entities
         public string Subject { get; set; }
 
         public virtual ICollection<Chat> Messages { get; set; }
+
+        public DateTime LastMessage { get; set; }
         
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Chat);
