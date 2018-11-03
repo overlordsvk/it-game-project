@@ -9,7 +9,9 @@ using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.Services.Accounts;
 using BL.Services.Characters;
+using BL.Services.Fights;
 using BL.Services.Items;
+using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
 
 namespace BL.Facades
@@ -19,10 +21,14 @@ namespace BL.Facades
         private readonly IAccountService _accountService;
         private readonly ICharacterService _characterService;
         private readonly IItemService _itemService;
+        private readonly IFightService _fightService;
 
-        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService) : base(unitOfWorkProvider)
+        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
         {
+            _accountService = accountService;
             _characterService = characterService;
+            _itemService = itemService;
+            _fightService = fightService;
         }
 
         /// <summary>
@@ -63,17 +69,54 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Gets all customers according to page
+        /// Gets inventory of character
         /// </summary>
         /// <returns>all customers</returns>
-        public async Task<QueryResultDto<CharacterDto, CharacterFilterDto>> GetCharacterItems(int id)
+        public async Task<QueryResultDto<ItemDto, ItemFilterDto>> GetCharacterItems(int id)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _characterService.(filter);
+                return await _itemService.ListItemsAsync(new ItemFilterDto(){OwnerId = id});
             }
         }
 
+        public async Task<ItemDto> GetEquipedWeapon(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _itemService.GetEquippedWeapon(id);
+            }
+        }
 
+        public async Task<ItemDto> GetEquipedArmor(int id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _itemService.GetEquippedArmor(id);
+            }
+        }
+
+        public async void SellItem(int itemId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var item = _itemService.GetAsync(itemId).Result;
+                var ownerId = item.OwnerId;
+                if (!ownerId.HasValue)
+                    return;
+                var owner = _characterService.GetAsync(ownerId.Value).Result;
+                owner.Money += item.Price;
+                item.OwnerId = null;
+                await _characterService.Update(owner);
+            }
+        }
+
+        public async Task<QueryResultDto<FightDto, FightFilterDto>> GetFightsHistory(FightFilterDto filter)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _fightService.ListFightsAsync(filter);
+            }
+        }
     }
 }
