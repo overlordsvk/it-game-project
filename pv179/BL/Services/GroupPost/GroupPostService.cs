@@ -10,8 +10,8 @@ using BL.Services.Common;
 
 namespace BL.Services.GroupPost
 {
-    public class GroupPostService : CrudQueryServiceBase<GroupPost, GroupPostDto, GroupFilterDto>, IGroupPostService
-    {
+    //public class grouppostservice : crudqueryservicebase<grouppost, grouppostdto, groupfilterdto>, igrouppostservice
+    //{
 
-    }
+    //}
 }

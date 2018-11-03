@@ -11,21 +11,15 @@ namespace Game.DAL.Entity.Entities
     {
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Sender))]
-        public int? SenderId { get; set; }
-        public virtual Character Sender { get; set; }
-
-        [ForeignKey(nameof(Receiver))]
-        public int? ReceiverId { get; set; }
-        public virtual Character Receiver { get; set; }
+        public virtual ICollection<Character> Chatters { get; set; }
 
         [MaxLength(256)]
         public string Subject { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
 
-        public DateTime LastMessage { get; set; }
-        
+        public DateTime? LastMessageTimestamp { get; set; }
+
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Chat);
     }

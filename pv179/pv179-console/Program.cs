@@ -71,14 +71,14 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count} \t Shop: {ch.Shop.Count} \t {ch.Group.Name} \t RM: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group.Name} \t RM: {ch.Chats.Count} \t Owner:  {ch.Account.Username}");
                     }
 
                     Console.WriteLine("\nItems: ");
                     foreach (var i in items)
                     {
                         //Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
-                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id, i.Name, i.IsWeapon.ToString(), "Owner: " + i.Owner?.Name);
+                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name);
                     }
 
                     /*Console.WriteLine("\nMessages: ");
@@ -102,7 +102,7 @@ namespace PV179Console
                     Console.WriteLine("\nFights: ");
                     foreach (var f in fights)
                     {
-                        Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerItem.Name} \t Di: {f.DefenderItem.Name} \t Succ: {f.AttackSuccess}");
+                        Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerWeapon.Name} \t Di: {f.DefenderWeapon.Name} \t Succ: {f.AttackSuccess}");
                     }
                 }
             }

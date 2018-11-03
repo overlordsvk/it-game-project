@@ -107,11 +107,6 @@ namespace InfrastructureTests
                 itemBow
             };
 
-            characterWalker.Shop = new List<Item>
-            {
-                itemAxe2
-            };
-
             Account accountPeter = new Account
             {
                 Username = "Pieter",
@@ -173,8 +168,9 @@ namespace InfrastructureTests
 
             var chat = new Chat
             {
-                Sender = characterSlayer,
-                Receiver = characterWalker,
+                Chatters = new List<Character> { 
+                    characterSlayer,
+                    characterWalker},
                 Subject = "Destruction",
             };
 
