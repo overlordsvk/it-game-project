@@ -30,5 +30,19 @@ namespace BL.Services.Accounts
             var queryResult = await Query.ExecuteQuery(new AccountFilterDto{Email = email});
             return queryResult.Items.SingleOrDefault();
         }
+        
+
+        public async Task<AccountDto> GetAccountAccordingToUsernameAsync(string username)
+        {
+            var queryResult = await Query.ExecuteQuery(new AccountFilterDto{Username = username});
+            return queryResult.Items.SingleOrDefault();
+        }
+
+        public void Register(AccountCreateDto accountCreate)
+        {
+            var entity = Mapper.Map<TEntity>(entityDto);
+            Repository.Create(entity);
+            return entity.Id;
+        }
     }
 }

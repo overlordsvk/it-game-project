@@ -14,9 +14,23 @@ namespace BL.Services.Accounts
         /// Gets account with given email address
         /// </summary>
         /// <param name="email">email</param>
-        /// <returns>Customer with given email address</returns>
+        /// <returns>Account with given email address</returns>
         Task<AccountDto> GetAccountAccordingToEmailAsync(string email);
 
+        /// <summary>
+        /// Gets account with given username address
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <returns>Account with given username</returns>
+        Task<AccountDto> GetAccountAccordingToUsernameAsync(string username);
+
+        /// <summary>
+        /// Registers account
+        /// </summary>
+        /// <param name="accountCreate">accountCreate</param>
+        /// <returns>Registers account</returns>
+        void Register(AccountCreateDto accountCreate);
+        
         /// <summary>
         /// Gets DTO representing the entity according to ID
         /// </summary>
