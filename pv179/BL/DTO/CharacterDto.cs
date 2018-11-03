@@ -45,6 +45,8 @@ namespace BL.DTO
 
         public GroupDto Group { get; set; }
 
+        public ICollection<ItemDto> Items {get; set; } = new List<ItemDto>();
+
         public AccountDto Account { get; set; }
 
 
