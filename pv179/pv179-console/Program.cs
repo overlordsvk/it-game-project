@@ -7,6 +7,7 @@ using AutoMapper;
 using BL.Config;
 using BL.DTO;
 using BL.DTO.Filters;
+using BL.Facades;
 using BL.QueryObject;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -108,6 +109,14 @@ namespace PV179Console
             mapper.Map(characterSlayer, chardto);
 
             Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
+
+
+            using (var container = new WindsorContainer())
+            {
+                container.Install(FromAssembly.This());
+                var accFacade = container.Resolve<AccountFacade>();
+
+            }
 
             Console.ReadKey();
         }
