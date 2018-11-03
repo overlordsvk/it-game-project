@@ -1,17 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using Game.DAL.Entity.Entities;
+using System;
 using System.Threading.Tasks;
-using AutoMapper;
-using BL.DTO;
-using BL.DTO.Common;
-using BL.DTO.Filters;
-using BL.QueryObject;
-using Castle.Windsor;
-using Castle.Windsor.Installer;
-using Game.DAL.Entity.Entities;
-using Game.Infrastructure;
-using Game.Infrastructure.Query;
-using Game.Infrastructure.UnitOfWork;
+using Game.Infrastructure.Entity.UnitOfWork;
+using Game.Infrastructure.Entity.Repository;
 
 namespace PV179Console
 {
@@ -21,8 +12,13 @@ namespace PV179Console
         {
 
             PrintDbContent().Wait();
+            Console.WriteLine("Test");
 
             Console.ReadKey();
+            /*using (var dbContext = new GameDbContext())
+            {
+                dbContext.Database.Delete();
+            }*/
         }
         public static async Task PrintDbContent()
         {

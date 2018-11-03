@@ -7,8 +7,8 @@ using BL.DTO.Common;
 
 namespace BL.DTO.Filters
 {
-    public class GroupFilterDto : FilterDtoBase
+    public class GroupPostFilterDto : FilterDtoBase
     {
-        public string Name { get; set; }
+        public int GroupId { get; set; }
     }
 }

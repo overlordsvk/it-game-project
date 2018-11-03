@@ -71,6 +71,7 @@
     <Compile Include="DTO\Filters\CharacterFilterDto.cs" />
     <Compile Include="DTO\Filters\FightFilterDto.cs" />
     <Compile Include="DTO\Filters\GroupFilterDto.cs" />
+    <Compile Include="DTO\Filters\GroupPostFilterDto.cs" />
     <Compile Include="DTO\Filters\ItemFilterDto.cs" />
     <Compile Include="DTO\Filters\MessageFilterDto.cs" />
     <Compile Include="DTO\GroupDto.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="DTO\WeaponTypeDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObject\AccountQueryObject.cs" />
+    <Compile Include="QueryObject\CharacterQueryObject.cs" />
     <Compile Include="QueryObject\Common\QueryObjectBase.cs" />
     <Compile Include="QueryObject\FightQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />

@@ -9,5 +9,10 @@ namespace BL.DTO.Filters
 {
     public class ItemFilterDto : FilterDtoBase
     {
+        public string Name { get; set; }
+        public int? OwnerId { get; set; }
+        public int? ShopOwnerId { get; set; }
+        public int? WeaponTypeId { get; set; }
+
     }
 }

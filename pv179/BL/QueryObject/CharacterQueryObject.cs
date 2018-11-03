@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BL.DTO.Common;
 
-namespace BL.DTO.Filters
+namespace BL.QueryObject
 {
-    public class GroupFilterDto : FilterDtoBase
+    public class CharacterQueryObject : QueryObjectBase<>
     {
-        public string Name { get; set; }
     }
 }
