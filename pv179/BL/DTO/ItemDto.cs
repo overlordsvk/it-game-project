@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Game.DAL.Enums;
 
 namespace BL.DTO
 {
@@ -30,5 +31,6 @@ namespace BL.DTO
         public int? OwnerId { get; set; }
         public CharacterDto Owner { get; set; }
 
+        public ItemType ItemType { get; set; }
     }
 }

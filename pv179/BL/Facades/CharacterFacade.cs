@@ -111,6 +111,49 @@ namespace BL.Facades
             }
         }
 
+        public async void EquipItem(int itemId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var item = _itemService.GetAsync(itemId).Result;
+                var ownerId = item.OwnerId;
+                if (!ownerId.HasValue)
+                    return;
+                ItemDto equippedItem;
+                if (item.ItemType == ItemType.Weapon)
+                {
+                    equippedItem = await GetEquipedWeapon(ownerId.Value);
+                }
+                else
+                {
+                    equippedItem = await GetEquipedArmor(ownerId.Value);
+                }
+
+                equippedItem.Equipped = false;
+                await _itemService.Update(equippedItem);
+                item.Equipped = true;
+                await _itemService.Update(item);
+            }
+        }
+
+        public async Task<bool> BuyItem(int characterId)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var character = _characterService.GetAsync(characterId).Result;
+                if (character.Money >= 100)
+                {
+
+                    return true;
+                }
+
+                return false;
+                //generate item
+
+                return true;
+            }
+        }
+
         public async Task<QueryResultDto<FightDto, FightFilterDto>> GetFightsHistory(FightFilterDto filter)
         {
             using (UnitOfWorkProvider.Create())
