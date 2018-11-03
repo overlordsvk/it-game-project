@@ -40,8 +40,13 @@ namespace BL.Services.Accounts
 
         public int Register(AccountCreateDto accountCreate)
         {
-            var accountDto = Mapper.Map<AccountCreateDto, AccountDto>(accountCreate, new AccountDto());
-            return Create(accountDto);
+            var newAccount = new AccountDto()
+            {
+                Username = accountCreate.Username,
+                Email = accountCreate.Email,
+                Password = accountCreate.Password
+            };
+            return Create(newAccount);
         }
     }
 }

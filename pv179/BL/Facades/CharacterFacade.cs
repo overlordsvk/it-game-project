@@ -136,20 +136,18 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> BuyItem(int characterId)
+        public bool BuyItem(int characterId)
         {
             using (UnitOfWorkProvider.Create())
             {
                 var character = _characterService.GetAsync(characterId).Result;
-                if (character.Money >= 100)
-                {
+                if (character.Money < 100) return false;
 
-                    return true;
-                }
-
-                return false;
-                //generate item
-
+                character.Money -= 100;
+                var item =_itemService.GetNewItem();
+                item.Owner = character;
+                item.OwnerId = characterId;
+                _itemService.Create(item);
                 return true;
             }
         }

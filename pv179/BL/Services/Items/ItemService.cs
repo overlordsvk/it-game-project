@@ -43,5 +43,20 @@ namespace BL.Services.Items
             var res = await ListItemsAsync(new ItemFilterDto(){OwnerId = id, IsEquipped = true, ItemType = ItemType.Armor});
             return res.Items.SingleOrDefault();
         }
+
+        public ItemDto GetNewItem()
+        {
+            var newItem = new ItemDto()
+            {
+                Attack = 5,
+                Defense = 4,
+                Equipped = false,
+                ItemType = ItemType.Weapon,
+                Name = "New Item Name",
+                Weight = 3,
+                Price = 310
+            };
+            return newItem;
+        }
     }
 }
