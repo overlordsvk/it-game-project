@@ -80,7 +80,6 @@
     <Compile Include="DTO\GroupPostDto.cs" />
     <Compile Include="DTO\ItemDto.cs" />
     <Compile Include="DTO\MessageDto.cs" />
-    <Compile Include="DTO\WeaponTypeDto.cs" />
     <Compile Include="Facades\AccountFacade.cs" />
     <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="QueryObject\CharacterQueryObject.cs" />
     <Compile Include="QueryObject\Common\QueryObjectBase.cs" />
     <Compile Include="QueryObject\FightQueryObject.cs" />
+    <Compile Include="QueryObject\GroupPostQueryObject.cs" />
     <Compile Include="QueryObject\ItemQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />

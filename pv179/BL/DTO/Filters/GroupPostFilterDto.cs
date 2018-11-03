@@ -9,6 +9,6 @@ namespace BL.DTO.Filters
 {
     public class GroupPostFilterDto : FilterDtoBase
     {
-        public int GroupId { get; set; }
+        public int? GroupId { get; set; }
     }
 }
