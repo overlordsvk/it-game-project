@@ -16,7 +16,7 @@ namespace BL.Services.GroupPost
         /// </summary>
         /// <param name="filter">The fights filter</param>
         /// <returns>Filtered results</returns>
-        Task<QueryResultDto<GroupDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter);
+        Task<QueryResultDto<GroupPostDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter);
 
         /// <summary>
         /// Gets DTO representing the entity according to ID

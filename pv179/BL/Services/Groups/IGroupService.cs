@@ -7,7 +7,7 @@ using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
 
-namespace BL.Services.Group
+namespace BL.Services.Groups
 {
     public interface IGroupService
     {
