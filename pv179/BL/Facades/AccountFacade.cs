@@ -8,6 +8,7 @@ using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.Facades.Common;
 using BL.Services.Accounts;
+using BL.Services.Chats;
 using Game.Infrastructure.UnitOfWork;
 
 namespace BL.Facades
@@ -15,10 +16,12 @@ namespace BL.Facades
     public class AccountFacade : FacadeBase
     {
         private readonly IAccountService _accountService;
+        private readonly IChatService _chatService;
 
-        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService) : base(unitOfWorkProvider)
+        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService) : base(unitOfWorkProvider)
         {
             this._accountService = accountService;
+            this._chatService = chatService;
         }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace BL.Facades
         /// </summary>
         /// <param name="email"></param>
         /// <returns>Account with specified email</returns>
-        public async Task<AccountDto> GetCustomerAccordingToEmailAsync(string email)
+        public async Task<AccountDto> GetAccountAccordingToEmailAsync(string email)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -39,7 +42,7 @@ namespace BL.Facades
         /// </summary>
         /// <param name="username"></param>
         /// <returns>Account with specified username</returns>
-        public async Task<AccountDto> GetCustomerAccordingToUsernameAsync(string username)
+        public async Task<AccountDto> GetAccountAccordingToUsernameAsync(string username)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -48,10 +51,10 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Gets all customers according to page
+        /// Gets all accounts according to page
         /// </summary>
         /// <returns>all customers</returns>
-        public async Task<QueryResultDto<AccountDto, AccountFilterDto>> GetAllCustomersAsync()
+        public async Task<QueryResultDto<AccountDto, AccountFilterDto>> GetAllAccountsAsync()
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -59,25 +62,48 @@ namespace BL.Facades
             }
         }
 
-        ///// <summary>
-        ///// Performs account registration
-        ///// </summary>
-        ///// <param name="registrationDto">Account registration details</param>
-        ///// <param name="success">argument that tells whether the registration was successful</param>
-        ///// <returns>Registered account ID</returns>
-        public async Task<int> RegisterAccount(AccountCreateDto registrationDto)
+        /// <summary>
+        /// Remove account according to accountId
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <returns>0 if account was removed</returns>
+        public async Task<int> RemoveAccountAsync(int accountId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (GetCustomerAccordingToEmailAsync(registrationDto.Email).Result != null)
+                if (_accountService.GetAsync(accountId).Result == null)
                 {
-                    //success = false;
+                    return -1;
+                }
+                //_chatService.
+                _accountService.Delete(accountId);
+                await uow.Commit();
+                if (_accountService.GetAsync(accountId).Result == null)
+                {
+                    return -2;
+                }
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Performs account registration
+        /// </summary>
+        /// <param name="registrationDto">Account registration details</param>
+        /// <returns>Registered account ID</returns>
+        public async Task<int> RegisterAccount(AccountCreateDto registrationDto)
+        {
+            int accountId;
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (GetAccountAccordingToEmailAsync(registrationDto.Email).Result != null)
+                {
                     return -1;
                 }
 
-                if (GetCustomerAccordingToUsernameAsync(registrationDto.Username).Result != null)
+                if (GetAccountAccordingToUsernameAsync(registrationDto.Username).Result != null)
                 {
-                    //success = false;
                     return -2;
                 }
                 var newAccount = new AccountDto()
@@ -85,14 +111,13 @@ namespace BL.Facades
                     Username = registrationDto.Username,
                     Email = registrationDto.Email,
                     Password = registrationDto.Password,
-                    //Id = 200
                 };
-                var accountId = _accountService.Create(newAccount);
+
+                accountId = _accountService.Create(newAccount);
                 await uow.Commit();
-                //var accountId = _accountService.Register(registrationDto);
-                //success = true;
-                return accountId;
             }
+            return accountId;
+             
         }
 
 
