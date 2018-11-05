@@ -95,6 +95,21 @@ namespace PV179Console
                 Agility = 5,
                 Luck = 9
             };
+
+            Character characterBela = new Character
+            {
+                Name = "BelaChar",
+                Money = 666,
+                Health = 98,
+                Score = 12,
+                Strength = 5,
+                Perception = 8,
+                Endurance = 2,
+                Charisma = 8,
+                Intelligence = 1,
+                Agility = 5,
+                Luck = 9
+            };
             characterSlayer.Items = new List<Item>
             {
                 itemAxe,
@@ -123,15 +138,23 @@ namespace PV179Console
             {
                 container.Install(FromAssembly.This());
                 var accFacade = container.Resolve<AccountFacade>();
-                var res = accFacade.GetCustomerAccordingToEmailAsync("navi@ivan.com");
-                var resew = accFacade.GetCustomerAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
+                var grFacade = container.Resolve<GroupFacade>();
+                var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
+                var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
                 Console.WriteLine(resew);
                 Console.WriteLine("AccFacUser: " + res.Result.Username);
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
                 var res4 = accFacade.RegisterAccount(acccrdto).Result;
                 Console.WriteLine("Succ: ");
-                var res3 = accFacade.GetCustomerAccordingToUsernameAsync("Bela").Result;
+                var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
                 Console.WriteLine("====>>>>" + res3.Username);
+
+                var res5 = accFacade.RemoveAccountAsync(1).Result;
+                Console.WriteLine("Remove : " + res5);
+
+                var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", "").Result;
+                Console.WriteLine("GroupCreate: " + res6);
+                
             }
 
             Console.ReadKey();
