@@ -23,7 +23,7 @@ namespace BL.Services.Chats
         public void RemoveReferencesToCharacterAsync(int characterId)
         {
             var chats = ListAllAsync().Result;
-            foreach (var chat in chats.)
+            foreach (var chat in chats.Items)
             {
 
             }
