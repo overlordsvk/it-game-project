@@ -85,7 +85,7 @@ namespace BL.Facades
                     Username = registrationDto.Username,
                     Email = registrationDto.Email,
                     Password = registrationDto.Password,
-                    Id = 200
+                    //Id = 200
                 };
                 var accountId = _accountService.Create(newAccount);
                 await uow.Commit();

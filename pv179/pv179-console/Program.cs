@@ -125,11 +125,11 @@ namespace PV179Console
                 var resew = accFacade.GetCustomerAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
                 Console.WriteLine(resew);
                 Console.WriteLine("AccFacUser: " + res.Result.Username);
-                bool succ = true;
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
-                Console.WriteLine("Succ: " + succ);
-                var res3 = accFacade.GetCustomerAccordingToEmailAsync("bela@bugar.com").Result;
-                //Console.WriteLine("====>>>>" + res3.Username);
+                var res4 = accFacade.RegisterAccount(acccrdto).Result;
+                Console.WriteLine("Succ: ");
+                var res3 = accFacade.GetCustomerAccordingToUsernameAsync("Bela").Result;
+                Console.WriteLine("====>>>>" + res3.Username);
             }
 
             Console.ReadKey();

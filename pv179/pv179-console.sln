@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.DAL.PetaPoco", "Game.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Infrastructure.PetaPoco", "Game.Infrastructure.PetaPoco\Game.Infrastructure.PetaPoco.csproj", "{B1A7779A-7101-4FC4-A449-C4B8EEE59776}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.EntityFrameWork.Tests", "DAL.EntityFrameWork.Tests\DAL.EntityFrameWork.Tests.csproj", "{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,18 @@ Global
 		{B1A7779A-7101-4FC4-A449-C4B8EEE59776}.Release|x64.Build.0 = Release|Any CPU
 		{B1A7779A-7101-4FC4-A449-C4B8EEE59776}.Release|x86.ActiveCfg = Release|Any CPU
 		{B1A7779A-7101-4FC4-A449-C4B8EEE59776}.Release|x86.Build.0 = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|x64.Build.0 = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +159,7 @@ Global
 		{5CE7B41E-A4C6-4954-A653-011C04141F1A} = {90C5FEB6-6F2C-465F-B5C3-8D6FE91B1B56}
 		{F80C1CA5-A34A-4B0A-94F6-420112DD335A} = {B9C52572-BE54-4330-8BF3-F1755D00ADCD}
 		{B1A7779A-7101-4FC4-A449-C4B8EEE59776} = {B4BE342B-5FF9-4270-8B13-52E61C240ECC}
+		{9D1C1C5A-7296-48A9-A65B-6812B39D9C17} = {5FC2510B-2C6A-4549-81C2-6FC67769C5EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {31225EBC-BF8B-460C-B2A0-28B8091B9ED0}
