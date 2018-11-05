@@ -53,6 +53,8 @@ namespace Game.DAL.Entity.Entities
 
         public virtual Account Account { get; set; }
 
+        public bool IsGroupAdmin { get; set; }
+
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Characters);
     }

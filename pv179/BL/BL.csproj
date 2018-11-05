@@ -83,6 +83,7 @@
     <Compile Include="Facades\AccountFacade.cs" />
     <Compile Include="Facades\CharacterFacade.cs" />
     <Compile Include="Facades\Common\FacadeBase.cs" />
+    <Compile Include="Facades\GroupFacade.cs" />
     <Compile Include="QueryObject\GroupQueryObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObject\AccountQueryObject.cs" />

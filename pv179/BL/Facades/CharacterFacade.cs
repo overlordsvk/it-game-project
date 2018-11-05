@@ -32,7 +32,7 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Gets all customers according to page
+        /// Gets all characters according to page
         /// </summary>
         /// <returns>all customers</returns>
         public async Task<QueryResultDto<CharacterDto, CharacterFilterDto>> GetAllCharactersAsync()
