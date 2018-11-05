@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
@@ -12,6 +7,9 @@ using BL.Services.Common;
 using Game.DAL.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BL.Services.Messsages
 {
@@ -28,7 +26,7 @@ namespace BL.Services.Messsages
 
         protected override async Task<Message> GetWithIncludesAsync(int entityId)
         {
-            return await Repository.GetAsync(entityId, nameof(Message.Author), nameof(Message.Chat)));
+            return await Repository.GetAsync(entityId, nameof(Message.Author), nameof(Message.Chat));
         }
     }
 }

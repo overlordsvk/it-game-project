@@ -26,7 +26,8 @@ namespace BL.Services.Chats
             foreach (var chat in chats.Items)
             {
 
-            }
+            }*/
+
         }
 
         protected override async Task<Chat> GetWithIncludesAsync(int entityId)

@@ -10,6 +10,7 @@ using BL.Services.Common;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Game.DAL.Entity.Config;
 
 namespace BL.Config
 {
@@ -17,6 +18,7 @@ namespace BL.Config
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            new EntityInstaller().Install(container, store);
             container.Register(
                 Classes.FromThisAssembly()
                     .BasedOn(typeof(QueryObjectBase<,,,>))
