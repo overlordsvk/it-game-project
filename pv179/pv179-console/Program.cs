@@ -1,28 +1,17 @@
-﻿using Game.DAL.Entity.Entities;
+﻿using AutoMapper;
+using BL.Config;
+using BL.DTO;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Game.DAL.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BL.Config;
-using BL.DTO;
-using BL.DTO.Filters;
-using BL.Facades;
-using BL.QueryObject;
-using Castle.Windsor;
-using Castle.Windsor.Installer;
-using Game.DAL.Entities;
-using Game.DAL.Enums;
-using Game.Infrastructure;
-using Game.Infrastructure.Entity.UnitOfWork;
-using Game.Infrastructure.Entity.Repository;
-using Game.Infrastructure.Query;
-using Game.Infrastructure.UnitOfWork;
-using Game.DAL.Entity;
 
 namespace PV179Console
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -52,7 +41,7 @@ namespace PV179Console
                 Username = "Jano",
             };
             var dto2 = new AccountDto();
-            
+
             var entity = new Account();
             var itemAxe = new Item
             {
@@ -116,7 +105,7 @@ namespace PV179Console
                 itemAxe2,
                 itemBow
             };
-            
+
             var chardto = new CharacterDto();
             mapper.Map(dto, entity);
             Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
@@ -152,9 +141,9 @@ namespace PV179Console
                 var res5 = accFacade.RemoveAccountAsync(1).Result;
                 Console.WriteLine("Remove : " + res5);
 
-                var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", "").Result;
+                var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
-                
+
             }
 
             Console.ReadKey();
@@ -174,9 +163,9 @@ namespace PV179Console
                 using (var unitOfWork = provider.Create())
                 {
                     var queryObjAccount = new AccountQueryObject(container.Resolve<IMapper>(), container.Resolve<IQuery<Account>>());
-                    var res = queryObjAccount.ExecuteQuery(new AccountFilterDto {Email = "navi@ivan.com"}).Result;
-                    
-                    Console.WriteLine("#####"+res.Items.First().Username);
+                    var res = queryObjAccount.ExecuteQuery(new AccountFilterDto { Email = "navi@ivan.com" }).Result;
+
+                    Console.WriteLine("#####" + res.Items.First().Username);
                     var accountRepo = container.Resolve<IRepository<Account>>(provider);
                     var fightRepo = container.Resolve<IRepository<Fight>>(provider);
                     var groupRepo = container.Resolve<IRepository<Group>>(provider);
@@ -201,7 +190,7 @@ namespace PV179Console
                         Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
                     }
 
-                    
+
 
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
@@ -252,7 +241,7 @@ namespace PV179Console
                     }
                 }
             }
-        
+
         }
     }
 }

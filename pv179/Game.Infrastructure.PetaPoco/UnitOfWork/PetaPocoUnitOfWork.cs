@@ -1,10 +1,9 @@
-﻿using System;
+﻿using AsyncPoco;
+using Game.Infrastructure.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using AsyncPoco;
-using Game.Infrastructure.UnitOfWork;
 
 namespace Game.Infrastructure.PetaPoco.UnitOfWork
 {
