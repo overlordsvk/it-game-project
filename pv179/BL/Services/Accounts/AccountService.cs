@@ -37,17 +37,5 @@ namespace BL.Services.Accounts
             var queryResult = await Query.ExecuteQuery(new AccountFilterDto{Username = username});
             return queryResult.Items.SingleOrDefault();
         }
-
-        public int Register(AccountCreateDto accountCreate)
-        {
-            var newAccount = new AccountDto()
-            {
-                Username = accountCreate.Username,
-                Email = accountCreate.Email,
-                Password = accountCreate.Password,
-                Id = 200
-            };
-            return Create(newAccount);
-        }
     }
 }

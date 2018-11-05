@@ -71,30 +71,49 @@ namespace BL.Facades
             {
                 if (GetCustomerAccordingToEmailAsync(registrationDto.Email).Result != null)
                 {
-                    //success = false;
                     return -1;
                 }
 
                 if (GetCustomerAccordingToUsernameAsync(registrationDto.Username).Result != null)
                 {
-                    //success = false;
                     return -2;
                 }
                 var newAccount = new AccountDto()
                 {
                     Username = registrationDto.Username,
                     Email = registrationDto.Email,
-                    Password = registrationDto.Password,
-                    Id = 200
+                    Password = registrationDto.Password
                 };
                 var accountId = _accountService.Create(newAccount);
                 await uow.Commit();
-                //var accountId = _accountService.Register(registrationDto);
-                //success = true;
                 return accountId;
             }
         }
 
+        public async Task<int> DeleteAccount(int accountDto)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                if (GetCustomerAccordingToEmailAsync(registrationDto.Email).Result != null)
+                {
+                    return -1;
+                }
+
+                if (GetCustomerAccordingToUsernameAsync(registrationDto.Username).Result != null)
+                {
+                    return -2;
+                }
+                var newAccount = new AccountDto()
+                {
+                    Username = registrationDto.Username,
+                    Email = registrationDto.Email,
+                    Password = registrationDto.Password
+                };
+                var accountId = _accountService.Create(newAccount);
+                await uow.Commit();
+                return accountId;
+            }
+        }
 
 
     }
