@@ -18,6 +18,7 @@ using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.Entity.Repository;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.UnitOfWork;
+using Game.DAL.Entity;
 
 namespace PV179Console
 {
@@ -25,6 +26,7 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
+            var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent("InMemoryTest"));
 
             PrintDbContent().Wait();
             Console.WriteLine("Test");

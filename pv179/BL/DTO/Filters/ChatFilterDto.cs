@@ -9,6 +9,6 @@ namespace BL.DTO.Filters
 {
     public class ChatFilterDto : FilterDtoBase
     {
-        public string[] Names { get; set; }
+        public int? CharacterId { get; set; }
     }
 }
