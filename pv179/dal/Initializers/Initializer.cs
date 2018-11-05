@@ -57,6 +57,25 @@ namespace Game.DAL.Entity.Initializers
                 itemAxe
             };
 
+            Character Ch = new Character
+            {
+                Name = "BelaKing",
+                Money = 666,
+                Health = 98,
+                Score = 12,
+                Strength = 5,
+                Perception = 8,
+                Endurance = 2,
+                Charisma = 8,
+                Intelligence = 1,
+                Agility = 5,
+                Luck = 9
+            };
+            Ch.Items = new List<Item>
+            {
+                itemAxe2
+            };
+
             var characterWalker = new Character
             {
                 Name = "White Walker",
@@ -83,14 +102,14 @@ namespace Game.DAL.Entity.Initializers
                 Username = "Pieter",
                 Email = "pieter@gmail.com",
                 Password = "12345678",
-                IsAdmin = true
+                IsAdmin = true,
+                Character = Ch,
             };
 
             
 
             var accountIvan = new Account
             {
-                Id = 200,
                 Username = "Ivan",
                 Email = "navi@ivan.com",
                 Password = "IvanJeBoh",
@@ -168,7 +187,8 @@ namespace Game.DAL.Entity.Initializers
             
             context.Characters.Add(characterSlayer);
             context.Characters.Add(characterWalker);
-            
+            context.Characters.Add(Ch);
+
             context.Accounts.Add(accountPeter);
             context.Accounts.Add(accountIvan);
             context.Accounts.Add(accountVedro);
