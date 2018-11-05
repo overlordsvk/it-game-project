@@ -98,6 +98,7 @@
     <Compile Include="Services\Accounts\IAccountService.cs" />
     <Compile Include="Services\Characters\CharacterService.cs" />
     <Compile Include="Services\Characters\ICharacterService.cs" />
+    <Compile Include="Services\Chats\ChatService.cs" />
     <Compile Include="Services\Chats\IChatService.cs" />
     <Compile Include="Services\Common\CrudQueryServiceBase.cs" />
     <Compile Include="Services\Common\ServiceBase.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Services\Items\IItemService.cs" />
     <Compile Include="Services\Items\ItemService.cs" />
     <Compile Include="Services\Messsages\IMessageService.cs" />
+    <Compile Include="Services\Messsages\MessageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

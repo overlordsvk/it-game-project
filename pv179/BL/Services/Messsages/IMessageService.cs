@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTO;
+using BL.DTO.Common;
+using BL.DTO.Filters;
 
 namespace BL.Services.Messsages
 {
@@ -34,5 +36,12 @@ namespace BL.Services.Messsages
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
+        
+        /// <summary>
+        /// Gets messages according to given filter
+        /// </summary>
+        /// <param name="filter">The message filter</param>
+        /// <returns>Filtered results</returns>
+        Task<QueryResultDto<MessageDto, MessageFilterDto>> ListMessagesAsync(MessageFilterDto filter);
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL.DTO;
+using BL.DTO.Common;
+using BL.DTO.Filters;
 
 namespace BL.Services.Chats
 {
@@ -34,5 +36,13 @@ namespace BL.Services.Chats
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(int entityId);
+
+        /// <summary>
+        /// Gets all DTOs (for given type)
+        /// </summary>
+        /// <returns>all available dtos (for given type)</returns>
+        Task<QueryResultDto<ChatDto, ChatFilterDto>> ListAllAsync();
+
+        void RemoveReferencesToCharacterAsync(int characterId);
     }
 }
