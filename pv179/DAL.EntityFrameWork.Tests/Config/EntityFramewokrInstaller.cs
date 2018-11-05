@@ -28,7 +28,8 @@ namespace DAL.EntityFrameWork.Tests.Config
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-
+            new EntityInstaller().Install(container, store);
+            /*
             container.Register(
                 Component.For<Func<DbContext>>()
                     .Instance(InitializeDatabase)
@@ -42,12 +43,13 @@ namespace DAL.EntityFrameWork.Tests.Config
                 Component.For(typeof(IQuery<>))
                     .ImplementedBy(typeof(EntityQuery<>))
                     .LifestyleTransient()
-            );
+            );*/
         }
+
 
         private static DbContext InitializeDatabase()
         {
-            var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent(TestDbConnectionString));
+            var context =  new GameDbContext(Effort.DbConnectionFactory.CreateTransient());
             context.Accounts.RemoveRange(context.Accounts);
             context.Chat.RemoveRange(context.Chat);
             context.Characters.RemoveRange(context.Characters);

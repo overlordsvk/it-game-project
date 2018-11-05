@@ -15,13 +15,13 @@ namespace DAL.EntityFrameWork.Tests
     [SetUpFixture]
     public class Initializer
     {
-        internal static readonly IWindsorContainer Container = new WindsorContainer().Install(FromAssembly.This());
+        internal static readonly IWindsorContainer Container = new WindsorContainer().Install(new EntityFramewokrInstaller());
 
         /// <summary>
         /// Initializes all Business Layer tests
         /// </summary>
         [OneTimeSetUp]
-        public void InitializeBusinessLayerTests()
+        public void Initialize()
         {
             Effort.Provider.EffortProviderConfiguration.RegisterProvider();
             Database.SetInitializer(new DropCreateDatabaseAlways<GameDbContext>());
