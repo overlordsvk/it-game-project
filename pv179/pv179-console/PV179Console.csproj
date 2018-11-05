@@ -91,7 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{5CE7B41E-A4C6-4954-A653-011C04141F1A}</Project>
+      <Project>{5ce7b41e-a4c6-4954-a653-011c04141f1a}</Project>
       <Name>BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">

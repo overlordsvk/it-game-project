@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BL.Config;
-using BL.DTO;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Game.DAL.Entity;
@@ -8,6 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BL.DTO;
+using Game.DAL.Enums;
+using Game.DAL.Entity.Entities;
+using BL.Facades;
+using Game.Infrastructure.UnitOfWork;
+using BL.QueryObject;
+using BL.DTO.Filters;
+using Game.Infrastructure.Query;
+using Game.Infrastructure;
+using Game.DAL.Entities;
 
 namespace PV179Console
 {

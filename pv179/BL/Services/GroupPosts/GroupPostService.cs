@@ -15,11 +15,11 @@ using Game.Infrastructure.Query;
 
 namespace BL.Services.GroupPosts
 {
-    public class GroupPostService : CrudQueryServiceBase<GroupPost, GroupPostDto, GroupFilterDto>, IGroupPostService
+    public class GroupPostService : CrudQueryServiceBase<GroupPost, GroupPostDto, GroupPostFilterDto>, IGroupPostService
     {
-        public async Task<QueryResultDto<GroupPostDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter)
+        public GroupPostService(IMapper mapper, IRepository<GroupPost> repository, QueryObjectBase<GroupPostDto, GroupPost, GroupPostFilterDto, IQuery<GroupPost>> query) : base(mapper, repository, query)
         {
-            return await Query.ExecuteQuery(filter);
+
         }
 
         protected override async Task<GroupPost> GetWithIncludesAsync(int entityId)
@@ -27,8 +27,11 @@ namespace BL.Services.GroupPosts
             return await Repository.GetAsync(entityId, nameof(GroupPost.Author), nameof(GroupPost.Group));
         }
 
-        public GroupPostService(IMapper mapper, IRepository<GroupPost> repository, QueryObjectBase<GroupPostDto, GroupPost, GroupFilterDto, IQuery<GroupPost>> query) : base(mapper, repository, query)
+        async Task<QueryResultDto<GroupPostDto, GroupPostFilterDto>> IGroupPostService.ListFightsAsync(GroupPostFilterDto filter)
         {
+            return await Query.ExecuteQuery(filter);
         }
+
+
     }
 }
