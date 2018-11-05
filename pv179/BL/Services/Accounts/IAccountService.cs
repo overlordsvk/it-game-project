@@ -23,13 +23,6 @@ namespace BL.Services.Accounts
         /// <param name="username">username</param>
         /// <returns>Account with given username</returns>
         Task<AccountDto> GetAccountAccordingToUsernameAsync(string username);
-
-        /// <summary>
-        /// Registers account
-        /// </summary>
-        /// <param name="accountCreate">accountCreate</param>
-        /// <returns>Registers account</returns>
-        int Register(AccountCreateDto accountCreate);
         
         /// <summary>
         /// Gets DTO representing the entity according to ID
