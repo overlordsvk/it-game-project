@@ -22,7 +22,7 @@ namespace BL.Services.Groups
             return await Repository.GetAsync(entityId, nameof(Group.Members), nameof(Group.Wall));
         }
 
-        public async Task<QueryResultDto<GroupDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter)
+        public async Task<QueryResultDto<GroupDto, GroupFilterDto>> ListGroupsAsync(GroupFilterDto filter)
         {
             return await Query.ExecuteQuery(filter);
         }

@@ -14,9 +14,9 @@ namespace BL.Services.Groups
         /// <summary>
         /// Gets groups according to given filter
         /// </summary>
-        /// <param name="filter">The fights filter</param>
+        /// <param name="filter">The groups filter</param>
         /// <returns>Filtered results</returns>
-        Task<QueryResultDto<GroupDto, GroupFilterDto>> ListFightsAsync(GroupFilterDto filter);
+        Task<QueryResultDto<GroupDto, GroupFilterDto>> ListGroupsAsync(GroupFilterDto filter);
 
         /// <summary>
         /// Gets DTO representing the entity according to ID

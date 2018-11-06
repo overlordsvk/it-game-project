@@ -7,7 +7,7 @@ using Game.DAL.Entity.Entities;
 
 namespace Game.DAL.Entity.Initializers
 {
-    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
+    public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {

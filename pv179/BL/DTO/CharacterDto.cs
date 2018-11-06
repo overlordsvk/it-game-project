@@ -48,6 +48,8 @@ namespace BL.DTO
         public bool IsGroupAdmin { get; set; }
 
         public ICollection<ItemDto> Items {get; set; } = new List<ItemDto>();
+        public ICollection<ChatDto> SenderChats { get; set; } = new List<ChatDto>();
+        public ICollection<ChatDto> ReceiverChats { get; set; } = new List<ChatDto>();
 
         public AccountDto Account { get; set; }
 

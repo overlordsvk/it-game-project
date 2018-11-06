@@ -44,5 +44,12 @@ namespace BL.Services.Chats
         Task<QueryResultDto<ChatDto, ChatFilterDto>> ListAllAsync();
 
         void RemoveReferencesToCharacterAsync(int characterId);
+
+        /// <summary>
+        /// Gets chats according to given filter
+        /// </summary>
+        /// <param name="filter">The chats filter</param>
+        /// <returns>Filtered results</returns>
+        Task<QueryResultDto<ChatDto, ChatFilterDto>> ListChatsAsync(ChatFilterDto filter);
     }
 }

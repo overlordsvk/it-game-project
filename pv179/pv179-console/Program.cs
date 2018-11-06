@@ -26,7 +26,6 @@ namespace PV179Console
         {
             var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent("InMemoryTest"));
 
-            PrintDbContent().Wait();
             Console.WriteLine("Test");
 
             Console.ReadKey();
@@ -137,6 +136,7 @@ namespace PV179Console
                 container.Install(FromAssembly.This());
                 var accFacade = container.Resolve<AccountFacade>();
                 var grFacade = container.Resolve<GroupFacade>();
+                var characterFacade = container.Resolve<CharacterFacade>();
                 var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
                 var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
                 Console.WriteLine(resew);
@@ -146,15 +146,19 @@ namespace PV179Console
                 Console.WriteLine("Succ: ");
                 var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
                 Console.WriteLine("====>>>>" + res3.Username);
+                var creationId = characterFacade.CreateCharacter(dtoChar);
+                Console.WriteLine("CreationId====>>>>" + creationId);
 
-                //var res5 = accFacade.RemoveAccountAsync(1).Result;
-                //Console.WriteLine("Remove : " + res5);
+                PrintDbContent().Wait();
+
+                var res5 = accFacade.RemoveAccountAsync(
+                    1).Result;
+                Console.WriteLine("Remove : " + res5);
 
                 var res6 = grFacade.CreateGroup(3, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
             }
-
             Console.ReadKey();
             PrintDbContent().Wait();
             Console.ReadKey();

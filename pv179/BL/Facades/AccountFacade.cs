@@ -8,6 +8,7 @@ using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.Facades.Common;
 using BL.Services.Accounts;
+using BL.Services.Characters;
 using BL.Services.Chats;
 using Game.Infrastructure.UnitOfWork;
 
@@ -17,11 +18,13 @@ namespace BL.Facades
     {
         private readonly IAccountService _accountService;
         private readonly IChatService _chatService;
+        private readonly ICharacterService _characterService;
 
-        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService) : base(unitOfWorkProvider)
+        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService, ICharacterService characterService) : base(unitOfWorkProvider)
         {
             this._accountService = accountService;
             this._chatService = chatService;
+            this._characterService = characterService;
         }
 
         /// <summary>
@@ -75,8 +78,15 @@ namespace BL.Facades
                 {
                     return -1;
                 }
-                //_chatService.
-                _accountService.Delete(accountId);
+                //var character = _characterService.GetAsync(accountId).Result;
+                //checkNULL character
+                //character.ReceiverChats = null;
+                //character.SenderChats = null;
+                _characterService.Delete(accountId);
+                //await uow.Commit();
+                //_chatService.RemoveReferencesToCharacterAsync(accountId);
+                //_accountService
+                //_accountService.Delete(accountId);
                 await uow.Commit();
                 if (_accountService.GetAsync(accountId).Result == null)
                 {

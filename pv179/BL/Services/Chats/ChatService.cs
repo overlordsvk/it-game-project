@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.DTO;
+using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.QueryObject;
 using BL.Services.Common;
@@ -20,14 +21,22 @@ namespace BL.Services.Chats
         {
         }
 
+        public async Task<QueryResultDto<ChatDto, ChatFilterDto>> ListChatsAsync(ChatFilterDto filter)
+        {
+            return await Query.ExecuteQuery(filter);
+        }
+
         public void RemoveReferencesToCharacterAsync(int characterId)
         {
-            var chats = ListAllAsync().Result;
-            /*foreach (var chat in chats.Items)
+            var chats = ListChatsAsync(new ChatFilterDto { CharacterId = characterId}).Result;
+            foreach (var chat in chats.Items)
             {
-
-            }*/
-
+                if (chat.ReceiverId == characterId)
+                    chat.ReceiverId = null;
+                if (chat.SenderId == characterId)
+                    chat.SenderId = null;
+                Update(chat).Wait();
+            }
         }
 
         protected override async Task<Chat> GetWithIncludesAsync(int entityId)

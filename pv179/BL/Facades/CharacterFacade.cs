@@ -69,6 +69,22 @@ namespace BL.Facades
         }
 
         /// <summary>
+        /// Gets character according to ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Character by id</returns>
+        public int CreateCharacter(CharacterDto character)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var characterId = _characterService.Create(character);
+                uow.Commit();
+                return characterId;
+                //TODO
+            }
+        }
+
+        /// <summary>
         /// Gets inventory of character
         /// </summary>
         /// <returns>all customers</returns>

@@ -44,13 +44,13 @@ namespace BL.Facades
                 {
                     Name = name,
                     Description = description,
-                    Picture = imagePath,
-                    Members = new List<CharacterDto> {founder}
+                    Picture = imagePath
                 };
-                var groupId = _groupService.Create(founder.Group);
                 await _characterService.Update(founder);
                 await uow.Commit();
-                return groupId;
+                founder = _characterService.GetAsync(groupFounder).Result;
+                return founder.Group.Id
+                    ;
             }
         }
 
@@ -96,7 +96,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _groupService.ListFightsAsync(filter);
+                return await _groupService.ListGroupsAsync(filter);
             }
         }
 
