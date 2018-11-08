@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Game.Infrastructure;
@@ -8,7 +9,7 @@ namespace Game.DAL.Entity.Entities
     public class Character : IEntity
     {
         [Key, ForeignKey("Account")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required, MaxLength(64)]
         public string Name { get; set; }
@@ -48,7 +49,7 @@ namespace Game.DAL.Entity.Entities
         public virtual ICollection<Chat> SenderChats { get; set; }
         public virtual ICollection<Chat> ReceiverChats { get; set; }
 
-        public int? GroupId { get; set; }
+        public Guid? GroupId { get; set; }
         public virtual Group Group { get; set; }
 
         public virtual Account Account { get; set; }

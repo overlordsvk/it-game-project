@@ -16,7 +16,7 @@ namespace Game.Infrastructure.PetaPoco.UnitOfWork
 
         private readonly IList<object> entitiesToInsert = new List<object>();
         private readonly IList<object> entitiesToUpdate = new List<object>();
-        private readonly IDictionary<int, Type> entititiesToRemove = new Dictionary<int, Type>();
+        private readonly IDictionary<Guid, Type> entititiesToRemove = new Dictionary<Guid, Type>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PetaPocoUnitOfWork"/> class.
@@ -58,7 +58,7 @@ namespace Game.Infrastructure.PetaPoco.UnitOfWork
 
         internal void RegisterEntityToInsert(object entity) => entitiesToInsert.Add(entity);
         internal void RegisterEntityToUpdate(object entity) => entitiesToUpdate.Add(entity);
-        internal void RegisterEntityToRemove<TEntity>(int entityId) where TEntity : IEntity
+        internal void RegisterEntityToRemove<TEntity>(Guid entityId) where TEntity : IEntity
            => entititiesToRemove.Add(entityId, typeof(TEntity));
 
         public override void Dispose()

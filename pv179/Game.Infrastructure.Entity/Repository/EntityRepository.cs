@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
+using System;
 
 namespace Game.Infrastructure.Entity.Repository
 {
@@ -23,7 +24,7 @@ namespace Game.Infrastructure.Entity.Repository
             Context.Set<TEntity>().Add(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var entity = Context.Set<TEntity>().Find(id);
             if (entity != null)
@@ -32,12 +33,12 @@ namespace Game.Infrastructure.Entity.Repository
             }
         }
 
-        public async Task<TEntity> GetAsync(int id)
+        public async Task<TEntity> GetAsync(Guid id)
         {
             return await Context.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<TEntity> GetAsync(int id, params string[] includes)
+        public async Task<TEntity> GetAsync(Guid id, params string[] includes)
         {
             DbQuery<TEntity> ctx = Context.Set<TEntity>();
             foreach (var include in includes)

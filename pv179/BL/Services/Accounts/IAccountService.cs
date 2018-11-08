@@ -30,13 +30,13 @@ namespace BL.Services.Accounts
         /// <param name="entityId">entity ID</param>
         /// <param name="withIncludes">include all entity complex types</param>
         /// <returns>The DTO representing the entity</returns>
-        Task<AccountDto> GetAsync(int entityId, bool withIncludes = true);
+        Task<AccountDto> GetAsync(Guid entityId, bool withIncludes = true);
 
         /// <summary>
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        int Create(AccountDto entityDto);
+        Guid Create(AccountDto entityDto);
 
         /// <summary>
         /// Updates entity
@@ -48,7 +48,7 @@ namespace BL.Services.Accounts
         /// Deletes entity with given Id
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
-        void Delete(int entityId);
+        void Delete(Guid entityId);
 
         /// <summary>
         /// Gets all DTOs (for given type)

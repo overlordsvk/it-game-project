@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Game.Infrastructure;
 
@@ -7,7 +8,7 @@ namespace Game.DAL.Entity.Entities
     public class Account : IEntity
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required, MinLength(4), MaxLength(32)]
         public string Username { get; set; }

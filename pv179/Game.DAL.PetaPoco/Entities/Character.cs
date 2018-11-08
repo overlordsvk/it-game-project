@@ -12,7 +12,7 @@ namespace Game.DAL.PetaPoco.Entities
     [PrimaryKey("Id", autoIncrement = false)]
     public class Character : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Ignore]
         public string TableName { get; } = TableNames.CharacterTable;

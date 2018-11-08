@@ -10,10 +10,10 @@ namespace BL.DTO
 {
     public class MessageDto : DtoBase
     {
-        public int? SenderId { get; set; }
+        public Guid? SenderId { get; set; }
         public CharacterDto Sender { get; set; }
 
-        public int? ReceiverId { get; set; }
+        public Guid? ReceiverId { get; set; }
         public CharacterDto Receiver { get; set; }
 
         [MaxLength(256)]

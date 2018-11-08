@@ -28,7 +28,7 @@ namespace BL.DTO
 
         public bool Equipped { get; set; }
 
-        public int? OwnerId { get; set; }
+        public Guid? OwnerId { get; set; }
         public CharacterDto Owner { get; set; }
 
         public ItemType ItemType { get; set; }

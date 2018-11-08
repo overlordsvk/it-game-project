@@ -14,8 +14,8 @@ namespace BL.DTO
 
         public DateTime? LastMessageTimestamp { get; set; }
 
-        public int? SenderId { get; set; }
+        public Guid? SenderId { get; set; }
 
-        public int? ReceiverId { get; set; }
+        public Guid? ReceiverId { get; set; }
     }
 }

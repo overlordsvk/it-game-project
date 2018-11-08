@@ -9,7 +9,7 @@ namespace BL.DTO.Filters
 {
     public class MessageFilterDto : FilterDtoBase
     {
-        public int? ChatId { get; set; }
+        public Guid? ChatId { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Game.Infrastructure
@@ -8,12 +9,12 @@ namespace Game.Infrastructure
         /// <summary>
         /// Gets the entity with given id.
         /// </summary>
-        Task<TEntity> GetAsync(int id);
+        Task<TEntity> GetAsync(Guid id);
 
         /// <summary>
         /// Gets the entity with given id.
         /// </summary>
-        Task<TEntity> GetAsync(int id, params string[] includes);
+        Task<TEntity> GetAsync(Guid id, params string[] includes);
 
         Task<ICollection<TEntity>> GetAllAsync();
 
@@ -30,6 +31,6 @@ namespace Game.Infrastructure
         /// <summary>
         /// Deletes an entity with the given id.
         /// </summary>
-        void Delete(int id);
+        void Delete(Guid id);
     }
 }

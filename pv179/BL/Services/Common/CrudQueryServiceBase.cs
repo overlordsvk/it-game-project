@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using BL.DTO.Common;
 using BL.QueryObject;
@@ -28,7 +29,7 @@ namespace BL.Services.Common
         /// <param name="entityId">entity ID</param>
         /// <param name="withIncludes">include all entity complex types</param>
         /// <returns>The DTO representing the entity</returns>
-        public virtual async Task<TDto> GetAsync(int entityId, bool withIncludes = true)
+        public virtual async Task<TDto> GetAsync(Guid entityId, bool withIncludes = true)
         {
             TEntity entity;
             if (withIncludes)
@@ -47,13 +48,13 @@ namespace BL.Services.Common
         /// </summary>
         /// <param name="entityId">entity ID</param>
         /// <returns>The DTO representing the entity</returns>
-        protected abstract Task<TEntity> GetWithIncludesAsync(int entityId);
+        protected abstract Task<TEntity> GetWithIncludesAsync(Guid entityId);
 
         /// <summary>
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        public virtual int Create(TDto entityDto)
+        public virtual Guid Create(TDto entityDto)
         {
             var entity = Mapper.Map<TEntity>(entityDto);
             Repository.Create(entity);
@@ -75,7 +76,7 @@ namespace BL.Services.Common
         /// Deletes entity with given Id
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
-        public virtual void Delete(int entityId)
+        public virtual void Delete(Guid entityId)
         {
             Repository.Delete(entityId);
         }

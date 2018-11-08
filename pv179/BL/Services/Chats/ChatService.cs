@@ -26,7 +26,7 @@ namespace BL.Services.Chats
             return await Query.ExecuteQuery(filter);
         }
 
-        public void RemoveReferencesToCharacterAsync(int characterId)
+        public void RemoveReferencesToCharacterAsync(Guid characterId)
         {
             var chats = ListChatsAsync(new ChatFilterDto { CharacterId = characterId}).Result;
             foreach (var chat in chats.Items)
@@ -39,7 +39,7 @@ namespace BL.Services.Chats
             }
         }
 
-        protected override async Task<Chat> GetWithIncludesAsync(int entityId)
+        protected override async Task<Chat> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Chat.Messages), nameof(Chat.Receiver), nameof(Chat.Sender));
         }

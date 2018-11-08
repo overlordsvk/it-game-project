@@ -27,18 +27,18 @@ namespace BL.Facades
             _characterService = characterService;
         }
 
-        public async Task<int> CreateGroup(int groupFounder,string name, string description, string imagePath)
+        public async Task<Guid> CreateGroup(Guid groupFounder,string name, string description, string imagePath)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var founder = _characterService.GetAsync(groupFounder).Result;
                 if (founder == null)
                 {
-                    return -1;
+                    return Guid.Empty;
                 }
                 if (founder.Group != null)
                 {
-                    return -2;
+                    return Guid.Empty;
                 }
                 founder.Group = new GroupDto
                 {
@@ -54,7 +54,7 @@ namespace BL.Facades
             }
         }
 
-        public async void RemoveGroup(int groupId)
+        public async void RemoveGroup(Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -71,7 +71,7 @@ namespace BL.Facades
             }
         }
 
-        public async void EditDescription(int groupId, string newDescription)
+        public async void EditDescription(Guid groupId, string newDescription)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -100,7 +100,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<int> AddToGroup(int characterId, int groupId)
+        public async Task<int> AddToGroup(Guid characterId, Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -119,26 +119,27 @@ namespace BL.Facades
             }
         }
 
-        public async Task<int> RemoveFromGroup(int characterId, int groupId)
+        public async Task<Guid> RemoveFromGroup(Guid characterId, Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var group =_groupService.GetAsync(groupId).Result;
                 var character = _characterService.GetAsync(characterId).Result;
                 if (group == null || character == null)
-                    return -1;
+                    return Guid.Empty;
                 if (character.Group != null)
-                    return -2;
+                    return Guid.Empty;
                 if (!group.Members.Contains(character))
                 {
-                    return -3;
+                    return Guid.Empty;
                 }
                 group.Members.Remove(character);
                 character.Group = null;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
                 await uow.Commit();
-                return 1;
+                return new Guid();
+                //todo use guid in creation
             }
         }
 

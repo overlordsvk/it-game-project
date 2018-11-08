@@ -22,7 +22,7 @@ namespace BL.Services.GroupPosts
 
         }
 
-        protected override async Task<GroupPost> GetWithIncludesAsync(int entityId)
+        protected override async Task<GroupPost> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(GroupPost.Author), nameof(GroupPost.Group));
         }

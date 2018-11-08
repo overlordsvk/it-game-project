@@ -11,7 +11,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BL.Services.Messsages
+namespace BL.Services.Messages
 {
     public class MessageService : CrudQueryServiceBase<Message, MessageDto, MessageFilterDto>, IMessageService
     {
@@ -24,7 +24,7 @@ namespace BL.Services.Messsages
             return await Query.ExecuteQuery(filter);
         }
 
-        protected override async Task<Message> GetWithIncludesAsync(int entityId)
+        protected override async Task<Message> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Message.Author), nameof(Message.Chat));
         }

@@ -21,7 +21,7 @@ namespace BL.Services.Fights
         {
         }
 
-        protected override async Task<Fight> GetWithIncludesAsync(int entityId)
+        protected override async Task<Fight> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Fight.Attacker), nameof(Fight.AttackerWeapon), nameof(Fight.AttackerArmor), nameof(Fight.Defender), nameof(Fight.DefenderWeapon), nameof(Fight.DefenderArmor));
         }

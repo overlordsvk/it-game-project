@@ -10,7 +10,7 @@ namespace Game.Infrastructure.PetaPoco
 {
     public static class DatabaseExtensions
     {
-        public static async Task<object> InvokeSingleOrDefaultAsync(this IDatabase database, Type typeParameter, int? id)
+        public static async Task<object> InvokeSingleOrDefaultAsync(this IDatabase database, Type typeParameter, Guid? id)
         {
             var genericMethod = typeof(Database)
                 .GetMethod(nameof(Database.SingleOrDefaultAsync), BindingFlags.Public | BindingFlags.Instance, null,

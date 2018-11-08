@@ -9,13 +9,13 @@ namespace BL.DTO
 {
     public class FightDto : DtoBase
     {
-        public int? AttackerId { get; set; }
+        public Guid? AttackerId { get; set; }
 
-        public int? DefenderId { get; set; }
+        public Guid? DefenderId { get; set; }
 
-        public int? AttackerItemId { get; set; }
+        public Guid? AttackerItemId { get; set; }
 
-        public int? DefenderItemId { get; set; }
+        public Guid? DefenderItemId { get; set; }
 
         public bool AttackSuccess { get; set; }
 

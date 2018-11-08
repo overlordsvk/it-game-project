@@ -13,7 +13,7 @@ namespace Game.DAL.Entities
 {
     public class Message : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public int ChatId { get; set; }
         public virtual Chat Chat { get; set; }
@@ -21,7 +21,7 @@ namespace Game.DAL.Entities
         [MaxLength(2048)]
         public string Text { get; set; }
 
-        public int? AuthorId { get; set; }
+        public Guid? AuthorId { get; set; }
         public virtual Character Author { get; set; }
 
         public DateTime Timestamp { get; set; }

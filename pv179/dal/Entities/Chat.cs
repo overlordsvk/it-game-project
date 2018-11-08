@@ -9,12 +9,12 @@ namespace Game.DAL.Entity.Entities
 {
     public class Chat : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int? SenderId { get; set; }
+        public Guid? SenderId { get; set; }
         public virtual Character Sender { get; set; }
 
-        public int? ReceiverId { get; set; }
+        public Guid? ReceiverId { get; set; }
         public virtual Character Receiver { get; set; }
 
         [MaxLength(256)]

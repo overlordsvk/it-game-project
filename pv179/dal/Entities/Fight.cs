@@ -7,24 +7,24 @@ namespace Game.DAL.Entity.Entities
 {
     public class Fight : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int? AttackerId { get; set; }
+        public Guid? AttackerId { get; set; }
         public virtual Character Attacker { get; set; }
 
-        public int? DefenderId { get; set; }
+        public Guid? DefenderId { get; set; }
         public virtual Character Defender { get; set; }
 
-        public int? AttackerWeaponId { get; set; }
+        public Guid? AttackerWeaponId { get; set; }
         public virtual Item AttackerWeapon { get; set; }
 
-        public int? AttackerArmorId { get; set; }
+        public Guid? AttackerArmorId { get; set; }
         public virtual Item AttackerArmor { get; set; }
 
-        public int? DefenderWeaponId { get; set; }
+        public Guid? DefenderWeaponId { get; set; }
         public virtual Item DefenderWeapon { get; set; }
 
-        public int? DefenderArmorId { get; set; }
+        public Guid? DefenderArmorId { get; set; }
         public virtual Item DefenderArmor { get; set; }
 
         public bool AttackSuccess { get; set; }

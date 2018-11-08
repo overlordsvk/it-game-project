@@ -20,7 +20,7 @@ namespace BL.Services.Accounts
         {
         }
 
-        protected override async Task<Account> GetWithIncludesAsync(int entityId)
+        protected override async Task<Account> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Character));
         }

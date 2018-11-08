@@ -17,13 +17,13 @@ namespace BL.Services.Chats
         /// <param name="entityId">entity ID</param>
         /// <param name="withIncludes">include all entity complex types</param>
         /// <returns>The DTO representing the entity</returns>
-        Task<ChatDto> GetAsync(int entityId, bool withIncludes = true);
+        Task<ChatDto> GetAsync(Guid entityId, bool withIncludes = true);
 
         /// <summary>
         /// Creates new entity
         /// </summary>
         /// <param name="entityDto">entity details</param>
-        int Create(ChatDto entityDto);
+        Guid Create(ChatDto entityDto);
 
         /// <summary>
         /// Updates entity
@@ -35,7 +35,7 @@ namespace BL.Services.Chats
         /// Deletes entity with given Id
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
-        void Delete(int entityId);
+        void Delete(Guid entityId);
 
         /// <summary>
         /// Gets all DTOs (for given type)
@@ -43,7 +43,7 @@ namespace BL.Services.Chats
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<ChatDto, ChatFilterDto>> ListAllAsync();
 
-        void RemoveReferencesToCharacterAsync(int characterId);
+        void RemoveReferencesToCharacterAsync(Guid characterId);
 
         /// <summary>
         /// Gets chats according to given filter

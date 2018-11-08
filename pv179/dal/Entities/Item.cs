@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Game.DAL.Enums;
 using Game.Infrastructure;
@@ -7,7 +8,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Item : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [MaxLength(256)]
         public string Name { get; set; }

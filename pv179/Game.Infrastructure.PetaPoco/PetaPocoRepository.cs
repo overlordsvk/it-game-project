@@ -24,12 +24,12 @@ namespace Game.Infrastructure.PetaPoco
             this.provider = provider;
         }
 
-        public async Task<TEntity> GetAsync(int id)
+        public async Task<TEntity> GetAsync(Guid id)
         {
             return await Database.SingleOrDefaultAsync<TEntity>(id);
         }
 
-        public async Task<TEntity> GetAsync(int id, params string[] includes)
+        public async Task<TEntity> GetAsync(Guid id, params string[] includes)
         {
             var entity = await GetAsync(id);
             var propertiesToLoad = typeof(TEntity).GetProperties()
@@ -59,7 +59,7 @@ namespace Game.Infrastructure.PetaPoco
             uow.RegisterEntityToUpdate(entity);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             var uow = provider.GetUnitOfWorkInstance() as PetaPocoUnitOfWork;
             uow.RegisterEntityToRemove<TEntity>(id);
@@ -67,7 +67,7 @@ namespace Game.Infrastructure.PetaPoco
 
         private async Task SideLoadEntityAsync(TEntity entity, PropertyInfo propertyToLoad)
         {
-            var foreignKeyValue = (int)(entity.GetType()
+            var foreignKeyValue = (Guid)(entity.GetType()
                 .GetProperty(propertyToLoad.Name + nameof(IEntity.Id))
                 ?.GetValue(entity) ?? null);
             var value = await Database.InvokeSingleOrDefaultAsync(propertyToLoad.PropertyType, foreignKeyValue);

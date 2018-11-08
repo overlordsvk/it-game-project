@@ -17,7 +17,7 @@ namespace BL.Services.Groups
 {
     public class GroupService : CrudQueryServiceBase<Group, GroupDto, GroupFilterDto>, IGroupService
     {
-        protected override async Task<Group> GetWithIncludesAsync(int entityId)
+        protected override async Task<Group> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Group.Members), nameof(Group.Wall));
         }
