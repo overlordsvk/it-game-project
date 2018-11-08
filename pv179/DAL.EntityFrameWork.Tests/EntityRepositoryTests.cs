@@ -16,6 +16,10 @@ namespace DAL.EntityFrameWork.Tests
         private readonly IRepository<Account> accountRepository = Initializer.Container.Resolve<IRepository<Account>>();
         private readonly IRepository<Character> characterRepository = Initializer.Container.Resolve<IRepository<Character>>();
 
+        private static readonly Guid guid1 = Guid.Parse("2d109fce-07ad-4170-ba31-b9253dcbfed7");
+        private static readonly Guid guid2 = Guid.Parse("d69fe626-bb15-4ec6-a778-1d3c91ad213b");
+        private static readonly Guid guid3 = Guid.Parse("139892fc-4a88-4636-aa0e-1975adf2ee11");
+
         private readonly Character characterSlayer = new Character
         {
             Name = "KingSlayer",
@@ -28,7 +32,8 @@ namespace DAL.EntityFrameWork.Tests
             Charisma = 8,
             Intelligence = 1,
             Agility = 5,
-            Luck = 9
+            Luck = 9,
+            Id = guid2
         };
 
         private readonly Account accountIvan = new Account
@@ -37,7 +42,7 @@ namespace DAL.EntityFrameWork.Tests
             Email = "navi@ivan.com",
             Password = "IvanJeBoh",
             IsAdmin = false,
-           
+            Id = guid1
         };
 
         private readonly Account accountJozo = new Account
@@ -46,6 +51,7 @@ namespace DAL.EntityFrameWork.Tests
             Email = "bob@pokec.sk",
             Password = "dota4life",
             IsAdmin = false,
+            Id = guid3
         };
 
         [TestMethod]
@@ -55,7 +61,7 @@ namespace DAL.EntityFrameWork.Tests
 
             using (unitOfWorkProvider.Create())
             {
-                Ivan = await accountRepository.GetAsync(3);
+                Ivan = await accountRepository.GetAsync(guid1);
             }
 
             Assert.AreEqual(Ivan.Email, accountIvan.Email);
@@ -68,7 +74,7 @@ namespace DAL.EntityFrameWork.Tests
 
             using (unitOfWorkProvider.Create())
             {
-                Ivan = await accountRepository.GetAsync(3, nameof(Character));
+                Ivan = await accountRepository.GetAsync(guid2, nameof(Character));
             }
 
             Assert.AreEqual(Ivan.Character.Name, characterSlayer.Name);
@@ -81,7 +87,7 @@ namespace DAL.EntityFrameWork.Tests
 
             using (unitOfWorkProvider.Create())
             {
-                slayer = await characterRepository.GetAsync(3);
+                slayer = await characterRepository.GetAsync(guid2);
                 Console.WriteLine(slayer.Name);
             }
 
@@ -97,7 +103,7 @@ namespace DAL.EntityFrameWork.Tests
             {
                 accountRepository.Create(accountJozo);
                 await uow.Commit();
-                jozo = await accountRepository.GetAsync(4);
+                jozo = await accountRepository.GetAsync(guid3);
             }
             Assert.AreEqual(jozo.Username, accountJozo.Username);
         }
@@ -111,11 +117,11 @@ namespace DAL.EntityFrameWork.Tests
 
             using (var uow = unitOfWorkProvider.Create())
             {
-                jozo = await accountRepository.GetAsync(4);
+                jozo = await accountRepository.GetAsync(guid3);
                 jozo.Email = mail;
                 accountRepository.Update(jozo);
                 await uow.Commit();
-                res = await accountRepository.GetAsync(4);
+                res = await accountRepository.GetAsync(guid3);
             }
             Assert.AreEqual(res.Email, mail);
         }

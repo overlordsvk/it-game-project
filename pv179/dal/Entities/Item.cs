@@ -28,7 +28,7 @@ namespace Game.DAL.Entity.Entities
         public bool Equipped { get; set; }
 
         [ForeignKey(nameof(Owner))]
-        public int? OwnerId { get; set; }
+        public Guid? OwnerId { get; set; }
         public virtual Character Owner { get; set; }
 
         public ItemType ItemType { get; set; }

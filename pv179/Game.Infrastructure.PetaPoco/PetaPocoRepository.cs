@@ -47,10 +47,12 @@ namespace Game.Infrastructure.PetaPoco
         }
 
 
-        public void Create(TEntity entity)
+        public Guid Create(TEntity entity)
         {
+            entity.Id = Guid.NewGuid();
             var uow = provider.GetUnitOfWorkInstance() as PetaPocoUnitOfWork;
             uow.RegisterEntityToInsert(entity);
+            return entity.Id;
         }
 
         public void Update(TEntity entity)

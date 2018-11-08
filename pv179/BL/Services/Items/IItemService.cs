@@ -50,7 +50,7 @@ namespace BL.Services.Items
 
         ItemDto GetNewItem();
 
-        Task<bool> EquipItem(int characterId, int itemId);
+        Task<bool> EquipItem(Guid characterId, Guid itemId);
 
     }
 }

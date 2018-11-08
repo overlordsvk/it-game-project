@@ -50,7 +50,7 @@ namespace BL.Services.Characters
         /// <returns>Filtered results</returns>
         Task<QueryResultDto<CharacterDto, CharacterFilterDto>> ListCharactersAsync(CharacterFilterDto filter);
 
-        Task<bool> AddMoney(int characterId, int value);
+        Task<bool> AddMoney(Guid characterId, int value);
 
     }
 }

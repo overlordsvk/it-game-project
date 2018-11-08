@@ -52,7 +52,7 @@ namespace BL.Facades
 
                 await uow.Commit();
                 founder = _characterService.GetAsync(groupFounder).Result;
-                return 3;// founder.Group.Id;
+                return Guid.NewGuid(); // founder.Group.Id;
             }
         }
 

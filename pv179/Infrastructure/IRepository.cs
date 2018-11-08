@@ -21,7 +21,7 @@ namespace Game.Infrastructure
         /// <summary>
         /// Persists the given entity.
         /// </summary>
-        void Create(TEntity entity);
+        Guid Create(TEntity entity);
 
         /// <summary>
         /// Updates the given entity.

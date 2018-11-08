@@ -19,9 +19,11 @@ namespace Game.Infrastructure.Entity.Repository
             this._provider = provider;
         }
 
-        public void Create(TEntity entity)
+        public Guid Create(TEntity entity)
         {
-             Context.Set<TEntity>().Add(entity);
+            entity.Id = Guid.NewGuid();
+            Context.Set<TEntity>().Add(entity);
+            return entity.Id;
         }
 
         public void Delete(Guid id)

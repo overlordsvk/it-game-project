@@ -24,6 +24,15 @@ namespace PV179Console
 {
     public class Program
     {
+        private static readonly Guid guid4 = Guid.Parse("2d5c776f-57bf-4467-b354-43b6b096d3fa");
+        private static readonly Guid guid5 = Guid.Parse("0aaa0448-3f09-4de7-aa15-257e9c77f451");
+        private static readonly Guid guid6 = Guid.Parse("5b4b60c8-bfce-423d-a559-72fd78f4c301");
+        private static readonly Guid guid7 = Guid.Parse("e3fdb475-3fcb-4554-a9d5-a22193ebab4c");
+        private static readonly Guid guid8 = Guid.Parse("c4d77057-ae1a-493d-ad24-39c6bfd6a507");
+        private static readonly Guid guid9 = Guid.Parse("bc53f485-942d-4a41-9e9a-a9ca3b353c56");
+        private static readonly Guid guid10 = Guid.Parse("fd4e4768-037f-4ed9-8520-dd1e5a38816c");
+
+
         static void Main(string[] args)
         {
             //var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent("InMemoryTest"));

@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.Entity;
 using Game.DAL.Entities;
 using Game.DAL.Entity.Config;
@@ -54,13 +55,13 @@ namespace Game.DAL.Entity
             modelBuilder.Entity<Item>()
                 .HasOptional<Character>(i => i.Owner)
                 .WithMany(ch => ch.Items)
-                .HasForeignKey<int?>(i => i.OwnerId)
+                .HasForeignKey<Guid?>(i => i.OwnerId)
                 .WillCascadeOnDelete(false);
 
            modelBuilder.Entity<Message>()
                .HasRequired<Chat>(m => m.Chat)
                .WithMany(ch => ch.Messages)
-               .HasForeignKey<int?>(m => m.ChatId)
+               .HasForeignKey<Guid?>(m => m.ChatId)
                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Fight>()

@@ -59,10 +59,10 @@ namespace BL.Services.Items
             return newItem;
         }
 
-        public async Task<bool> EquipItem(int characterId, int itemId)
+        public async Task<bool> EquipItem(Guid characterId, Guid itemId)
         {
             var item = await Repository.GetAsync(itemId);
-            if (item == null || item.OwnerId != characterId)
+            if (item == null || !characterId.Equals(item.OwnerId))
                 return false;
 
             ItemDto equppedItem;
