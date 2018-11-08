@@ -51,7 +51,7 @@ namespace BL.DTO
         public ICollection<FightDto> AttackerFights { get; set; } = new List<FightDto>();
         public ICollection<FightDto> DefenderFights { get; set; } = new List<FightDto>();
 
-        public int? GroupId { get; set; }
+        public Guid? GroupId { get; set; }
         public GroupDto Group { get; set; }
 
         //public AccountDto Account { get; set; }
