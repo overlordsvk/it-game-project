@@ -58,5 +58,28 @@ namespace BL.Services.Items
             };
             return newItem;
         }
+
+        public async Task<bool> EquipItem(int characterId, int itemId)
+        {
+            var item = await Repository.GetAsync(itemId);
+            if (item == null || item.OwnerId != characterId)
+                return false;
+
+            ItemDto equppedItem;
+            if(item.ItemType == ItemType.Armor)
+                equppedItem = await GetEquippedArmor(characterId);
+            else
+                equppedItem = await GetEquippedWeapon(characterId);
+
+            if (equppedItem != null)
+            {
+                equppedItem.Equipped = false;
+                await Update(equppedItem);
+            }
+
+            item.Equipped = true;
+            Repository.Update(item);
+            return true;
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Game.Infrastructure.Entity.Repository
 
         public void Create(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
+             Context.Set<TEntity>().Add(entity);
         }
 
         public void Delete(int id)

@@ -7,7 +7,7 @@ using Game.DAL.Entity.Entities;
 
 namespace Game.DAL.Entity.Initializers
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
+    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
     {
         protected override void Seed(GameDbContext context)
         {
@@ -17,7 +17,8 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
-                ItemType = ItemType.Weapon
+                ItemType = ItemType.Weapon,
+                Equipped = true
             };
 
             var itemAxe2 = new Item
@@ -35,7 +36,8 @@ namespace Game.DAL.Entity.Initializers
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
-                ItemType = ItemType.Weapon
+                ItemType = ItemType.Weapon,
+                Equipped = true
             };
 
             Character characterSlayer = new Character
@@ -197,10 +199,10 @@ namespace Game.DAL.Entity.Initializers
             context.Messages.Add(message2);
 
             context.Fights.Add(fight1);
-            
-            context.Groups.Add(group1);
 
-            context.GroupPosts.Add(gpost);
+            //context.Groups.Add(group1);
+
+            //context.GroupPosts.Add(gpost);
 
             base.Seed(context);
         }

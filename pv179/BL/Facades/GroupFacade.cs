@@ -40,17 +40,19 @@ namespace BL.Facades
                 {
                     return -2;
                 }
-                founder.Group = new GroupDto
+                founder.IsGroupAdmin = true;
+                var group = new GroupDto
                 {
                     Name = name,
                     Description = description,
-                    Picture = imagePath
+                    Picture = imagePath,
                 };
+                _groupService.Create(group);
                 await _characterService.Update(founder);
+
                 await uow.Commit();
                 founder = _characterService.GetAsync(groupFounder).Result;
-                return founder.Group.Id
-                    ;
+                return 3;// founder.Group.Id;
             }
         }
 

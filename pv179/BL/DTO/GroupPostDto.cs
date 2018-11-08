@@ -11,13 +11,13 @@ namespace BL.DTO
     public class GroupPostDto : DtoBase
     {
         public int? CharacterId { get; set; }
-        public virtual CharacterDto Author { get; set; }
+        public CharacterDto Author { get; set; }
 
         [MaxLength(1024)]
         public string Text { get; set; }
 
         public int GroupId { get; set; }
-        public virtual GroupDto Group { get; set; }
+        public GroupDto Group { get; set; }
 
         public DateTime Timestamp { get; set; }
     }

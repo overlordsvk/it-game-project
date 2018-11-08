@@ -43,16 +43,20 @@ namespace BL.DTO
         [Range(0, 10)]
         public int Luck { get; set; }
 
-        public GroupDto Group { get; set; }
+        public ICollection<ItemDto> Items { get; set; } = new List<ItemDto>();
 
-        public bool IsGroupAdmin { get; set; }
-
-        public ICollection<ItemDto> Items {get; set; } = new List<ItemDto>();
         public ICollection<ChatDto> SenderChats { get; set; } = new List<ChatDto>();
         public ICollection<ChatDto> ReceiverChats { get; set; } = new List<ChatDto>();
 
-        public AccountDto Account { get; set; }
+        public ICollection<FightDto> AttackerFights { get; set; } = new List<FightDto>();
+        public ICollection<FightDto> DefenderFights { get; set; } = new List<FightDto>();
 
+        public int? GroupId { get; set; }
+        public GroupDto Group { get; set; }
+
+        //public AccountDto Account { get; set; }
+
+        public bool IsGroupAdmin { get; set; }
 
     }
 }

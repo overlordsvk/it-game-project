@@ -11,12 +11,13 @@ namespace BL.DTO
     {
         public string Name { get; set; }
 
+        public string Picture { get; set; }
+
         public ICollection<CharacterDto> Members { get; set; }
 
         public ICollection<GroupPostDto> Wall { get; set; }
 
         public string Description { get; set; }
 
-        public string Picture { get; set; }
     }
 }

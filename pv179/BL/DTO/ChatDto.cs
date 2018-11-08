@@ -10,7 +10,7 @@ namespace BL.DTO
         [MaxLength(256)]
         public string Subject { get; set; }
 
-        public virtual ICollection<MessageDto> Messages { get; set; }
+        public ICollection<MessageDto> Messages { get; set; }
 
         public DateTime? LastMessageTimestamp { get; set; }
 

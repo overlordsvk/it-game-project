@@ -66,6 +66,7 @@ namespace BL.Services.Common
         /// <param name="entityDto">entity details</param>
         public virtual async Task Update(TDto entityDto)
         {
+
             var entity = await GetWithIncludesAsync(entityDto.Id);
             Mapper.Map(entityDto, entity);
             Repository.Update(entity);
