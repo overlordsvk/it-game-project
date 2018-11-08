@@ -13,6 +13,7 @@ using BL.Services.Fights;
 using BL.Services.Items;
 using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
+using BL.Services.CharacterChanges;
 
 namespace BL.Facades
 {
@@ -22,13 +23,15 @@ namespace BL.Facades
         private readonly ICharacterService _characterService;
         private readonly IItemService _itemService;
         private readonly IFightService _fightService;
+        private readonly ICharacterAddMoneyService _characterChangesService;
 
-        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
+        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IItemService itemService, IFightService fightService, ICharacterAddMoneyService characterChangesService) : base(unitOfWorkProvider)
         {
             _accountService = accountService;
             _characterService = characterService;
             _itemService = itemService;
             _fightService = fightService;
+            _characterChangesService = characterChangesService;
         }
 
         /// <summary>
@@ -96,7 +99,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<ItemDto> GetEquipedWeapon(int id)
+        public async Task<ItemDto> GetEquippedWeapon(int id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -104,7 +107,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<ItemDto> GetEquipedArmor(int id)
+        public async Task<ItemDto> GetEquippedArmor(int id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -127,43 +130,47 @@ namespace BL.Facades
             }
         }
 
-        public async void EquipItem(int itemId)
+        public async Task<bool> EquipItem(int characterId, int itemId)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
-                var item = _itemService.GetAsync(itemId).Result;
-                var ownerId = item.OwnerId;
-                if (!ownerId.HasValue)
-                    return;
-                ItemDto equippedItem;
-                if (item.ItemType == ItemType.Weapon)
-                {
-                    equippedItem = await GetEquipedWeapon(ownerId.Value);
-                }
-                else
-                {
-                    equippedItem = await GetEquipedArmor(ownerId.Value);
-                }
+                var succ = await _itemService.EquipItem(characterId, itemId);
+                await uow.Commit();
+                return succ;
+                //var item = _itemService.GetAsync(itemId).Result;
+                //var ownerId = item.OwnerId;
+                //if (!ownerId.HasValue)
+                //    return;
+                //ItemDto equippedItem;
+                //if (item.ItemType == ItemType.Weapon)
+                //{
+                //    equippedItem = await GetEquipedWeapon(ownerId.Value);
+                //}
+                //else
+                //{
+                //    equippedItem = await GetEquipedArmor(ownerId.Value);
+                //}
 
-                equippedItem.Equipped = false;
-                await _itemService.Update(equippedItem);
-                item.Equipped = true;
-                await _itemService.Update(item);
+                //equippedItem.Equipped = false;
+                //await _itemService.Update(equippedItem);
+                //item.Equipped = true;
+                //await _itemService.Update(item);
             }
         }
 
-        public bool BuyItem(int characterId)
+        public async Task<bool> BuyItemAsync(int characterId)
         {
-            using (UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
-                var character = _characterService.GetAsync(characterId).Result;
+                var character = await _characterService.GetAsync(characterId);
                 if (character.Money < 100) return false;
 
                 character.Money -= 100;
                 var item =_itemService.GetNewItem();
-                item.Owner = character;
                 item.OwnerId = characterId;
                 _itemService.Create(item);
+                await _characterService.Update(character);
+                await uow.Commit();
                 return true;
             }
         }
@@ -174,6 +181,64 @@ namespace BL.Facades
             {
                 return await _fightService.ListFightsAsync(filter);
             }
+        }
+
+        public async Task<int> Attack(int attackerId, int defenderId)
+        {
+            int fightId;
+
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+            var attacker = await _characterService.GetAsync(attackerId);
+            var defender = await _characterService.GetAsync(defenderId);
+
+            if (attacker == null)
+            {
+                return -1;
+            }
+            if (defender == null)
+            {
+                return -2;
+            }
+            var attackerItem = await GetEquippedWeapon(attackerId);
+            var defenderItem = await GetEquippedArmor(defenderId);
+            var attackSuccess = ResolveAttack(attacker, defender);
+            
+                fightId = _fightService.Create(new FightDto
+                {
+                    AttackerId = attacker.Id,
+                    DefenderId = defender.Id,
+                    AttackerItemId = attackerItem?.Id,
+                    DefenderItemId = defenderItem?.Id,
+                    Timestamp = DateTime.Now,
+                    AttackSuccess = attackSuccess
+                });
+                //attacker = _characterService.GetAsync(attackerId, withIncludes: false).Result;
+                //attacker.Money += 30;
+                //_characterService.Update(attacker).Wait();
+                await uow.Commit();
+            }
+            return fightId;
+
+        }
+
+        public async Task<bool> AddMoneyToCharacter(int characterId, int value)
+        {
+            bool result;
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var character = await _characterService.GetAsync(characterId);
+                character.Money += value;
+                await _characterService.Update(character);
+                await uow.Commit();
+            }
+            return true;
+        }
+
+
+        private bool ResolveAttack(CharacterDto attacker, CharacterDto defender)
+        {
+            return true;
         }
     }
 }

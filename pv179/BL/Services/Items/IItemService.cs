@@ -49,5 +49,8 @@ namespace BL.Services.Items
         Task<ItemDto> GetEquippedArmor(Guid id);
 
         ItemDto GetNewItem();
+
+        Task<bool> EquipItem(int characterId, int itemId);
+
     }
 }

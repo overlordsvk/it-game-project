@@ -30,5 +30,18 @@ namespace BL.Services.Characters
         {
             return await Query.ExecuteQuery(filter);
         }
+
+        public async Task<bool> AddMoney(int characterId, int value)
+        {
+            var character = await GetAsync(characterId, withIncludes: false);
+
+            if (character == null || character.Money - value < 0)
+            {
+                return false;
+            }
+            character.Money += value;
+            await Update(character);
+            return true;
+        }
     }
 }

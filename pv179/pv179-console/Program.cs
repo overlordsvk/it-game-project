@@ -17,6 +17,8 @@ using BL.DTO.Filters;
 using Game.Infrastructure.Query;
 using Game.Infrastructure;
 using Game.DAL.Entities;
+using BL.Services.Items;
+using Game.Infrastructure.Entity.UnitOfWork;
 
 namespace PV179Console
 {
@@ -24,9 +26,10 @@ namespace PV179Console
     {
         static void Main(string[] args)
         {
-            var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent("InMemoryTest"));
+            //var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent("InMemoryTest"));
 
             Console.WriteLine("Test");
+            PrintDbContent().Wait();
 
             Console.ReadKey();
             /*using (var dbContext = new GameDbContext())
@@ -53,7 +56,7 @@ namespace PV179Console
             var entity = new Account();
             var itemAxe = new Item
             {
-                Name = "Sekera",
+                Name = "Sekerisko",
                 Attack = 20,
                 Defense = 5,
                 Weight = 12,
@@ -62,7 +65,7 @@ namespace PV179Console
 
             var itemAxe2 = new Item
             {
-                Name = "Lepsia Sekera",
+                Name = "Lepsia Sekerka",
                 Attack = 25,
                 Defense = 10,
                 Weight = 8,
@@ -71,7 +74,7 @@ namespace PV179Console
 
             var itemBow = new Item
             {
-                Name = "Luk",
+                Name = "Lukoslav",
                 Attack = 44,
                 Defense = 3,
                 Weight = 3,
@@ -107,7 +110,7 @@ namespace PV179Console
                 Agility = 5,
                 Luck = 9
             };
-            characterSlayer.Items = new List<Item>
+            characterBela.Items = new List<Item>
             {
                 itemAxe,
                 itemAxe2,
@@ -116,19 +119,33 @@ namespace PV179Console
 
             var chardto = new CharacterDto();
             mapper.Map(dto, entity);
-            Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
+            //Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
             mapper.Map(entity, dto2);
-            Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
+            //Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
 
             mapper.Map(characterSlayer, chardto);
 
-            Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
+            //Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
 
             var acccrdto = new AccountCreateDto
             {
-                Email = "bela@bugar.com",
+                Email = "beliak@bugar.com",
                 Password = "147852369",
-                Username = "Bela"
+                Username = "Bela",
+            };
+
+            var acccrdto2 = new AccountCreateDto
+            {
+                Email = "R@Kalinas.com",
+                Password = "147852369",
+                Username = "Kalinas"
+            };
+
+            var acccrdto3 = new AccountCreateDto
+            {
+                Email = "c@c.com",
+                Password = "147852369",
+                Username = "cccc"
             };
 
             using (var container = new WindsorContainer())
@@ -137,26 +154,59 @@ namespace PV179Console
                 var accFacade = container.Resolve<AccountFacade>();
                 var grFacade = container.Resolve<GroupFacade>();
                 var characterFacade = container.Resolve<CharacterFacade>();
-                var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
-                var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
-                Console.WriteLine(resew);
-                Console.WriteLine("AccFacUser: " + res.Result.Username);
+                var itemService = container.Resolve<IItemService>();
+                var uowp = container.Resolve<IUnitOfWorkProvider>();
+
+                //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
+                //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
+                //Console.WriteLine(resew);
+                //Console.WriteLine("AccFacUser: " + res.Result.Username);
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
-                var res4 = accFacade.RegisterAccount(acccrdto).Result;
-                Console.WriteLine("Succ: ");
-                var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
-                Console.WriteLine("====>>>>" + res3.Username);
+                Console.WriteLine("Reg : " + res2);
+                var res22 = accFacade.RegisterAccount(acccrdto2).Result;
+                Console.WriteLine("Reg : " + res22);
+                var res23 = accFacade.RegisterAccount(acccrdto3).Result;
+                Console.WriteLine("Reg : " + res23);
+                
+
+                //var res4 = accFacade.RegisterAccount(acccrdto).Result;
+                //Console.WriteLine("Succ: ");
+                //var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
+                //Console.WriteLine("====>>>>" + res3.Username);
                 var creationId = characterFacade.CreateCharacter(dtoChar);
-                Console.WriteLine("CreationId====>>>>" + creationId);
+                //Console.WriteLine("CreationId====>>>>" + creationId);
 
-                PrintDbContent().Wait();
 
-                var res5 = accFacade.RemoveAccountAsync(
-                    1).Result;
-                Console.WriteLine("Remove : " + res5);
+                //var res5 = accFacade.RemoveAccountAsync(1).Result;
+                //Console.WriteLine("Remove : " + res5);
 
                 var res6 = grFacade.CreateGroup(3, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
+
+                var res7 = characterFacade.Attack(3, 2).Result;
+                Console.WriteLine("Attack: " + res7);
+
+                var b = characterFacade.GetCharacterById(3).Result;
+                Console.WriteLine("Money:" + b.Money);
+                var res8 = characterFacade.BuyItemAsync(3).Result;
+                b = characterFacade.GetCharacterById(3).Result;
+                Console.WriteLine("Money:" + b.Money);
+
+
+
+                var ch = characterFacade.GetCharacterById(2).Result;
+                Console.WriteLine("Money:" + ch.Money);
+                characterFacade.AddMoneyToCharacter(2, 200).Wait();
+                ch = characterFacade.GetCharacterById(2).Result;
+                Console.WriteLine("Money:" + ch.Money);
+                using(var uow = uowp.Create())
+                {
+                    var i = itemService.GetEquippedWeapon(2).Result;
+                    Console.WriteLine("Equipped Weapon: " + i.Name);
+
+                }
+                var res9 = characterFacade.EquipItem(3, 3).Result;
+                characterFacade.EquipItem(3, 4).Wait();
 
             }
             Console.ReadKey();
@@ -178,7 +228,7 @@ namespace PV179Console
                     var queryObjAccount = new AccountQueryObject(container.Resolve<IMapper>(), container.Resolve<IQuery<Account>>());
                     var res = queryObjAccount.ExecuteQuery(new AccountFilterDto { Email = "navi@ivan.com" }).Result;
 
-                    Console.WriteLine("#####" + res.Items.First().Username);
+                    Console.WriteLine("#####" + res.Items.FirstOrDefault()?.Username);
                     var accountRepo = container.Resolve<IRepository<Account>>(provider);
                     var fightRepo = container.Resolve<IRepository<Fight>>(provider);
                     var groupRepo = container.Resolve<IRepository<Group>>(provider);
@@ -219,14 +269,14 @@ namespace PV179Console
                     Console.WriteLine("\nMessages");
                     foreach (var m in messages)
                     {
-                        Console.WriteLine($"{m.Chat.Subject} \t Author: {m.Author.Name} \t Text: {m.Text}");
+                        Console.WriteLine($"{m.Chat.Subject} \t Author: {m.Author?.Name} \t Text: {m.Text}");
                     }
 
                     Console.WriteLine("\nItems: ");
                     foreach (var i in items)
                     {
                         //Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
-                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name);
+                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}{4,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name, "E: " + i.Equipped);
                     }
 
                     /*Console.WriteLine("\nMessages: ");
@@ -244,13 +294,13 @@ namespace PV179Console
                     Console.WriteLine("\nGroupPosts: ");
                     foreach (var g in testgroup)
                     {
-                        Console.WriteLine($"{g.Id} \t {g.Group.Name} \t {g.Author.Name} : {g.Text} ");
+                        Console.WriteLine($"{g.Id} \t {g.Group.Name} \t {g.Author?.Name} : {g.Text} ");
                     }
 
                     Console.WriteLine("\nFights: ");
                     foreach (var f in fights)
                     {
-                        Console.WriteLine($"{f.Id} \t {f.Attacker.Name} \t {f.Defender.Name} \t Ai: {f.AttackerWeapon.Name} \t Di: {f.DefenderWeapon.Name} \t Succ: {f.AttackSuccess}");
+                        Console.WriteLine($"{f.Id} \t {f.Attacker?.Name} \t {f.Defender?.Name} \t Ai: {f.AttackerWeapon?.Name} \t Di: {f.DefenderWeapon?.Name} \t Succ: {f.AttackSuccess}");
                     }
                 }
             }

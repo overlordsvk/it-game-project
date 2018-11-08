@@ -21,7 +21,7 @@ namespace Game.DAL.Entity
         /// <summary>
         /// Non-parametric ctor used by data access layer
         /// </summary>
-        public GameDbContext() : base(EntityInstaller.AzureDbConnection)
+        public GameDbContext() : base(EntityInstaller.LocalDbConnection)
         {
             // force load of EntityFramework.SqlServer.dll into build
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
@@ -61,6 +61,18 @@ namespace Game.DAL.Entity
                .HasRequired<Chat>(m => m.Chat)
                .WithMany(ch => ch.Messages)
                .HasForeignKey<int?>(m => m.ChatId)
+               .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Fight>()
+                .HasOptional<Character>(ch => ch.Attacker)
+                .WithMany(ch => ch.AttackerFights)
+                .HasForeignKey(ch => ch.AttackerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Fight>()
+               .HasOptional<Character>(ch => ch.Defender)
+               .WithMany(ch => ch.DefenderFights)
+               .HasForeignKey(ch => ch.DefenderId)
                .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

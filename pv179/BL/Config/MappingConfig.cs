@@ -17,15 +17,48 @@ namespace BL.Config
     {
         public static void ConfigureMapping(IMapperConfigurationExpression config)
         {
-            config.CreateMap<Account, AccountDto>().ReverseMap();
+            config.CreateMap<Account, AccountDto>();
+            config.CreateMap<AccountDto, Account>().ForMember(dest => dest.Character, opt => opt.Ignore());
+
             config.CreateMap<Account, AccountCreateDto>().ReverseMap();
-            config.CreateMap<Fight, FightDto>().ReverseMap();
-            config.CreateMap<Group, GroupDto>().ReverseMap();
-            config.CreateMap<GroupPost, GroupPostDto>().ReverseMap();
-            config.CreateMap<Character, CharacterDto>().ReverseMap();
-            config.CreateMap<Chat, ChatDto>().ReverseMap();
-            config.CreateMap<Item, ItemDto>().ReverseMap();
-            config.CreateMap<Message, MessageDto>().ReverseMap();
+
+            config.CreateMap<Fight, FightDto>();
+            config.CreateMap<FightDto, Fight>().ForMember(dest => dest.Attacker, opt => opt.Ignore())
+                                                .ForMember(dest => dest.Defender, opt => opt.Ignore())
+                                                .ForMember(dest => dest.DefenderArmor, opt => opt.Ignore())
+                                                .ForMember(dest => dest.DefenderWeapon, opt => opt.Ignore())
+                                                .ForMember(dest => dest.AttackerWeapon, opt => opt.Ignore())
+                                                .ForMember(dest => dest.AttackerArmor, opt => opt.Ignore());
+
+            config.CreateMap<Group, GroupDto>();
+            config.CreateMap<GroupDto, Group>().ForMember(dest => dest.Members, opt => opt.Ignore())
+                                                .ForMember(dest => dest.Wall, opt => opt.Ignore());
+
+            config.CreateMap<GroupPost, GroupPostDto>();
+            config.CreateMap<GroupPostDto, GroupPost>().ForMember(dest => dest.Author, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.Group, opt => opt.Ignore());
+
+            config.CreateMap<Character, CharacterDto>();
+            config.CreateMap<CharacterDto, Character>().ForMember(dest => dest.Account, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.AttackerFights, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.DefenderFights, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.Items, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.Group, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.ReceiverChats, opt => opt.Ignore())
+                                                        .ForMember(dest => dest.SenderChats, opt => opt.Ignore());
+
+            config.CreateMap<Chat, ChatDto>();
+            config.CreateMap<ChatDto, Chat>().ForMember(dest => dest.Messages, opt => opt.Ignore())
+                                            .ForMember(dest => dest.Receiver, opt => opt.Ignore())
+                                            .ForMember(dest => dest.Sender, opt => opt.Ignore());
+
+            config.CreateMap<Item, ItemDto>();
+            config.CreateMap<ItemDto, Item>().ForMember(dest => dest.Owner, opt => opt.Ignore());
+
+            config.CreateMap<Message, MessageDto>();
+            config.CreateMap<MessageDto, Message>().ForMember(dest => dest.Author, opt => opt.Ignore())
+                                                    .ForMember(dest => dest.Chat, opt => opt.Ignore());
+
             config.CreateMap<QueryResult<Account>, QueryResultDto<AccountDto, AccountFilterDto>>();
             config.CreateMap<QueryResult<Fight>, QueryResultDto<FightDto, FightFilterDto>>();
             config.CreateMap<QueryResult<Group>, QueryResultDto<GroupDto, GroupFilterDto>>();

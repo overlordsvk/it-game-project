@@ -49,5 +49,8 @@ namespace BL.Services.Characters
         /// <param name="filter">The character filter</param>
         /// <returns>Filtered results</returns>
         Task<QueryResultDto<CharacterDto, CharacterFilterDto>> ListCharactersAsync(CharacterFilterDto filter);
+
+        Task<bool> AddMoney(int characterId, int value);
+
     }
 }
