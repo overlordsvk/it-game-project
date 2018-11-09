@@ -8,6 +8,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Item : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [MaxLength(256)]

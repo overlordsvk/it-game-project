@@ -73,13 +73,13 @@ namespace BL.Facades
         /// </summary>
         /// <param name="accountId"></param>
         /// <returns>0 if account was removed</returns>
-        public async Task<int> RemoveAccountAsync(int accountId)
+        public async Task<bool> RemoveAccountAsync(Guid accountId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 if (_accountService.GetAsync(accountId).Result == null)
                 {
-                    return -1;
+                    return false;
                 }
                 //var character = _characterService.GetAsync(accountId).Result;
                 //checkNULL character
@@ -92,11 +92,11 @@ namespace BL.Facades
                 //_accountService
                 _accountService.Delete(accountId);
                 await uow.Commit();
-                if (_accountService.GetAsync(accountId).Result == null)
+                if (_accountService.GetAsync(accountId).Result != null)
                 {
-                    return -2;
+                    return false;
                 }
-                return 0;
+                return true;
             }
         }
 
@@ -106,19 +106,19 @@ namespace BL.Facades
         /// </summary>
         /// <param name="registrationDto">Account registration details</param>
         /// <returns>Registered account ID</returns>
-        public async Task<int> RegisterAccount(AccountCreateDto registrationDto)
+        public async Task<Guid> RegisterAccount(AccountCreateDto registrationDto)
         {
-            int accountId;
+            Guid accountId;
             using (var uow = UnitOfWorkProvider.Create())
             {
                 if (GetAccountAccordingToEmailAsync(registrationDto.Email).Result != null)
                 {
-                    return -1;
+                    return Guid.Empty;
                 }
 
                 if (GetAccountAccordingToUsernameAsync(registrationDto.Username).Result != null)
                 {
-                    return -2;
+                    return Guid.Empty;
                 }
                 var newAccount = new AccountDto()
                 {

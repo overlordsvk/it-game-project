@@ -7,7 +7,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Account : IEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Required, MinLength(4), MaxLength(32)]

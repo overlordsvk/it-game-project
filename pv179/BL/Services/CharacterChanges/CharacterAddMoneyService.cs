@@ -19,7 +19,7 @@ namespace BL.Services.CharacterChanges
             this._characterRepository = characterRepository;
         }
 
-        public async Task<bool> AddMoney(int characterId, int value)
+        public async Task<bool> AddMoney(Guid characterId, int value)
         {
             var character = await _characterRepository.GetAsync(characterId);
 

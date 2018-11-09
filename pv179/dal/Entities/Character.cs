@@ -8,7 +8,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Character : IEntity
     {
-        [Key, ForeignKey("Account")]
+        [Key, ForeignKey("Account"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         [Required, MaxLength(64)]

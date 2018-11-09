@@ -63,7 +63,7 @@ namespace BL.Facades
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Character by id</returns>
-        public async Task<CharacterDto> GetCharacterById(int id)
+        public async Task<CharacterDto> GetCharacterById(Guid id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -76,7 +76,7 @@ namespace BL.Facades
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Character by id</returns>
-        public int CreateCharacter(CharacterDto character)
+        public Guid CreateCharacter(CharacterDto character)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -91,7 +91,7 @@ namespace BL.Facades
         /// Gets inventory of character
         /// </summary>
         /// <returns>all customers</returns>
-        public async Task<QueryResultDto<ItemDto, ItemFilterDto>> GetCharacterItems(int id)
+        public async Task<QueryResultDto<ItemDto, ItemFilterDto>> GetCharacterItems(Guid id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -99,7 +99,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<ItemDto> GetEquippedWeapon(int id)
+        public async Task<ItemDto> GetEquippedWeapon(Guid id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -107,7 +107,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<ItemDto> GetEquippedArmor(int id)
+        public async Task<ItemDto> GetEquippedArmor(Guid id)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -115,7 +115,7 @@ namespace BL.Facades
             }
         }
 
-        public async void SellItem(int itemId)
+        public async void SellItem(Guid itemId)
         {
             using (UnitOfWorkProvider.Create())
             {
@@ -130,7 +130,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> EquipItem(int characterId, int itemId)
+        public async Task<bool> EquipItem(Guid characterId, Guid itemId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -158,7 +158,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> BuyItemAsync(int characterId)
+        public async Task<bool> BuyItemAsync(Guid characterId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -183,9 +183,9 @@ namespace BL.Facades
             }
         }
 
-        public async Task<int> Attack(int attackerId, int defenderId)
+        public async Task<Guid> Attack(Guid attackerId, Guid defenderId)
         {
-            int fightId;
+            Guid fightId;
 
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -194,11 +194,11 @@ namespace BL.Facades
 
             if (attacker == null)
             {
-                return -1;
+                return Guid.Empty;
             }
             if (defender == null)
             {
-                return -2;
+                return Guid.Empty;
             }
             var attackerItem = await GetEquippedWeapon(attackerId);
             var defenderItem = await GetEquippedArmor(defenderId);
@@ -213,18 +213,17 @@ namespace BL.Facades
                     Timestamp = DateTime.Now,
                     AttackSuccess = attackSuccess
                 });
-                //attacker = _characterService.GetAsync(attackerId, withIncludes: false).Result;
-                //attacker.Money += 30;
-                //_characterService.Update(attacker).Wait();
+                attacker = _characterService.GetAsync(attackerId, withIncludes: false).Result;
+                attacker.Money += 30;
+                _characterService.Update(attacker).Wait();
                 await uow.Commit();
             }
             return fightId;
 
         }
 
-        public async Task<bool> AddMoneyToCharacter(int characterId, int value)
+        public async Task<bool> AddMoneyToCharacter(Guid characterId, int value)
         {
-            bool result;
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var character = await _characterService.GetAsync(characterId);

@@ -8,6 +8,6 @@ namespace BL.Services.CharacterChanges
 {
     public interface ICharacterAddMoneyService
     {
-        Task<bool> AddMoney(int characterId, int value);
+        Task<bool> AddMoney(Guid characterId, int value);
     }
 }

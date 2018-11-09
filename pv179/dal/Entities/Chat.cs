@@ -9,6 +9,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Chat : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         public Guid? SenderId { get; set; }

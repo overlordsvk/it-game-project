@@ -19,6 +19,7 @@ using Game.Infrastructure;
 using Game.DAL.Entities;
 using BL.Services.Items;
 using Game.Infrastructure.Entity.UnitOfWork;
+using Game.DAL.Entity.Initializers;
 
 namespace PV179Console
 {
@@ -178,44 +179,44 @@ namespace PV179Console
                 Console.WriteLine("Reg : " + res23);
                 
 
-                //var res4 = accFacade.RegisterAccount(acccrdto).Result;
+                var res4 = accFacade.RegisterAccount(acccrdto).Result;
                 //Console.WriteLine("Succ: ");
-                //var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
+                var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
                 //Console.WriteLine("====>>>>" + res3.Username);
                 var creationId = characterFacade.CreateCharacter(dtoChar);
                 //Console.WriteLine("CreationId====>>>>" + creationId);
 
 
-                //var res5 = accFacade.RemoveAccountAsync(1).Result;
-                //Console.WriteLine("Remove : " + res5);
+                var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
+                Console.WriteLine("Remove : " + res5);
 
-                var res6 = grFacade.CreateGroup(3, "Most", "Hid", string.Empty).Result;
+                var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
-                var res7 = characterFacade.Attack(3, 2).Result;
+                var res7 = characterFacade.Attack(Initializer._guid5, Initializer._guid6).Result;
                 Console.WriteLine("Attack: " + res7);
 
-                var b = characterFacade.GetCharacterById(3).Result;
-                Console.WriteLine("Money:" + b.Money);
-                var res8 = characterFacade.BuyItemAsync(3).Result;
-                b = characterFacade.GetCharacterById(3).Result;
-                Console.WriteLine("Money:" + b.Money);
+                //var b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
+                //var res8 = characterFacade.BuyItemAsync(3).Result;
+                //b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
 
 
 
-                var ch = characterFacade.GetCharacterById(2).Result;
-                Console.WriteLine("Money:" + ch.Money);
-                characterFacade.AddMoneyToCharacter(2, 200).Wait();
-                ch = characterFacade.GetCharacterById(2).Result;
-                Console.WriteLine("Money:" + ch.Money);
-                using(var uow = uowp.Create())
-                {
-                    var i = itemService.GetEquippedWeapon(2).Result;
-                    Console.WriteLine("Equipped Weapon: " + i.Name);
+                //var ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //characterFacade.AddMoneyToCharacter(2, 200).Wait();
+                //ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //using(var uow = uowp.Create())
+                //{
+                //    var i = itemService.GetEquippedWeapon(2).Result;
+                //    Console.WriteLine("Equipped Weapon: " + i.Name);
 
-                }
-                var res9 = characterFacade.EquipItem(3, 3).Result;
-                characterFacade.EquipItem(3, 4).Wait();
+                //}
+                //var res9 = characterFacade.EquipItem(3, 3).Result;
+                //characterFacade.EquipItem(3, 4).Wait();
 
             }
             Console.ReadKey();
@@ -285,7 +286,7 @@ namespace PV179Console
                     foreach (var i in items)
                     {
                         //Console.WriteLine($"{i.Id} \t {i.Name}  \t  {i.WeaponType.ItemName}   \t  \t   Owner: {i.Owner?.Name}");
-                        Console.WriteLine("{0,-5}{1,-20}{2,-20}{3,-20}{4,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name, "E: " + i.Equipped);
+                        Console.WriteLine("{0,-5}  {1,-20}{2,-20}{3,-20}{4,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name, "E: " + i.Equipped);
                     }
 
                     /*Console.WriteLine("\nMessages: ");
