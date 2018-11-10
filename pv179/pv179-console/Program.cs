@@ -187,12 +187,12 @@ namespace PV179Console
                 //Console.WriteLine("====>>>>" + res3.Username);
                 var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
                 Console.WriteLine("CreationId====>>>>" + creationId);
-                characterFacade.RemoveCharacter(creationId).Wait();
+                //characterFacade.RemoveCharacter(creationId).Wait();
 
                 var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
                 Console.WriteLine("Remove : " + res5);
 
-                var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", string.Empty).Result;
+                var res6 = grFacade.CreateGroup(creationId, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
                 var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;

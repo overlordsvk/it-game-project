@@ -31,7 +31,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var founder = _characterService.GetAsync(groupFounder).Result;
+                var founder = await _characterService.GetAsync(groupFounder);
                 if (founder == null)
                 {
                     return Guid.Empty;
@@ -43,16 +43,16 @@ namespace BL.Facades
                 founder.IsGroupAdmin = true;
                 var group = new GroupDto
                 {
+                    Id = Guid.NewGuid(),
                     Name = name,
                     Description = description,
                     Picture = imagePath,
                 };
                 _groupService.Create(group);
                 await _characterService.Update(founder);
-
                 await uow.Commit();
                 founder = _characterService.GetAsync(groupFounder).Result;
-                return group.Id; // founder.Group.Id;
+                return group.Id; 
             }
         }
 
@@ -143,6 +143,16 @@ namespace BL.Facades
                 return new Guid();
                 //todo use guid in creation
             }
+        }
+
+        public async Task<bool> CreatePost(GroupPostDto groupPost)
+        {
+            var post = _groupPostService.Create(groupPost);
+            if (post.Equals(Guid.Empty))
+            {
+                return false;
+            }
+            return true;
         }
 
 
