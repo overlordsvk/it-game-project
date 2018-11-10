@@ -13,7 +13,7 @@ namespace Game.DAL.Entities
 {
     public class Message : IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         public Guid ChatId { get; set; }
