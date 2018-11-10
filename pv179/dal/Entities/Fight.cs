@@ -7,7 +7,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class Fight : IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         public Guid? AttackerId { get; set; }

@@ -56,6 +56,12 @@
     <Compile Include="Config\PetaPocoInstaller.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Character.cs" />
+    <Compile Include="Entities\Chat.cs" />
+    <Compile Include="Entities\Fight.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\GroupPost.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Message.cs" />
     <Compile Include="Enums\ItemType.cs" />
     <Compile Include="TableNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ namespace Game.DAL.Entity.Entities
 {
     public class GroupPost : IEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         public Guid? CharacterId { get; set; }
