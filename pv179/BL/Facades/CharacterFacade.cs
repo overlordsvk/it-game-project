@@ -15,6 +15,8 @@ using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
 using BL.Services.CharacterChanges;
 using System.Runtime.InteropServices;
+using BL.Services.Groups;
+using System.Security.Cryptography;
 
 namespace BL.Facades
 {
@@ -22,14 +24,16 @@ namespace BL.Facades
     {
         private readonly IAccountService _accountService;
         private readonly ICharacterService _characterService;
+        private readonly IGroupService _groupService;
         private readonly IItemService _itemService;
         private readonly IFightService _fightService;
         private readonly ICharacterAddMoneyService _characterChangesService;
 
-        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IItemService itemService, IFightService fightService, ICharacterAddMoneyService characterChangesService) : base(unitOfWorkProvider)
+        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IItemService itemService, IFightService fightService, ICharacterAddMoneyService characterChangesService) : base(unitOfWorkProvider)
         {
             _accountService = accountService;
             _characterService = characterService;
+            _groupService = groupService;
             _itemService = itemService;
             _fightService = fightService;
             _characterChangesService = characterChangesService;
@@ -202,16 +206,20 @@ namespace BL.Facades
                 {
                     return Guid.Empty;
                 }
-                var attackerItem = await GetEquippedWeapon(attackerId);
-                var defenderItem = await GetEquippedArmor(defenderId);
+                var attackerArmor = await GetEquippedArmor(attackerId);
+                var attackerWeapon = await GetEquippedWeapon(attackerId);
+                var defenderArmor = await GetEquippedArmor(defenderId);
+                var defenderWeapon = await GetEquippedWeapon(defenderId);
                 var attackSuccess = ResolveAttack(attacker, defender);
                 fightId = _fightService.Create(new FightDto
                     {
                         Id = Guid.NewGuid(),
                         AttackerId = attacker.Id,
                         DefenderId = defender.Id,
-                        AttackerItemId = attackerItem?.Id,
-                        DefenderItemId = defenderItem?.Id,
+                        AttackerArmorId = attackerArmor?.Id,
+                        AttackerWeaponId = attackerWeapon?.Id,
+                        DefenderArmorId = defenderArmor?.Id,
+                        DefenderWeaponId = defenderWeapon?.Id,
                         Timestamp = DateTime.Now,
                         AttackSuccess = attackSuccess
                     });
@@ -233,6 +241,44 @@ namespace BL.Facades
                 await uow.Commit();
             }
             return true;
+        }
+
+        public async Task<bool> JoinGroup(Guid characterId, Guid groupId)
+        {
+            using(var uow = UnitOfWorkProvider.Create())
+            {
+                var character = await _characterService.GetAsync(characterId, withIncludes: false);
+                var group = await _groupService.GetAsync(groupId);
+                if (character == null || group == null)
+                {
+                    return false;
+                }
+                character.GroupId = groupId;
+                await _characterService.Update(character);
+                await uow.Commit();
+
+                return true;
+            }
+        }
+
+        public async Task<bool> LeaveGroup(Guid characterId)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var character = await _characterService.GetAsync(characterId, withIncludes: false);
+                if (!character.GroupId.HasValue)
+                {
+                    return false;
+                }
+                if (character.IsGroupAdmin)
+                {
+                    character.IsGroupAdmin = false;
+                }
+                character.GroupId = null;
+                await _characterService.Update(character);
+                await uow.Commit();
+                return true;
+            }
         }
 
 

@@ -13,9 +13,17 @@ namespace BL.DTO
 
         public Guid? DefenderId { get; set; }
 
-        public Guid? AttackerItemId { get; set; }
+        public Guid? AttackerWeaponId { get; set; }
+        public ItemDto AttackerWeapon { get; set; }
 
-        public Guid? DefenderItemId { get; set; }
+        public Guid? AttackerArmorId { get; set; }
+        public ItemDto AttackerArmor { get; set; }
+
+        public Guid? DefenderWeaponId { get; set; }
+        public ItemDto DefenderWeapon { get; set; }
+
+        public Guid? DefenderArmorId { get; set; }
+        public ItemDto DefenderArmor { get; set; }
 
         public bool AttackSuccess { get; set; }
 
