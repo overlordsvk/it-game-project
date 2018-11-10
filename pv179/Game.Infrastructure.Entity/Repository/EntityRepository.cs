@@ -21,6 +21,7 @@ namespace Game.Infrastructure.Entity.Repository
 
         public Guid Create(TEntity entity)
         {
+            entity.Id = Guid.NewGuid();
             Context.Set<TEntity>().Add(entity);
             return entity.Id;
         }

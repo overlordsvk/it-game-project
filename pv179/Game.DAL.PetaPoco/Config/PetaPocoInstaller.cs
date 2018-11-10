@@ -21,7 +21,7 @@ namespace Game.DAL.PetaPoco.Config
         {
             container.Register(
                 Component.For<Func<IDatabase>>()
-                    .Instance(() => new Database("Data source=(localdb)\\mssqllocaldb;Database=DemoEshopDatabaseSample;Trusted_Connection=True;MultipleActiveResultSets=true", "System.Data.SqlClient"))
+                    .Instance(() => new Database("Data source=(localdb)\\mssqllocaldb;Database=GameDb;Trusted_Connection=True;MultipleActiveResultSets=true", "System.Data.SqlClient"))
                     .LifestyleTransient(),
                 Component.For<IUnitOfWorkProvider>()
                     .ImplementedBy<PetaPocoUnitOfWorkProvider>()

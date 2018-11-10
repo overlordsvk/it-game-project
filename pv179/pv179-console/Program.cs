@@ -272,18 +272,18 @@ namespace PV179Console
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
-                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items.Count}  \t {ch.Group?.Name} \t RC: {ch.ReceiverChats.Count} \t SC: {ch.SenderChats.Count} \t Owner:  {ch.Account.Username}");
+                        Console.WriteLine($"{ch.Id}  \t  {ch.Name} \t Items: {ch.Items?.Count}  \t {ch.Group?.Name} \t RC: {ch.ReceiverChats?.Count} \t SC: {ch.SenderChats?.Count} \t Owner:  {ch.Account?.Username}");
                     }
                     Console.WriteLine(("\nChats"));
                     foreach (var c in chats)
                     {
-                        Console.WriteLine($"{c.Subject} \t Count: {c.Messages.Count}");
+                        Console.WriteLine($"{c.Subject} \t Count: {c.Messages?.Count}");
                     }
 
                     Console.WriteLine("\nMessages");
                     foreach (var m in messages)
                     {
-                        Console.WriteLine($"{m.Chat.Subject} \t Author: {m.Author?.Name} \t Text: {m.Text}");
+                        Console.WriteLine($"{m.Chat?.Subject} \t Author: {m.Author?.Name} \t Text: {m.Text}");
                     }
 
                     Console.WriteLine("\nItems: ");
@@ -302,13 +302,13 @@ namespace PV179Console
                     Console.WriteLine("\nGroups: ");
                     foreach (var g in groups)
                     {
-                        Console.WriteLine($"{g.Id} \t {g.Name}  Members: {g.Members.Count}  Wall: {g.Wall.Count} ");
+                        Console.WriteLine($"{g.Id} \t {g.Name}  Members: {g.Members?.Count}  Wall: {g.Wall?.Count} ");
                     }
 
                     Console.WriteLine("\nGroupPosts: ");
                     foreach (var g in testgroup)
                     {
-                        Console.WriteLine($"{g.Id} \t {g.Group.Name} \t {g.Author?.Name} : {g.Text} ");
+                        Console.WriteLine($"{g.Id} \t {g.Group?.Name} \t {g.Author?.Name} : {g.Text} ");
                     }
 
                     Console.WriteLine("\nFights: ");

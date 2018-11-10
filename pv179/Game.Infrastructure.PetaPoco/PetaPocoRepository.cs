@@ -41,9 +41,11 @@ namespace Game.Infrastructure.PetaPoco
             return entity;
         }
 
-        public Task<ICollection<TEntity>> GetAllAsync()
+        public async Task<ICollection<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            Console.WriteLine(typeof(TEntity).Name);
+            var res = await Database.FetchAsync<TEntity>($"SELECT * FROM {typeof(TEntity).Name}s");
+            return res;
         }
 
 
@@ -66,6 +68,8 @@ namespace Game.Infrastructure.PetaPoco
             var uow = provider.GetUnitOfWorkInstance() as PetaPocoUnitOfWork;
             uow.RegisterEntityToRemove<TEntity>(id);
         }
+
+
 
         private async Task SideLoadEntityAsync(TEntity entity, PropertyInfo propertyToLoad)
         {

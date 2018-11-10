@@ -98,6 +98,10 @@
       <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
       <Name>Game.DAL.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Game.DAL.PetaPoco\Game.DAL.PetaPoco.csproj">
+      <Project>{F80C1CA5-A34A-4B0A-94F6-420112DD335A}</Project>
+      <Name>Game.DAL.PetaPoco</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Game.Infrastructure.Entity\Game.Infrastructure.Entity.csproj">
       <Project>{3e82adad-a5a6-4225-aa60-4c56aa4df207}</Project>
       <Name>Game.Infrastructure.Entity</Name>
