@@ -23,7 +23,7 @@ using Game.DAL.Entity.Initializers;
 
 namespace PV179Console
 {
-    public class Program
+    public static class Program
     {
         private static readonly Guid guid4 = Guid.Parse("2d5c776f-57bf-4467-b354-43b6b096d3fa");
         private static readonly Guid guid5 = Guid.Parse("0aaa0448-3f09-4de7-aa15-257e9c77f451");
@@ -106,7 +106,7 @@ namespace PV179Console
                 Luck = 9
             };
 
-            Character characterBela = new Character
+            CharacterDto characterBela = new CharacterDto
             {
                 Name = "BelaChar",
                 Money = 666,
@@ -120,12 +120,12 @@ namespace PV179Console
                 Agility = 5,
                 Luck = 9
             };
-            characterBela.Items = new List<Item>
-            {
-                itemAxe,
-                itemAxe2,
-                itemBow
-            };
+            //characterBela.Items = new List<Item>
+            //{
+            //    itemAxe,
+            //    itemAxe2,
+            //    itemBow
+            //};
 
             var chardto = new CharacterDto();
             mapper.Map(dto, entity);
@@ -172,20 +172,22 @@ namespace PV179Console
                 //Console.WriteLine(resew);
                 //Console.WriteLine("AccFacUser: " + res.Result.Username);
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
-                Console.WriteLine("Reg : " + res2);
+                Console.WriteLine("Reggg : " + res2);
                 var res22 = accFacade.RegisterAccount(acccrdto2).Result;
                 Console.WriteLine("Reg : " + res22);
                 var res23 = accFacade.RegisterAccount(acccrdto3).Result;
                 Console.WriteLine("Reg : " + res23);
                 
 
+                var res44 = accFacade.Login("Bela", "147852369").Result;
+                Console.WriteLine("Login: " + res44?.Username);
                 var res4 = accFacade.RegisterAccount(acccrdto).Result;
                 //Console.WriteLine("Succ: ");
                 var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
                 //Console.WriteLine("====>>>>" + res3.Username);
-                var creationId = characterFacade.CreateCharacter(dtoChar);
-                //Console.WriteLine("CreationId====>>>>" + creationId);
-
+                var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
+                Console.WriteLine("CreationId====>>>>" + creationId);
+                characterFacade.RemoveCharacter(creationId).Wait();
 
                 var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
                 Console.WriteLine("Remove : " + res5);
@@ -193,7 +195,7 @@ namespace PV179Console
                 var res6 = grFacade.CreateGroup(res3.Id, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
-                var res7 = characterFacade.Attack(Initializer._guid5, Initializer._guid6).Result;
+                var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
                 Console.WriteLine("Attack: " + res7);
 
                 //var b = characterFacade.GetCharacterById(3).Result;
@@ -310,7 +312,7 @@ namespace PV179Console
                     Console.WriteLine("\nFights: ");
                     foreach (var f in fights)
                     {
-                        Console.WriteLine($"{f.Id} \t {f.Attacker?.Name} \t {f.Defender?.Name} \t Ai: {f.AttackerWeapon?.Name} \t Di: {f.DefenderWeapon?.Name} \t Succ: {f.AttackSuccess}");
+                        Console.WriteLine($"{f.Id} \t {f.Attacker?.Name} \t {f.Defender?.Name} \t Ai: {f.AttackerWeapon?.Name} \t Di: {f.DefenderArmor?.Name} \t Succ: {f.AttackSuccess}");
                     }
                 }
             }

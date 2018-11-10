@@ -37,5 +37,32 @@ namespace BL.Services.Accounts
             var queryResult = await Query.ExecuteQuery(new AccountFilterDto{Username = username});
             return queryResult.Items.SingleOrDefault();
         }
+
+        public async Task<AccountDto> Login(string usernameOrEmail, string password)
+        {
+            var emailAccount = await GetAccountAccordingToEmailAsync(usernameOrEmail);
+            var usernameAccount = await GetAccountAccordingToUsernameAsync(usernameOrEmail);
+
+            if (emailAccount != null)
+            {
+                if (ComparePassword(emailAccount, password))
+                {
+                    return emailAccount;
+                }
+            }
+            else if (usernameAccount != null)
+            {
+                if (ComparePassword(usernameAccount, password))
+                {
+                    return usernameAccount;
+                }
+            }
+            return null;
+        }
+
+        private bool ComparePassword(AccountDto account, string password)
+        {
+            return account.Password == password;
+        }
     }
 }

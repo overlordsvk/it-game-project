@@ -66,7 +66,6 @@ namespace Game.DAL.Entity.Initializers
 
             Character characterSlayer = new Character
             {
-                Id = _guid4,
                 Name = "KingSlayer",
                 Money = 666,
                 Health = 98,
@@ -86,7 +85,6 @@ namespace Game.DAL.Entity.Initializers
 
             Character Ch = new Character
             {
-                Id = _guid5,
                 Name = "BelaKing",
                 Money = 666,
                 Health = 98,
@@ -106,7 +104,6 @@ namespace Game.DAL.Entity.Initializers
 
             var characterWalker = new Character
             {
-                Id = _guid6,
                 Name = "White Walker",
                 Money = 1200,
                 Health = 50,

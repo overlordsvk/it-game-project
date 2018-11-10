@@ -55,5 +55,8 @@ namespace BL.Services.Accounts
         /// </summary>
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAllAsync();
+
+        Task<AccountDto> Login(string usernameOrEmail, string password);
+
     }
 }

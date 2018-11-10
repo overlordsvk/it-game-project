@@ -35,7 +35,9 @@ namespace BL.Services.Items
         public async Task<ItemDto> GetEquippedWeapon(Guid id)
         {
             var res = await ListItemsAsync(new ItemFilterDto(){OwnerId = id, IsEquipped = true, ItemType = ItemType.Weapon});
-            return res.Items.SingleOrDefault();
+            var r = res.Items.SingleOrDefault();
+            Console.WriteLine(r?.Name);
+            return r;
         }
 
         public async Task<ItemDto> GetEquippedArmor(Guid id)

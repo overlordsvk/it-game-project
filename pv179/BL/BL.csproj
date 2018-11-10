@@ -115,6 +115,7 @@
     <Compile Include="Services\Items\ItemService.cs" />
     <Compile Include="Services\Messsages\IMessageService.cs" />
     <Compile Include="Services\Messsages\MessageService.cs" />
+    <Compile Include="Services\Shop\IShop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

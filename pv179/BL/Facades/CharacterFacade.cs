@@ -14,6 +14,7 @@ using BL.Services.Items;
 using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
 using BL.Services.CharacterChanges;
+using System.Runtime.InteropServices;
 
 namespace BL.Facades
 {
@@ -76,14 +77,33 @@ namespace BL.Facades
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Character by id</returns>
-        public Guid CreateCharacter(CharacterDto character)
+        public async Task<Guid> CreateCharacter(Guid AccountId, CharacterDto character)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var characterId = _characterService.Create(character);
-                uow.Commit();
-                return characterId;
+                character.Id = AccountId;
+                var acc = _accountService.GetAsync(AccountId).Result;
+                acc.Character = character;
+                //var characterId = _characterService.Create(character);
+                await _accountService.Update(acc);
+                await uow.Commit();
+                return AccountId;
                 //TODO
+            }
+        }
+
+        public async Task<bool> RemoveCharacter(Guid CharacterId)
+        {
+            using(var uow = UnitOfWorkProvider.Create())
+            {
+                var character = await _characterService.GetAsync(CharacterId, withIncludes: false);
+                if (character == null)
+                {
+                    return false;
+                }
+                _characterService.Delete(CharacterId);
+                await uow.Commit();
+                return true;
             }
         }
 
@@ -134,27 +154,9 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var succ = await _itemService.EquipItem(characterId, itemId);
+                var res = await _itemService.EquipItem(characterId, itemId);
                 await uow.Commit();
-                return succ;
-                //var item = _itemService.GetAsync(itemId).Result;
-                //var ownerId = item.OwnerId;
-                //if (!ownerId.HasValue)
-                //    return;
-                //ItemDto equippedItem;
-                //if (item.ItemType == ItemType.Weapon)
-                //{
-                //    equippedItem = await GetEquipedWeapon(ownerId.Value);
-                //}
-                //else
-                //{
-                //    equippedItem = await GetEquipedArmor(ownerId.Value);
-                //}
-
-                //equippedItem.Equipped = false;
-                //await _itemService.Update(equippedItem);
-                //item.Equipped = true;
-                //await _itemService.Update(item);
+                return res;
             }
         }
 
@@ -189,33 +191,32 @@ namespace BL.Facades
 
             using (var uow = UnitOfWorkProvider.Create())
             {
-            var attacker = await _characterService.GetAsync(attackerId);
-            var defender = await _characterService.GetAsync(defenderId);
+                var attacker = await _characterService.GetAsync(attackerId);
+                var defender = await _characterService.GetAsync(defenderId);
 
-            if (attacker == null)
-            {
-                return Guid.Empty;
-            }
-            if (defender == null)
-            {
-                return Guid.Empty;
-            }
-            var attackerItem = await GetEquippedWeapon(attackerId);
-            var defenderItem = await GetEquippedArmor(defenderId);
-            var attackSuccess = ResolveAttack(attacker, defender);
-            
-                fightId = _fightService.Create(new FightDto
+                if (attacker == null)
                 {
-                    AttackerId = attacker.Id,
-                    DefenderId = defender.Id,
-                    AttackerItemId = attackerItem?.Id,
-                    DefenderItemId = defenderItem?.Id,
-                    Timestamp = DateTime.Now,
-                    AttackSuccess = attackSuccess
-                });
-                attacker = _characterService.GetAsync(attackerId, withIncludes: false).Result;
+                    return Guid.Empty;
+                }
+                if (defender == null)
+                {
+                    return Guid.Empty;
+                }
+                var attackerItem = await GetEquippedWeapon(attackerId);
+                var defenderItem = await GetEquippedArmor(defenderId);
+                var attackSuccess = ResolveAttack(attacker, defender);
+                fightId = _fightService.Create(new FightDto
+                    {
+                        Id = Guid.NewGuid(),
+                        AttackerId = attacker.Id,
+                        DefenderId = defender.Id,
+                        AttackerItemId = attackerItem?.Id,
+                        DefenderItemId = defenderItem?.Id,
+                        Timestamp = DateTime.Now,
+                        AttackSuccess = attackSuccess
+                    });
                 attacker.Money += 30;
-                _characterService.Update(attacker).Wait();
+                await _characterService.Update(attacker);
                 await uow.Commit();
             }
             return fightId;

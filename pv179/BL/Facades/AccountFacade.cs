@@ -72,7 +72,7 @@ namespace BL.Facades
         /// Remove account according to accountId
         /// </summary>
         /// <param name="accountId"></param>
-        /// <returns>0 if account was removed</returns>
+        /// <returns>true if account was removed</returns>
         public async Task<bool> RemoveAccountAsync(Guid accountId)
         {
             using (var uow = UnitOfWorkProvider.Create())
@@ -81,15 +81,6 @@ namespace BL.Facades
                 {
                     return false;
                 }
-                //var character = _characterService.GetAsync(accountId).Result;
-                //checkNULL character
-                //character.ReceiverChats = null;
-                //character.SenderChats = null;
-                //**_fightService.RemoveFightCharacterConnections(accountId);
-                //_characterService.Delete(accountId);
-                //await uow.Commit();
-                //_chatService.RemoveReferencesToCharacterAsync(accountId);
-                //_accountService
                 _accountService.Delete(accountId);
                 await uow.Commit();
                 if (_accountService.GetAsync(accountId).Result != null)
@@ -134,6 +125,13 @@ namespace BL.Facades
              
         }
 
+        public async Task<AccountDto> Login(string usernameOrEmail, string password)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+            return await _accountService.Login(usernameOrEmail, password);
+            }
+        }
 
 
     }
