@@ -52,7 +52,7 @@ namespace Game.DAL.Entity.Entities
         public virtual ICollection<Fight> AttackerFights { get; set; }
         public virtual ICollection<Fight> DefenderFights { get; set; }
 
-        public int? GroupId { get; set; }
+        public Guid? GroupId { get; set; }
         public virtual Group Group { get; set; }
 
         public virtual Account Account { get; set; }

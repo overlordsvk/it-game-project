@@ -256,7 +256,7 @@ namespace BL.Facades
                 character.GroupId = groupId;
                 await _characterService.Update(character);
                 await uow.Commit();
-
+                Console.WriteLine("Joined");
                 return true;
             }
         }

@@ -16,7 +16,7 @@ namespace Game.DAL.Entity.Entities
         [MaxLength(1024)]
         public string Text { get; set; }
 
-        public Guid GroupId { get; set; }
+        public Guid? GroupId { get; set; }
         public virtual Group Group { get; set; }
 
         public DateTime Timestamp { get; set; }

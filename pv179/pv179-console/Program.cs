@@ -195,6 +195,8 @@ namespace PV179Console
                 var res6 = grFacade.CreateGroup(creationId, "Most", "Hid", string.Empty).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
+                characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
+
                 var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
                 Console.WriteLine("Attack: " + res7);
 

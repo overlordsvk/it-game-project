@@ -40,7 +40,6 @@ namespace BL.Facades
                 {
                     return Guid.Empty;
                 }
-                founder.IsGroupAdmin = true;
                 var group = new GroupDto
                 {
                     Id = Guid.NewGuid(),
@@ -48,11 +47,16 @@ namespace BL.Facades
                     Description = description,
                     Picture = imagePath,
                 };
-                _groupService.Create(group);
+                founder.IsGroupAdmin = true;
+                var groupId = _groupService.Create(group);
+                founder.GroupId = groupId;
                 await _characterService.Update(founder);
                 await uow.Commit();
+                Console.WriteLine("xxxxxxxxx " + founder.GroupId);
+
                 founder = _characterService.GetAsync(groupFounder).Result;
-                return group.Id; 
+                Console.WriteLine("xxxxxxxxx " + founder.GroupId);
+                return groupId; 
             }
         }
 
@@ -145,7 +149,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> CreatePost(GroupPostDto groupPost)
+        public bool CreatePost(GroupPostDto groupPost)
         {
             var post = _groupPostService.Create(groupPost);
             if (post.Equals(Guid.Empty))
