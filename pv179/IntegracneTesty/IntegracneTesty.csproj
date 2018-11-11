@@ -6,11 +6,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D1C1C5A-7296-48A9-A65B-6812B39D9C17}</ProjectGuid>
+    <ProjectGuid>{16962269-2362-4F70-9508-E406F8925F29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL.EntityFrameWork.Tests</RootNamespace>
-    <AssemblyName>DAL.EntityFrameWork.Tests</AssemblyName>
+    <RootNamespace>IntegracneTesty</RootNamespace>
+    <AssemblyName>IntegracneTesty</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -76,19 +76,23 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\EntityFramewokrInstaller.cs" />
+    <Compile Include="Config\IntegracneTestyInstaller.cs" />
+    <Compile Include="Config\Konstanty.cs" />
     <Compile Include="Initializer.cs" />
-    <Compile Include="EntityRepositoryTests.cs" />
+    <Compile Include="AccountFacadeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntityQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{5ce7b41e-a4c6-4954-a653-011c04141f1a}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
-      <Project>{30b51413-6302-4022-8fa0-074b2cc94c20}</Project>
+      <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
       <Name>Game.DAL.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Game.Infrastructure.Entity\Game.Infrastructure.Entity.csproj">

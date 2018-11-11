@@ -21,35 +21,20 @@ using Game.DAL.Entities;
 
 namespace DAL.EntityFrameWork.Tests.Config
 {
-    public class EntityFramewokrInstaller : IWindsorInstaller
+    public class EntityFrameworkInstaller : IWindsorInstaller
     {
         private const string TestDbConnectionString = "InMemoryEntityFrameworkTestDb";
 
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            new EntityInstaller().Install(container, store);
-            
-            //container.Register(
-            //    Component.For<Func<DbContext>>()
-            //        .Instance(InitializeDatabase)
-            //        .LifestyleTransient(),
-            //    Component.For<IUnitOfWorkProvider>()
-            //        .ImplementedBy<EntityUnitOfWorkProvider>()
-            //        .LifestyleSingleton(),
-            //    Component.For(typeof(IRepository<>))
-            //        .ImplementedBy(typeof(EntityRepository<>))
-            //        .LifestyleTransient(),
-            //    Component.For(typeof(IQuery<>))
-            //        .ImplementedBy(typeof(EntityQuery<>))
-            //        .LifestyleTransient()
-            //);
-        }
 
+            new EntityInstaller().Install(container, store);
+        }
 
         private static DbContext InitializeDatabase()
         {
-            var context =  new GameDbContext(Effort.DbConnectionFactory.CreateTransient());
+            var context = new GameDbContext(Effort.DbConnectionFactory.CreatePersistent(TestDbConnectionString));
             context.Accounts.RemoveRange(context.Accounts);
             context.Chat.RemoveRange(context.Chat);
             context.Characters.RemoveRange(context.Characters);
@@ -165,6 +150,7 @@ namespace DAL.EntityFrameWork.Tests.Config
 
             var accountIvan = new Account
             {
+                Id = 200,
                 Username = "Ivan",
                 Email = "navi@ivan.com",
                 Password = "IvanJeBoh",
