@@ -66,7 +66,7 @@ namespace IntegracneTesty.Tests.Config
             context.SaveChanges();
 
 
-            
+
 
             context.Items.Add(itemSekera);
             context.Items.Add(itemMec);

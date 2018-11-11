@@ -173,12 +173,13 @@ namespace PV179Console
                 //Console.WriteLine("AccFacUser: " + res.Result.Username);
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
                 Console.WriteLine("Reggg : " + res2);
-                Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto.Email).Result.Email);
                 var res22 = accFacade.RegisterAccount(acccrdto2).Result;
                 Console.WriteLine("Reg : " + res22);
                 var res23 = accFacade.RegisterAccount(acccrdto3).Result;
                 Console.WriteLine("Reg : " + res23);
-                
+                Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
+
+
 
                 var res44 = accFacade.Login("Bela", "147852369").Result;
                 Console.WriteLine("Login: " + res44?.Username);
