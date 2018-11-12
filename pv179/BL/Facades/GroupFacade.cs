@@ -151,12 +151,17 @@ namespace BL.Facades
 
         public bool CreatePost(GroupPostDto groupPost)
         {
-            var post = _groupPostService.Create(groupPost);
-            if (post.Equals(Guid.Empty))
+            using (var uow = UnitOfWorkProvider.Create())
             {
-                return false;
+                var post = _groupPostService.Create(groupPost);
+                uow.Commit();
+                if (post.Equals(Guid.Empty))
+                {
+                    return false;
+                }
+                return true;
             }
-            return true;
+            
         }
 
 

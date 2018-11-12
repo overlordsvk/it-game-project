@@ -21,6 +21,7 @@ using Game.DAL.Entities;
 using IntegracneTesty.Config;
 using static IntegracneTesty.Config.Konstanty;
 using BL.Config;
+using System.Data.Entity.Migrations;
 
 namespace IntegracneTesty.Tests.Config
 {
@@ -55,41 +56,41 @@ namespace IntegracneTesty.Tests.Config
         private static DbContext InitializeDatabase()
         {
             var context =  new GameDbContext(Effort.DbConnectionFactory.CreatePersistent(TestDbConnectionString));
-            context.Accounts.RemoveRange(context.Accounts);
-            context.Chat.RemoveRange(context.Chat);
-            context.Characters.RemoveRange(context.Characters);
-            context.Fights.RemoveRange(context.Fights);
-            context.GroupPosts.RemoveRange(context.GroupPosts);
-            context.Groups.RemoveRange(context.Groups);
-            context.Messages.RemoveRange(context.Messages);
-            context.Items.RemoveRange(context.Items);
-            context.SaveChanges();
+            //context.Accounts.RemoveRange(context.Accounts);
+            //context.Chat.RemoveRange(context.Chat);
+            //context.Characters.RemoveRange(context.Characters);
+            //context.Fights.RemoveRange(context.Fights);
+            //context.GroupPosts.RemoveRange(context.GroupPosts);
+            //context.Groups.RemoveRange(context.Groups);
+            //context.Messages.RemoveRange(context.Messages);
+            //context.Items.RemoveRange(context.Items);
+            //context.SaveChanges();
 
 
 
 
-            context.Items.Add(itemSekera);
-            context.Items.Add(itemMec);
-            context.Items.Add(itemLuk);
+            context.Items.AddOrUpdate(itemSekera);
+            context.Items.AddOrUpdate(itemMec);
+            context.Items.AddOrUpdate(itemLuk);
             
-            context.Characters.Add(characterSlayer);
-            context.Characters.Add(characterWalker);
-            context.Characters.Add(characterBela);
+            context.Characters.AddOrUpdate(characterSlayer);
+            context.Characters.AddOrUpdate(characterWalker);
+            context.Characters.AddOrUpdate(characterBela);
 
-            context.Accounts.Add(accountPeter);
-            context.Accounts.Add(accountIvan);
-            context.Accounts.Add(accountVedro);
+            context.Accounts.AddOrUpdate(accountPeter);
+            context.Accounts.AddOrUpdate(accountIvan);
+            context.Accounts.AddOrUpdate(accountVedro);
 
-            context.Messages.Add(messageSlayerWalker);
-            context.Messages.Add(messageWalkerSlayer);
+            context.Messages.AddOrUpdate(messageSlayerWalker);
+            context.Messages.AddOrUpdate(messageWalkerSlayer);
 
-            context.Fights.Add(fightSlayerWalker);
+            context.Fights.AddOrUpdate(fightSlayerWalker);
 
-            context.Chat.Add(chatSlayerWalker);
+            context.Chat.AddOrUpdate(chatSlayerWalker);
 
-            context.Groups.Add(groupPrvaSkupina);
+            context.Groups.AddOrUpdate(groupPrvaSkupina);
 
-            context.GroupPosts.Add(gPostPrvejSkupiny);
+            context.GroupPosts.AddOrUpdate(gPostPrvejSkupiny);
 
             context.SaveChanges();
             return context;

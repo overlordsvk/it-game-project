@@ -17,14 +17,7 @@ namespace IntegracneTesty
     [TestClass]
     public class AccountFacadeTests
     {
-        private readonly IUnitOfWorkProvider unitOfWorkProvider = Initializer.Container.Resolve<IUnitOfWorkProvider>();
         private readonly AccountFacade accountFacade = Initializer.Container.Resolve<AccountFacade>();
-        private readonly IRepository<Account> accountRepository = Initializer.Container.Resolve<IRepository<Account>>();
-        private readonly IAccountService accountService = Initializer.Container.Resolve<IAccountService>();
-
-
-
-
 
 
         [TestMethod]
@@ -71,48 +64,35 @@ namespace IntegracneTesty
         [TestMethod]
         public async Task RegisterAccount()
         {
-            using (var uow = unitOfWorkProvider.Create())
+            AccountCreateDto accountToRegister = new AccountCreateDto
             {
-                AccountCreateDto accountToRegister = new AccountCreateDto
-                {
-                    Email = "Register@account.com",
-                    Password = "trytoregister",
-                    Username = "IamRobot",
-                };
-                var registered = await accountFacade.RegisterAccount(accountToRegister);
-                var accc = await accountRepository.GetAsync(registered);
-                var r = accountService.GetAccountAccordingToEmailAsync(accountToRegister.Email).Result;
-                //Console.WriteLine("-" + r.Username);
-                //var accounts = Initializer.Container.Resolve<IRepository<Account>>().GetAllAsync().Result;
-                //var result = accountFacade.GetAccountAccordingToEmailAsync(accountToRegister.Email).Result;
-                //Console.WriteLine("\nAccounts: ");
-                //foreach (var acc in accounts)
-                //{
-                //    Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
-                //}
-                Assert.AreEqual(r.Id, registered); /// POZOR NEJDE PRI RESULTE
-            }
+                Email = "Register@account.com",
+                Password = "trytoregister",
+                Username = "IamRobot",
+            };
+            var registered = await accountFacade.RegisterAccount(accountToRegister);
+            var result = accountFacade.GetAccountAccordingToEmailAsync(accountToRegister.Email).Result;
+            Assert.AreEqual(result.Id, registered);
         }
 
         [TestMethod]
         public async Task RemoveAccount()
         {
-            using (unitOfWorkProvider.Create())
+            AccountCreateDto accountToRegister = new AccountCreateDto
             {
-                AccountCreateDto accountToRegister = new AccountCreateDto
-                {
-                    Email = "Register@account.com",
-                    Password = "trytoregister",
-                    Username = "IamRobot",
-                };
-                var registered = await accountFacade.RegisterAccount(accountToRegister);
+                Email = "Remove@account.com",
+                Password = "trytoremove",
+                Username = "IamRobot",
+            };
+            var registered = await accountFacade.RegisterAccount(accountToRegister);
+            var afterReg = await accountFacade.GetAccountAccordingToEmailAsync(accountToRegister.Email);
+            var result = await accountFacade.RemoveAccountAsync(registered);
+            var res = await accountFacade.GetAccountAccordingToEmailAsync(accountToRegister.Email);
 
-                var r = await accountService.GetAccountAccordingToEmailAsync(accountToRegister.Email);
-                Console.WriteLine("-" + r.Username);
-                var result = await accountFacade.RemoveAccountAsync(r.Id);
-
-                Assert.AreEqual(r.Id, result); /// POZOR NEJDE PRI RESULTE
-            }
+            Assert.AreEqual(result, true);
+            Assert.AreEqual(afterReg.Username, accountToRegister.Username);
+            Assert.AreEqual(res, null);
+            
 
         }
 

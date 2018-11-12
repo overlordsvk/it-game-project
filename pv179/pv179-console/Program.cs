@@ -202,6 +202,16 @@ namespace PV179Console
                 var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
                 Console.WriteLine("Attack: " + res7);
 
+                var gpost = new GroupPostDto
+                {
+                    CharacterId = creationId,
+                    GroupId = res6,
+                    Text = "Hi",
+                    Timestamp = DateTime.Now,
+
+                };
+                grFacade.CreatePost(gpost);
+
                 //var b = characterFacade.GetCharacterById(3).Result;
                 //Console.WriteLine("Money:" + b.Money);
                 //var res8 = characterFacade.BuyItemAsync(3).Result;

@@ -81,6 +81,7 @@
     <Compile Include="Initializer.cs" />
     <Compile Include="AccountFacadeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CharacterFacadeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
