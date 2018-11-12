@@ -191,8 +191,6 @@ namespace BL.Facades
 
         public async Task<Guid> Attack(Guid attackerId, Guid defenderId)
         {
-            Guid fightId;
-
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var attacker = await _characterService.GetAsync(attackerId);
@@ -211,7 +209,7 @@ namespace BL.Facades
                 var defenderArmor = await GetEquippedArmor(defenderId);
                 var defenderWeapon = await GetEquippedWeapon(defenderId);
                 var attackSuccess = ResolveAttack(attacker, defender);
-                fightId = _fightService.Create(new FightDto
+                Guid fightId = _fightService.Create(new FightDto
                     {
                         Id = Guid.NewGuid(),
                         AttackerId = attacker.Id,
@@ -226,9 +224,8 @@ namespace BL.Facades
                 attacker.Money += 30;
                 await _characterService.Update(attacker);
                 await uow.Commit();
+                return fightId;
             }
-            return fightId;
-
         }
 
         public async Task<bool> AddMoneyToCharacter(Guid characterId, int value)
@@ -239,8 +236,8 @@ namespace BL.Facades
                 character.Money += value;
                 await _characterService.Update(character);
                 await uow.Commit();
+                return true;
             }
-            return true;
         }
 
         public async Task<bool> JoinGroup(Guid characterId, Guid groupId)
@@ -256,7 +253,6 @@ namespace BL.Facades
                 character.GroupId = groupId;
                 await _characterService.Update(character);
                 await uow.Commit();
-                Console.WriteLine("Joined");
                 return true;
             }
         }
@@ -284,6 +280,7 @@ namespace BL.Facades
 
         private bool ResolveAttack(CharacterDto attacker, CharacterDto defender)
         {
+            // TO-DO
             return true;
         }
     }

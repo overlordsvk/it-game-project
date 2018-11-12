@@ -52,10 +52,8 @@ namespace BL.Facades
                 founder.GroupId = groupId;
                 await _characterService.Update(founder);
                 await uow.Commit();
-                Console.WriteLine("xxxxxxxxx " + founder.GroupId);
 
                 founder = _characterService.GetAsync(groupFounder).Result;
-                Console.WriteLine("xxxxxxxxx " + founder.GroupId);
                 return groupId; 
             }
         }
@@ -125,27 +123,26 @@ namespace BL.Facades
             }
         }
 
-        public async Task<Guid> RemoveFromGroup(Guid characterId, Guid groupId)
+        public async Task<bool> RemoveFromGroup(Guid characterId, Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var group =_groupService.GetAsync(groupId).Result;
                 var character = _characterService.GetAsync(characterId).Result;
                 if (group == null || character == null)
-                    return Guid.Empty;
+                    return false;
                 if (character.Group != null)
-                    return Guid.Empty;
+                    return false;
                 if (!group.Members.Contains(character))
                 {
-                    return Guid.Empty;
+                    return false;
                 }
                 group.Members.Remove(character);
                 character.Group = null;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
                 await uow.Commit();
-                return new Guid();
-                //todo use guid in creation
+                return true;
             }
         }
 
@@ -165,9 +162,22 @@ namespace BL.Facades
         }
 
 
-        //post in clan forum
-        //get posts of clan
-        //remove post in clan
-        //edit post in clan
+        public void EditPost(GroupPostDto groupPost)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                _groupPostService.Update(groupPost);
+                uow.Commit();
+            }
+        }
+        
+        public void DeletePost(Guid groupPostId)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                _groupPostService.Delete(groupPostId);
+                uow.Commit();
+            }
+        }
     }
 }

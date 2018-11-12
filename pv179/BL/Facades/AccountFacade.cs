@@ -129,10 +129,8 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-            return await _accountService.Login(usernameOrEmail, password);
+                return await _accountService.Login(usernameOrEmail, password);
             }
         }
-
-
     }
 }

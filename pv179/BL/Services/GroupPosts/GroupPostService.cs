@@ -27,7 +27,7 @@ namespace BL.Services.GroupPosts
             return await Repository.GetAsync(entityId, nameof(GroupPost.Author), nameof(GroupPost.Group));
         }
 
-        async Task<QueryResultDto<GroupPostDto, GroupPostFilterDto>> IGroupPostService.ListFightsAsync(GroupPostFilterDto filter)
+        async Task<QueryResultDto<GroupPostDto, GroupPostFilterDto>> IGroupPostService.ListGroupPostsAsync(GroupPostFilterDto filter)
         {
             return await Query.ExecuteQuery(filter);
         }
