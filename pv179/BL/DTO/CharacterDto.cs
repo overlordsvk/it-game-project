@@ -54,8 +54,6 @@ namespace BL.DTO
         public Guid? GroupId { get; set; }
         public GroupDto Group { get; set; }
 
-        //public AccountDto Account { get; set; }
-
         public bool IsGroupAdmin { get; set; }
 
     }

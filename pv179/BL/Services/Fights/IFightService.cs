@@ -50,6 +50,5 @@ namespace BL.Services.Fights
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<FightDto, FightFilterDto>> ListAllAsync();
 
-        //void RemoveFightCharacterConnections(int characterId);
     }
 }

@@ -29,11 +29,6 @@ namespace BL.Config
                     .WithServiceDefaultInterfaces()
                     .LifestyleTransient(),
 
-//                Classes.FromThisAssembly()
-//                    .BasedOn<IService>()
-//                    .WithService.FromInterface()
-//                    .LifestyleSingleton(),
-
                 Classes.FromThisAssembly()
                     .BasedOn<FacadeBase>()
                    .LifestyleTransient(),

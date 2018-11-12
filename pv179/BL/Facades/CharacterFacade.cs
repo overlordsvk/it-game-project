@@ -13,7 +13,6 @@ using BL.Services.Fights;
 using BL.Services.Items;
 using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
-using BL.Services.CharacterChanges;
 using System.Runtime.InteropServices;
 using BL.Services.Groups;
 using System.Security.Cryptography;
@@ -27,16 +26,14 @@ namespace BL.Facades
         private readonly IGroupService _groupService;
         private readonly IItemService _itemService;
         private readonly IFightService _fightService;
-        private readonly ICharacterAddMoneyService _characterChangesService;
 
-        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IItemService itemService, IFightService fightService, ICharacterAddMoneyService characterChangesService) : base(unitOfWorkProvider)
+        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
         {
             _accountService = accountService;
             _characterService = characterService;
             _groupService = groupService;
             _itemService = itemService;
             _fightService = fightService;
-            _characterChangesService = characterChangesService;
         }
 
         /// <summary>
@@ -88,11 +85,9 @@ namespace BL.Facades
                 character.Id = AccountId;
                 var acc = _accountService.GetAsync(AccountId).Result;
                 acc.Character = character;
-                //var characterId = _characterService.Create(character);
                 await _accountService.Update(acc);
                 await uow.Commit();
                 return AccountId;
-                //TODO
             }
         }
 

@@ -18,7 +18,7 @@ namespace BL.Config
         public static void ConfigureMapping(IMapperConfigurationExpression config)
         {
             config.CreateMap<Account, AccountDto>();
-            config.CreateMap<AccountDto, Account>();//.ForMember(dest => dest.Character, opt => opt.Ignore());
+            config.CreateMap<AccountDto, Account>();
 
             config.CreateMap<Account, AccountCreateDto>().ReverseMap();
 

@@ -63,7 +63,6 @@
     <Compile Include="DTO\AccountCreateDto.cs" />
     <Compile Include="DTO\AccountDto.cs" />
     <Compile Include="DTO\CharacterDto.cs" />
-    <Compile Include="DTO\CharacterOnlyDto.cs" />
     <Compile Include="DTO\ChatDto.cs" />
     <Compile Include="DTO\Common\DtoBase.cs" />
     <Compile Include="DTO\Common\FilterDtoBase.cs" />
@@ -97,8 +96,6 @@
     <Compile Include="QueryObject\MessageQueryObject.cs" />
     <Compile Include="Services\Accounts\AccountService.cs" />
     <Compile Include="Services\Accounts\IAccountService.cs" />
-    <Compile Include="Services\CharacterChanges\CharacterAddMoneyService.cs" />
-    <Compile Include="Services\CharacterChanges\ICharacterAddMoneyService.cs" />
     <Compile Include="Services\Characters\CharacterService.cs" />
     <Compile Include="Services\Characters\ICharacterService.cs" />
     <Compile Include="Services\Chats\ChatService.cs" />
@@ -115,7 +112,6 @@
     <Compile Include="Services\Items\ItemService.cs" />
     <Compile Include="Services\Messsages\IMessageService.cs" />
     <Compile Include="Services\Messsages\MessageService.cs" />
-    <Compile Include="Services\Shop\IShop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

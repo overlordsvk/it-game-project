@@ -31,24 +31,6 @@ namespace BL.Services.Fights
             return await Query.ExecuteQuery(filter);
         }
 
-        //public void RemoveFightCharacterConnections(int characterId)
-        //{
-        //    var attackerFights = ListFightsAsync(new FightFilterDto { AttackerId = characterId }).Result.Items;
-        //    var defenderFights = ListFightsAsync(new FightFilterDto { DefenderId = characterId }).Result.Items;
-
-        //    foreach (var a in attackerFights)
-        //    {
-        //        a.AttackerId = null;
-        //        Update(a).Wait();
-        //    }
-
-        //    foreach (var d in defenderFights)
-        //    {
-        //        d.DefenderId = null;
-        //        Update(d).Wait();
-        //    }
-            
-        //}
 
     }
 }
