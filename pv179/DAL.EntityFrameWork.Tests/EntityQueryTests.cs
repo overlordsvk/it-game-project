@@ -14,8 +14,6 @@ namespace DAL.EntityFrameWork.Tests
     public class EntityQueryTests
     {
         private readonly IUnitOfWorkProvider unitOfWorkProvider = Initializer.Container.Resolve<IUnitOfWorkProvider>();
-        private static readonly Guid guid = Guid.Parse("fd4e4768-037f-4ed9-8520-dd1e5a38816c");
-
 
         private readonly Account accountIvan = new Account
         {
