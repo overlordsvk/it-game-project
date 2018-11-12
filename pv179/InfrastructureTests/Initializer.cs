@@ -119,7 +119,7 @@ namespace InfrastructureTests
 
             var accountIvan = new Account
             {
-                Id = 200,
+                //Id = 200,
                 Username = "Ivan",
                 Email = "navi@ivan.com",
                 Password = "IvanJeBoh",
