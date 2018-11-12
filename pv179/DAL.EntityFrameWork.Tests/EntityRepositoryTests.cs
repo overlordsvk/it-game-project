@@ -16,7 +16,7 @@ namespace DAL.EntityFrameWork.Tests
         private readonly IRepository<Account> accountRepository = Initializer.Container.Resolve<IRepository<Account>>();
         private readonly IRepository<Character> characterRepository = Initializer.Container.Resolve<IRepository<Character>>();
 
-        private static readonly Guid guid1 = Guid.Parse("2d109fce-07ad-4170-ba31-b9253dcbfed7");
+        private static readonly Guid guid1 = Guid.Parse("b49c2b2f-99b0-4f21-8655-70b0d2c7c5d2");
         private static readonly Guid guid2 = Guid.Parse("d69fe626-bb15-4ec6-a778-1d3c91ad213b");
         private static readonly Guid guid3 = Guid.Parse("139892fc-4a88-4636-aa0e-1975adf2ee11");
 
@@ -74,7 +74,7 @@ namespace DAL.EntityFrameWork.Tests
 
             using (unitOfWorkProvider.Create())
             {
-                Ivan = await accountRepository.GetAsync(guid2, nameof(Character));
+                Ivan = await accountRepository.GetAsync(guid1, nameof(Character));
             }
 
             Assert.AreEqual(Ivan.Character.Name, characterSlayer.Name);
@@ -87,7 +87,7 @@ namespace DAL.EntityFrameWork.Tests
 
             using (unitOfWorkProvider.Create())
             {
-                slayer = await characterRepository.GetAsync(guid2);
+                slayer = await characterRepository.GetAsync(guid1);
                 Console.WriteLine(slayer.Name);
             }
 
@@ -101,9 +101,9 @@ namespace DAL.EntityFrameWork.Tests
 
             using (var uow = unitOfWorkProvider.Create())
             {
-                accountRepository.Create(accountJozo);
+                var Id = accountRepository.Create(accountJozo);
                 await uow.Commit();
-                jozo = await accountRepository.GetAsync(guid3);
+                jozo = await accountRepository.GetAsync(Id);
             }
             Assert.AreEqual(jozo.Username, accountJozo.Username);
         }
@@ -111,17 +111,17 @@ namespace DAL.EntityFrameWork.Tests
         [TestMethod]
         public async Task UpdateAccount()
         {
-            var jozo = accountJozo;
+            var ivan = accountIvan;
             var mail = "jozo@azet.sk";
             Account res;
 
             using (var uow = unitOfWorkProvider.Create())
             {
-                jozo = await accountRepository.GetAsync(guid3);
-                jozo.Email = mail;
-                accountRepository.Update(jozo);
+                ivan = await accountRepository.GetAsync(guid1);
+                ivan.Email = mail;
+                accountRepository.Update(ivan);
                 await uow.Commit();
-                res = await accountRepository.GetAsync(guid3);
+                res = await accountRepository.GetAsync(guid1);
             }
             Assert.AreEqual(res.Email, mail);
         }

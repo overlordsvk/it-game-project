@@ -19,7 +19,7 @@ namespace DAL.EntityFrameWork.Tests
 
         private readonly Account accountIvan = new Account
         {
-            Id = guid,
+            Id = Guid.Parse("b49c2b2f-99b0-4f21-8655-70b0d2c7c5d2"),
             Username = "Ivan",
             Email = "navi@ivan.com",
             Password = "IvanJeBoh",
