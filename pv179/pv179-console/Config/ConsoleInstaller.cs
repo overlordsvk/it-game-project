@@ -13,7 +13,6 @@ namespace pv179_console.Config
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            new EntityInstaller().Install(container, store);
             new BLInstaller().Install(container, store);
         }
     }

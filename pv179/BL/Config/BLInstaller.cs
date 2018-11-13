@@ -18,6 +18,8 @@ namespace BL.Config
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            new EntityInstaller().Install(container, store);
+
             container.Register(
                 Classes.FromThisAssembly()
                     .BasedOn(typeof(QueryObjectBase<,,,>))

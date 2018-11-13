@@ -36,20 +36,6 @@ namespace IntegracneTesty.Tests.Config
         {
             new BLInstaller().Install(container, store);
 
-            container.Register(
-                Component.For<Func<DbContext>>()
-                    .Instance(InitializeDatabase)
-                    .LifestyleTransient(),
-                Component.For<IUnitOfWorkProvider>()
-                    .ImplementedBy<EntityUnitOfWorkProvider>()
-                    .LifestyleSingleton(),
-                Component.For(typeof(IRepository<>))
-                    .ImplementedBy(typeof(EntityRepository<>))
-                    .LifestyleTransient(),
-                Component.For(typeof(IQuery<>))
-                    .ImplementedBy(typeof(EntityQuery<>))
-                    .LifestyleTransient()
-            );
         }
 
 

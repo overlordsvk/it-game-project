@@ -82,7 +82,7 @@ namespace IntegracneTesty
             {
                 Email = "Remove@account.com",
                 Password = "trytoremove",
-                Username = "IamRobot",
+                Username = "IamRemove",
             };
             var registered = await accountFacade.RegisterAccount(accountToRegister);
             var afterReg = await accountFacade.GetAccountAccordingToEmailAsync(accountToRegister.Email);
