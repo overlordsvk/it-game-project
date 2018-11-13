@@ -22,7 +22,7 @@ namespace Game.DAL.Entity
         /// <summary>
         /// Non-parametric ctor used by data access layer
         /// </summary>
-        public GameDbContext() : base(EntityInstaller.AzureDbConnection)
+        public GameDbContext() : base(EntityInstaller.LocalDbConnection)
         {
             // force load of EntityFramework.SqlServer.dll into build
             var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
