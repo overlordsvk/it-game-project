@@ -4,8 +4,8 @@ using Castle.Windsor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Web;
 
 namespace GameWebMVC.App_Start.Windsor
 {
