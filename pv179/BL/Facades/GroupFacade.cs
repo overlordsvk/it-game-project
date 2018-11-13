@@ -146,37 +146,32 @@ namespace BL.Facades
             }
         }
 
-        public bool CreatePost(GroupPostDto groupPost)
+        public async void CreatePost(GroupPostDto groupPost)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var post = _groupPostService.Create(groupPost);
-                uow.Commit();
-                if (post.Equals(Guid.Empty))
-                {
-                    return false;
-                }
-                return true;
+                await uow.Commit();
             }
             
         }
 
 
-        public void EditPost(GroupPostDto groupPost)
+        public async void EditPost(GroupPostDto groupPost)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                _groupPostService.Update(groupPost);
-                uow.Commit();
+                await _groupPostService.Update(groupPost);
+                await uow.Commit();
             }
         }
         
-        public void DeletePost(Guid groupPostId)
+        public async void DeletePost(Guid groupPostId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
                 _groupPostService.Delete(groupPostId);
-                uow.Commit();
+                await uow.Commit();
             }
         }
     }

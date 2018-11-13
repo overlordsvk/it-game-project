@@ -43,196 +43,196 @@ namespace PV179Console
             Console.ReadKey();
 
             #region Tests
-            //var mapper = new Mapper(new MapperConfiguration(MappingConfig.ConfigureMapping)).DefaultContext.Mapper;
-            //var dtoChar = new CharacterDto
+            var mapper = new Mapper(new MapperConfiguration(MappingConfig.ConfigureMapping)).DefaultContext.Mapper;
+            var dtoChar = new CharacterDto
+            {
+                Name = "Harakter",
+            };
+            var dto = new AccountDto
+            {
+                Email = "ja@skuska.cz",
+                Character = dtoChar,
+                IsAdmin = false,
+                Password = "123456789",
+                Username = "Jano",
+            };
+            var dto2 = new AccountDto();
+
+            var entity = new Account();
+            var itemAxe = new Item
+            {
+                Name = "Sekerisko",
+                Attack = 20,
+                Defense = 5,
+                Weight = 12,
+                ItemType = ItemType.Weapon
+            };
+
+            var itemAxe2 = new Item
+            {
+                Name = "Lepsia Sekerka",
+                Attack = 25,
+                Defense = 10,
+                Weight = 8,
+                ItemType = ItemType.Weapon
+            };
+
+            var itemBow = new Item
+            {
+                Name = "Lukoslav",
+                Attack = 44,
+                Defense = 3,
+                Weight = 3,
+                ItemType = ItemType.Weapon
+            };
+
+            Character characterSlayer = new Character
+            {
+                Name = "KingSlayer",
+                Money = 666,
+                Health = 98,
+                Score = 12,
+                Strength = 5,
+                Perception = 8,
+                Endurance = 2,
+                Charisma = 8,
+                Intelligence = 1,
+                Agility = 5,
+                Luck = 9
+            };
+
+            CharacterDto characterBela = new CharacterDto
+            {
+                Name = "BelaChar",
+                Money = 666,
+                Health = 98,
+                Score = 12,
+                Strength = 5,
+                Perception = 8,
+                Endurance = 2,
+                Charisma = 8,
+                Intelligence = 1,
+                Agility = 5,
+                Luck = 9
+            };
+            //characterBela.Items = new List<Item>
             //{
-            //    Name = "Harakter",
-            //};
-            //var dto = new AccountDto
-            //{
-            //    Email = "ja@skuska.cz",
-            //    Character = dtoChar,
-            //    IsAdmin = false,
-            //    Password = "123456789",
-            //    Username = "Jano",
-            //};
-            //var dto2 = new AccountDto();
-
-            //var entity = new Account();
-            //var itemAxe = new Item
-            //{
-            //    Name = "Sekerisko",
-            //    Attack = 20,
-            //    Defense = 5,
-            //    Weight = 12,
-            //    ItemType = ItemType.Weapon
-            //};
-
-            //var itemAxe2 = new Item
-            //{
-            //    Name = "Lepsia Sekerka",
-            //    Attack = 25,
-            //    Defense = 10,
-            //    Weight = 8,
-            //    ItemType = ItemType.Weapon
-            //};
-
-            //var itemBow = new Item
-            //{
-            //    Name = "Lukoslav",
-            //    Attack = 44,
-            //    Defense = 3,
-            //    Weight = 3,
-            //    ItemType = ItemType.Weapon
-            //};
-
-            //Character characterSlayer = new Character
-            //{
-            //    Name = "KingSlayer",
-            //    Money = 666,
-            //    Health = 98,
-            //    Score = 12,
-            //    Strength = 5,
-            //    Perception = 8,
-            //    Endurance = 2,
-            //    Charisma = 8,
-            //    Intelligence = 1,
-            //    Agility = 5,
-            //    Luck = 9
-            //};
-
-            //CharacterDto characterBela = new CharacterDto
-            //{
-            //    Name = "BelaChar",
-            //    Money = 666,
-            //    Health = 98,
-            //    Score = 12,
-            //    Strength = 5,
-            //    Perception = 8,
-            //    Endurance = 2,
-            //    Charisma = 8,
-            //    Intelligence = 1,
-            //    Agility = 5,
-            //    Luck = 9
-            //};
-            ////characterBela.Items = new List<Item>
-            ////{
-            ////    itemAxe,
-            ////    itemAxe2,
-            ////    itemBow
-            ////};
-
-            //var chardto = new CharacterDto();
-            //mapper.Map(dto, entity);
-            ////Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
-            //mapper.Map(entity, dto2);
-            ////Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
-
-            //mapper.Map(characterSlayer, chardto);
-
-            ////Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
-
-            //var acccrdto = new AccountCreateDto
-            //{
-            //    Email = "beliak@bugar.com",
-            //    Password = "147852369",
-            //    Username = "Bela",
+            //    itemAxe,
+            //    itemAxe2,
+            //    itemBow
             //};
 
-            //var acccrdto2 = new AccountCreateDto
-            //{
-            //    Email = "R@Kalinas.com",
-            //    Password = "147852369",
-            //    Username = "Kalinas"
-            //};
+            var chardto = new CharacterDto();
+            mapper.Map(dto, entity);
+            //Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
+            mapper.Map(entity, dto2);
+            //Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
 
-            //var acccrdto3 = new AccountCreateDto
-            //{
-            //    Email = "c@c.com",
-            //    Password = "147852369",
-            //    Username = "cccc"
-            //};
+            mapper.Map(characterSlayer, chardto);
 
-            //using (var container = new WindsorContainer())
-            //{
-            //    container.Install(FromAssembly.This());
-            //    var accFacade = container.Resolve<AccountFacade>();
-            //    var grFacade = container.Resolve<GroupFacade>();
-            //    var characterFacade = container.Resolve<CharacterFacade>();
-            //    var itemService = container.Resolve<IItemService>();
-            //    var uowp = container.Resolve<IUnitOfWorkProvider>();
+            //Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
 
-            //    //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
-            //    //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
-            //    //Console.WriteLine(resew);
-            //    //Console.WriteLine("AccFacUser: " + res.Result.Username);
-            //    var res2 = accFacade.RegisterAccount(acccrdto).Result;
-            //    Console.WriteLine("Reggg : " + res2);
-            //    var res22 = accFacade.RegisterAccount(acccrdto2).Result;
-            //    Console.WriteLine("Reg : " + res22);
-            //    var res23 = accFacade.RegisterAccount(acccrdto3).Result;
-            //    Console.WriteLine("Reg : " + res23);
-            //    Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
+            var acccrdto = new AccountCreateDto
+            {
+                Email = "beliak@bugar.com",
+                Password = "147852369",
+                Username = "Bela",
+            };
 
+            var acccrdto2 = new AccountCreateDto
+            {
+                Email = "R@Kalinas.com",
+                Password = "147852369",
+                Username = "Kalinas"
+            };
 
+            var acccrdto3 = new AccountCreateDto
+            {
+                Email = "c@c.com",
+                Password = "147852369",
+                Username = "cccc"
+            };
 
-            //    var res44 = accFacade.Login("Bela", "147852369").Result;
-            //    Console.WriteLine("Login: " + res44?.Username);
-            //    var res4 = accFacade.RegisterAccount(acccrdto).Result;
-            //    //Console.WriteLine("Succ: ");
-            //    var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
-            //    //Console.WriteLine("====>>>>" + res3.Username);
-            //    var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
-            //    Console.WriteLine("CreationId====>>>>" + creationId);
-            //    //characterFacade.RemoveCharacter(creationId).Wait();
+            using (var container = new WindsorContainer())
+            {
+                container.Install(FromAssembly.This());
+                var accFacade = container.Resolve<AccountFacade>();
+                var grFacade = container.Resolve<GroupFacade>();
+                var characterFacade = container.Resolve<CharacterFacade>();
+                var itemService = container.Resolve<IItemService>();
+                var uowp = container.Resolve<IUnitOfWorkProvider>();
 
-            //    var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
-            //    Console.WriteLine("Remove : " + res5);
-
-            //    var res6 = grFacade.CreateGroup(creationId, "Most", "Hid", string.Empty).Result;
-            //    Console.WriteLine("GroupCreate: " + res6);
-
-            //    characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
-
-            //    var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
-            //    Console.WriteLine("Attack: " + res7);
-
-            //    var gpost = new GroupPostDto
-            //    {
-            //        CharacterId = creationId,
-            //        GroupId = res6,
-            //        Text = "Hi",
-            //        Timestamp = DateTime.Now,
-
-            //    };
-            //    grFacade.CreatePost(gpost);
-
-            //    //var b = characterFacade.GetCharacterById(3).Result;
-            //    //Console.WriteLine("Money:" + b.Money);
-            //    //var res8 = characterFacade.BuyItemAsync(3).Result;
-            //    //b = characterFacade.GetCharacterById(3).Result;
-            //    //Console.WriteLine("Money:" + b.Money);
+                //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
+                //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
+                //Console.WriteLine(resew);
+                //Console.WriteLine("AccFacUser: " + res.Result.Username);
+                var res2 = accFacade.RegisterAccount(acccrdto).Result;
+                Console.WriteLine("Reggg : " + res2);
+                var res22 = accFacade.RegisterAccount(acccrdto2).Result;
+                Console.WriteLine("Reg : " + res22);
+                var res23 = accFacade.RegisterAccount(acccrdto3).Result;
+                Console.WriteLine("Reg : " + res23);
+                Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
 
 
 
-            //    //var ch = characterFacade.GetCharacterById(2).Result;
-            //    //Console.WriteLine("Money:" + ch.Money);
-            //    //characterFacade.AddMoneyToCharacter(2, 200).Wait();
-            //    //ch = characterFacade.GetCharacterById(2).Result;
-            //    //Console.WriteLine("Money:" + ch.Money);
-            //    //using(var uow = uowp.Create())
-            //    //{
-            //    //    var i = itemService.GetEquippedWeapon(2).Result;
-            //    //    Console.WriteLine("Equipped Weapon: " + i.Name);
+                var res44 = accFacade.Login("Bela", "147852369").Result;
+                Console.WriteLine("Login: " + res44?.Username);
+                var res4 = accFacade.RegisterAccount(acccrdto).Result;
+                //Console.WriteLine("Succ: ");
+                var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
+                //Console.WriteLine("====>>>>" + res3.Username);
+                var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
+                Console.WriteLine("CreationId====>>>>" + creationId);
+                //characterFacade.RemoveCharacter(creationId).Wait();
 
-            //    //}
-            //    //var res9 = characterFacade.EquipItem(3, 3).Result;
-            //    //characterFacade.EquipItem(3, 4).Wait();
+                var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
+                Console.WriteLine("Remove : " + res5);
 
-            //}
-            //Console.ReadKey();
-            //PrintDbContent().Wait();
-            //Console.ReadKey();
+                var res6 = grFacade.CreateGroup(creationId, "Most", "Hid", string.Empty).Result;
+                Console.WriteLine("GroupCreate: " + res6);
+
+                characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
+
+                var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
+                Console.WriteLine("Attack: " + res7);
+
+                var gpost = new GroupPostDto
+                {
+                    CharacterId = creationId,
+                    GroupId = res6,
+                    Text = "Hi",
+                    Timestamp = DateTime.Now,
+
+                };
+                grFacade.CreatePost(gpost);
+
+                //var b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
+                //var res8 = characterFacade.BuyItemAsync(3).Result;
+                //b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
+
+
+
+                //var ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //characterFacade.AddMoneyToCharacter(2, 200).Wait();
+                //ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //using(var uow = uowp.Create())
+                //{
+                //    var i = itemService.GetEquippedWeapon(2).Result;
+                //    Console.WriteLine("Equipped Weapon: " + i.Name);
+
+                //}
+                //var res9 = characterFacade.EquipItem(3, 3).Result;
+                //characterFacade.EquipItem(3, 4).Wait();
+
+            }
+            Console.ReadKey();
+            PrintDbContent().Wait();
+            Console.ReadKey();
             #endregion
 
 
