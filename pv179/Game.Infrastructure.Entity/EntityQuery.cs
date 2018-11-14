@@ -49,7 +49,7 @@ namespace Game.Infrastructure.Entity
             {
                 queryable = queryable.Skip(PageSize * (DesiredPage.Value - 1)).Take(PageSize);
             }
-            var items = await queryable.ToListAsync();
+            var items = queryable.ToList();
             return new QueryResult<TEntity>(items, itemsCount, PageSize, DesiredPage);
         }
 

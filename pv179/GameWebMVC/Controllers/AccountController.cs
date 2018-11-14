@@ -1,6 +1,5 @@
 ﻿using BL.DTO;
 using BL.Facades;
-using GameWebMVC.App_Start.Windsor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +9,48 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
-    public class TestController : Controller
+    public class AccountController : Controller
     {
-        public AccountFacade accFacade { get; set; }
+        public AccountFacade accountFacade { get; set; }
 
-        // GET: Test
-        public async Task<ActionResult>Index()
-        {
-            var res = await accFacade.GetAllAccountsAsync();
-            return View(res.Items);
-        }
-         
-        // GET: Test/Details/5
-        public ActionResult Details(int id)
-        {
-            var res = accFacade.GetAccountAccordingToUsernameAsync("Pieter").Result;
-            return View(new List<AccountDto> { res });
-
-        }
-
-        // GET: Test/Create
-        public ActionResult Create()
+        // GET: Account
+        public ActionResult Index()
         {
             return View();
         }
 
-        // POST: Test/Create
+        // GET: Account/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: Account/Create
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Account/Create
+        [HttpPost]
+        public async Task<ActionResult> Register(AccountCreateDto createDto)
+        {
+            try
+            {
+                var accountId = accountFacade.RegisterAccount(createDto).Result;
+                Session["accountId"] = accountId;
+                return RedirectToAction("Create", "Character");
+
+
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+
+        }
+
+        // POST: Account/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -51,13 +66,13 @@ namespace GameWebMVC.Controllers
             }
         }
 
-        // GET: Test/Edit/5
+        // GET: Account/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Test/Edit/5
+        // POST: Account/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -73,13 +88,13 @@ namespace GameWebMVC.Controllers
             }
         }
 
-        // GET: Test/Delete/5
+        // GET: Account/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Test/Delete/5
+        // POST: Account/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

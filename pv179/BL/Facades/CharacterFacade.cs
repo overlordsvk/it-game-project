@@ -83,13 +83,27 @@ namespace BL.Facades
             using (var uow = UnitOfWorkProvider.Create())
             {
                 character.Id = AccountId;
-                var acc = _accountService.GetAsync(AccountId).Result;
+                var acc = await _accountService.GetAsync(AccountId);
                 acc.Character = character;
                 await _accountService.Update(acc);
                 await uow.Commit();
                 return AccountId;
             }
         }
+
+        public async Task<Guid> EditCharacter(Guid AccountId, CharacterDto character)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                character.Id = AccountId;
+                var acc = await _accountService.GetAsync(AccountId);
+                acc.Character = character;
+                await _accountService.Update(acc);
+                await uow.Commit();
+                return AccountId;
+            }
+        }
+
 
         public async Task<bool> RemoveCharacter(Guid CharacterId)
         {

@@ -102,12 +102,14 @@ namespace BL.Facades
             Guid accountId;
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (GetAccountAccordingToEmailAsync(registrationDto.Email).Result != null)
+                var emailAccount = await GetAccountAccordingToEmailAsync(registrationDto.Email);
+                var usernameAccount = await GetAccountAccordingToUsernameAsync(registrationDto.Username);
+                if (emailAccount != null)
                 {
                     return Guid.Empty;
                 }
 
-                if (GetAccountAccordingToUsernameAsync(registrationDto.Username).Result != null)
+                if (usernameAccount != null)
                 {
                     return Guid.Empty;
                 }
