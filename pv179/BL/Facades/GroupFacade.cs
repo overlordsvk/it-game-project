@@ -58,11 +58,13 @@ namespace BL.Facades
             }
         }
 
-        public async void RemoveGroup(Guid groupId)
+        public async 
+        Task
+RemoveGroup(Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var group =_groupService.GetAsync(groupId).Result;
+                var group = await _groupService.GetAsync(groupId);
                 if (group == null)
                     return;
                 foreach (var member in group.Members)
@@ -79,7 +81,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var group =_groupService.GetAsync(groupId).Result;
+                var group = await _groupService.GetAsync(groupId);
                 if (group == null)
                     return;
                 group.Description = newDescription;
@@ -93,6 +95,14 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await _groupService.ListAllAsync();
+            }
+        }
+
+        public async Task<GroupDto> GetGroupAsync(Guid id)
+        { 
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _groupService.GetAsync(id);
             }
         }
 
