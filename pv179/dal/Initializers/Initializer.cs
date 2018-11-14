@@ -158,7 +158,9 @@ namespace Game.DAL.Entity.Initializers
             var group1 = new Group
             {
                 Id = _guid10,
-                Name = "Prva skupina"
+                Name = "Prva skupina",
+                Description = "Toto je prva a posledna skupina!",
+                Picture = "/img/img1.jpg"
             };
 
             group1.Members = new List<Character>
@@ -233,9 +235,9 @@ namespace Game.DAL.Entity.Initializers
 
             context.Fights.Add(fight1);
 
-            //context.Groups.Add(group1);
+            context.Groups.Add(group1);
 
-            //context.GroupPosts.Add(gpost);
+            context.GroupPosts.Add(gpost);
 
             base.Seed(context);
         }
