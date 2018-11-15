@@ -160,6 +160,7 @@
     </Compile>
     <Compile Include="Models\AccountLogin.cs" />
     <Compile Include="Models\CharacterEdit.cs" />
+    <Compile Include="Models\GroupImageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
