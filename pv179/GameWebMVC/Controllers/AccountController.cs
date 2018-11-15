@@ -1,5 +1,6 @@
 ﻿using BL.DTO;
 using BL.Facades;
+using GameWebMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,21 +49,37 @@ namespace GameWebMVC.Controllers
 
         }
 
+        // GET: Account/Create
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // POST: Account/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Login(AccountLogin login)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                var account = await accountFacade.Login(login.usernameOrEmail, login.password);
+                if (account == null)
+                {
+                    return View();
+                }
+                Session["accountId"] = account.Id;
+                if (account.Character == null)
+                {
+                    return RedirectToAction("Create", "Character");
+                }
+                return RedirectToAction("Index", "Character");
             }
-            catch
+            catch (Exception)
             {
                 return View();
             }
+
         }
+
 
         // GET: Account/Edit/5
         public ActionResult Edit(int id)

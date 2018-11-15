@@ -158,7 +158,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GroupImageModel.cs" />
+    <Compile Include="Models\AccountLogin.cs" />
+    <Compile Include="Models\CharacterEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,11 +212,8 @@
     <Content Include="Views\Group\Index.cshtml" />
     <Content Include="Views\Group\List.cshtml" />
     <Content Include="Views\Group\Details.cshtml" />
-    <Content Include="Views\Group\Create.cshtml" />
-    <Content Include="Views\Group\Upload.cshtml" />
-    <Content Include="Views\Group\View.cshtml" />
-    <Content Include="Views\Group\Edit.cshtml" />
-    <Content Include="Views\Group\Test.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Character\Remove.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
