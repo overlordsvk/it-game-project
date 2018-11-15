@@ -1,26 +1,23 @@
-﻿using BL.DTO.Common;
+﻿using BL.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BL.DTO
+namespace GameWebMVC.Models
 {
-    public class GroupDto : DtoBase
+    public class GroupImageModel
     {
+        [ScaffoldColumn(false)]
+        public Guid Id { get; set; }
+
         [Required, StringLength(64, MinimumLength = 4, ErrorMessage = "Názov skupiny musí mať 4 až 64 znakov")]
         public string Name { get; set; }
 
-        [StringLength(512, ErrorMessage = "Skúste iný obrázok")]
-        public string Picture { get; set; }
-
-        public ICollection<CharacterDto> Members { get; set; }
-
-        public ICollection<GroupPostDto> Wall { get; set; }
-
         [StringLength(2048, ErrorMessage = "Popis skupiny môže mať max. 2048 znakov")]
         public string Description { get; set; }
+
+        public HttpPostedFileBase File { get; set; }
     }
 }

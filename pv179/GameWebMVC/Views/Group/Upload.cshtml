@@ -1,0 +1,11 @@
+﻿@model HttpPostedFileBase
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload Group Image</h2>
+@using (Html.BeginForm("Upload", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}

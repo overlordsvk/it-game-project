@@ -1,8 +1,10 @@
 ﻿using BL.DTO;
 using BL.DTO.Filters;
 using BL.Facades;
+using GameWebMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -23,7 +25,7 @@ namespace GameWebMVC.Controllers
         #endregion
 
         #region Facades
-        public GroupFacade _groupFacade { get; set; }
+        public GroupFacade groupFacade { get; set; }
         #endregion
 
 
@@ -38,7 +40,7 @@ namespace GameWebMVC.Controllers
         // GET: Group/Details/
         public async Task<ActionResult> Details(Guid id)
         {
-            var model = await _groupFacade.GetGroupAsync(id);
+            var model = await groupFacade.GetGroupAsync(id);
             return View("Details", model);
         }
 
@@ -50,47 +52,65 @@ namespace GameWebMVC.Controllers
 
         // POST: Group/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(GroupDto group)
         {
             try
             {
                 // TODO: Add insert logic here
+                var creator = Session["accountId"] as Guid?; // TO DO - use when user is logged
+                group.Id = Guid.Parse("8cb7a3a7-164a-4ad2-bc12-868e5878cc31");
 
-                return RedirectToAction("Index");
+                group.Picture = "/Img/default.jpg";
+
+                var newGroupId = await groupFacade.CreateGroup(Guid.Parse("5092aae4-3f07-4a0e-afbb-bc094a3cc73e"), group);
+                return RedirectToAction("Details", new { id = newGroupId }); //redirect to detail
             }
             catch
             {
-                return View();
+                return View(group);
             }
         }
 
         // GET: Group/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
+            Session["groupId"] = id;
             return View();
         }
 
         // POST: Group/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(GroupImageModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                var imgPath = "/Img/Default.jpg";
+                var groupId = Session["groupId"] as Guid?;
+                if (!groupId.HasValue)
+                    throw new Exception("Session argument groupId not found");
+                if (model.File != null && model.File.ContentLength > 0)
+                {
+                    var fileType = Path.GetExtension(model.File.FileName);
+                    var fileName = Path.GetFileName(model.File.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Img/"), fileName);
+                    model.File.SaveAs(path);
+                    imgPath = "/Img/" + groupId.Value + fileType;
+                }
+                await groupFacade.Edit(new GroupDto{ Id = groupId.Value, Name = model.Name, Description = model.Description, Picture = imgPath});
+            }  
+            catch (Exception ex)  
+            {  
+                ViewBag.Message = "ERROR:" + ex.Message.ToString();  
+            }   
+            return View();  
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Group/Delete/5
         public async Task<ActionResult> Delete(Guid id)
         {
             // TO DO - check authorization
-            await _groupFacade.RemoveGroup(id);
+            await groupFacade.RemoveGroup(id);
             return RedirectToAction("List");
         }
 
@@ -102,9 +122,38 @@ namespace GameWebMVC.Controllers
             var filter = Session[filterSessionKey] as GroupFilterDto ?? new GroupFilterDto{PageSize = PageSize};
             filter.RequestedPageNumber = page;
 
-            var result = await _groupFacade.GetGroupsByFilterAsync(filter);
+            var result = await groupFacade.GetGroupsByFilterAsync(filter);
 
             return View("List", result.Items);
+        }
+
+        public ActionResult Upload()
+        {
+            return View();
+        }
+
+        // UPLOAD
+        [HttpPost]
+        public  ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)  
+                try 
+                {  
+                    string path = Path.Combine(Server.MapPath("~/Img"),  
+                       Path.GetFileName(file.FileName));
+
+                    file.SaveAs(path);  
+                    ViewBag.Message = "Your message for success";  
+                }  
+                catch (Exception ex)  
+                {  
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();  
+                }  
+            else 
+            {  
+                ViewBag.Message = "Please select file";  
+            }  
+            return View();  
         }
 
     }
