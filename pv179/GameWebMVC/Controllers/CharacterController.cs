@@ -18,8 +18,15 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Index()
         {
             var id = Session["accountId"] as Guid?;
-
+            if(id == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var character = await characterFacade.GetCharacterById(id.Value);
+            if (character == null)
+            {
+                return RedirectToAction("Create");
+            }
             return View(character);
         }
 
@@ -46,6 +53,7 @@ namespace GameWebMVC.Controllers
             }
         }
         #endregion
+
 
         #region Edit
         public async Task<ActionResult> Edit()
@@ -76,6 +84,8 @@ namespace GameWebMVC.Controllers
         }
         #endregion
 
+
+        #region Remove
         public async Task<ActionResult> Remove()
         {
             var id = Session["accountId"] as Guid?;
@@ -90,6 +100,7 @@ namespace GameWebMVC.Controllers
             var c = await characterFacade.RemoveCharacter(id.Value);
             return RedirectToAction("Create");
         }
+        #endregion
     }
 
 }
