@@ -1,11 +1,12 @@
 ﻿@model BL.DTO.CharacterDto
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Remove";
 }
 
-<h2>Index</h2>
+<h2>Remove</h2>
 
+<h3>Are you sure you want to delete your character?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -97,26 +98,15 @@
             @Html.DisplayFor(model => model.Luck)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GroupId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GroupId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsGroupAdmin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsGroupAdmin)
-        </dd>
 
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to Character", "Index")
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Remove", "Remove", new { id = Model.Id }) |
-    @Html.ActionLink("Back to Homepage", "Index", "Home")
-</p>
