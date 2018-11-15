@@ -4,33 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>@Model.Name</h2>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Money)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Money)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Health)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Health)
         </dd>
 
         <dt>
@@ -42,11 +26,25 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Health)
+        </dt>
+
+        <dd>
+           <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width: @(Model.Health)%;"></div>
+            </div>
+        </dd>
+
+
+
+        <dt>
             @Html.DisplayNameFor(model => model.Strength)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Strength)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Strength*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -54,7 +52,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Perception)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Perception*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -62,7 +62,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Endurance)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Endurance*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -70,7 +72,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Charisma)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Charisma*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -78,7 +82,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Intelligence)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Intelligence*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -86,7 +92,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Agility)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Agility*10)%;"></div>
+            </div>
         </dd>
 
         <dt>
@@ -94,24 +102,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Luck)
+            <div class="progress" style="width: 30%;">
+                <div class="progress-bar progress-bar-warning" role="progressbar" style="width: @(Model.Luck*10)%;"></div>
+            </div>
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GroupId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GroupId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsGroupAdmin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsGroupAdmin)
-        </dd>
 
     </dl>
 </div>
