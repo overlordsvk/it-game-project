@@ -27,7 +27,7 @@ namespace BL.Facades
             _characterService = characterService;
         }
 
-        public async Task<Guid> CreateGroup(Guid groupFounder,string name, string description, string imagePath)
+        public async Task<Guid> CreateGroup(Guid groupFounder, GroupDto group)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -40,27 +40,17 @@ namespace BL.Facades
                 {
                     return Guid.Empty;
                 }
-                var group = new GroupDto
-                {
-                    Id = Guid.NewGuid(),
-                    Name = name,
-                    Description = description,
-                    Picture = imagePath,
-                };
+                
                 founder.IsGroupAdmin = true;
                 var groupId = _groupService.Create(group);
                 founder.GroupId = groupId;
                 await _characterService.Update(founder);
                 await uow.Commit();
-
-                founder = _characterService.GetAsync(groupFounder).Result;
                 return groupId; 
             }
         }
 
-        public async 
-        Task
-RemoveGroup(Guid groupId)
+        public async Task RemoveGroup(Guid groupId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -77,14 +67,10 @@ RemoveGroup(Guid groupId)
             }
         }
 
-        public async void EditDescription(Guid groupId, string newDescription)
+        public async Task Edit(GroupDto group)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var group = await _groupService.GetAsync(groupId);
-                if (group == null)
-                    return;
-                group.Description = newDescription;
                 await _groupService.Update(group);
                 await uow.Commit();
             }

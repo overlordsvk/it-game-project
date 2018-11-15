@@ -37,11 +37,9 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                var accountId = accountFacade.RegisterAccount(createDto).Result;
+                var accountId = await accountFacade.RegisterAccount(createDto);
                 Session["accountId"] = accountId;
                 return RedirectToAction("Create", "Character");
-
-
             }
             catch (Exception)
             {
