@@ -84,6 +84,7 @@
     <Compile Include="Facades\CharacterFacade.cs" />
     <Compile Include="Facades\Common\FacadeBase.cs" />
     <Compile Include="Facades\GroupFacade.cs" />
+    <Compile Include="Facades\MessagingFacade.cs" />
     <Compile Include="QueryObject\ChatQueryObject.cs" />
     <Compile Include="QueryObject\GroupQueryObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

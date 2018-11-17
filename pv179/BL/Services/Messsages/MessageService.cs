@@ -28,5 +28,6 @@ namespace BL.Services.Messages
         {
             return await Repository.GetAsync(entityId, nameof(Message.Author), nameof(Message.Chat));
         }
+
     }
 }
