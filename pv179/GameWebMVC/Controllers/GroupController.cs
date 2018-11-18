@@ -72,10 +72,11 @@ namespace GameWebMVC.Controllers
         }
 
         // GET: Group/Edit/5
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            Session["groupId"] = id;
-            return View();
+            //Session["groupId"] = id;
+            var group = await groupFacade.GetGroupAsync(id);
+            return View(new GroupImageModel{ Id = group.Id, Name = group.Name, Description = group.Description });
         }
 
         // POST: Group/Edit/5
@@ -85,18 +86,18 @@ namespace GameWebMVC.Controllers
             try
             {
                 var imgPath = "/Img/Default.jpg";
-                var groupId = Session["groupId"] as Guid?;
-                if (!groupId.HasValue)
-                    throw new Exception("Session argument groupId not found");
+                //var groupId = Session["groupId"] as Guid?;
+                //if (!groupId.HasValue)
+                //    throw new Exception("Session argument groupId not found");
                 if (model.File != null && model.File.ContentLength > 0)
                 {
                     var fileType = Path.GetExtension(model.File.FileName);
                     var fileName = Path.GetFileName(model.File.FileName);
                     var path = Path.Combine(Server.MapPath("~/Img/"), fileName);
                     model.File.SaveAs(path);
-                    imgPath = "/Img/" + groupId.Value + fileType;
+                    imgPath = "/Img/" + model.Id + fileType;
                 }
-                await groupFacade.Edit(new GroupDto{ Id = groupId.Value, Name = model.Name, Description = model.Description, Picture = imgPath});
+                await groupFacade.Edit(new GroupDto{ Id = model.Id, Name = model.Name, Description = model.Description, Picture = imgPath});
             }  
             catch (Exception ex)  
             {  
