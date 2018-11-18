@@ -11,7 +11,7 @@ namespace Game.DAL.Entity.Entities
         [Key, ForeignKey("Account"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
-        [Required, MaxLength(64)]
+        [Required, MaxLength(64), MinLength(4)]
         public string Name { get; set; }
 
         [Range(0, int.MaxValue)]
