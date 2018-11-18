@@ -39,6 +39,7 @@ namespace BL.Services.Chats
             }
         }
 
+
         protected override async Task<Chat> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Chat.Messages), nameof(Chat.Receiver), nameof(Chat.Sender));

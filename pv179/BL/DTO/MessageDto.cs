@@ -10,17 +10,14 @@ namespace BL.DTO
 {
     public class MessageDto : DtoBase
     {
-        public Guid? SenderId { get; set; }
-        public CharacterDto Sender { get; set; }
-
-        public Guid? ReceiverId { get; set; }
-        public CharacterDto Receiver { get; set; }
-
-        [MaxLength(256)]
-        public string Subject { get; set; }
+        public Guid ChatId { get; set; }
+        public ChatDto Chat { get; set; }
 
         [MaxLength(2048)]
         public string Text { get; set; }
+
+        public Guid? AuthorId { get; set; }
+        public CharacterDto Author { get; set; }
 
         public DateTime Timestamp { get; set; }
     }

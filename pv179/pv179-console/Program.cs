@@ -159,6 +159,7 @@ namespace PV179Console
                 var accFacade = container.Resolve<AccountFacade>();
                 var grFacade = container.Resolve<GroupFacade>();
                 var characterFacade = container.Resolve<CharacterFacade>();
+                var messagingFacade = container.Resolve<MessagingFacade>();
                 var itemService = container.Resolve<IItemService>();
                 var uowp = container.Resolve<IUnitOfWorkProvider>();
 
@@ -189,7 +190,13 @@ namespace PV179Console
                 var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
                 Console.WriteLine("Remove : " + res5);
 
-                var res6 = grFacade.CreateGroup(creationId, "Most", "Hid", string.Empty).Result;
+                var group = new GroupDto
+                {
+                    Name = "Most",
+                    Description = "Hid",
+                    Picture = string.Empty,
+                };
+                var res6 = grFacade.CreateGroup(creationId, group).Result;
                 Console.WriteLine("GroupCreate: " + res6);
 
                 characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
@@ -206,6 +213,22 @@ namespace PV179Console
 
                 };
                 grFacade.CreatePost(gpost);
+
+                var chat = new ChatDto
+                {
+                    SenderId = res44.Id,
+                    ReceiverId = res2,
+                    Subject = "This is test",
+                };
+                var chatId = messagingFacade.CreateChat(chat).Result;
+                var message = new MessageDto
+                {
+                    AuthorId = res2,
+                    ChatId = chatId,
+                    Text = "Ako sa mas?",
+                    
+                };
+                var messageId = messagingFacade.SendMessage(message);
 
                 //var b = characterFacade.GetCharacterById(3).Result;
                 //Console.WriteLine("Money:" + b.Money);
