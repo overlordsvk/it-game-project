@@ -52,5 +52,8 @@ namespace BL.Services.Characters
 
         Task<bool> AddMoney(Guid characterId, int value);
 
+        Task<CharacterDto> GetCharacterAccordingToNameAsync(string name);
+
+
     }
 }
