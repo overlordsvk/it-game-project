@@ -10,19 +10,20 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
+    [Authorize]
     public class CharacterController : Controller
     {
-        public CharacterFacade characterFacade { get; set; }
+        public CharacterFacade CharacterFacade { get; set; }
+        public AccountFacade AccountFacade{ get; set; }
 
         // GET: Character
         public async Task<ActionResult> Index()
         {
-            var id = Session["accountId"] as Guid?;
-            if(id == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            var character = await characterFacade.GetCharacterById(id.Value);
+            //if(id == null)
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             if (character == null)
             {
                 return RedirectToAction("Create");
@@ -42,9 +43,10 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                var id = Session["accountId"] as Guid?;
                 characterDto.Health = characterDto.Endurance * 10;
-                var character = await characterFacade.CreateCharacter(id.Value, characterDto);
+                var id = User.Identity.Name;
+                var guid = Guid.Parse(id);
+                var character = await CharacterFacade.CreateCharacter(guid, characterDto);
                 return RedirectToAction("Index");
             }
             catch
@@ -58,9 +60,8 @@ namespace GameWebMVC.Controllers
         #region Edit
         public async Task<ActionResult> Edit()
         {
-            var id = Session["accountId"] as Guid?;
 
-            var character = await characterFacade.GetCharacterById(id.Value);
+            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             return View(character);
         }
 
@@ -69,10 +70,9 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                var id = Session["accountId"] as Guid?;
-                var character = await characterFacade.GetCharacterById(id.Value);
+                var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
                 character.Name = characterDto.Name;
-                var res = await characterFacade.EditCharacter(id.Value, character);
+                var res = await CharacterFacade.EditCharacter(Guid.Parse(User.Identity.Name), character);
                 return RedirectToAction("Index");
             }
             catch
@@ -88,16 +88,14 @@ namespace GameWebMVC.Controllers
         #region Remove
         public async Task<ActionResult> Remove()
         {
-            var id = Session["accountId"] as Guid?;
 
-            var character = await characterFacade.GetCharacterById(id.Value);
+            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             return View(character);
         }
         [HttpPost]
         public async Task<ActionResult> Remove(CharacterDto characterDto)
         {
-            var id = Session["accountId"] as Guid?;
-            var c = await characterFacade.RemoveCharacter(id.Value);
+            var c = await CharacterFacade.RemoveCharacter(Guid.Parse(User.Identity.Name));
             return RedirectToAction("Create");
         }
         #endregion

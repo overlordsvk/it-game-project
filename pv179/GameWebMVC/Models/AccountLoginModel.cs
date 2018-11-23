@@ -7,7 +7,7 @@ using System.Web;
 
 namespace GameWebMVC.Models
 {
-    public class AccountLogin
+    public class AccountLoginModel
     {
         [Required(ErrorMessage = "Meno nesmie byť prázdne")]
         [StringLength(64, MinimumLength = 4, ErrorMessage = "Login musí mať 4 - 64 znakov")]

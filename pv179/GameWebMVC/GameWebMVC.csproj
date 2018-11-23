@@ -56,6 +56,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -154,12 +155,14 @@
     <Compile Include="Controllers\CharacterController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessagingController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountLogin.cs" />
+    <Compile Include="Models\AccountLoginModel.cs" />
     <Compile Include="Models\CharacterEdit.cs" />
+    <Compile Include="Models\ChatCreate.cs" />
     <Compile Include="Models\GroupImageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -220,6 +223,9 @@
     <Content Include="Views\Group\Test.cshtml" />
     <Content Include="Views\Group\Upload.cshtml" />
     <Content Include="Views\Group\View.cshtml" />
+    <Content Include="Views\Messaging\NewChat.cshtml" />
+    <Content Include="Views\Messaging\MailBox.cshtml" />
+    <Content Include="Views\Messaging\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

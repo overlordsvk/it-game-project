@@ -99,40 +99,30 @@ namespace BL.Facades
         /// <returns>Registered account ID</returns>
         public async Task<Guid> RegisterAccount(AccountCreateDto registrationDto)
         {
-            Guid accountId;
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var emailAccount = await GetAccountAccordingToEmailAsync(registrationDto.Email);
-                var usernameAccount = await GetAccountAccordingToUsernameAsync(registrationDto.Username);
-                if (emailAccount != null)
+                try
                 {
-                    return Guid.Empty;
+                    var id = await _accountService.RegisterAccountAsync(registrationDto);
+                    await uow.Commit();
+                    return id;
+                } catch (ArgumentException)
+                {
+                    throw;
                 }
-
-                if (usernameAccount != null)
-                {
-                    return Guid.Empty;
-                }
-                var newAccount = new AccountDto()
-                {
-                    Username = registrationDto.Username,
-                    Email = registrationDto.Email,
-                    Password = registrationDto.Password,
-                };
-
-                accountId = _accountService.Create(newAccount);
-                await uow.Commit();
             }
-            return accountId;
+
              
         }
 
-        public async Task<AccountDto> Login(string usernameOrEmail, string password)
+        public async Task<(bool success, Guid id, string roles)> Login(string usernameOrEmail, string password)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _accountService.Login(usernameOrEmail, password);
+                return await _accountService.AuthorizeUserAsync(usernameOrEmail, password);
             }
         }
+
+
     }
 }

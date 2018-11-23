@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,12 @@ namespace BL.Services.Characters
         public async Task<QueryResultDto<CharacterDto, CharacterFilterDto>> ListCharactersAsync(CharacterFilterDto filter)
         {
             return await Query.ExecuteQuery(filter);
+        }
+
+        public async Task<CharacterDto> GetCharacterAccordingToNameAsync(string name)
+        {
+            var queryResult = await Query.ExecuteQuery(new CharacterFilterDto { Name = name});
+            return queryResult.Items.SingleOrDefault();
         }
 
         public async Task<bool> AddMoney(Guid characterId, int value)

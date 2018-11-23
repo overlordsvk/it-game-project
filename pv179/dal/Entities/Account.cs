@@ -16,10 +16,13 @@ namespace Game.DAL.Entity.Entities
         [Required, EmailAddress]
         public string Email { get; set; }
 
-        [Required, MinLength(8)]
-        public string Password { get; set; }
+        [Required]
+        public string PasswordSalt { get; set; }
 
-        public bool IsAdmin { get; set; }
+        [Required]
+        public string PasswordHash { get; set; }
+
+        public string Roles { get; set; }
 
         public string Picture { get; set; }
 

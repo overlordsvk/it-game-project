@@ -56,7 +56,11 @@ namespace BL.Services.Accounts
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAllAsync();
 
-        Task<AccountDto> Login(string usernameOrEmail, string password);
+        Task<Guid> RegisterAccountAsync(AccountCreateDto account);
+
+        Task<(bool success, Guid id, string roles)> AuthorizeUserAsync(string usernameOrEmail, string password);
+
+
 
     }
 }

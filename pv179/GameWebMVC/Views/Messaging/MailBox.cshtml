@@ -1,0 +1,51 @@
+﻿@model IEnumerable<BL.DTO.ChatDto>
+
+@{
+    ViewBag.Title = "MailBox";
+}
+
+<h2>MailBox</h2>
+
+<p>
+    @Html.ActionLink("Create New", "NewChat")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastMessageTimestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SenderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastMessageTimestamp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sender.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Receiver.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Chat", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -73,6 +73,14 @@ namespace BL.Facades
             }          
         }
 
+        public async Task<CharacterDto> GetCharacterAccordingToNameAsync(string name)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _characterService.GetCharacterAccordingToNameAsync(name);
+            }
+        }
+
         /// <summary>
         /// Gets character according to ID
         /// </summary>
