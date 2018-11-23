@@ -1,4 +1,5 @@
 ﻿using BL.DTO.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace BL.DTO
         public string Text { get; set; }
 
         public Guid? AuthorId { get; set; }
+        [JsonIgnore]
         public CharacterDto Author { get; set; }
 
         public DateTime Timestamp { get; set; }

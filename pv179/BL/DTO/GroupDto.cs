@@ -1,4 +1,5 @@
 ﻿using BL.DTO.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,7 @@ namespace BL.DTO
         public string Picture { get; set; }
 
         public ICollection<CharacterDto> Members { get; set; }
-
+        [JsonIgnore]
         public ICollection<GroupPostDto> Wall { get; set; }
 
         [StringLength(2048, ErrorMessage = "Popis skupiny môže mať max. 2048 znakov")]

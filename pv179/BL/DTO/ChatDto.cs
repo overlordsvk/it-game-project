@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BL.DTO.Common;
+using Newtonsoft.Json;
 
 namespace BL.DTO
 {
@@ -10,6 +11,7 @@ namespace BL.DTO
         [MaxLength(256)]
         public string Subject { get; set; }
 
+        [JsonIgnore]
         public ICollection<MessageDto> Messages { get; set; }
 
         public DateTime? LastMessageTimestamp { get; set; }

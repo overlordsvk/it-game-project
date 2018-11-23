@@ -34,6 +34,9 @@ namespace GameWebMVC.Controllers
         // GET: Group
         public ActionResult Index()
         {
+            var creator = Session["accountId"] as Guid?; // TODO - use when user is logged
+            if (!creator.HasValue)
+                return View("Login","Account");
             return View();
         }
 
@@ -42,6 +45,7 @@ namespace GameWebMVC.Controllers
         {
             var model = await groupFacade.GetGroupAsync(id);
             return View("Details", model);
+            //view members
         }
 
         // GET: Group/Create
@@ -56,13 +60,11 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                var creator = Session["accountId"] as Guid?; // TO DO - use when user is logged
-                group.Id = Guid.Parse("8cb7a3a7-164a-4ad2-bc12-868e5878cc31");
-
+                var creator = Session["accountId"] as Guid?; // TODO - use when user is logged
                 group.Picture = "/Img/default.jpg";
-
-                var newGroupId = await groupFacade.CreateGroup(Guid.Parse("5092aae4-3f07-4a0e-afbb-bc094a3cc73e"), group);
+                if (!creator.HasValue)
+                    return View("Login","Account");
+                var newGroupId = await groupFacade.CreateGroup(creator.Value, group);
                 return RedirectToAction("Details", new { id = newGroupId }); //redirect to detail
             }
             catch
@@ -74,7 +76,6 @@ namespace GameWebMVC.Controllers
         // GET: Group/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
-            //Session["groupId"] = id;
             var group = await groupFacade.GetGroupAsync(id);
             return View(new GroupImageModel{ Group = group, File = null });
         }
@@ -124,35 +125,5 @@ namespace GameWebMVC.Controllers
 
             return View("List", result.Items);
         }
-
-        public ActionResult Upload()
-        {
-            return View();
-        }
-
-        // UPLOAD
-        [HttpPost]
-        public  ActionResult Upload(HttpPostedFileBase file)
-        {
-            if (file != null && file.ContentLength > 0)  
-                try 
-                {  
-                    string path = Path.Combine(Server.MapPath("~/Img"),  
-                       Path.GetFileName(file.FileName));
-
-                    file.SaveAs(path);  
-                    ViewBag.Message = "Your message for success";  
-                }  
-                catch (Exception ex)  
-                {  
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();  
-                }  
-            else 
-            {  
-                ViewBag.Message = "Please select file";  
-            }  
-            return View();  
-        }
-
     }
 }

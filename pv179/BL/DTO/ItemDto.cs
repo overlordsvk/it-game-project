@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Game.DAL.Enums;
+using Newtonsoft.Json;
 
 namespace BL.DTO
 {
@@ -29,6 +30,7 @@ namespace BL.DTO
         public bool Equipped { get; set; }
 
         public Guid? OwnerId { get; set; }
+        [JsonIgnore]
         public CharacterDto Owner { get; set; }
 
         public ItemType ItemType { get; set; }
