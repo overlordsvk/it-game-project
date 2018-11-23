@@ -12,12 +12,18 @@ namespace WebAPI.Models
     {
         public CharacterFacade CharacterFacade { get; set; }
 
-        [HttpGet, Route("api/Characters/List")]
-        public async Task<IEnumerable<CharacterDto>> List(string sort = null, bool asc = true, string name = null, int scoreMin = int.MinValue, int scoreMax = int.MaxValue, int pageSize = 50, int pageNumber = 1)
+        [HttpGet]
+        public async Task<IEnumerable<CharacterDto>> List(string sort = null, 
+                                                        bool asc = true, 
+                                                        string groupId = null, 
+                                                        string name = null, 
+                                                        int scoreMin = int.MinValue, 
+                                                        int scoreMax = int.MaxValue, 
+                                                        int pageSize = 50, 
+                                                        int pageNumber = 1)
         {
             var filter = new CharacterFilterDto
             {
-                //GroupId = groupId.Value,
                 Name = name,
                 PageSize = pageSize,
                 RequestedPageNumber = pageNumber,
@@ -26,11 +32,11 @@ namespace WebAPI.Models
                 SortAscending = asc,
                 SortCriteria = sort
             };
-            var characters = (await CharacterFacade.GetCharactersByFilterAsync(filter)).Items;
-            foreach (var character in characters)
-            {
-                character.Id = Guid.Empty;
+            if (groupId != null)
+            { 
+                filter.GroupId = Guid.Parse(groupId);
             }
+            var characters = (await CharacterFacade.GetCharactersByFilterAsync(filter)).Items;
             return characters;
         }
     }
