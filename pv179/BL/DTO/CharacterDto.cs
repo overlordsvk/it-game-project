@@ -1,7 +1,10 @@
 ﻿using BL.DTO.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
 
 namespace BL.DTO
 {
@@ -39,16 +42,22 @@ namespace BL.DTO
 
         [Range(0, 10, ErrorMessage = "0-10")]
         public int Luck { get; set; }
-
+        
+        [JsonIgnore]
         public ICollection<ItemDto> Items { get; set; } = new List<ItemDto>();
 
+        [JsonIgnore]
         public ICollection<ChatDto> SenderChats { get; set; } = new List<ChatDto>();
+        [JsonIgnore]
         public ICollection<ChatDto> ReceiverChats { get; set; } = new List<ChatDto>();
 
+        [JsonIgnore]
         public ICollection<FightDto> AttackerFights { get; set; } = new List<FightDto>();
+        [JsonIgnore]
         public ICollection<FightDto> DefenderFights { get; set; } = new List<FightDto>();
-
+        
         public Guid? GroupId { get; set; }
+        [JsonIgnore]
         public GroupDto Group { get; set; }
 
         public bool IsGroupAdmin { get; set; }
