@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Game.DAL.Entities;
 using Game.DAL.Enums;
 using Game.DAL.Entity.Entities;
+using System.Security.Cryptography;
 
 namespace Game.DAL.Entity.Initializers
 {
@@ -29,6 +30,10 @@ namespace Game.DAL.Entity.Initializers
         public static readonly Guid _guid18 = Guid.Parse( "5fd2c0ea-f31d-482b-a1b7-4650495ad346");
         public static readonly Guid _guid19 = Guid.Parse( "abb4f59a-8fed-4060-ac96-be827992054c");
         public static readonly Guid _guid20 = Guid.Parse( "46f7bc5a-c043-4722-9438-6e6e7640fc71");
+
+        private const int PBKDF2IterCount = 100000;
+        private const int PBKDF2SubkeyLength = 160 / 8;
+        private const int saltSize = 128 / 8;
 
         protected override void Seed(GameDbContext context)
         {
@@ -122,39 +127,40 @@ namespace Game.DAL.Entity.Initializers
                 itemBow
             };
 
-
+            var pass1 = CreateHash("12345678");
             Account accountPeter = new Account
             {
                 Id = _guid7,
                 Username = "Pieter",
                 Email = "pieter@gmail.com",
-                PasswordHash = "12345678",
-                PasswordSalt = "12345678",
-                Roles = "Admin",
+                PasswordHash = pass1.Item1,
+                PasswordSalt = pass1.Item2,
+                Roles = "Admin, HasCharacter",
                 Character = Ch,
             };
 
-            
 
+            var pass2 = CreateHash("IvanJeBoh");
             var accountIvan = new Account
             {
                 Id = _guid8,
                 Username = "Ivan",
                 Email = "navi@ivan.com",
-                PasswordHash = "IvanJeBoh",
-                PasswordSalt = "IvanJeBoh",
-                Roles = "",
+                PasswordHash = pass2.Item1,
+                PasswordSalt = pass2.Item2,
+                Roles = ", HasCharacter",
                 Character = characterSlayer
             };
 
+            var pass3 = CreateHash("QWE123975");
             var accountVedro = new Account
             {
                 Id = _guid9,
                 Username = "Vedro",
                 Email = "vedro@vemail.com",
-                PasswordHash = "QWE123975",
-                PasswordSalt = "QWE123975",
-                Roles = "",
+                PasswordHash = pass3.Item1,
+                PasswordSalt = pass3.Item2,
+                Roles = ", HasCharacter",
                 Character = characterWalker
             };
 
@@ -243,6 +249,17 @@ namespace Game.DAL.Entity.Initializers
             context.GroupPosts.Add(gpost);
 
             base.Seed(context);
+        }
+
+        private Tuple<string, string> CreateHash(string password)
+        {
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount))
+            {
+                byte[] salt = deriveBytes.Salt;
+                byte[] subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+
+                return Tuple.Create(Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
+            }
         }
     }
 }

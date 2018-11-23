@@ -39,6 +39,7 @@ namespace BL.Facades
                 {
                     return Guid.Empty;
                 }
+                chat.LastMessageTimestamp = DateTime.Now;
                 var chatId = _chatService.Create(chat);
                 await uow.Commit();
                 return chatId;

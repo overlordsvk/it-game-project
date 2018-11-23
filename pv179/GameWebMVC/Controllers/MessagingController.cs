@@ -11,47 +11,39 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
+    [Authorize]
     public class MessagingController : Controller
     {
-        public MessagingFacade messagingFacade { get; set; }
-        public CharacterFacade characterFacade { get; set; }
-        // GET: Messaging
-        public async Task<ActionResult> Index()
-        {
-            //messagingFacade.
+        public MessagingFacade MessagingFacade { get; set; }
+        public CharacterFacade CharacterFacade { get; set; }
 
-            return View();
-        }
 
-        // GET: Messaging/Details/5
         public async Task<ActionResult> MailBox()
         {
-            var id = Session["accountId"] as Guid?;
-            var character = await characterFacade.GetCharacterById(id.Value);
+            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             var chats = new List<ChatDto>();
             chats.AddRange(character.SenderChats);
             chats.AddRange(character.ReceiverChats);
+            chats = chats.OrderByDescending(x => x.LastMessageTimestamp).ToList();
             return View(chats);
         }
 
-        // GET: Messaging/Create
         public ActionResult NewChat()
         {
             return View();
         }
 
-        // POST: Messaging/Create
         [HttpPost]
         public async Task<ActionResult> NewChat(ChatCreate chat)
         {
             try
             {
-                var receiver = await characterFacade.GetCharacterAccordingToNameAsync(chat.ReceiverName);
+                var receiver = await CharacterFacade.GetCharacterAccordingToNameAsync(chat.ReceiverName);
                 if (receiver == null)
                 {
                     return View(chat);
                 }
-                var id = Session["accountId"] as Guid?;
+                var id = Guid.Parse(User.Identity.Name);
 
                 var chatDto = new ChatDto
                 {
@@ -60,7 +52,7 @@ namespace GameWebMVC.Controllers
                     Subject = chat.Subject,
 
                 };
-                await messagingFacade.CreateChat(chatDto);
+                await MessagingFacade.CreateChat(chatDto);
 
                 return RedirectToAction("Mailbox");
             }
@@ -73,7 +65,7 @@ namespace GameWebMVC.Controllers
 
         public async Task<ActionResult> Chat(Guid id)
         {
-            var chat = await messagingFacade.GetChatById(id);
+            var chat = await MessagingFacade.GetChatById(id);
             if (chat == null)
             {
                 return RedirectToAction("Mailbox");

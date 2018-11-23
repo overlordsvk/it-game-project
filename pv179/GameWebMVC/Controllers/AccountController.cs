@@ -27,7 +27,6 @@ namespace GameWebMVC.Controllers
             try
             {
                 var id = await AccountFacade.RegisterAccount(accountCreateDto);
-                //FormsAuthentication.SetAuthCookie(id.ToString(), false);
 
                 var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
                     DateTime.Now.AddMinutes(30), false, "");
@@ -45,13 +44,15 @@ namespace GameWebMVC.Controllers
 
         }
 
-        // GET: Account/Create
         public ActionResult Login()
         {
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Character");
+            }
             return View();
         }
 
-        // POST: Account/Create
         [HttpPost]
         public async Task<ActionResult> Login(AccountLoginModel login, string returnUrl)
         {
@@ -59,8 +60,6 @@ namespace GameWebMVC.Controllers
             (bool success, Guid id, string roles) = await AccountFacade.Login(login.usernameOrEmail, login.password);
             if (success)
             {
-                //FormsAuthentication.SetAuthCookie(id.ToString(), false);
-
                 var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
                     DateTime.Now.AddMinutes(30), false, roles);
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
@@ -83,10 +82,8 @@ namespace GameWebMVC.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Logout()
+        public ActionResult Logout()
         {
-            //var customer = await AccountFacade.GetAccountAccordingToUsernameAsync(User.Identity.Name);
-
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }

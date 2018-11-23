@@ -19,10 +19,6 @@ namespace GameWebMVC.Controllers
         // GET: Character
         public async Task<ActionResult> Index()
         {
-            //if(id == null)
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             if (character == null)
             {
@@ -44,9 +40,7 @@ namespace GameWebMVC.Controllers
             try
             {
                 characterDto.Health = characterDto.Endurance * 10;
-                var id = User.Identity.Name;
-                var guid = Guid.Parse(id);
-                var character = await CharacterFacade.CreateCharacter(guid, characterDto);
+                var character = await CharacterFacade.CreateCharacter(Guid.Parse(User.Identity.Name), characterDto);
                 return RedirectToAction("Index");
             }
             catch
