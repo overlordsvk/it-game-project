@@ -94,6 +94,7 @@ namespace BL.Facades
                 character.Id = AccountId;
                 var acc = await _accountService.GetAsync(AccountId);
                 acc.Character = character;
+                acc.Roles += ", HasCharacter";
                 await _accountService.Update(acc);
                 await uow.Commit();
                 return AccountId;
