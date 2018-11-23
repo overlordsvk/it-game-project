@@ -71,10 +71,14 @@ namespace GameWebMVC.Controllers
         }
 
 
-        public ActionResult Chat(Guid id)
+        public async Task<ActionResult> Chat(Guid id)
         {
-            messagingFacade.
-            return View();
+            var chat = await messagingFacade.GetChatById(id);
+            if (chat == null)
+            {
+                return RedirectToAction("Mailbox");
+            }
+            return View(chat.Messages);
 
         }
     }

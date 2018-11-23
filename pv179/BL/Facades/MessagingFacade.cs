@@ -27,7 +27,7 @@ namespace BL.Facades
 
         public async Task<Guid> CreateChat(ChatDto chat)
         {
-            using(var uow = UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 if (!chat.SenderId.HasValue || !chat.ReceiverId.HasValue || string.IsNullOrWhiteSpace(chat.Subject))
                 {
@@ -47,7 +47,7 @@ namespace BL.Facades
 
         public async Task<Guid> SendMessage(MessageDto message)
         {
-            using(var uow = UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 if (!message.AuthorId.HasValue)
                 {
@@ -55,7 +55,7 @@ namespace BL.Facades
                 }
                 var sender = await _characterService.GetAsync(message.AuthorId.Value, withIncludes: false);
                 var chat = await _chatService.GetAsync(message.ChatId, withIncludes: false);
-                if(sender == null || chat == null)
+                if (sender == null || chat == null)
                 {
                     return Guid.Empty;
                 }
@@ -68,7 +68,13 @@ namespace BL.Facades
             }
         }
 
-        
+        public async Task<ChatDto> GetChatById(Guid id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+            return await _chatService.GetAsync(id);
+            }
+        }
     }
 
 

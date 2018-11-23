@@ -7,43 +7,39 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace GameWebMVC.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountFacade accountFacade { get; set; }
+        public AccountFacade AccountFacade { get; set; }
 
-        // GET: Account
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        // GET: Account/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Account/Create
         public ActionResult Register()
         {
             return View();
         }
 
-        // POST: Account/Create
         [HttpPost]
-        public async Task<ActionResult> Register(AccountCreateDto createDto)
+        public async Task<ActionResult> Register(AccountCreateDto accountCreateDto)
         {
             try
             {
-                var accountId = await accountFacade.RegisterAccount(createDto);
-                Session["accountId"] = accountId;
+                var id = await AccountFacade.RegisterAccount(accountCreateDto);
+                //FormsAuthentication.SetAuthCookie(id.ToString(), false);
+
+                var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
+                    DateTime.Now.AddMinutes(30), false, "");
+                string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                HttpContext.Response.Cookies.Add(authCookie);
+
                 return RedirectToAction("Create", "Character");
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
+                ModelState.AddModelError("Username", "Account with that username already exists!");
                 return View();
             }
 
@@ -57,72 +53,44 @@ namespace GameWebMVC.Controllers
 
         // POST: Account/Create
         [HttpPost]
-        public async Task<ActionResult> Login(AccountLogin login)
+        public async Task<ActionResult> Login(AccountLoginModel login, string returnUrl)
         {
-            try
+
+            (bool success, Guid id, string roles) = await AccountFacade.Login(login.usernameOrEmail, login.password);
+            if (success)
             {
-                var account = await accountFacade.Login(login.usernameOrEmail, login.password);
-                if (account == null)
+                //FormsAuthentication.SetAuthCookie(id.ToString(), false);
+
+                var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
+                    DateTime.Now.AddMinutes(30), false, roles);
+                string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                HttpContext.Response.Cookies.Add(authCookie);
+
+                var decodedUrl = "";
+                if (!string.IsNullOrEmpty(returnUrl))
                 {
-                    return View();
+                    decodedUrl = Server.UrlDecode(returnUrl);
                 }
-                Session["accountId"] = account.Id;
-                if (account.Character == null)
+
+                if (Url.IsLocalUrl(decodedUrl))
                 {
-                    return RedirectToAction("Create", "Character");
+                    return Redirect(decodedUrl);
                 }
-                return RedirectToAction("Index", "Character");
+                return RedirectToAction("Index", "Home");
             }
-            catch (Exception)
-            {
-                return View();
-            }
-
-        }
-
-
-        // GET: Account/Edit/5
-        public ActionResult Edit(int id)
-        {
+            ModelState.AddModelError("", "Wrong username or password!");
             return View();
         }
 
-        // POST: Account/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Logout()
         {
-            try
-            {
-                // TODO: Add update logic here
+            //var customer = await AccountFacade.GetAccountAccordingToUsernameAsync(User.Identity.Name);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
-        // GET: Account/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Account/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

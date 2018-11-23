@@ -17,9 +17,11 @@ namespace BL.DTO
         public string Email { get; set; }
 
         [StringLength(64, MinimumLength = 8, ErrorMessage = "Heslo musí mať 8 až 64 znakov")]
-        public string Password { get; set; }
+        public string PasswordSalt { get; set; } 
 
-        public bool IsAdmin { get; set; }
+        public string PasswordHash { get; set; }
+
+        public string Roles { get; set; }
 
         public CharacterDto Character { get; set; }
 
