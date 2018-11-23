@@ -157,8 +157,9 @@ namespace DAL.EntityFrameWork.Tests.Config
             {
                 Username = "Pieter",
                 Email = "pieter@gmail.com",
-                Password = "12345678",
-                IsAdmin = true
+                PasswordHash = "12345678",
+                PasswordSalt = "12345678",
+                Roles = ""
             };
 
 
@@ -167,8 +168,9 @@ namespace DAL.EntityFrameWork.Tests.Config
             {
                 Username = "Ivan",
                 Email = "navi@ivan.com",
-                Password = "IvanJeBoh",
-                IsAdmin = false,
+                PasswordHash = "IvanJeBoh",
+                PasswordSalt = "IvanJeBoh",
+                Roles = "",
                 Character = characterSlayer
             };
 
@@ -176,8 +178,9 @@ namespace DAL.EntityFrameWork.Tests.Config
             {
                 Username = "Vedro",
                 Email = "vedro@vemail.com",
-                Password = "QWE123975",
-                IsAdmin = false,
+                PasswordHash = "QWE123975",
+                PasswordSalt = "QWE123975",
+                Roles = "",
                 Character = characterWalker
             };
 

@@ -51,15 +51,6 @@ namespace IntegracneTesty
 
         }
 
-        [TestMethod]
-        public async Task LoginAccount()
-        {
-            var Ivan = await accountFacade.GetAccountAccordingToUsernameAsync(Konstanty.accountIvan.Username);
-            var result = await accountFacade.Login(Konstanty.accountIvan.Username, Konstanty.accountIvan.Password);
-
-            Assert.AreEqual(result.Id, Ivan.Id);
-
-        }
 
         [TestMethod]
         public async Task RegisterAccount()

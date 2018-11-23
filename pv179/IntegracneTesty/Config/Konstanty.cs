@@ -5,12 +5,13 @@ using Game.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace IntegracneTesty.Config
 {
-    public static class Konstanty
+    public class Konstanty
     {
         public static readonly Guid guidItemSekera = Guid.Parse("629fd444-0146-4b94-a928-e62a4ab51f42");
         public static readonly Guid guidItemMec = Guid.Parse("84124fe7-e59b-411d-a76e-73b81bf233c2");
@@ -32,6 +33,7 @@ namespace IntegracneTesty.Config
         public static readonly Guid _guid18 = Guid.Parse("5fd2c0ea-f31d-482b-a1b7-4650495ad346");
         public static readonly Guid _guid19 = Guid.Parse("abb4f59a-8fed-4060-ac96-be827992054c");
         public static readonly Guid _guid20 = Guid.Parse("46f7bc5a-c043-4722-9438-6e6e7640fc71");
+
 
 
         public static readonly Item itemSekera = new Item
@@ -131,8 +133,9 @@ namespace IntegracneTesty.Config
             Id = guidAccountPeter,
             Username = "Pieter",
             Email = "pieter@gmail.com",
-            Password = "12345678",
-            IsAdmin = true,
+            PasswordSalt = "12345678",
+            PasswordHash = "12345678",
+            Roles = "Admin",
             Character = characterBela,
         };
 
@@ -143,8 +146,9 @@ namespace IntegracneTesty.Config
             Id = guidAccountIvan,
             Username = "Ivan",
             Email = "navi@ivan.com",
-            Password = "IvanJeBoh",
-            IsAdmin = false,
+            PasswordSalt = "IvanJeBoh",
+            PasswordHash = "IvanJeBoh",
+            Roles = "",
             Character = characterSlayer
         };
 
@@ -153,8 +157,9 @@ namespace IntegracneTesty.Config
             Id = guidAccountVedro,
             Username = "Vedro",
             Email = "vedro@vemail.com",
-            Password = "QWE123975",
-            IsAdmin = false,
+            PasswordSalt = "QWE123975",
+            PasswordHash = "QWE123975",
+            Roles = "",
             Character = characterWalker
         };
 
@@ -219,5 +224,6 @@ namespace IntegracneTesty.Config
             Timestamp = DateTime.Now,
 
         };
+
     }
 }

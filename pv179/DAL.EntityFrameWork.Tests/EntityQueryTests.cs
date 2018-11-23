@@ -20,8 +20,9 @@ namespace DAL.EntityFrameWork.Tests
             Id = Guid.Parse("b49c2b2f-99b0-4f21-8655-70b0d2c7c5d2"),
             Username = "Ivan",
             Email = "navi@ivan.com",
-            Password = "IvanJeBoh",
-            IsAdmin = false,
+            PasswordHash = "IvanJeBoh",
+            PasswordSalt = "IvanJeBoh",
+            Roles = "",
 
         };
 

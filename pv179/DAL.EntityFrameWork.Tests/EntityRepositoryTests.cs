@@ -40,8 +40,9 @@ namespace DAL.EntityFrameWork.Tests
         {
             Username = "Ivan",
             Email = "navi@ivan.com",
-            Password = "IvanJeBoh",
-            IsAdmin = false,
+            PasswordHash = "IvanJeBoh",
+            PasswordSalt = "IvanJeBoh",
+            Roles = "",
             Id = guid1
         };
 
@@ -49,8 +50,9 @@ namespace DAL.EntityFrameWork.Tests
         {
             Username = "Jozo",
             Email = "bob@pokec.sk",
-            Password = "dota4life",
-            IsAdmin = false,
+            PasswordHash = "dota4life",
+            PasswordSalt = "dota4life",
+            Roles = "",
             Id = guid3
         };
 
