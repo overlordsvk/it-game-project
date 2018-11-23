@@ -15,13 +15,13 @@ namespace BL.DTO
         [MaxLength(256)]
         public string Name { get; set; }
 
-        [Range(0, 500)]
+        [Range(1, 500)]
         public int Attack { get; set; }
 
-        [Range(0, 500)]
+        [Range(1, 500)]
         public int Defense { get; set; }
 
-        [Range(0, 100)]
+        [Range(1, 10)]
         public int Weight { get; set; }
 
         [Range(0, int.MaxValue)]

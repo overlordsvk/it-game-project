@@ -26,6 +26,7 @@ namespace BL.Facades
         private readonly IGroupService _groupService;
         private readonly IItemService _itemService;
         private readonly IFightService _fightService;
+        private readonly Random _random = new Random();
 
         public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
         {
@@ -225,7 +226,7 @@ namespace BL.Facades
                 var attackerWeapon = await GetEquippedWeapon(attackerId);
                 var defenderArmor = await GetEquippedArmor(defenderId);
                 var defenderWeapon = await GetEquippedWeapon(defenderId);
-                var attackSuccess = ResolveAttack(attacker, defender);
+                var attackSuccess = ResolveAttack(attacker, attackerWeapon, attackerArmor, defender, defenderWeapon, defenderArmor);
                 Guid fightId = _fightService.Create(new FightDto
                     {
                         Id = Guid.NewGuid(),
@@ -295,10 +296,61 @@ namespace BL.Facades
         }
 
 
-        private bool ResolveAttack(CharacterDto attacker, CharacterDto defender)
-        {
-            // TO-DO
-            return true;
+        private bool ResolveAttack(CharacterDto attacker, ItemDto attackerWeapon, ItemDto attackerArmor, CharacterDto defender, ItemDto defenderWeapon, ItemDto defenderArmor)
+        {   
+            var attackerHealth = attacker.Health * 10;
+            var defenderHealth = defender.Health * 10;
+
+            var attDamage = 10;
+            var attDefense = 10;
+            var attackerWeight = 0;
+
+            var defDamage = 10;
+            var defDefense = 10;
+            var defenderWeight = 0;
+
+            if (attackerWeapon != null)
+            {
+                attDamage += attackerWeapon.Attack;
+                attDefense += attackerWeapon.Defense;
+                attackerWeight += attackerWeapon.Weight;
+            }
+            if (attackerArmor != null)
+            {
+                attDamage += attackerArmor.Attack;
+                attDefense += attackerArmor.Defense;
+                attackerWeight += attackerArmor.Weight;
+            }
+            if (defenderWeapon != null)
+            {
+                defDamage += defenderWeapon.Attack;
+                defDefense += defenderWeapon.Defense;
+                defenderWeight += defenderWeapon.Weight;
+            }
+            if (defenderArmor != null)
+            {
+                defDamage += defenderArmor.Attack;
+                defDefense += defenderArmor.Defense;
+                defenderWeight += defenderArmor.Weight;
+            }
+
+            attDamage = ((attacker.Strength + attacker.Intelligence + attacker.Charisma) * attDamage) / 12;
+            attDefense = ((attacker.Agility + attacker.Endurance + attacker.Perception) * attDefense) / 12;
+            defDamage = ((defender.Strength + defender.Intelligence + defender.Charisma) * defDamage) / 12;
+            defDefense = ((defender.Agility + defender.Endurance + defender.Perception) * defDefense) / 12;
+
+            while (attackerHealth > 0 || defenderHealth > 0)
+            {
+                if (_random.Next(0,100) < (50 + attacker.Luck - attackerWeight))
+                    defenderHealth -= attDamage * (1 - (defDefense / 1500));
+                if (defenderHealth < 0)
+                    return true;
+                if (_random.Next(0,100) < (50 + defender.Luck - defenderWeight))
+                    attackerHealth -= defDamage * (1 - (attDefense / 1500));
+                if (attackerHealth < 0)
+                    return false;
+            }
+            return false;
         }
     }
 }
