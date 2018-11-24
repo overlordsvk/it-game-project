@@ -82,7 +82,6 @@ namespace GameWebMVC.Controllers
         #region Remove
         public async Task<ActionResult> Remove()
         {
-
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             return View(character);
         }

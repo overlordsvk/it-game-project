@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "HasCharacter")]
     public class GroupController : Controller
     {
         #region SessionKey constants
@@ -29,15 +29,9 @@ namespace GameWebMVC.Controllers
         public GroupFacade groupFacade { get; set; }
         #endregion
 
-
-
-
         // GET: Group
         public ActionResult Index()
         {
-            var creator = Session["accountId"] as Guid?; // TODO - use when user is logged
-            if (!creator.HasValue)
-                return View("Login","Account");
             return View();
         }
 
@@ -59,22 +53,13 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(GroupDto group)
         {
-            try
-            {
-                var creator = Session["accountId"] as Guid?; // TODO - use when user is logged
-                group.Picture = "/Img/default.jpg";
-                if (!creator.HasValue)
-                    return View("Login","Account");
-                var newGroupId = await groupFacade.CreateGroup(creator.Value, group);
-                return RedirectToAction("Details", new { id = newGroupId }); //redirect to detail
-            }
-            catch
-            {
-                return View(group);
-            }
+            group.Picture = "/Img/default.jpg";
+            var newGroupId = await groupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
+            return RedirectToAction("Details", new { id = newGroupId });
         }
 
         // GET: Group/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(Guid id)
         {
             var group = await groupFacade.GetGroupAsync(id);
@@ -82,7 +67,7 @@ namespace GameWebMVC.Controllers
         }
 
         // POST: Group/Edit/5
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(GroupImageModel model)
         {
             try
@@ -107,6 +92,7 @@ namespace GameWebMVC.Controllers
         }
 
         // GET: Group/Delete/5
+
         public async Task<ActionResult> Delete(Guid id)
         {
             // TO DO - check authorization
