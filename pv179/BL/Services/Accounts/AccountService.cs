@@ -63,7 +63,7 @@ namespace BL.Services.Accounts
             return Create(newAccount);
         }
 
-        public async Task<(bool success, Guid id, string roles)> AuthorizeUserAsync(string usernameOrEmail, string password)
+        public async Task<(bool success, Guid id, string roles)> AuthorizeAccountAsync(string usernameOrEmail, string password)
         {
             var emailAccount = await GetAccountAccordingToEmailAsync(usernameOrEmail);
             var usernameAccount = await GetAccountAccordingToUsernameAsync(usernameOrEmail);

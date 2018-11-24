@@ -44,12 +44,32 @@ namespace BL.Services.Items
         /// <returns>Filtered results</returns>
         Task<QueryResultDto<ItemDto, ItemFilterDto>> ListItemsAsync(ItemFilterDto filter);
 
+        /// <summary>
+        /// Gets equipped weapon
+        /// </summary>
+        /// <param name="id">Character id</param>
+        /// <returns>Equipped weapon</returns>
         Task<ItemDto> GetEquippedWeapon(Guid id);
 
+        /// <summary>
+        /// Gets equipped armor
+        /// </summary>
+        /// <param name="id">Character id</param>
+        /// <returns>Equipped armor</returns>
         Task<ItemDto> GetEquippedArmor(Guid id);
 
+        /// <summary>
+        /// Create new item
+        /// </summary>
+        /// <returns>New item</returns>
         ItemDto GetNewItem();
 
+        /// <summary>
+        /// Equip Item
+        /// </summary>
+        /// <param name="characterId">Character id</param>
+        /// <param name="itemId">Item id</param>
+        /// <returns>True if item was equipped</returns>
         Task<bool> EquipItem(Guid characterId, Guid itemId);
 
     }

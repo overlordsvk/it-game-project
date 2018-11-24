@@ -16,7 +16,6 @@ namespace BL.DTO
         [EmailAddress(ErrorMessage = "Neplatný formát")]
         public string Email { get; set; }
 
-        [StringLength(64, MinimumLength = 8, ErrorMessage = "Heslo musí mať 8 až 64 znakov")]
         public string PasswordSalt { get; set; } 
 
         public string PasswordHash { get; set; }

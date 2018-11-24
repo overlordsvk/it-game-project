@@ -21,7 +21,9 @@ namespace Game.DAL.PetaPoco.Entities
 
         public string Email { get; set; }
 
-        public string Password { get; set; }
+        public string PasswordSalt { get; set; }
+
+        public string PasswordHash { get; set; }
 
         public bool IsAdmin { get; set; }
 
