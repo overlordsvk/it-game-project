@@ -4,11 +4,12 @@ using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DAL.EntityFrameWork.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class EntityRepositoryTests
     {
         private readonly IUnitOfWorkProvider unitOfWorkProvider = Initializer.Container.Resolve<IUnitOfWorkProvider>();
@@ -56,7 +57,7 @@ namespace DAL.EntityFrameWork.Tests
             Id = guid3
         };
 
-        [TestMethod]
+        [Test]
         public async Task GetAccountAsync()
         {
             Account Ivan;
@@ -66,10 +67,10 @@ namespace DAL.EntityFrameWork.Tests
                 Ivan = await accountRepository.GetAsync(guid1);
             }
 
-            Assert.AreEqual(Ivan.Email, accountIvan.Email);
+            Assert.AreEqual(Ivan.Username, accountIvan.Username);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetAccountWithIncludesAsync()
         {
             Account Ivan;
@@ -82,7 +83,7 @@ namespace DAL.EntityFrameWork.Tests
             Assert.AreEqual(Ivan.Character.Name, characterSlayer.Name);
         }
 
-        [TestMethod]
+        [Test]
         public async Task GetCharacterAsync()
         {
             Character slayer;
@@ -96,7 +97,7 @@ namespace DAL.EntityFrameWork.Tests
             Assert.AreEqual(slayer.Name, characterSlayer.Name);
         }
 
-        [TestMethod]
+        [Test]
         public async Task CreateAccount()
         {
             Account jozo;
@@ -110,7 +111,7 @@ namespace DAL.EntityFrameWork.Tests
             Assert.AreEqual(jozo.Username, accountJozo.Username);
         }
 
-        [TestMethod]
+        [Test]
         public async Task UpdateAccount()
         {
             var ivan = accountIvan;
