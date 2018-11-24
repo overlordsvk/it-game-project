@@ -15,7 +15,7 @@ namespace DAL.EntityFrameWork.Tests
     [SetUpFixture]
     public class Initializer
     {
-        internal static readonly IWindsorContainer Container = new WindsorContainer().Install(new EntityFramewokrInstaller());
+        internal static readonly IWindsorContainer Container = new WindsorContainer().Install(new EntityFrameworkInstaller());
 
         /// <summary>
         /// Initializes all Business Layer tests

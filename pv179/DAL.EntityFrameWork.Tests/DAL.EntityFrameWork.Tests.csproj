@@ -76,7 +76,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\EntityFramewokrInstaller.cs" />
+    <Compile Include="Config\EntityFrameworkInstaller.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="EntityRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

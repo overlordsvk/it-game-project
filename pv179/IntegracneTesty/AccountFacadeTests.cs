@@ -43,16 +43,6 @@ namespace IntegracneTesty
         }
 
         [TestMethod]
-        public async Task GetAllAccountsAsyncReturnAll()
-        {
-            var result = await accountFacade.GetAllAccountsAsync();
-
-            Assert.AreEqual(result.Items.ToList().Count, 4);
-
-        }
-
-
-        [TestMethod]
         public async Task RegisterAccount()
         {
             AccountCreateDto accountToRegister = new AccountCreateDto

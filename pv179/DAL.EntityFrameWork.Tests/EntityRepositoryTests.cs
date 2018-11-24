@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
-using Game.Infrastructure.Entity.UnitOfWork;
 using Game.Infrastructure.UnitOfWork;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
 namespace DAL.EntityFrameWork.Tests
