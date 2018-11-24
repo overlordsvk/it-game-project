@@ -20,7 +20,7 @@ namespace DAL.EntityFrameWork.Tests
         /// <summary>
         /// Initializes all Business Layer tests
         /// </summary>
-        [OneTimeSetUp]
+        [SetUp]
         public void Initialize()
         {
             Effort.Provider.EffortProviderConfiguration.RegisterProvider();

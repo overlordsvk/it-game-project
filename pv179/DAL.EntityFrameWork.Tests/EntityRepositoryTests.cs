@@ -39,7 +39,7 @@ namespace DAL.EntityFrameWork.Tests
         private readonly Account accountIvan = new Account
         {
             Username = "Ivan",
-            Email = "navi@ivan.com",
+            Email = "jozo@azet.sk",
             PasswordHash = "IvanJeBoh",
             PasswordSalt = "IvanJeBoh",
             Roles = "",

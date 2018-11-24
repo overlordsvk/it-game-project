@@ -47,7 +47,7 @@ namespace IntegracneTesty
         {
             var result = await accountFacade.GetAllAccountsAsync();
 
-            Assert.AreEqual(result.Items.ToList().Count, 3);
+            Assert.AreEqual(result.Items.ToList().Count, 4);
 
         }
 
