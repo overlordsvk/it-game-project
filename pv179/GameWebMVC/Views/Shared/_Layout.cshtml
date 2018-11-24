@@ -29,11 +29,10 @@
                     @if (!string.IsNullOrEmpty(ViewContext.HttpContext.User.Identity.Name))
                     {
                         <li>@Html.ActionLink("Character", "Index", "Character")</li>
-                        
                         <li>@Html.ActionLink("MailBox", "MailBox", "Messaging")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-
                     }
+                        <li>@Html.ActionLink("GroupList", "List", "Group")</li>
                 </ul>
             </div>
         </div>
@@ -42,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Game</p>
         </footer>
     </div>
 

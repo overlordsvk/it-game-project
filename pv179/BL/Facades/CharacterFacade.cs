@@ -125,6 +125,9 @@ namespace BL.Facades
                 {
                     return false;
                 }
+                var acc = await _accountService.GetAsync(CharacterId);
+                acc.Character = character;
+                acc.Roles.Replace(", HasCharacter", "");
                 _characterService.Delete(CharacterId);
                 await uow.Commit();
                 return true;
