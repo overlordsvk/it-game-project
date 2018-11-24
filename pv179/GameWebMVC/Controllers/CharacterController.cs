@@ -45,7 +45,7 @@ namespace GameWebMVC.Controllers
 
                 var cookie = FormsAuthentication.GetAuthCookie(User.Identity.Name, true);
                 var ticket = FormsAuthentication.Decrypt(cookie.Value);
-                var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData + ", HasCharacter");
+                var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData + ",HasCharacter");
                 cookie.Value = FormsAuthentication.Encrypt(newTicket);
                 cookie.Expires = newTicket.Expiration.AddMinutes(30);
                 HttpContext.Response.Cookies.Set(cookie);
@@ -101,7 +101,7 @@ namespace GameWebMVC.Controllers
 
             var cookie = FormsAuthentication.GetAuthCookie(User.Identity.Name, true);
             var ticket = FormsAuthentication.Decrypt(cookie.Value);
-            var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData.Replace(", HasCharacter", ""));
+            var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData.Replace(",HasCharacter", ""));
             cookie.Value = FormsAuthentication.Encrypt(newTicket);
             cookie.Expires = newTicket.Expiration.AddMinutes(30);
             HttpContext.Response.Cookies.Set(cookie);

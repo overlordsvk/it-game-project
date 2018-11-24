@@ -135,7 +135,7 @@ namespace Game.DAL.Entity.Initializers
                 Email = "pieter@gmail.com",
                 PasswordHash = pass1.Item1,
                 PasswordSalt = pass1.Item2,
-                Roles = "Admin, HasCharacter",
+                Roles = "Admin,HasCharacter",
                 Character = Ch,
             };
 
@@ -148,7 +148,7 @@ namespace Game.DAL.Entity.Initializers
                 Email = "navi@ivan.com",
                 PasswordHash = pass2.Item1,
                 PasswordSalt = pass2.Item2,
-                Roles = ", HasCharacter",
+                Roles = ",HasCharacter",
                 Character = characterSlayer
             };
 
@@ -160,7 +160,7 @@ namespace Game.DAL.Entity.Initializers
                 Email = "vedro@vemail.com",
                 PasswordHash = pass3.Item1,
                 PasswordSalt = pass3.Item2,
-                Roles = ", HasCharacter",
+                Roles = ",HasCharacter",
                 Character = characterWalker
             };
 
