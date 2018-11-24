@@ -119,7 +119,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _accountService.AuthorizeUserAsync(usernameOrEmail, password);
+                return await _accountService.AuthorizeAccountAsync(usernameOrEmail, password);
             }
         }
 

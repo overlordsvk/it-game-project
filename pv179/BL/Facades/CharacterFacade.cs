@@ -87,17 +87,18 @@ namespace BL.Facades
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Character by id</returns>
-        public async Task<Guid> CreateCharacter(Guid AccountId, CharacterDto character)
+        public async Task<Guid> CreateCharacter(Guid accountId, CharacterDto character)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                character.Id = AccountId;
-                var acc = await _accountService.GetAsync(AccountId);
-                acc.Character = character;
-                acc.Roles += ", HasCharacter";
-                await _accountService.Update(acc);
+                character.Id = accountId;
+                var account = await _accountService.GetAsync(accountId);
+                character.Health = character.Endurance * 100;
+                account.Character = character;
+                account.Roles += ", HasCharacter";
+                await _accountService.Update(account);
                 await uow.Commit();
-                return AccountId;
+                return accountId;
             }
         }
 

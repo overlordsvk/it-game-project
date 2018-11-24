@@ -43,7 +43,6 @@ namespace PV179Console
             Console.ReadKey();
 
             #region Tests
-            var mapper = new Mapper(new MapperConfiguration(MappingConfig.ConfigureMapping)).DefaultContext.Mapper;
             var dtoChar = new CharacterDto
             {
                 Name = "Harakter",
@@ -52,7 +51,7 @@ namespace PV179Console
             {
                 Email = "ja@skuska.cz",
                 Character = dtoChar,
-                IsAdmin = false,
+                Roles = "",
                 PasswordHash = "123456789",
                 Username = "Jano",
             };
@@ -115,22 +114,10 @@ namespace PV179Console
                 Agility = 5,
                 Luck = 9
             };
-            //characterBela.Items = new List<Item>
-            //{
-            //    itemAxe,
-            //    itemAxe2,
-            //    itemBow
-            //};
 
-            var chardto = new CharacterDto();
-            mapper.Map(dto, entity);
-            //Console.WriteLine(entity.Username + " =====> " + entity.Character.Name);
-            mapper.Map(entity, dto2);
-            //Console.WriteLine(dto2.Username + " =====> " + dto2.Character.Name);
 
-            mapper.Map(characterSlayer, chardto);
 
-            //Console.WriteLine($"{chardto.Name}  itemCount: {chardto.Items.Count}");
+
 
             var acccrdto = new AccountCreateDto
             {
@@ -153,106 +140,107 @@ namespace PV179Console
                 Username = "cccc"
             };
 
-            //using (var container = new WindsorContainer())
-            //{
-            //    container.Install(FromAssembly.This());
-            //    var accFacade = container.Resolve<AccountFacade>();
-            //    var grFacade = container.Resolve<GroupFacade>();
-            //    var characterFacade = container.Resolve<CharacterFacade>();
-            //    var messagingFacade = container.Resolve<MessagingFacade>();
-            //    var itemService = container.Resolve<IItemService>();
-            //    var uowp = container.Resolve<IUnitOfWorkProvider>();
+            using (var container = new WindsorContainer())
+            {
+                container.Install(FromAssembly.This());
+                var accFacade = container.Resolve<AccountFacade>();
+                var grFacade = container.Resolve<GroupFacade>();
+                var characterFacade = container.Resolve<CharacterFacade>();
+                var messagingFacade = container.Resolve<MessagingFacade>();
+                var itemService = container.Resolve<IItemService>();
+                var uowp = container.Resolve<IUnitOfWorkProvider>();
 
-            //    //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
-            //    //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
-            //    //Console.WriteLine(resew);
-            //    //Console.WriteLine("AccFacUser: " + res.Result.Username);
-            //    var res2 = accFacade.RegisterAccount(acccrdto).Result;
-            //    Console.WriteLine("Reggg : " + res2);
-            //    var res22 = accFacade.RegisterAccount(acccrdto2).Result;
-            //    Console.WriteLine("Reg : " + res22);
-            //    var res23 = accFacade.RegisterAccount(acccrdto3).Result;
-            //    Console.WriteLine("Reg : " + res23);
-            //    Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
-
-
-
-            //    var res44 = accFacade.Login("Bela", "147852369").Result;
-            //    Console.WriteLine("Login: " + res44?.Username);
-            //    var res4 = accFacade.RegisterAccount(acccrdto).Result;
-            //    //Console.WriteLine("Succ: ");
-            //    var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
-            //    //Console.WriteLine("====>>>>" + res3.Username);
-            //    var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
-            //    Console.WriteLine("CreationId====>>>>" + creationId);
-            //    //characterFacade.RemoveCharacter(creationId).Wait();
-
-            //    var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
-            //    Console.WriteLine("Remove : " + res5);
-
-            //    var group = new GroupDto
-            //    {
-            //        Name = "Most",
-            //        Description = "Hid",
-            //        Picture = string.Empty,
-            //    };
-            //    var res6 = grFacade.CreateGroup(creationId, group).Result;
-            //    Console.WriteLine("GroupCreate: " + res6);
-
-            //    characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
-
-            //    var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
-            //    Console.WriteLine("Attack: " + res7);
-
-            //    var gpost = new GroupPostDto
-            //    {
-            //        CharacterId = creationId,
-            //        GroupId = res6,
-            //        Text = "Hi",
-            //        Timestamp = DateTime.Now,
-
-            //    };
-            //    grFacade.CreatePost(gpost);
-
-            //    var chat = new ChatDto
-            //    {
-            //        SenderId = res44.Id,
-            //        ReceiverId = res2,
-            //        Subject = "This is test",
-            //    };
-            //    var chatId = messagingFacade.CreateChat(chat).Result;
-            //    var message = new MessageDto
-            //    {
-            //        AuthorId = res2,
-            //        ChatId = chatId,
-            //        Text = "Ako sa mas?",
-                    
-            //    };
-            //    var messageId = messagingFacade.SendMessage(message);
-
-            //    //var b = characterFacade.GetCharacterById(3).Result;
-            //    //Console.WriteLine("Money:" + b.Money);
-            //    //var res8 = characterFacade.BuyItemAsync(3).Result;
-            //    //b = characterFacade.GetCharacterById(3).Result;
-            //    //Console.WriteLine("Money:" + b.Money);
+                //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
+                //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
+                //Console.WriteLine(resew);
+                //Console.WriteLine("AccFacUser: " + res.Result.Username);
+                var res2 = accFacade.RegisterAccount(acccrdto).Result;
+                Console.WriteLine("Reggg : " + res2);
+                var res22 = accFacade.RegisterAccount(acccrdto2).Result;
+                Console.WriteLine("Reg : " + res22);
+                var res23 = accFacade.RegisterAccount(acccrdto3).Result;
+                Console.WriteLine("Reg : " + res23);
+                Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
 
 
 
-            //    //var ch = characterFacade.GetCharacterById(2).Result;
-            //    //Console.WriteLine("Money:" + ch.Money);
-            //    //characterFacade.AddMoneyToCharacter(2, 200).Wait();
-            //    //ch = characterFacade.GetCharacterById(2).Result;
-            //    //Console.WriteLine("Money:" + ch.Money);
-            //    //using(var uow = uowp.Create())
-            //    //{
-            //    //    var i = itemService.GetEquippedWeapon(2).Result;
-            //    //    Console.WriteLine("Equipped Weapon: " + i.Name);
+                var res44 = accFacade.Login("Bela", "147852369").Result;
+                Console.WriteLine("Login: " + res44.success);
+                //var res4 = accFacade.RegisterAccount(acccrdto).Result;
+                //Console.WriteLine("Succ: ");
+                //var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
+                //Console.WriteLine("====>>>>" + res3.Username);
+                var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
+                Console.WriteLine("CreationId====>>>>" + creationId);
+                //characterFacade.RemoveCharacter(creationId).Wait();
 
-            //    //}
-            //    //var res9 = characterFacade.EquipItem(3, 3).Result;
-            //    //characterFacade.EquipItem(3, 4).Wait();
+                var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
+                Console.WriteLine("Remove : " + res5);
 
-            ////}
+                var group = new GroupDto
+                {
+                    Name = "Most",
+                    Description = "Hid",
+                    Picture = string.Empty,
+                };
+                var res6 = grFacade.CreateGroup(creationId, group).Result;
+                Console.WriteLine("GroupCreate: " + res6);
+
+                characterFacade.JoinGroup(accFacade.GetAccountAccordingToUsernameAsync("Vedro").Result.Character.Id, res6).Wait();
+
+                var res7 = characterFacade.Attack(Initializer._guid9, Initializer._guid7).Result;
+                Console.WriteLine("Attack: " + res7);
+
+                var gpost = new GroupPostDto
+                {
+                    CharacterId = creationId,
+                    GroupId = res6,
+                    Text = "Hi",
+                    Timestamp = DateTime.Now,
+
+                };
+                grFacade.CreatePost(gpost);
+
+                var chat = new ChatDto
+                {
+                    SenderId = res44.id,
+                    ReceiverId = res2,
+                    Subject = "This is test",
+                };
+                var chatId = messagingFacade.CreateChat(chat).Result;
+                var message = new MessageDto
+                {
+                    AuthorId = res2,
+                    ChatId = chatId,
+                    Text = "Ako sa mas?",
+
+                };
+                var messageId = messagingFacade.SendMessage(message);
+
+                //var b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
+                //var res8 = characterFacade.BuyItemAsync(3).Result;
+                //b = characterFacade.GetCharacterById(3).Result;
+                //Console.WriteLine("Money:" + b.Money);
+
+
+
+                //var ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //characterFacade.AddMoneyToCharacter(2, 200).Wait();
+                //ch = characterFacade.GetCharacterById(2).Result;
+                //Console.WriteLine("Money:" + ch.Money);
+                //using(var uow = uowp.Create())
+                //{
+                //    var i = itemService.GetEquippedWeapon(2).Result;
+                //    Console.WriteLine("Equipped Weapon: " + i.Name);
+
+                //}
+                //var res9 = characterFacade.EquipItem(3, 3).Result;
+                //characterFacade.EquipItem(3, 4).Wait();
+
+                //}
+            }
             Console.ReadKey();
             PrintDbContent().Wait();
             Console.ReadKey();

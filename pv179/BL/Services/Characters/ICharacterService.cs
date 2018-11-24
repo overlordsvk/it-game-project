@@ -50,8 +50,19 @@ namespace BL.Services.Characters
         /// <returns>Filtered results</returns>
         Task<QueryResultDto<CharacterDto, CharacterFilterDto>> ListCharactersAsync(CharacterFilterDto filter);
 
+        /// <summary>
+        /// Adds money to character
+        /// </summary>
+        /// <param name="characterId">The character id</param>
+        /// <param name="value">Money value to add</param>
+        /// <returns>True if money were added</returns>
         Task<bool> AddMoney(Guid characterId, int value);
 
+        /// <summary>
+        /// Get CharacterDto according to name
+        /// </summary>
+        /// <param name="name">Character name</param>
+        /// <returns>CharacterDto if character was found</returns>
         Task<CharacterDto> GetCharacterAccordingToNameAsync(string name);
 
 

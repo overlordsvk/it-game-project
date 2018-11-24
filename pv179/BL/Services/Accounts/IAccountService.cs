@@ -14,14 +14,14 @@ namespace BL.Services.Accounts
         /// Gets account with given email address
         /// </summary>
         /// <param name="email">email</param>
-        /// <returns>Account with given email address</returns>
+        /// <returns>AccountDto with given email address</returns>
         Task<AccountDto> GetAccountAccordingToEmailAsync(string email);
 
         /// <summary>
         /// Gets account with given username address
         /// </summary>
         /// <param name="username">username</param>
-        /// <returns>Account with given username</returns>
+        /// <returns>AccountDto with given username</returns>
         Task<AccountDto> GetAccountAccordingToUsernameAsync(string username);
         
         /// <summary>
@@ -29,13 +29,14 @@ namespace BL.Services.Accounts
         /// </summary>
         /// <param name="entityId">entity ID</param>
         /// <param name="withIncludes">include all entity complex types</param>
-        /// <returns>The DTO representing the entity</returns>
+        /// <returns>The AccountDto representing the entity</returns>
         Task<AccountDto> GetAsync(Guid entityId, bool withIncludes = true);
 
         /// <summary>
         /// Creates new entity
         /// </summary>
-        /// <param name="entityDto">entity details</param>
+        /// <param name="entityDto">entity to create</param>
+        /// <returns>Guid of created entity</returns>
         Guid Create(AccountDto entityDto);
 
         /// <summary>
@@ -56,9 +57,20 @@ namespace BL.Services.Accounts
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAllAsync();
 
+        /// <summary>
+        /// Register new account
+        /// </summary>
+        /// <param name="account">account to create</param>
+        /// <returns>Guid of registered account</returns>
         Task<Guid> RegisterAccountAsync(AccountCreateDto account);
 
-        Task<(bool success, Guid id, string roles)> AuthorizeUserAsync(string usernameOrEmail, string password);
+        /// <summary>
+        /// Authorize account
+        /// </summary>
+        /// <param name="usernameOrEmail">Username or email of account</param>
+        /// <param name="password">Password</param>
+        /// <returns>Autorization success, guid of authorized account and account roles </returns>
+        Task<(bool success, Guid id, string roles)> AuthorizeAccountAsync(string usernameOrEmail, string password);
 
 
 

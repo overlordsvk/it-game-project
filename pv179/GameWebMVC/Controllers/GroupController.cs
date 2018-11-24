@@ -25,13 +25,12 @@ namespace GameWebMVC.Controllers
         #endregion
 
         #region Facades
-        public GroupFacade groupFacade { get; set; }
+        public GroupFacade GroupFacade { get; set; }
         #endregion
 
 
 
 
-        // GET: Group
         public ActionResult Index()
         {
             var creator = Session["accountId"] as Guid?; // TODO - use when user is logged
@@ -40,21 +39,18 @@ namespace GameWebMVC.Controllers
             return View();
         }
 
-        // GET: Group/Details/
         public async Task<ActionResult> Details(Guid id)
         {
-            var model = await groupFacade.GetGroupAsync(id);
+            var model = await GroupFacade.GetGroupAsync(id);
             return View("Details", model);
             //view members
         }
 
-        // GET: Group/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Group/Create
         [HttpPost]
         public async Task<ActionResult> Create(GroupDto group)
         {
@@ -64,7 +60,7 @@ namespace GameWebMVC.Controllers
                 group.Picture = "/Img/default.jpg";
                 if (!creator.HasValue)
                     return View("Login","Account");
-                var newGroupId = await groupFacade.CreateGroup(creator.Value, group);
+                var newGroupId = await GroupFacade.CreateGroup(creator.Value, group);
                 return RedirectToAction("Details", new { id = newGroupId }); //redirect to detail
             }
             catch
@@ -73,14 +69,12 @@ namespace GameWebMVC.Controllers
             }
         }
 
-        // GET: Group/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
-            var group = await groupFacade.GetGroupAsync(id);
+            var group = await GroupFacade.GetGroupAsync(id);
             return View(new GroupImageModel{ Group = group, File = null });
         }
 
-        // POST: Group/Edit/5
         [HttpPost]
         public async Task<ActionResult> Edit(GroupImageModel model)
         {
@@ -95,7 +89,7 @@ namespace GameWebMVC.Controllers
                     relativePath = "/Img/" + model.Group.Id + fileType;
                 }
                 model.Group.Picture = relativePath;
-                await groupFacade.Edit(model.Group);
+                await GroupFacade.Edit(model.Group);
             }  
             catch (Exception ex)  
             {  
@@ -105,15 +99,13 @@ namespace GameWebMVC.Controllers
 
         }
 
-        // GET: Group/Delete/5
         public async Task<ActionResult> Delete(Guid id)
         {
             // TO DO - check authorization
-            await groupFacade.RemoveGroup(id);
+            await GroupFacade.RemoveGroup(id);
             return RedirectToAction("List");
         }
 
-        // GET: Group list
         public async Task<ActionResult> List(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
@@ -121,7 +113,7 @@ namespace GameWebMVC.Controllers
             var filter = Session[filterSessionKey] as GroupFilterDto ?? new GroupFilterDto{PageSize = PageSize};
             filter.RequestedPageNumber = page;
 
-            var result = await groupFacade.GetGroupsByFilterAsync(filter);
+            var result = await GroupFacade.GetGroupsByFilterAsync(filter);
 
             return View("List", result.Items);
         }

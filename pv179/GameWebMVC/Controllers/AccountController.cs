@@ -13,9 +13,11 @@ namespace GameWebMVC.Controllers
 {
     public class AccountController : Controller
     {
+        #region Facades
         public AccountFacade AccountFacade { get; set; }
+        #endregion
 
-
+        #region Registration
         public ActionResult Register()
         {
             return View();
@@ -43,7 +45,9 @@ namespace GameWebMVC.Controllers
             }
 
         }
+        #endregion
 
+        #region Login
         public ActionResult Login()
         {
             if (!string.IsNullOrEmpty(User.Identity.Name))
@@ -81,13 +85,15 @@ namespace GameWebMVC.Controllers
             ModelState.AddModelError("", "Wrong username or password!");
             return View();
         }
+        #endregion
 
+        #region Logout
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
+        #endregion
 
     }
 }

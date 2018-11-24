@@ -16,31 +16,31 @@ namespace BL.DTO
         [Range(0, int.MaxValue)]
         public int Money { get; set; } = 100;
 
-        [Range(0, 1000, ErrorMessage = "0-10")]
+        [Range(0, 1000)]
         public int Health { get; set; } = 0;
 
-        [Range(0, int.MaxValue, ErrorMessage = "0-10")]
+        [Range(0, int.MaxValue)]
         public int Score { get; set; } = 0;
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Strength { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Perception { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Endurance { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Charisma { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Intelligence { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Agility { get; set; }
 
-        [Range(0, 10, ErrorMessage = "0-10")]
+        [Range(1, 10, ErrorMessage = "1-10")]
         public int Luck { get; set; }
         
         [JsonIgnore]

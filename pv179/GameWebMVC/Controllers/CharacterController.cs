@@ -7,16 +7,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace GameWebMVC.Controllers
 {
     [Authorize]
     public class CharacterController : Controller
     {
+        #region Facades
         public CharacterFacade CharacterFacade { get; set; }
         public AccountFacade AccountFacade{ get; set; }
+        #endregion
 
-        // GET: Character
         public async Task<ActionResult> Index()
         {
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
@@ -39,8 +41,15 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                characterDto.Health = characterDto.Endurance * 10;
                 var character = await CharacterFacade.CreateCharacter(Guid.Parse(User.Identity.Name), characterDto);
+
+                var cookie = FormsAuthentication.GetAuthCookie(User.Identity.Name, true);
+                var ticket = FormsAuthentication.Decrypt(cookie.Value);
+                var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData + ", HasCharacter");
+                cookie.Value = FormsAuthentication.Encrypt(newTicket);
+                cookie.Expires = newTicket.Expiration.AddMinutes(30);
+                HttpContext.Response.Cookies.Set(cookie);
+
                 return RedirectToAction("Index");
             }
             catch
@@ -90,6 +99,14 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Remove(CharacterDto characterDto)
         {
             var c = await CharacterFacade.RemoveCharacter(Guid.Parse(User.Identity.Name));
+
+            var cookie = FormsAuthentication.GetAuthCookie(User.Identity.Name, true);
+            var ticket = FormsAuthentication.Decrypt(cookie.Value);
+            var newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, false, ticket.UserData.Replace(", HasCharacter", ""));
+            cookie.Value = FormsAuthentication.Encrypt(newTicket);
+            cookie.Expires = newTicket.Expiration.AddMinutes(30);
+            HttpContext.Response.Cookies.Set(cookie);
+
             return RedirectToAction("Create");
         }
         #endregion
