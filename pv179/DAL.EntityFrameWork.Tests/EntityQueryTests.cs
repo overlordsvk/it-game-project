@@ -6,11 +6,12 @@ using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
 using Game.Infrastructure.UnitOfWork;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace DAL.EntityFrameWork.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class EntityQueryTests
     {
         private readonly IUnitOfWorkProvider unitOfWorkProvider = Initializer.Container.Resolve<IUnitOfWorkProvider>();
@@ -26,7 +27,7 @@ namespace DAL.EntityFrameWork.Tests
 
         };
 
-        [TestMethod]
+        [Test]
         public async Task QueryWithSimplePredicate()
         {
             QueryResult<Account> acctualResult;
@@ -44,7 +45,7 @@ namespace DAL.EntityFrameWork.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public async Task QueryWithSimplePredicateWithStringSearch()
         {
             QueryResult<Account> acctualResult;
@@ -61,7 +62,7 @@ namespace DAL.EntityFrameWork.Tests
             Assert.AreEqual(expecterResult, acctualResult);
         }
 
-        [TestMethod]
+        [Test]
         public async Task QueryWithComplexPredicate()
         {
             QueryResult<Account> acctualResult;
