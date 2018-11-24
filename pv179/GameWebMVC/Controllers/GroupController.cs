@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
+    [Authorize]
     public class GroupController : Controller
     {
         #region SessionKey constants
@@ -114,6 +115,7 @@ namespace GameWebMVC.Controllers
         }
 
         // GET: Group list
+        [AllowAnonymous]
         public async Task<ActionResult> List(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
