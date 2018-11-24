@@ -53,7 +53,7 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Create(GroupDto group)
         {
             group.Picture = "/Img/default.jpg";
-            var newGroupId = await groupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
+            var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
             return RedirectToAction("Details", new { id = newGroupId });
         }
 

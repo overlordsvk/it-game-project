@@ -140,7 +140,7 @@ namespace DAL.EntityFrameWork.Tests.Config
                 Strength = 9,
                 Perception = 2,
                 Endurance = 5,
-                Charisma = 0,
+                Charisma = 1,
                 Intelligence = 2,
                 Agility = 6,
                 Luck = 4

@@ -11,7 +11,6 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Game.DAL.Entity.Config;
-using Game.DAL.PetaPoco.Config;
 
 namespace BL.Config
 {
