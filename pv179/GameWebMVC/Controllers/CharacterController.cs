@@ -75,7 +75,7 @@ namespace GameWebMVC.Controllers
             {
                 var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
                 character.Name = characterDto.Name;
-                var res = await CharacterFacade.EditCharacter(Guid.Parse(User.Identity.Name), character);
+                var res = await CharacterFacade.EditCharacter(character);
                 return RedirectToAction("Index");
             }
             catch

@@ -20,7 +20,6 @@ namespace BL.Facades
         private readonly IAccountService _accountService;
         private readonly IChatService _chatService;
         private readonly ICharacterService _characterService;
-        private readonly IFightService _fightService;
 
         public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService, ICharacterService characterService) : base(unitOfWorkProvider)
         {
