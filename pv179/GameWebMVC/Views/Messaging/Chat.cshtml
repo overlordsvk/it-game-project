@@ -1,29 +1,31 @@
-﻿@model IEnumerable<BL.DTO.MessageDto>
+﻿@model BL.DTO.ChatDto
 
 @{
     ViewBag.Title = "Chat";
 }
 
-<h2>Chat</h2>
+<h2>@Model.Subject</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    <input type="button" value="Reply" class="btn btn-success" onclick="location.href='@Url.Action("Reply", new { chatId = Model.Id })'" />
+    <br />
+    <br />
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.Messages.First().Text)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author.Name)
+            @Html.DisplayNameFor(model => model.Messages.First().Author.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Timestamp)
+            @Html.DisplayNameFor(model => model.Messages.First().Timestamp)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Messages) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Text)
@@ -34,10 +36,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Timestamp)
         </td>
-        <td>
-            @Html.ActionLink("Messages", "Messages", new { id=item.Id }) |
-        </td>
     </tr>
 }
 
 </table>
+<div>
+    <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Mailbox")'" />
+</div>
