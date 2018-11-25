@@ -111,6 +111,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Remove", "Remove", new { id = Model.Id }) |
+    <input type="button" value="Edit" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" />
+    <input type="button" value="Remove" class="btn btn-primary" onclick="location.href='@Url.Action("Remove", new { id = Model.Id })'" />
 </p>

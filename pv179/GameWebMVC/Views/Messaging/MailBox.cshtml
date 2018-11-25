@@ -6,9 +6,12 @@
 
 <h2>MailBox</h2>
 
-<p>
-    @Html.ActionLink("Create New", "NewChat")
-</p>
+<div>
+<input type="button" value="New" class="btn btn-success" onclick="location.href='@Url.Action("NewChat")'" />
+<br />
+<br />
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -26,21 +29,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastMessageTimestamp)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sender.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Receiver.Name)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastMessageTimestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receiver.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Messages", "Chat", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+

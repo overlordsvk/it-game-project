@@ -66,12 +66,39 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Chat(Guid id)
         {
             var chat = await MessagingFacade.GetChatById(id);
+
             if (chat == null)
             {
                 return RedirectToAction("Mailbox");
             }
-            return View(chat.Messages);
+            chat.Messages = chat.Messages.OrderByDescending(m => m.Timestamp).ToList();
+            return View(chat);
 
+        }
+
+        public ActionResult Reply(Guid chatId)
+        {
+            var message = new MessageDto
+            {
+                ChatId = chatId,
+                AuthorId = Guid.Parse(User.Identity.Name),
+            };
+            return View(message);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Reply(MessageDto message)
+        {
+            try
+            {
+                await MessagingFacade.SendMessage(message);
+                return RedirectToAction("Chat", new {id = message.ChatId });
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
