@@ -22,12 +22,11 @@ namespace BL.Facades
         private readonly ICharacterService _characterService;
         private readonly IFightService _fightService;
 
-        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService, ICharacterService characterService, IFightService fightService) : base(unitOfWorkProvider)
+        public AccountFacade(IUnitOfWorkProvider unitOfWorkProvider, IAccountService accountService, IChatService chatService, ICharacterService characterService) : base(unitOfWorkProvider)
         {
             this._accountService = accountService;
             this._chatService = chatService;
             this._characterService = characterService;
-            _fightService = fightService;
         }
 
         /// <summary>

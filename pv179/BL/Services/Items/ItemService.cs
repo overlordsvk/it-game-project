@@ -38,7 +38,6 @@ namespace BL.Services.Items
         {
             var res = await ListItemsAsync(new ItemFilterDto(){OwnerId = id, IsEquipped = true, ItemType = ItemType.Weapon});
             var r = res.Items.SingleOrDefault();
-            Console.WriteLine(r?.Name);
             return r;
         }
 
