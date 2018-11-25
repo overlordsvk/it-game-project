@@ -102,16 +102,13 @@ namespace BL.Facades
             }
         }
 
-        public async Task<Guid> EditCharacter(Guid AccountId, CharacterDto character)
+        public async Task<Guid> EditCharacter(CharacterDto character)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                character.Id = AccountId;
-                var acc = await _accountService.GetAsync(AccountId);
-                acc.Character = character;
-                await _accountService.Update(acc);
+                await _characterService.Update(character);
                 await uow.Commit();
-                return AccountId;
+                return character.Id;
             }
         }
 
@@ -138,46 +135,59 @@ namespace BL.Facades
         /// Gets inventory of character
         /// </summary>
         /// <returns>all customers</returns>
-        public async Task<QueryResultDto<ItemDto, ItemFilterDto>> GetCharacterItems(Guid id)
+        public async Task<QueryResultDto<ItemDto, ItemFilterDto>> GetItemsByFilterAsync(ItemFilterDto filter)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _itemService.ListItemsAsync(new ItemFilterDto(){OwnerId = id});
+                return await _itemService.ListItemsAsync(filter);
             }
         }
 
-        public async Task<ItemDto> GetEquippedWeapon(Guid id)
+        public async Task<ItemDto> GetItem(Guid itemId)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _itemService.GetEquippedWeapon(id);
+                return await _itemService.GetAsync(itemId);
             }
         }
 
-        public async Task<ItemDto> GetEquippedArmor(Guid id)
+        public async Task<ItemDto> GetEquippedWeapon(Guid characterId)
         {
             using (UnitOfWorkProvider.Create())
             {
-                return await _itemService.GetEquippedArmor(id);
+                return await _itemService.GetEquippedWeapon(characterId);
             }
         }
 
-        public async void SellItem(Guid itemId)
+        public async Task<ItemDto> GetEquippedArmor(Guid characterId)
         {
             using (UnitOfWorkProvider.Create())
             {
-                var item = _itemService.GetAsync(itemId).Result;
+                return await _itemService.GetEquippedArmor(characterId);
+            }
+        }
+
+        public async Task<bool> SellItem(Guid itemId)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var item = await _itemService.GetAsync(itemId);
+                if (item == null)
+                    return false;
                 var ownerId = item.OwnerId;
                 if (!ownerId.HasValue)
-                    return;
-                var owner = _characterService.GetAsync(ownerId.Value).Result;
+                    return false;
+                var owner = await _characterService.GetAsync(ownerId.Value);
                 owner.Money += item.Price;
                 item.OwnerId = null;
+                await _itemService.Update(item);
                 await _characterService.Update(owner);
+                await uow.Commit();
+                return true;
             }
         }
 
-        public async Task<bool> EquipItem(Guid characterId, Guid itemId)
+        public async Task<bool> EquipItemAsync(Guid characterId, Guid itemId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -192,7 +202,12 @@ namespace BL.Facades
             using (var uow = UnitOfWorkProvider.Create())
             {
                 var character = await _characterService.GetAsync(characterId);
-                if (character.Money < 100) return false;
+                if (character == null)
+                {
+                    return false;
+                }
+                if (character.Money < 100) 
+                    return false;
 
                 character.Money -= 100;
                 var item =_itemService.GetNewItem();
@@ -201,6 +216,24 @@ namespace BL.Facades
                 await _characterService.Update(character);
                 await uow.Commit();
                 return true;
+            }
+        }
+
+        public async Task<Guid> GiveItemAsync(Guid characterId, ItemDto item = null)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                var character = await _characterService.GetAsync(characterId);
+                if (character == null)
+                    return Guid.Empty;
+                if (item == null)
+                    item =_itemService.GetNewItem();
+                item.OwnerId = characterId;
+                var itemId = _itemService.Create(item);
+                character.Items.Add(item);
+                await _characterService.Update(character);
+                await uow.Commit();
+                return itemId;
             }
         }
 

@@ -69,6 +69,17 @@ namespace BL.Services.Items
                 Weight = _random.Next(1,11),
                 Price = price
             };
+
+            if (newItem.ItemType == ItemType.Weapon && newItem.Attack < newItem.Defense)
+            { 
+                newItem.Attack = defense;
+                newItem.Defense = attack;
+            }
+            if (newItem.ItemType == ItemType.Armor && newItem.Attack > newItem.Defense)
+            { 
+                newItem.Attack = defense;
+                newItem.Defense = attack;
+            }
             return newItem;
         }
 

@@ -129,11 +129,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\Windsor\WebApiInstaller.cs" />
     <Compile Include="App_Start\Windsor\WindsorCompositionRoot.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CharactersController.cs" />
+    <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +147,17 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj">
       <Project>{5CE7B41E-A4C6-4954-A653-011C04141F1A}</Project>
       <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\dal\Game.DAL.Entity.csproj">
+      <Project>{30B51413-6302-4022-8FA0-074B2CC94C20}</Project>
+      <Name>Game.DAL.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
