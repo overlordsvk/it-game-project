@@ -95,7 +95,7 @@ namespace BL.Facades
                 var account = await _accountService.GetAsync(accountId);
                 character.Health = character.Endurance * 100;
                 account.Character = character;
-                account.Roles += ", HasCharacter";
+                account.Roles += ",HasCharacter";
                 await _accountService.Update(account);
                 await uow.Commit();
                 return accountId;
@@ -123,8 +123,8 @@ namespace BL.Facades
                     return false;
                 }
                 var acc = await _accountService.GetAsync(CharacterId);
-                acc.Character = character;
-                acc.Roles.Replace(", HasCharacter", "");
+                acc.Roles = acc.Roles.Replace(",HasCharacter", "");
+                await _accountService.Update(acc);
                 _characterService.Delete(CharacterId);
                 await uow.Commit();
                 return true;

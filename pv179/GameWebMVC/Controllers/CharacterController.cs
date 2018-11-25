@@ -94,6 +94,7 @@ namespace GameWebMVC.Controllers
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             return View(character);
         }
+
         [HttpPost]
         public async Task<ActionResult> Remove(CharacterDto characterDto)
         {
