@@ -8,7 +8,7 @@ namespace BL.DTO
 {
     public class ChatDto : DtoBase
     {
-        [MaxLength(256)]
+        [Required, MaxLength(256, ErrorMessage = "Predmet nesmie mať viac ako 256 znakov")]
         public string Subject { get; set; }
 
         [JsonIgnore]

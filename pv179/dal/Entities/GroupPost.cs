@@ -13,7 +13,7 @@ namespace Game.DAL.Entity.Entities
         public Guid? CharacterId { get; set; }
         public virtual Character Author { get; set; }
 
-        [MaxLength(1024)]
+        [MaxLength(4096)]
         public string Text { get; set; }
 
         public Guid? GroupId { get; set; }

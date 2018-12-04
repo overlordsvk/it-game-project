@@ -20,7 +20,7 @@ namespace Game.DAL.Entity.Entities
 
         public virtual ICollection<GroupPost> Wall { get; set; }
 
-        [MaxLength(2048)]
+        [MaxLength(4096)]
         public string Description { get; set; }
 
         [NotMapped]

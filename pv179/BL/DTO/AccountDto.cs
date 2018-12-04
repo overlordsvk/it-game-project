@@ -10,7 +10,7 @@ namespace BL.DTO
 {
     public class AccountDto : DtoBase
     {
-        [StringLength(64, MinimumLength = 4, ErrorMessage = "Username musí mať 4 až 64 znakov")]
+        [Required, MinLength(4, ErrorMessage = "Meno musí mať aspoň 4 znaky"), MaxLength(64, ErrorMessage = "Meno nesmie mať viac ako 64 znakov")]
         public string Username { get; set; }
 
         [EmailAddress(ErrorMessage = "Neplatný formát")]

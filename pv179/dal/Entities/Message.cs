@@ -19,7 +19,7 @@ namespace Game.DAL.Entities
         public Guid ChatId { get; set; }
         public virtual Chat Chat { get; set; }
 
-        [MaxLength(2048)]
+        [MaxLength(4096)]
         public string Text { get; set; }
 
         public Guid? AuthorId { get; set; }

@@ -39,12 +39,7 @@ namespace Game.DAL.PetaPoco.Entities
 
         public int Luck { get; set; }
 
-        //public virtual ICollection<Item> Items { get; set; }
-
-        //public virtual ICollection<Chat> Chats { get; set; }
-
         public Guid? GroupId { get; set; }
-        //public Group Group { get; set; }
 
         public Account Account { get; set; }
     }

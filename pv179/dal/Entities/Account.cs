@@ -10,10 +10,10 @@ namespace Game.DAL.Entity.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
-        [Required, MinLength(4), MaxLength(32)]
+        [Required, MinLength(4), MaxLength(64)]
         public string Username { get; set; }
 
-        [Required, EmailAddress]
+        [Required, MinLength(4), MaxLength(320)]
         public string Email { get; set; }
 
         [Required]

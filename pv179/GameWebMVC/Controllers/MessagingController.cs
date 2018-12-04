@@ -41,6 +41,7 @@ namespace GameWebMVC.Controllers
                 var receiver = await CharacterFacade.GetCharacterAccordingToNameAsync(chat.ReceiverName);
                 if (receiver == null)
                 {
+                    ModelState.AddModelError("", "Daný charakter neexistuje");
                     return View(chat);
                 }
                 var id = Guid.Parse(User.Identity.Name);

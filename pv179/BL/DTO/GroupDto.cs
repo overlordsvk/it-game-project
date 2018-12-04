@@ -11,7 +11,7 @@ namespace BL.DTO
 {
     public class GroupDto : DtoBase
     {
-        [Required, StringLength(64, MinimumLength = 4, ErrorMessage = "Názov skupiny musí mať 4 až 64 znakov")]
+        [Required, MinLength(4, ErrorMessage = "Názov skupiny musí mať aspoň 4 znaky"), MaxLength(64, ErrorMessage = "Názov skupiny nesmie mať viac ako 64 znakov")]
         public string Name { get; set; }
 
         [StringLength(512, ErrorMessage = "Skúste iný obrázok")]
@@ -21,7 +21,7 @@ namespace BL.DTO
         [JsonIgnore]
         public ICollection<GroupPostDto> Wall { get; set; }
 
-        [StringLength(2048, ErrorMessage = "Popis skupiny môže mať max. 2048 znakov")]
+        [StringLength(4096, ErrorMessage = "Popis skupiny môže mať max. 4096 znakov")]
         public string Description { get; set; }
     }
 }

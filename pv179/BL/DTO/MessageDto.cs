@@ -14,7 +14,7 @@ namespace BL.DTO
         public Guid ChatId { get; set; }
         public ChatDto Chat { get; set; }
 
-        [MaxLength(2048)]
+        [MaxLength(4096, ErrorMessage ="Správa nesmie mať viac ako 256 znakov")]
         public string Text { get; set; }
 
         public Guid? AuthorId { get; set; }

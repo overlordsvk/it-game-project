@@ -15,7 +15,7 @@ namespace BL.DTO
         [JsonIgnore]
         public CharacterDto Author { get; set; }
 
-        [MaxLength(1024)]
+        [MaxLength(4096)]
         public string Text { get; set; }
 
         public Guid GroupId { get; set; }

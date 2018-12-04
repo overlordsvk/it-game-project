@@ -10,7 +10,7 @@ namespace BL.DTO
 {
     public class CharacterDto : DtoBase
     {
-        [Required, StringLength(64, MinimumLength = 4, ErrorMessage = "Meno musí mať aspoň 4 znaky")]
+        [Required, MinLength(4, ErrorMessage ="Meno musí mať aspoň 4 znaky"), MaxLength(64, ErrorMessage ="Meno nesmie mať viac ako 64 znakov")]
         public string Name { get; set; }
 
         [Range(0, int.MaxValue)]
@@ -22,25 +22,25 @@ namespace BL.DTO
         [Range(0, int.MaxValue)]
         public int Score { get; set; } = 0;
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Strength { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Perception { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Endurance { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Charisma { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Intelligence { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Agility { get; set; }
 
-        [Range(1, 10, ErrorMessage = "1-10")]
+        [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Luck { get; set; }
         
         [JsonIgnore]

@@ -26,6 +26,10 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Register(AccountCreateDto accountCreateDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             try
             {
                 var id = await AccountFacade.RegisterAccount(accountCreateDto);
@@ -38,9 +42,13 @@ namespace GameWebMVC.Controllers
 
                 return RedirectToAction("Create", "Character");
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
-                ModelState.AddModelError("Username", "Account with that username already exists!");
+                ModelState.AddModelError(e.ParamName, "Účet s daným nemom alebo emailom už existuje!");
+                return View();
+            }
+            catch
+            {
                 return View();
             }
 

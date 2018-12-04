@@ -45,9 +45,15 @@ namespace BL.Services.Accounts
             var emailAccount = await GetAccountAccordingToEmailAsync(account.Email);
             var usernameAccount = await GetAccountAccordingToUsernameAsync(account.Username);
 
-            if (emailAccount != null || usernameAccount != null)
+            if (usernameAccount != null)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("", "Username");
+
+            }
+
+            if (emailAccount != null )
+            {
+                throw new ArgumentException("", "Email");
             }
 
             var password = CreateHash(account.Password);
