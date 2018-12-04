@@ -55,6 +55,19 @@ namespace BL.Facades
         }
 
         /// <summary>
+        /// Gets account according to username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>Account with specified username</returns>
+        public async Task<AccountDto> GetAccountAsync(Guid id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _accountService.GetAsync(id);
+            }          
+        }
+
+        /// <summary>
         /// Gets all accounts according to page
         /// </summary>
         /// <returns>all customers</returns>

@@ -32,7 +32,12 @@
                         <li>@Html.ActionLink("MailBox", "MailBox", "Messaging")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
-                        <li>@Html.ActionLink("GroupList", "List", "Group")</li>
+                    <li>@Html.ActionLink("GroupList", "List", "Group")</li>
+                    @{ 
+                    if (!string.IsNullOrEmpty(ViewContext.HttpContext.User.Identity.Name)) {
+                    <li class="user"> <a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
+                    }
+                    }
                 </ul>
             </div>
         </div>
