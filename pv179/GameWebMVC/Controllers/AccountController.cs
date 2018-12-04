@@ -4,6 +4,7 @@ using GameWebMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -95,5 +96,18 @@ namespace GameWebMVC.Controllers
         }
         #endregion
 
+        #region Actions
+        public ActionResult GetUserName()
+        {
+            var syncContext = SynchronizationContext.Current;
+            SynchronizationContext.SetSynchronizationContext(null);
+
+            var account = AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name)).Result;
+
+            SynchronizationContext.SetSynchronizationContext(syncContext);
+
+            return Content(account.Username);
+        }
+        #endregion Actions
     }
 }
