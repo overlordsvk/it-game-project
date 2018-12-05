@@ -55,10 +55,10 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Gets account according to username
+        /// Gets account according to id
         /// </summary>
-        /// <param name="username"></param>
-        /// <returns>Account with specified username</returns>
+        /// <param name="id"></param>
+        /// <returns>Account with specified id</returns>
         public async Task<AccountDto> GetAccountAsync(Guid id)
         {
             using (UnitOfWorkProvider.Create())
@@ -66,6 +66,55 @@ namespace BL.Facades
                 return await _accountService.GetAsync(id);
             }          
         }
+
+        /// <summary>
+        /// Change email of given acc id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="email"></param>
+        public async Task ChangeEmailAsync(Guid id, string email)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                try
+                {
+                    var acc = await _accountService.GetAsync(id);
+                    acc.Email = email;
+                    await _accountService.Update(acc);
+                    await uow.Commit();
+                }
+                catch (NullReferenceException)
+                {
+                    throw;
+                }
+
+            }          
+        }
+
+        /// <summary>
+        /// Change username of given acc id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        public async Task ChangeUsernameAsync(Guid id, string username)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                try
+                {
+                    var acc = await _accountService.GetAsync(id);
+                    acc.Username = username;
+                    await _accountService.Update(acc);
+                    await uow.Commit();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }          
+        }
+
 
         /// <summary>
         /// Gets all accounts according to page
