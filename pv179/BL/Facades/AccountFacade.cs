@@ -68,59 +68,11 @@ namespace BL.Facades
         }
 
         /// <summary>
-        /// Change email of given acc id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="email"></param>
-        public async Task ChangeEmailAsync(Guid id, string email)
-        {
-            using (var uow = UnitOfWorkProvider.Create())
-            {
-                try
-                {
-                    var acc = await _accountService.GetAsync(id);
-                    acc.Email = email;
-                    await _accountService.Update(acc);
-                    await uow.Commit();
-                }
-                catch (NullReferenceException)
-                {
-                    throw;
-                }
-
-            }          
-        }
-
-        /// <summary>
         /// Change username of given acc id
         /// </summary>
         /// <param name="id"></param>
         /// <param name="username"></param>
-        public async Task ChangeUsernameAsync(Guid id, string username)
-        {
-            using (var uow = UnitOfWorkProvider.Create())
-            {
-                try
-                {
-                    var acc = await _accountService.GetAsync(id);
-                    acc.Username = username;
-                    await _accountService.Update(acc);
-                    await uow.Commit();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-            }          
-        }
-
-                /// <summary>
-        /// Change username of given acc id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="username"></param>
-        public async Task ChangeUsernameAsync(Guid id, AccountCreateDto updatedAccount)
+        public async Task EditAccountAsync(Guid id, AccountCreateDto updatedAccount)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
