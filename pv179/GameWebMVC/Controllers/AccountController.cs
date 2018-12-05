@@ -18,6 +18,14 @@ namespace GameWebMVC.Controllers
         public AccountFacade AccountFacade { get; set; }
         #endregion
 
+        #region Index
+        public async Task<ActionResult> Index()
+        {
+            var account = await AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name));
+            return View(account);
+        }
+        #endregion
+
         #region Registration
         public ActionResult Register()
         {
