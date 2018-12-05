@@ -62,7 +62,7 @@ namespace BL.Services.Accounts
         /// </summary>
         /// <param name="account">account to update</param>
         /// <returns>Account</returns>
-        Task<AccountDto> UpdateAccount(AccountDto account, string password);
+        Task UpdateAccount(AccountDto account, string password);
 
         /// <summary>
         /// Register new account
