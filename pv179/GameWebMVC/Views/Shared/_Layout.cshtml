@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top justify-content-between">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,26 +20,34 @@
             </div>
 
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (string.IsNullOrEmpty(ViewContext.HttpContext.User.Identity.Name))
+                <ul class="nav navbar-nav navbar-left">
+                    
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Character", "Index", "Character")</li>
+                        <li>@Html.ActionLink("MailBox", "MailBox", "Messaging")</li>
+                    }
+                    <li>@Html.ActionLink("GroupList", "List", "Group")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="user"> <a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
+                    }
+
+
+                </ul>
+                <ul class="nav navbar-nav  navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                         <li>@Html.ActionLink("Registration", "Register", "Account")</li>
                     }
-
-                    @if (!string.IsNullOrEmpty(ViewContext.HttpContext.User.Identity.Name))
+                    else
                     {
-                        <li>@Html.ActionLink("Character", "Index", "Character")</li>
-                        <li>@Html.ActionLink("MailBox", "MailBox", "Messaging")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
-                    <li>@Html.ActionLink("GroupList", "List", "Group")</li>
-                    @{ 
-                    if (!string.IsNullOrEmpty(ViewContext.HttpContext.User.Identity.Name)) {
-                    <li class="user"> <a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
-                    }
-                    }
                 </ul>
+
             </div>
         </div>
     </div>

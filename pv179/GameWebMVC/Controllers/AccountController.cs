@@ -130,7 +130,6 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-
                 return RedirectToAction("Index");
             }
             catch
