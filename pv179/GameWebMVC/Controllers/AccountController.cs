@@ -122,7 +122,7 @@ namespace GameWebMVC.Controllers
 
             SynchronizationContext.SetSynchronizationContext(syncContext);
 
-            return Content(account.Username);
+            return Content(account?.Username);
         }
         #endregion Actions
     }
