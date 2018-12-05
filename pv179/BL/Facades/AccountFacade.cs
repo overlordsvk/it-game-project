@@ -115,6 +115,30 @@ namespace BL.Facades
             }          
         }
 
+                /// <summary>
+        /// Change username of given acc id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        public async Task ChangeUsernameAsync(Guid id, AccountCreateDto updatedAccount)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                try
+                {
+                    var acc = await _accountService.GetAsync(id);
+                    acc.Username = updatedAccount.Username;
+                    acc.Email = updatedAccount.Email;
+                    await _accountService.UpdateAccount(acc, updatedAccount.Password);
+                    await uow.Commit();
+                }
+                catch (NullReferenceException)
+                {
+                    throw;
+                }
+            }          
+        }
+
 
         /// <summary>
         /// Gets all accounts according to page

@@ -58,6 +58,13 @@ namespace BL.Services.Accounts
         Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAllAsync();
 
         /// <summary>
+        /// Updates account
+        /// </summary>
+        /// <param name="account">account to update</param>
+        /// <returns>Account</returns>
+        Task<AccountDto> UpdateAccount(AccountDto account, string password);
+
+        /// <summary>
         /// Register new account
         /// </summary>
         /// <param name="account">account to create</param>
