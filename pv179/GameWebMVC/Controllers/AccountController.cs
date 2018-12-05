@@ -150,8 +150,8 @@ namespace GameWebMVC.Controllers
             var account = AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name)).Result;
 
             SynchronizationContext.SetSynchronizationContext(syncContext);
-            
-            return Content(account.Username);
+
+            return Content(account?.Username);
         }
         #endregion Actions
     }

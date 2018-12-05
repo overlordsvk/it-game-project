@@ -40,6 +40,14 @@ namespace BL.Services.Accounts
             return queryResult.Items.SingleOrDefault();
         }
 
+        public async Task UpdateAccount(AccountDto account, string password)
+        {
+            var hash = CreateHash(password);
+            account.PasswordHash = hash.Item1;
+            account.PasswordSalt = hash.Item2;
+            await Update(account);
+        }
+
         public async Task<Guid> RegisterAccountAsync(AccountCreateDto account)
         {
             var emailAccount = await GetAccountAccordingToEmailAsync(account.Email);
