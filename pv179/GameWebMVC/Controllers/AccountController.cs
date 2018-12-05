@@ -112,6 +112,35 @@ namespace GameWebMVC.Controllers
         }
         #endregion
 
+        #region Edit
+        public async Task<ActionResult> Edit()
+        {
+            var account = await AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name));
+            var accountCreateDto = new AccountCreateDto
+            {
+                Username = account.Username,
+                Email = account.Email,
+                Password = ""
+            };
+            return View(accountCreateDto);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AccountCreateDto account)
+        {
+            try
+            {
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+
+                return View();
+            }
+        }
+        #endregion
+
         #region Actions
         public ActionResult GetUserName()
         {
@@ -121,7 +150,7 @@ namespace GameWebMVC.Controllers
             var account = AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name)).Result;
 
             SynchronizationContext.SetSynchronizationContext(syncContext);
-
+            
             return Content(account.Username);
         }
         #endregion Actions
