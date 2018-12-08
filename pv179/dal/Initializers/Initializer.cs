@@ -169,7 +169,7 @@ namespace Game.DAL.Entity.Initializers
                 Id = _guid10,
                 Name = "Prva skupina",
                 Description = "Toto je prva a posledna skupina!",
-                Picture = "/img/img1.jpg"
+                Picture = "/Img/img1.jpg"
             };
 
             group1.Members = new List<Character>

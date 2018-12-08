@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         /// <param name="characterId">Guid of character to give item</param>
         /// <params name="itemDto">Params of item dto given or default</params>
         /// <returns>ItemDto</returns>
-        [HttpPut]
+        [HttpPost]
         public async Task<ItemDto> Put(string characterId = null, bool randomItem = false , int attack = 10, int defense = 10, 
                                         int type = 0, string name = "New Item", int price = 20, int weight = 1)
         {
