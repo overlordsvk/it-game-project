@@ -4,26 +4,18 @@
     ViewBag.Title = Model.Name;
 }
 
-<h2>View</h2>
+<h2>Skupina</h2>
 
 <div>
-    <h4>GroupDto</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Picture)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Picture)
+            <img class="clan-list-img" src="@Html.DisplayFor(model => model.Picture)" />
         </dd>
 
         <dt>
@@ -36,6 +28,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "List")
+    @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Späť na zoznam skupín", "List")
 </p>

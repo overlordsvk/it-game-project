@@ -215,7 +215,6 @@
     <Content Include="Views\Character\Remove.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Group\Edit.cshtml" />
-    <Content Include="Views\Group\View.cshtml" />
     <Content Include="Views\Messaging\NewChat.cshtml" />
     <Content Include="Views\Messaging\MailBox.cshtml" />
     <Content Include="Views\Messaging\Chat.cshtml" />
