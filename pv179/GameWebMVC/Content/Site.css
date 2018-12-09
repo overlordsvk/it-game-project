@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+img.clan-list-img {
+    max-width: 100px;
+    max-height: 100px;
+}

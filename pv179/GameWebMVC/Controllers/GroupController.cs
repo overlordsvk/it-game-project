@@ -86,10 +86,10 @@ namespace GameWebMVC.Controllers
             {  
                 ViewBag.Message = "ERROR: " + ex.Message.ToString();  
             }   
-            return View(model);  
-
+            return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(Guid id)
         {
             // TO DO - check authorization
