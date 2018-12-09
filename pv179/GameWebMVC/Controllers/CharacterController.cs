@@ -88,6 +88,9 @@ namespace GameWebMVC.Controllers
         #endregion
 
 
+
+
+
         #region Remove
         public async Task<ActionResult> Remove()
         {

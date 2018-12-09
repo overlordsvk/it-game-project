@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BL.DTO.CharacterDto>
+
+<h2>Výber protivníka</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Health)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Strength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perception)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Charisma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Intelligence)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Agility)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luck)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Health)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Strength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perception)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endurance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charisma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intelligence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Luck)
+            </td>
+            <td>
+                @Html.ActionLink("Útok", "Create", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    <input type="button" value="Návrat na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
+</div>

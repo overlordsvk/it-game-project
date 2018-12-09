@@ -1,0 +1,69 @@
+﻿@model BL.DTO.FightDto
+
+<div>
+    <h4>FightDto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Attacker.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attacker.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Defender.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Defender.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackerWeapon.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackerWeapon.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackerArmor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackerArmor.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DefenderWeapon.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DefenderWeapon.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DefenderArmor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DefenderArmor.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttackSuccess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttackSuccess)
+        </dd>
+
+
+    </dl>
+</div>
+<div>
+    <input type="button" value="Back To Character" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
+    <input type="button" value="Back To List" class="btn btn-primary" onclick="location.href='@Url.Action("List")'" />
+</div>

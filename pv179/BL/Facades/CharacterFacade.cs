@@ -11,11 +11,9 @@ using BL.Services.Accounts;
 using BL.Services.Characters;
 using BL.Services.Fights;
 using BL.Services.Items;
-using Game.DAL.Enums;
 using Game.Infrastructure.UnitOfWork;
-using System.Runtime.InteropServices;
 using BL.Services.Groups;
-using System.Security.Cryptography;
+
 
 namespace BL.Facades
 {
@@ -236,6 +234,47 @@ namespace BL.Facades
                 return itemId;
             }
         }
+
+        public async Task<IEnumerable<CharacterDto>> GetCharactersToFight(CharacterDto character, int count)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var characters = await _characterService.ListCharactersAsync(new CharacterFilterDto { SortCriteria = nameof(character.Score) });
+                var lessScore = characters.Items.TakeWhile(x => x.Name != character.Name);
+                var moreScore = characters.Items.SkipWhile(x => x.Name != character.Name);
+                moreScore = moreScore.Skip(1);
+                var possibleCharacters = new List<CharacterDto>();
+
+                if (lessScore.Count() < count / 2)
+                {
+                    possibleCharacters.AddRange(lessScore);
+                }
+                else
+                {
+                    possibleCharacters.AddRange(lessScore.Skip(lessScore.Count() - count / 2));
+                }
+
+                if (moreScore.Count() < count - possibleCharacters.Count())
+                {
+                    var i = possibleCharacters.Count();
+                    possibleCharacters.AddRange(moreScore);
+                }
+                else
+                {
+                    possibleCharacters.AddRange(moreScore.Take(count - possibleCharacters.Count()));
+                }
+                return possibleCharacters;
+            }
+        }
+
+        public async Task<FightDto> GetFight(Guid id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+            return await _fightService.GetAsync(id);
+            }
+        }
+
 
         public async Task<QueryResultDto<FightDto, FightFilterDto>> GetFightsHistory(FightFilterDto filter)
         {

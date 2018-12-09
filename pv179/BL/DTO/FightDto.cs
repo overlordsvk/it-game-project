@@ -10,8 +10,10 @@ namespace BL.DTO
     public class FightDto : DtoBase
     {
         public Guid? AttackerId { get; set; }
+        public CharacterDto Attacker { get; set; }
 
         public Guid? DefenderId { get; set; }
+        public CharacterDto Defender { get; set; }
 
         public Guid? AttackerWeaponId { get; set; }
         public ItemDto AttackerWeapon { get; set; }
