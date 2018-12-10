@@ -77,6 +77,7 @@ namespace GameWebMVC.Controllers
 
         }
 
+
         public ActionResult Reply(Guid chatId)
         {
             var message = new MessageDto

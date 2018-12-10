@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
+    [Authorize]
     public class FightController : Controller
     {
         public CharacterFacade CharacterFacade { get; set; }

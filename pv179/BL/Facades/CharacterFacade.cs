@@ -316,7 +316,14 @@ namespace BL.Facades
                         Timestamp = DateTime.Now,
                         AttackSuccess = attackSuccess
                     });
-                attacker.Money += 30;
+                if (attackSuccess)
+                {
+                    attacker.Score += 30;
+                    attacker.Money += 30;
+                } else
+                {
+                    attacker.Score -= 17;
+                }
                 await _characterService.Update(attacker);
                 await uow.Commit();
                 return fightId;

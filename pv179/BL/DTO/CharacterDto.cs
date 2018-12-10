@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Script.Serialization;
 using System.Xml.Serialization;
 
@@ -13,14 +14,25 @@ namespace BL.DTO
         [Required, MinLength(4, ErrorMessage ="Meno musí mať aspoň 4 znaky"), MaxLength(64, ErrorMessage ="Meno nesmie mať viac ako 64 znakov")]
         public string Name { get; set; }
 
+        private int money = 100;
         [Range(0, int.MaxValue)]
-        public int Money { get; set; } = 100;
+        public int Money 
+        {
+            get { return money; }
+            set { money = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
+                
+        } 
 
         [Range(0, 1000)]
         public int Health { get; set; } = 0;
 
+        private int score = 0;
         [Range(0, int.MaxValue)]
-        public int Score { get; set; } = 0;
+        public int Score 
+        {
+            get { return score; }
+            set { score = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
+        }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
         public int Strength { get; set; }
