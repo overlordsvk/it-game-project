@@ -1,11 +1,16 @@
 ﻿@model BL.DTO.FightDto
 
+@{
+    ViewBag.Title = "Súboj";
+}
+
+
 <div>
-    <h4>FightDto</h4>
+    <h2>Súboj</h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Attacker.Name)
+            Útočník
         </dt>
 
         <dd>
@@ -13,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Defender.Name)
+            Obranca
         </dt>
 
         <dd>
@@ -21,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AttackerWeapon.Name)
+            Útočníkova zbraň
         </dt>
 
         <dd>
@@ -29,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AttackerArmor.Name)
+            Útočníkové brnenie
         </dt>
 
         <dd>
@@ -37,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DefenderWeapon.Name)
+            Obrancova zbraň
         </dt>
 
         <dd>
@@ -45,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DefenderArmor.Name)
+            Obrancove brnenie
         </dt>
 
         <dd>
@@ -53,17 +58,29 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AttackSuccess)
+            Výsledok
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AttackSuccess)
-        </dd>
+        @if (Model.AttackSuccess)
+        {
+
+            <dd class="text-success">
+                @Html.DisplayName("Výhra")
+            </dd>
+
+        }
+        else
+        {
+            <dd class="text-danger">
+                @Html.DisplayName("Porážka")
+            </dd>
+
+        }
 
 
     </dl>
 </div>
 <div>
-    <input type="button" value="Back To Character" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
-    <input type="button" value="Back To List" class="btn btn-primary" onclick="location.href='@Url.Action("List")'" />
+    <input type="button" value="Naspäť na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
+    <input type="button" value="Naspäť na súboje" class="btn btn-primary" onclick="location.href='@Url.Action("List")'" />
 </div>

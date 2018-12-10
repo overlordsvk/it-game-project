@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BL.DTO.ChatDto>
 
 @{
-    ViewBag.Title = "MailBox";
+    ViewBag.Title = "Správy";
 }
 
-<h2>MailBox</h2>
+<h2>Správy</h2>
 
 <div>
-<input type="button" value="New" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("NewChat")'" />
+<input type="button" value="Nová konverzácia" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("NewChat")'" />
 </div>
 
 <table class="table">
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Receiver.Name)
             </td>
             <td>
-                @Html.ActionLink("Messages", "Chat", new { id = item.Id })
+                @Html.ActionLink("Správy", "Chat", new { id = item.Id })
             </td>
         </tr>
     }

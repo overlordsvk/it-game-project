@@ -42,9 +42,12 @@ namespace BL.Services.Accounts
 
         public async Task UpdateAccount(AccountDto account, string password)
         {
-            var hash = CreateHash(password);
-            account.PasswordHash = hash.Item1;
-            account.PasswordSalt = hash.Item2;
+            if (!string.IsNullOrEmpty(password))
+            {
+                var hash = CreateHash(password);
+                account.PasswordHash = hash.Item1;
+                account.PasswordSalt = hash.Item2;
+            } 
             await Update(account);
         }
 

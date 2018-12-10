@@ -60,6 +60,7 @@ namespace GameWebMVC.Controllers
             var defenderFights = await CharacterFacade.GetFightsHistory(new FightFilterDto { DefenderId = characterId });
             fights.AddRange(attackerFights.Items);
             fights.AddRange(defenderFights.Items);
+            fights = fights.OrderByDescending(x => x.Timestamp).ToList();
 
             return View(fights);
 

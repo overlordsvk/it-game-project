@@ -5,57 +5,70 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Attacker.Name)
+            Útočník
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Defender.Name)
+            Obranca
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AttackerWeapon.Name)
+            Útočníkova zbraň
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AttackerArmor.Name)
+            Útočníkové brnenie
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DefenderWeapon.Name)
+            Obrancova zbraň
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DefenderArmor.Name)
+            Obrancove brnenie
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AttackSuccess)
+            Výsledok
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Attacker.Name)
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attacker.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Defender.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
+        </td>
+
+        @if (item.AttackSuccess)
+        {
+
+            <td class="text-success">
+                @Html.DisplayName("Výhra")
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Defender.Name)
+
+        }
+        else
+        {
+            <td class="text-danger">
+                @Html.DisplayName("Porážka")
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AttackSuccess)
-            </td>
-            <td>
-                @Html.ActionLink("Detail", "Index", new { id = item.Id }) 
-            </td>
-        </tr>
+
+        }
+        <td>
+            @Html.ActionLink("Detail", "Index", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>

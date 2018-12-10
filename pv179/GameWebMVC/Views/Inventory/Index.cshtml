@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<BL.DTO.ItemDto>
 
-<p>
-    @Html.ActionLink("Kúpiť", "Buy")
-</p>
+
+<div>
+    <input type="button" value="Kúpiť" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("Buy")'" />
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -24,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Equipped)
         </th>
         <th>
-            @Html.DisplayName("Typ")
+            @Html.DisplayNameFor(model => model.ItemType)
         </th>
         <th></th>
     </tr>

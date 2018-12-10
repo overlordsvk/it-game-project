@@ -1,7 +1,7 @@
 ﻿@model BL.DTO.ItemDto
 
 <div>
-    <h4>ItemDto</h4>
+    <h4>@Model.Name</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -62,7 +62,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    <input type="button" value="Vyzbrojiť" class="btn btn-primary" onclick="location.href='@Url.Action("Equip", new { id = Model.Id })'" />
+    <input type="button" value="Predať" class="btn btn-warning" onclick="location.href='@Url.Action("Sell", new { id = Model.Id })'" />
+    <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" />
+</div>
+
