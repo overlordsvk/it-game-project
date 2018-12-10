@@ -49,7 +49,7 @@ namespace GameWebMVC.Controllers
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
-            if (user.GroupId != null))
+            if (user.GroupId != null)
             {
                 return RedirectToAction("NotAuthorized", "Error");
             }
