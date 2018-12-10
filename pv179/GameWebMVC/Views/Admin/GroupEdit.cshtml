@@ -2,11 +2,12 @@
 
 @{
     ViewBag.Title = "Upraviť skupinu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Upraviť skupinu</h2>
 
-@using (Html.BeginForm("Edit", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("GroupEdit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -47,5 +48,5 @@
 }
 
 <div>
-    @Html.ActionLink("Späť na zoznam skupín", "List")
+    @Html.ActionLink("Späť na zoznam skupín", "GroupList")
 </div>

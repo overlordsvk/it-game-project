@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<BL.DTO.AccountDto>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Zoznam účtov";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>View</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <input type="button" value="Vytvoriť účet" class="btn btn-success" onclick="location.href='@Url.Action("AccountCreate")'" />
 </p>
 <table class="table">
     <tr>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Roles)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Upraviť", "AccountEdit", new { id = item.Id }) |
+                @Html.ActionLink("Detail", "AccountDetails", new { id = item.Id }) |
+                @Html.ActionLink("Zmazať", "AccountDelete", new { id = item.Id })
             </td>
         </tr>
     }

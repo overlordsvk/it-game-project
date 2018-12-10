@@ -45,38 +45,63 @@ namespace GameWebMVC.Controllers
             //view members
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (user.GroupId != null))
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(GroupDto group)
         {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (user.GroupId != null)
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
             group.Picture = "/Img/default.jpg";
             var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
             return RedirectToAction("Details", new { id = newGroupId });
         }
 
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(Guid id)
         {
-            var group = await GroupFacade.GetGroupAsync(id);
-            return View(new GroupImageModel{ Group = group, File = null });
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (user.IsGroupAdmin && user.GroupId != id)
+            {
+                var group = await GroupFacade.GetGroupAsync(id);
+                return View(new GroupImageModel{ Group = group, File = null });
+            }
+            return RedirectToAction("NotAuthorized", "Error");
         }
 
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost]
         public async Task<ActionResult> Edit(GroupImageModel model)
         {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (!(user.IsGroupAdmin && user.GroupId != model.Group.Id))
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
             try
             {
-                var relativePath = "/Img/Default.jpg";
+                var group = await GroupFacade.GetGroupAsync(model.Group.Id);
+                var relativePath = group.Picture;
                 if (model.File != null && model.File.ContentLength > 0)
                 {
                     var fileType = Path.GetExtension(model.File.FileName);
                     var path = Path.Combine(Server.MapPath("~/Img/"), model.Group.Id + fileType);
                     model.File.SaveAs(path);
                     relativePath = "/Img/" + model.Group.Id + fileType;
+                    model.Group.Picture = relativePath;
                 }
                 model.Group.Picture = relativePath;
                 await GroupFacade.Edit(model.Group);
@@ -91,13 +116,14 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            if (!user.IsGroupAdmin || user.GroupId != id)
-            {
-                return View("Error", "Error");
-            }
             
-            await GroupFacade.RemoveGroup(id);
-            return RedirectToAction("List");
+            if (user.IsGroupAdmin && user.GroupId != id)
+            {
+                await GroupFacade.RemoveGroup(id);
+                return View("List");
+                
+            }
+            return RedirectToAction("NotAuthorized", "Error");
         }
 
         // GET: Group list

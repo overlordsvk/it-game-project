@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Skupina</h2>
@@ -28,6 +29,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Späť na zoznam skupín", "List")
+    @Html.ActionLink("Upraviť", "GroupEdit", new { id = Model.Id }) |
+    @Html.ActionLink("Späť na zoznam skupín", "GroupList")
 </p>
