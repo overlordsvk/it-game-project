@@ -154,6 +154,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CharacterController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FightController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -215,7 +216,7 @@
     <Content Include="Views\Group\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Character\Remove.cshtml" />
-    <Content Include="Views\Admin\Group\Create.cshtml" />
+    <Content Include="Views\Admin\GroupCreate.cshtml" />
     <Content Include="Views\Group\Edit.cshtml" />
     <Content Include="Views\Messaging\NewChat.cshtml" />
     <Content Include="Views\Messaging\MailBox.cshtml" />
@@ -227,17 +228,18 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Admin\Accounts.cshtml" />
+    <Content Include="Views\Admin\AccountList.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Fight\FightSelection.cshtml" />
     <Content Include="Views\Fight\Index.cshtml" />
     <Content Include="Views\Fight\List.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Inventory\Details.cshtml" />
-    <Content Include="Views\Admin\Group\Index.cshtml" />
-    <Content Include="Views\Admin\Group\Details.cshtml" />
-    <Content Include="Views\Admin\Group\Edit.cshtml" />
+    <Content Include="Views\Admin\GroupList.cshtml" />
+    <Content Include="Views\Admin\GroupDetails.cshtml" />
+    <Content Include="Views\Admin\GroupEdit.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

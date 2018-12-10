@@ -70,13 +70,14 @@ namespace GameWebMVC.Controllers
         {
             try
             {
-                var relativePath = "/Img/Default.jpg";
+                var relativePath = model.Group.Picture;
                 if (model.File != null && model.File.ContentLength > 0)
                 {
                     var fileType = Path.GetExtension(model.File.FileName);
                     var path = Path.Combine(Server.MapPath("~/Img/"), model.Group.Id + fileType);
                     model.File.SaveAs(path);
                     relativePath = "/Img/" + model.Group.Id + fileType;
+                    model.Group.Picture = relativePath;
                 }
                 model.Group.Picture = relativePath;
                 await GroupFacade.Edit(model.Group);
@@ -91,13 +92,14 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Delete(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            if (!user.IsGroupAdmin || user.GroupId != id)
-            {
-                return View("Error", "Error");
-            }
             
-            await GroupFacade.RemoveGroup(id);
-            return RedirectToAction("List");
+            if ((user.IsGroupAdmin && user.GroupId != id) || User.IsInRole("Admin"))
+            {
+                await GroupFacade.RemoveGroup(id);
+                return View("List");
+                
+            }
+            return RedirectToAction("NotAuthorized", "Error");
         }
 
         // GET: Group list
