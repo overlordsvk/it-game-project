@@ -45,7 +45,10 @@ namespace GameWebMVC.Controllers
 
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
 
-            return View("GroupList", result.Items);
+            var collection = result.Items;
+            if (collection == null)
+                collection = new List<GroupDto>();
+            return View("GroupList", collection);
         }
 
         public async Task<ActionResult> GroupDetails(Guid id)
@@ -106,8 +109,7 @@ namespace GameWebMVC.Controllers
             if ((user.IsGroupAdmin && user.GroupId != id) || User.IsInRole("Admin"))
             {
                 await GroupFacade.RemoveGroup(id);
-                return View("GroupList");
-                
+                return RedirectToAction("GroupList");
             }
             return RedirectToAction("NotAuthorized", "Error");
         }

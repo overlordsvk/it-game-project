@@ -144,6 +144,16 @@ namespace BL.Facades
             }
         }
 
+        public async Task<QueryResultDto<GroupPostDto, GroupPostFilterDto>> GetGroupPostsAsync(Guid id)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                var posts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto{ GroupId = id, PageSize = 20, SortAscending = false });
+                return posts;
+            }
+            
+        }
+
         public async void CreatePost(GroupPostDto groupPost)
         {
             using (var uow = UnitOfWorkProvider.Create())
@@ -153,7 +163,6 @@ namespace BL.Facades
             }
             
         }
-
 
         public async void EditPost(GroupPostDto groupPost)
         {
