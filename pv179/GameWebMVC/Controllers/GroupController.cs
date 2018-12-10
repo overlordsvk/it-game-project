@@ -80,7 +80,7 @@ namespace GameWebMVC.Controllers
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
-            if (user.IsGroupAdmin && user.GroupId != id)
+            if (user.IsGroupAdmin && user.GroupId == id)
             {
                 var group = await GroupFacade.GetGroupAsync(id);
                 return View(new GroupImageModel{ Group = group, File = null });
@@ -93,7 +93,7 @@ namespace GameWebMVC.Controllers
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
-            if (!(user.IsGroupAdmin && user.GroupId != model.Group.Id))
+            if (!(user.IsGroupAdmin && user.GroupId == model.Group.Id))
             {
                 return RedirectToAction("NotAuthorized", "Error");
             }
@@ -123,7 +123,7 @@ namespace GameWebMVC.Controllers
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
-            if (user.IsGroupAdmin && user.GroupId != id)
+            if (user != null && user.IsGroupAdmin && user.GroupId == id)
             {
                 await GroupFacade.RemoveGroup(id);
                 return RedirectToAction("List");
