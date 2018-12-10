@@ -42,13 +42,15 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Details(Guid id)
         {
             var model = await GroupFacade.GetGroupAsync(id);
-            if (model.Members == null)
-                model.Members = new List<CharacterDto>();
-            if (model.Wall == null)
-                model.Wall = new List<GroupPostDto>();
+            
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            if (user.GroupId == model.Id)
+            {
+                ViewBag.GroupMember = true;
+                if (user.IsGroupAdmin)
+                    ViewBag.GroupAdmin = true;
+            }
             return View("Details", model);
-
-            //view members
         }
 
         public async Task<ActionResult> Create()
@@ -147,6 +149,21 @@ namespace GameWebMVC.Controllers
                 collection = new List<GroupDto>();
             return View("List", collection);
         }
+        /*
+        [HttpPost]
+        public async Task<ActionResult> PostToGroup(Guid id, string text)
+        {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (user != null && user.GroupId == id)
+            {
+                await GroupFacade.CreatePost(new GroupPostDto{ });
+                return RedirectToAction("List");
+                
+            }
+            return RedirectToAction("NotAuthorized", "Error");
+        }*/
+        
 
 
     }
