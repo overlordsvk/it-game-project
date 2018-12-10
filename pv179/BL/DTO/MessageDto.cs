@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace BL.DTO
 
         public Guid? AuthorId { get; set; }
         [JsonIgnore]
+        [DisplayName("Autor")]
         public CharacterDto Author { get; set; }
 
+        [DisplayName("Čas odoslania")]
         public DateTime Timestamp { get; set; }
     }
 }

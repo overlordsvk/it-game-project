@@ -36,7 +36,7 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> NewChat(ChatCreate chat)
         {
-            try
+            if (ModelState.IsValid)
             {
                 var receiver = await CharacterFacade.GetCharacterAccordingToNameAsync(chat.ReceiverName);
                 if (receiver == null)
@@ -53,14 +53,13 @@ namespace GameWebMVC.Controllers
                     Subject = chat.Subject,
 
                 };
-                await MessagingFacade.CreateChat(chatDto);
-
-                return RedirectToAction("Mailbox");
+                var message = await MessagingFacade.CreateChat(chatDto);
+                if (message != Guid.Empty)
+                {
+                    return RedirectToAction("Mailbox");
+                } 
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
 

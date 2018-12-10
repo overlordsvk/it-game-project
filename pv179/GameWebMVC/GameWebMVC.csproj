@@ -163,7 +163,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountLoginModel.cs" />
-    <Compile Include="Models\CharacterEdit.cs" />
     <Compile Include="Models\ChatCreate.cs" />
     <Compile Include="Models\GroupImageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
