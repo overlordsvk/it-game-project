@@ -204,10 +204,10 @@ namespace BL.Facades
                 {
                     return false;
                 }
-                if (character.Money < 100) 
+                if (character.Money < 500) 
                     return false;
 
-                character.Money -= 100;
+                character.Money -= 500;
                 var item =_itemService.GetNewItem();
                 item.OwnerId = characterId;
                 _itemService.Create(item);

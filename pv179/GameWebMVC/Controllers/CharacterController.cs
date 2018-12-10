@@ -1,4 +1,5 @@
 ﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using System;
 using System.Collections.Generic;
@@ -122,6 +123,14 @@ namespace GameWebMVC.Controllers
             return RedirectToAction("Create");
         }
         #endregion
+
+        [AllowAnonymous]
+        public async Task<ActionResult> List()
+        {
+            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { SortCriteria = nameof(CharacterDto.Score)});
+            
+            return View(characters.Items);
+        }
     }
 
 }
