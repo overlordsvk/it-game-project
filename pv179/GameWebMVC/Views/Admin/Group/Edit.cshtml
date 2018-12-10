@@ -1,0 +1,51 @@
+﻿@model GameWebMVC.Models.GroupImageModel
+
+@{
+    ViewBag.Title = "Upraviť skupinu";
+}
+
+<h2>Upraviť skupinu</h2>
+
+@using (Html.BeginForm("Edit", "Group", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Group.Id)
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Name">Meno skupiny</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Group.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Group.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Name">Popis</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Group.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Group.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Name">Obrázok skupiny</label>
+        <div class="col-md-10">
+            <input type="file" name="File">
+            @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Uložiť zmeny" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Späť na zoznam skupín", "List")
+</div>

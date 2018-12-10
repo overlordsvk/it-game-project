@@ -27,6 +27,7 @@ namespace GameWebMVC.Controllers
 
         #region Facades
         public GroupFacade GroupFacade { get; set; }
+        public CharacterFacade CharacterFacade { get; set; }
         #endregion
 
 
@@ -57,7 +58,6 @@ namespace GameWebMVC.Controllers
             return RedirectToAction("Details", new { id = newGroupId });
         }
 
-        // GET: Group/Edit/5
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(Guid id)
         {
@@ -65,7 +65,6 @@ namespace GameWebMVC.Controllers
             return View(new GroupImageModel{ Group = group, File = null });
         }
 
-        // POST: Group/Edit/5
         [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(GroupImageModel model)
         {
@@ -89,10 +88,14 @@ namespace GameWebMVC.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            // TO DO - check authorization
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            if (!user.IsGroupAdmin || user.GroupId != id)
+            {
+                return View("Error", "Error");
+            }
+            
             await GroupFacade.RemoveGroup(id);
             return RedirectToAction("List");
         }

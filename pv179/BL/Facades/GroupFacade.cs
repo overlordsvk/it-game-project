@@ -60,6 +60,7 @@ namespace BL.Facades
                 foreach (var member in group.Members)
                 {
                     member.Group = null;
+                    member.IsGroupAdmin = false;
                     await _characterService.Update(member);
                 }
                 _groupService.Delete(groupId);
@@ -135,6 +136,7 @@ namespace BL.Facades
                 }
                 group.Members.Remove(character);
                 character.Group = null;
+                character.IsGroupAdmin = false;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
                 await uow.Commit();

@@ -215,7 +215,7 @@
     <Content Include="Views\Group\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Character\Remove.cshtml" />
-    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Admin\Group\Create.cshtml" />
     <Content Include="Views\Group\Edit.cshtml" />
     <Content Include="Views\Messaging\NewChat.cshtml" />
     <Content Include="Views\Messaging\MailBox.cshtml" />
@@ -234,6 +234,10 @@
     <Content Include="Views\Fight\List.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Inventory\Details.cshtml" />
+    <Content Include="Views\Admin\Group\Index.cshtml" />
+    <Content Include="Views\Admin\Group\Details.cshtml" />
+    <Content Include="Views\Admin\Group\Edit.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
