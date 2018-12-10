@@ -27,3 +27,46 @@ img.clan-list-img {
     max-width: 100px;
     max-height: 100px;
 }
+
+.wrapper {
+            overflow: hidden;
+            width: 970px;
+            margin: 40px auto;
+        }
+        .sign {
+            width: 400px;
+            height: 260px;
+            background-size: cover;
+        }
+        .left, .right, .result {
+            float: left;
+        }
+        .result {
+            width: 170px;
+            height: 140px;
+            background-size: cover;
+            font-size: 46px;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 25px;
+        }
+        .position {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 33px;
+        }
+        .name {
+            text-align: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+        .stats {
+            width: 300px;
+            margin-left: 50px;
+            margin-top: 10px;
+            text-align:center;
+        }
+        .stat-label {
+            font-weight: bold;
+        }

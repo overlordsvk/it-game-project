@@ -5,80 +5,43 @@
 }
 
 
-<div>
-    <h2>Súboj</h2>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Útočník
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Attacker.Name)
-        </dd>
-
-        <dt>
-            Obranca
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Defender.Name)
-        </dd>
-
-        <dt>
-            Útočníkova zbraň
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AttackerWeapon.Name)
-        </dd>
-
-        <dt>
-            Útočníkové brnenie
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AttackerArmor.Name)
-        </dd>
-
-        <dt>
-            Obrancova zbraň
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DefenderWeapon.Name)
-        </dd>
-
-        <dt>
-            Obrancove brnenie
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DefenderArmor.Name)
-        </dd>
-
-        <dt>
-            Výsledok
-        </dt>
-
+<div class="wrapper">
+    <div class="left">
+        <div class="sign">
+            <div class="position">Útočník</div>
+            <div class="name text-warning">@Html.DisplayFor(model => model.Attacker.Name)</div>
+            <div class="stats">
+                <span class="stat-label">Útočníkova zbraň: </span>
+                <span class="stat">@Html.DisplayFor(model => model.AttackerWeapon.Name)</span>
+                <br>
+                <span class="stat-label">Útočníkové brnenie: </span>
+                <span class="stat">@Html.DisplayFor(model => model.AttackerArmor.Name)</span>
+            </div>
+        </div>
+    </div>
+    <div class="result">
         @if (Model.AttackSuccess)
         {
-
-            <dd class="text-success">
-                @Html.DisplayName("Výhra")
-            </dd>
-
+        <div class="text-success">@Html.DisplayName("Výhra")</div>
         }
         else
         {
-            <dd class="text-danger">
-                @Html.DisplayName("Porážka")
-            </dd>
-
+        <div class="text-danger">@Html.DisplayName("Porážka")</div>
         }
-
-
-    </dl>
+    </div>
+    <div class="right">
+        <div class="sign">
+            <div class="position">Obranca</div>
+            <div class="name text-warning">@Html.DisplayFor(model => model.Defender.Name)</div>
+            <div class="stats">
+                <span class="stat-label">Obrancova zbraň: </span>
+                <span class="stat">@Html.DisplayFor(model => model.DefenderWeapon.Name)</span>
+                <br>
+                <span class="stat-label">Obrancove brnenie: </span>
+                <span class="stat">@Html.DisplayFor(model => model.DefenderArmor.Name)</span>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
     <input type="button" value="Naspäť na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
