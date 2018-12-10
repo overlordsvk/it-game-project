@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<BL.DTO.FightDto>
 
+@{
+    ViewBag.Title = "Súboje";
+}
+
+<h2>Súboje</h2>
 <input type="button" value="Útok" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("FightSelection")'" />
 
 <table class="table">

@@ -128,16 +128,20 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(AccountCreateDto account)
         {
-            try
+            if (ModelState.IsValid)
             {
-                await AccountFacade.EditAccountAsync(Guid.Parse(User.Identity.Name),account);
-                return RedirectToAction("Index");
+                try
+                {
+                    await AccountFacade.EditAccountAsync(Guid.Parse(User.Identity.Name), account);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-
-                return View();
-            }
+            return View();
+            
         }
         #endregion
 
