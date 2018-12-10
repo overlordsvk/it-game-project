@@ -21,11 +21,10 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li>@Html.ActionLink("Účty", "Accounts", "Admin")</li>
-                    <li>@Html.ActionLink("Postavy", "Users", "Admin")</li>
-                    <li>@Html.ActionLink("Skupiny", "Groups", "Admin")</li>
-                    <li>@Html.ActionLink("Správy", "Messages", "Admin")</li>
-                    <li>@Html.ActionLink("Súboje", "Fights", "Admin")</li>
+                    <li>@Html.ActionLink("Účty", "AccountList", "Admin")</li>
+                    <li>@Html.ActionLink("Postavy", "UserList", "Admin")</li>
+                    <li>@Html.ActionLink("Skupiny", "GroupList", "Admin")</li>
+                    <li>@Html.ActionLink("Súboje", "FightList", "Admin")</li>
                 </ul>
                 <ul class="nav navbar-nav  navbar-right">
                     <li class="user"><a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>

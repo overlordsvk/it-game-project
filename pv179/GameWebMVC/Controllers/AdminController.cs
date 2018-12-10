@@ -35,8 +35,8 @@ namespace GameWebMVC.Controllers
             return View();
         }
 
-        [Route("Admin/Groups")]
-        public async Task<ActionResult> Groups(int page = 1)
+        #region Group
+        public async Task<ActionResult> GroupList(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
 
@@ -48,41 +48,39 @@ namespace GameWebMVC.Controllers
             return View("GroupList", result.Items);
         }
 
-        [Route("Admin/Groups")]
-        public async Task<ActionResult> Details(Guid id)
+        public async Task<ActionResult> GroupDetails(Guid id)
         {
             var model = await GroupFacade.GetGroupAsync(id);
             return View("GroupDetails", model);
             //view members
         }
 
-        [Route("Admin/Groups")]
-        public ActionResult Create()
+        public ActionResult GroupCreate()
         {
             return View();
         }
 
-        [HttpPost, Route("Admin/Groups")]
-        public async Task<ActionResult> Create(GroupDto group)
+        [HttpPost]
+        public async Task<ActionResult> GroupCreate(GroupDto group)
         {
             group.Picture = "/Img/default.jpg";
             var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
             return RedirectToAction("GroupDetails", new { id = newGroupId });
         }
 
-        [Authorize(Roles = "Admin"), Route("Admin/Groups")]
-        public async Task<ActionResult> Edit(Guid id)
+        public async Task<ActionResult> GroupEdit(Guid id)
         {
             var group = await GroupFacade.GetGroupAsync(id);
             return View("GroupEdit", new GroupImageModel{ Group = group, File = null });
         }
 
-        [HttpPost, Authorize(Roles = "Admin"), Route("Admin/Groups")]
-        public async Task<ActionResult> Edit(GroupImageModel model)
+        [HttpPost]
+        public async Task<ActionResult> GroupEdit(GroupImageModel model)
         {
             try
             {
-                var relativePath = model.Group.Picture;
+                var group = await GroupFacade.GetGroupAsync(model.Group.Id);
+                var relativePath = group.Picture;
                 if (model.File != null && model.File.ContentLength > 0)
                 {
                     var fileType = Path.GetExtension(model.File.FileName);
@@ -101,8 +99,7 @@ namespace GameWebMVC.Controllers
             return View("GroupEdit", model);
         }
 
-        [Route("Admin/Groups")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> GroupDelete(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
@@ -114,5 +111,14 @@ namespace GameWebMVC.Controllers
             }
             return RedirectToAction("NotAuthorized", "Error");
         }
+        #endregion
+
+
+
+
+
+
+
+
     }
 }

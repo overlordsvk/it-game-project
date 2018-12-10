@@ -8,7 +8,7 @@
 <h2>Zoznam skupín</h2>
 
 <p>
-    <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("Create")'" />
+    <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("GroupCreate")'" />
 </p>
 <table class="table">
     <tr>
@@ -39,13 +39,13 @@
             <td>
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Upraviť", "Edit", new { id = item.Id }) <span>|</span>
+                    @Html.ActionLink("Upraviť", "GroupEdit", new { id = item.Id }) <span>|</span>
                 }
-                @Html.ActionLink("Detail", "Details", new { id = item.Id })
+                @Html.ActionLink("Detail", "GroupDetails", new { id = item.Id })
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
                     <span>|</span>
-                    @Html.ActionLink("Zmazať", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Zmazať", "GroupDelete", new { id = item.Id })
                 }
             </td>
         </tr>
