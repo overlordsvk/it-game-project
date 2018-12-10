@@ -66,7 +66,11 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Chat(Guid id)
         {
             var chat = await MessagingFacade.GetChatById(id);
-
+            var characterId = Guid.Parse(User.Identity.Name);
+             if(characterId != chat.ReceiverId && characterId != chat.SenderId)
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
             if (chat == null)
             {
                 return RedirectToAction("Mailbox");
@@ -77,8 +81,15 @@ namespace GameWebMVC.Controllers
         }
 
 
-        public ActionResult Reply(Guid chatId)
+        public async Task<ActionResult> Reply(Guid chatId)
         {
+            var chat = await MessagingFacade.GetChatById(chatId);
+            var characterId = Guid.Parse(User.Identity.Name);
+            if (characterId != chat.ReceiverId && characterId != chat.SenderId)
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
+
             var message = new MessageDto
             {
                 ChatId = chatId,
