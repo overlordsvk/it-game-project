@@ -12,7 +12,8 @@ using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
-    [Authorize]
+
+    [Authorize(Roles = "HasCharacter")]
     public class FightController : Controller
     {
         public CharacterFacade CharacterFacade { get; set; }
