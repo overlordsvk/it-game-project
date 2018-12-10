@@ -29,6 +29,15 @@ namespace GameWebMVC.Controllers
             return View(character);
         }
 
+        public async Task<ActionResult> Detail(Guid id)
+        {
+            var character = await CharacterFacade.GetCharacterById(id);
+            if (character == null)
+            {
+                return RedirectToAction("Index", "Error", "Postava neexistuje");
+            }
+            return View(character);
+        }
 
         #region Create
         public ActionResult Create()
