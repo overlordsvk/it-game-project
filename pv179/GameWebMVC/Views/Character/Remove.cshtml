@@ -1,12 +1,12 @@
 ﻿@model BL.DTO.CharacterDto
 
 @{
-    ViewBag.Title = "Remove";
+    ViewBag.Title = "Zmazanie postavy";
 }
 
-<h2>Remove</h2>
+<h2>Zmazanie postavy</h2>
 
-<h3>Are you sure you want to delete your character?</h3>
+<h3>Si si istý, že chceš zmazať túto postavu?</h3>
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -105,8 +105,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> 
-            <input type="button" value="Back" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" />
+            <input type="submit" value="Zmazať" class="btn btn-danger" /> 
+            <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" />
 
         </div>
     }

@@ -130,6 +130,7 @@ namespace GameWebMVC.Controllers
         {
             try
             {
+                await AccountFacade.EditAccountAsync(Guid.Parse(User.Identity.Name),account);
                 return RedirectToAction("Index");
             }
             catch
