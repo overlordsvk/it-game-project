@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -41,7 +42,12 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Details(Guid id)
         {
             var model = await GroupFacade.GetGroupAsync(id);
+            if (model.Members == null)
+                model.Members = new List<CharacterDto>();
+            if (model.Wall == null)
+                model.Wall = new List<GroupPostDto>();
             return View("Details", model);
+
             //view members
         }
 
@@ -120,7 +126,7 @@ namespace GameWebMVC.Controllers
             if (user.IsGroupAdmin && user.GroupId != id)
             {
                 await GroupFacade.RemoveGroup(id);
-                return View("List");
+                return RedirectToAction("List");
                 
             }
             return RedirectToAction("NotAuthorized", "Error");
@@ -136,8 +142,12 @@ namespace GameWebMVC.Controllers
             filter.RequestedPageNumber = page;
 
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
-
-            return View("List", result.Items);
+            var collection = result.Items;
+            if (collection == null)
+                collection = new List<GroupDto>();
+            return View("List", collection);
         }
+
+
     }
 }
