@@ -10,7 +10,7 @@ namespace GameWebMVC.Models
 {
     public class ChatCreate
     {
-        [Required(ErrorMessage = "Meno nesmie byť prázdne")]
+        [Required(ErrorMessage = "Prijímateľ nesmie byť prázdny")]
         [StringLength(64, MinimumLength = 4, ErrorMessage = "Prijímateľ musí mať 4 - 64 znakov")]
         [DisplayName("Prijímateľ")]
         public String ReceiverName { get; set; }

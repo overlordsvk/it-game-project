@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Script.Serialization;
@@ -11,50 +12,62 @@ namespace BL.DTO
 {
     public class CharacterDto : DtoBase
     {
-        [Required, MinLength(4, ErrorMessage ="Meno musí mať aspoň 4 znaky"), MaxLength(64, ErrorMessage ="Meno nesmie mať viac ako 64 znakov")]
+        [Required(ErrorMessage ="Meno nesmie byť prázdne")]
+        [MinLength(4, ErrorMessage ="Meno musí mať aspoň 4 znaky")]
+        [MaxLength(64, ErrorMessage ="Meno nesmie mať viac ako 64 znakov")]
+        [DisplayName("Meno")]
         public string Name { get; set; }
 
         private int money = 100;
+
         [Range(0, int.MaxValue)]
-        public int Money 
-        {
+        [DisplayName("Peniaze")]
+        public int Money {
             get { return money; }
             set { money = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
                 
-        } 
+        }
 
         [Range(0, 1000)]
+        [DisplayName("Zdravie")]
         public int Health { get; set; } = 0;
 
         private int score = 0;
         [Range(0, int.MaxValue)]
-        public int Score 
-        {
+        [DisplayName("Skóre")]
+        public int Score {
             get { return score; }
             set { score = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
         }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Sila")]
         public int Strength { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Reflexy")]
         public int Perception { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Výdrž")]
         public int Endurance { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Charizma")]
         public int Charisma { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Inteligencia")]
         public int Intelligence { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Obratnosť")]
         public int Agility { get; set; }
 
         [Range(1, 10, ErrorMessage = "Rozsah medzi 1-10")]
+        [DisplayName("Štastie")]
         public int Luck { get; set; }
-        
+
         [JsonIgnore]
         public ICollection<ItemDto> Items { get; set; } = new List<ItemDto>();
 
