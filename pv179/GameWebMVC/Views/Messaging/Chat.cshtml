@@ -7,9 +7,7 @@
 <h2>@Model.Subject</h2>
 
 <div>
-    <input type="button" value="Reply" class="btn btn-success" onclick="location.href='@Url.Action("Reply", new { chatId = Model.Id })'" />
-    <br />
-    <br />
+    <input type="button" value="Reply" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("Reply", new { chatId = Model.Id })'" />
 </div>
 <table class="table">
     <tr>

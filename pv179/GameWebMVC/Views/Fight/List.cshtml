@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BL.DTO.FightDto>
+
+<input type="button" value="Útok" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("FightSelection")'" />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Attacker.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Defender.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttackerWeapon.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttackerArmor.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefenderWeapon.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DefenderArmor.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttackSuccess)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attacker.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Defender.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttackSuccess)
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "Index", new { id = item.Id }) 
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    <input type="button" value="Návrat na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
+</div>
