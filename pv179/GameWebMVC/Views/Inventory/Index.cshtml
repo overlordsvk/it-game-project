@@ -5,14 +5,15 @@
 
 <div style="overflow:hidden; ">
     <input type="button" value="Kúpiť (500 k)" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy")'" />
-    <dl class="dl-horizontal" style="float: left; margin-top: 17px;">
+    <dl class="dl-horizontal" style="float: left; margin: 17px 10px 10px 20px ;">
+        
         <dt>
             @Html.DisplayNameFor(model => model.Money)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Money)
-            @Html.ValidationMessageFor(model => model.Money, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Money, "", new { @class = "text-danger", @style = "margin-left:10px" })
         </dd>
     </dl>
 
