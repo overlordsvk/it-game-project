@@ -1,5 +1,6 @@
 ﻿using BL.DTO.Filters;
 using BL.Facades;
+using GameWebMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,14 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Index()
         {
             var characterId = Guid.Parse(User.Identity.Name);
+            var character = await CharacterFacade.GetCharacterById(characterId);
             var items = await CharacterFacade.GetItemsByFilterAsync(new ItemFilterDto { OwnerId = characterId });
-            return View(items.Items);
+            var model = new InventoryModel { Money = character.Money, Items = items.Items };
+            if(character.Money < 500)
+            {
+                ModelState.AddModelError("Money", "nemáš dostatok peňazí");
+            }
+            return View(model);
         }
 
 
@@ -34,18 +41,11 @@ namespace GameWebMVC.Controllers
 
         public async Task<ActionResult> Buy()
         {
-            try
-            {
-                var characterId = Guid.Parse(User.Identity.Name);
-                await CharacterFacade.BuyItemAsync(characterId);
+            var characterId = Guid.Parse(User.Identity.Name);
+            var res = await CharacterFacade.BuyItemAsync(characterId);
+            return RedirectToAction("Index");
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                //nemáš dost penazi
-                return RedirectToAction("Index");
-            }
+  
         }
 
 

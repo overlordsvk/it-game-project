@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
-
+using GameWebMVC.Controllers;
 
 namespace GameWebMVC.App_Start.Windsor
 {
@@ -27,7 +27,8 @@ namespace GameWebMVC.App_Start.Windsor
         {
             if (controllerType == null)
             {
-                throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
+                return (IController)kernel.Resolve(typeof(ErrorController));
+                //throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
             }
             return (IController)kernel.Resolve(controllerType);
         }

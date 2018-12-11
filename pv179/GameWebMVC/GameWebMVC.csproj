@@ -166,6 +166,7 @@
     <Compile Include="Models\AccountLoginModel.cs" />
     <Compile Include="Models\ChatCreate.cs" />
     <Compile Include="Models\GroupImageModel.cs" />
+    <Compile Include="Models\InventoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
