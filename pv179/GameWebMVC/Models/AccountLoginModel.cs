@@ -11,7 +11,7 @@ namespace GameWebMVC.Models
     {
         [Required(ErrorMessage = "Meno nesmie byť prázdne")]
         [StringLength(64, MinimumLength = 4, ErrorMessage = "Login musí mať 4 - 64 znakov")]
-        [DisplayName("Login")]
+        [DisplayName("Meno/Email")]
         public string usernameOrEmail { get; set; }
         [Required(ErrorMessage = "Heslo nesmie byť prázdne")]
         [StringLength(64, MinimumLength = 4, ErrorMessage = "Heslo musí mať 4 - 64 znakov")]
