@@ -11,50 +11,49 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
                 @Html.ActionLink("Hra", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="">
-                <ul class="nav navbar-nav navbar-left">
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Postava", "Index", "Character")</li>
-                        <li>@Html.ActionLink("Skupina", "Index", "Group")</li>
-                        <li>@Html.ActionLink("Správy", "MailBox", "Messaging")</li>
-                        <li>@Html.ActionLink("Súboj", "List", "Fight")</li>
-                        <li>@Html.ActionLink("Inventár", "Index", "Inventory")</li>
+                        <li class="nav-item">@Html.ActionLink("Postava", "Index", "Character", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Skupina", "Index", "Group", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Správy", "MailBox", "Messaging", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Súboj", "List", "Fight", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Inventár", "Index", "Inventory", new { @class = "nav-link" })</li>
                     }
-                    <li class="public">@Html.ActionLink("Skupiny", "List", "Group")</li>
-                    <li class="public">@Html.ActionLink("Zoznam Postáv", "List", "Character")</liclass="public">
+                    <li class="nav-item">@Html.ActionLink("Skupiny", "List", "Group", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Zoznam Postáv", "List", "Character", new { @class = "nav-link" })</liclass="public">
                 </ul>
-                <ul class="nav navbar-nav  navbar-right">
+                <ul class="navbar-nav pull-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="user"> <a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account", null)</a></li>
                     }
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Prihlásiť sa", "Login", "Account")</li>
-                        <li>@Html.ActionLink("Registrácia", "Register", "Account")</li>
+                        <li class="nav-item">@Html.ActionLink("Prihlásiť sa", "Login", "Account", new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Registrácia", "Register", "Account", new { @class = "nav-link" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Odhlásenie", "Logout", "Account")</li>
+                        <li class="nav-item">@Html.ActionLink("Odhlásenie", "Logout", "Account", new { @class = "nav-link" })</li>
                     }
                 </ul>
             </div>
         </div>
-        </nav>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Game</p>
-            </footer>
-        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Game</p>
+        </footer>
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

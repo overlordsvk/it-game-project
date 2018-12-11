@@ -8,31 +8,25 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top justify-content-between">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Hra", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li>@Html.ActionLink("Účty", "AccountList", "Admin")</li>
-                    <li>@Html.ActionLink("Postavy", "UserList", "Admin")</li>
-                    <li>@Html.ActionLink("Skupiny", "GroupList", "Admin")</li>
-                    <li>@Html.ActionLink("Súboje", "FightList", "Admin")</li>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Účty", "AccountList", "Admin", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Postavy", "UserList", "Admin", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Skupiny", "GroupList", "Admin", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Súboje", "FightList", "Admin", new { @class = "nav-link" })</li>
                 </ul>
-                <ul class="nav navbar-nav  navbar-right">
-                    <li class="user"><a href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
+                    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Account", new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
