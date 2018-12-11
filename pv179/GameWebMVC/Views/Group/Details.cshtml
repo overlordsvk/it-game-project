@@ -50,11 +50,12 @@
                     @Html.DisplayFor(modelItem => item.Score)
                 </td>
                 <td>
+                    @Html.ActionLink("Detail", "Index", "Character", new { id = item.Id })
                     @if (ViewBag.GroupAdmin == true)
                     {
-                        @Html.ActionLink("Vyhodiť zo skupiny", "Edit", new { id = item.Id }) <span>|</span>
+                        <span>|</span>
+                        @Html.ActionLink("Vyhodiť", "LeaveGroup", new { characterId = item.Id, groupId = Model.Id })
                     }
-                    @Html.ActionLink("Detail", "Index", "Character", new { id = item.Id })
                 </td>
             </tr>
         }
@@ -62,7 +63,7 @@
     </table>
 </div>
 @if (ViewBag.GroupMember == true)
-{
+{<div class="pull-left">
     <div style="width:48%;margin-left:5px;box-shadow: #eaeaea 2px 5px 10px 1px;" class="pull-left">
         <h3>Nástenka</h3>
         <table class="table">
@@ -88,20 +89,36 @@
             }
 
         </table>
-        <div>
-            <form method="post" target="/Group/PostToGroup">
-                <label class="control-label col-md-2" for="message">Napíš do skupiny:</label>
-                <div class="col-md-10">
-                    <input type="text" name="message" value="" placeholder="Správa pre skupinu" />
-                </div>
-            </form>
-        </div>
+
+    </div>
+    <div style="margin-top:20px;float:left;">
+        <form action="/Group/PostToGroup" method="post" >
+            <div style="padding:5px;" class="pull-left">
+                <label class="control-label" for="message">Správa:</label>
+            </div>
+            <div style="margin-left:8px;" class="pull-left">
+                <input type="text" name="message" value="" placeholder="Správa pre skupinu" />
+                <input type="submit" value="Poslať" class="btn btn-default">
+            </div>
+        </form>
+    </div>
     </div>
 }
-
 <div style="clear:both;">
     <p>
-        @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) |
+        @if (User.Identity.IsAuthenticated && ViewBag.GroupMember == true)
+        {
+            @Html.ActionLink("Opustiť skupinu", "LeaveGroup", new { characterId = User.Identity.Name, groupId = Model.Id }) <span>|</span>
+        }
+        @if (ViewBag.GroupAdmin == true)
+        {
+            @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) <span>|</span>
+            @Html.ActionLink("Odstrániť skupinu", "Edit", new { id = Model.Id }) <span>|</span>
+        }
+        @if (ViewContext.HttpContext.User.Identity.IsAuthenticated && ViewBag.GroupMember == false)
+        {
+            @Html.ActionLink("Pridať sa", "Join", new { id = User.Identity.Name }) <span>|</span>
+        }
         @Html.ActionLink("Späť na zoznam skupín", "List")
     </p>
 </div>

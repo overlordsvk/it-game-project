@@ -32,18 +32,22 @@ namespace GameWebMVC.Controllers
         #endregion
 
 
-
-
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            if (user == null || !user.GroupId.HasValue)
+                return RedirectToAction("List");
+            return RedirectToAction("Details", new {id = user.GroupId});
         }
 
         public async Task<ActionResult> Details(Guid id)
         {
-            var model = await GroupFacade.GetGroupAsync(id);
-            
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            var model = await GroupFacade.GetGroupAsync(id);
+            if (model == null || user == null)
+            {
+                return RedirectToAction("List");
+            }
             if (user.GroupId == model.Id)
             {
                 ViewBag.GroupMember = true;
@@ -134,6 +138,24 @@ namespace GameWebMVC.Controllers
             return RedirectToAction("NotAuthorized", "Error");
         }
 
+        public async Task<ActionResult> Join(Guid id)
+        {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            
+            if (user != null && !user.GroupId.HasValue)
+            {
+                await GroupFacade.AddToGroup(user.Id, id);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("NotAuthorized", "Error");
+        }
+
+        public async Task<ActionResult> LeaveGroup(Guid characterId, Guid groupId)
+        {
+            await GroupFacade.RemoveFromGroup(characterId, groupId);
+            return RedirectToAction("Index");
+        }
+
         // GET: Group list
         [AllowAnonymous]
         public async Task<ActionResult> List(int page = 1)
@@ -147,22 +169,31 @@ namespace GameWebMVC.Controllers
             var collection = result.Items;
             if (collection == null)
                 collection = new List<GroupDto>();
+
+            ViewBag.GroupMember = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+                if (user.GroupId.HasValue)
+                {
+                    ViewBag.GroupMember = true;
+                }
+            }
             return View("List", collection);
         }
-        /*
+        
         [HttpPost]
-        public async Task<ActionResult> PostToGroup(Guid id, string text)
+        public async Task<ActionResult> PostToGroup(string message)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             
-            if (user != null && user.GroupId == id)
+            if (user != null && user.GroupId.HasValue)
             {
-                await GroupFacade.CreatePost(new GroupPostDto{ });
-                return RedirectToAction("List");
-                
+                GroupFacade.CreatePost(new GroupPostDto{ GroupId = user.GroupId.Value, CharacterId = user.Id, Text = message, Timestamp = DateTime.Now});
+                return RedirectToAction("Index"); 
             }
             return RedirectToAction("NotAuthorized", "Error");
-        }*/
+        }
         
 
 
