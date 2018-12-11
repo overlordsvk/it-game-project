@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 
 namespace Game.DAL.Entity.Initializers
 {
-    public class Initializer : DropCreateDatabaseAlways<GameDbContext>
+    public class Initializer : DropCreateDatabaseIfModelChanges<GameDbContext>
     {
         public static readonly Guid _guid1 = Guid.Parse("629fd444-0146-4b94-a928-e62a4ab51f42");
         public static readonly Guid _guid2 = Guid.Parse("84124fe7-e59b-411d-a76e-73b81bf233c2");
