@@ -54,6 +54,7 @@ namespace GameWebMVC.Controllers
                 if (user.IsGroupAdmin)
                     ViewBag.GroupAdmin = true;
             }
+            model.Wall = model.Wall.OrderByDescending(x => x.Timestamp).ToList();
             return View("Details", model);
         }
 
