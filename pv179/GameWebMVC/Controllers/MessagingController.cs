@@ -30,6 +30,7 @@ namespace GameWebMVC.Controllers
 
         public ActionResult NewChat()
         {
+            
             return View();
         }
 

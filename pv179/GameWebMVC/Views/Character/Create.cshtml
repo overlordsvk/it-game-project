@@ -79,8 +79,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <div class="warn text-danger" >
+                    @Html.DisplayName("Rozdeľ všetkých 35 bodov skúseností")
+                </div>
                 <input type="submit" value="Vytvoriť" class="btn btn-default" />
-                @Html.DisplayName("SPECIAL musia mať spolu 35")
             </div>
         </div>
     </div>
@@ -93,6 +95,7 @@
     function checkValues() {
 	  var inputs = $('.field');
       var submitButton = $('input[type=submit]');
+      var warn = $('.warn');
       var total = 0;
       var value = 0;
       var inputsCount = 0;
@@ -104,9 +107,11 @@
             }
       });
           if (total == 35 && inputsCount == 7) {
+        warn.prop('hidden', true);
   	    submitButton.prop('disabled', false);
       } else {
-  	    submitButton.prop('disabled', true);
+        submitButton.prop('disabled', true);
+  	    warn.prop('hidden', false);
       }
 }
 
