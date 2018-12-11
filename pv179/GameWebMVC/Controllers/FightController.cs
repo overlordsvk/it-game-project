@@ -36,6 +36,11 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Index(Guid id)
         {
             var fight = await CharacterFacade.GetFight(id);
+            var characterId = Guid.Parse(User.Identity.Name);
+            if (characterId != fight.AttackerId && characterId != fight.DefenderId)
+            {
+                return RedirectToAction("NotAuthorized", "Error");
+            }
             return View(fight);
         }
 

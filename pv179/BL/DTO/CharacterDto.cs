@@ -81,6 +81,7 @@ namespace BL.DTO
         [JsonIgnore]
         public ICollection<FightDto> DefenderFights { get; set; } = new List<FightDto>();
         
+        [DisplayName("Názov skupiny")]
         public Guid? GroupId { get; set; }
         [JsonIgnore]
         public GroupDto Group { get; set; }

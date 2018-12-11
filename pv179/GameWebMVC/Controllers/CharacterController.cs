@@ -1,4 +1,5 @@
 ﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,15 @@ namespace GameWebMVC.Controllers
             return View(character);
         }
 
+        public async Task<ActionResult> Detail(Guid id)
+        {
+            var character = await CharacterFacade.GetCharacterById(id);
+            if (character == null)
+            {
+                return RedirectToAction("Index", "Error", "Postava neexistuje");
+            }
+            return View(character);
+        }
 
         #region Create
         public ActionResult Create()
@@ -113,6 +123,14 @@ namespace GameWebMVC.Controllers
             return RedirectToAction("Create");
         }
         #endregion
+
+        [AllowAnonymous]
+        public async Task<ActionResult> List()
+        {
+            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { SortCriteria = nameof(CharacterDto.Score)});
+            
+            return View(characters.Items);
+        }
     }
 
 }

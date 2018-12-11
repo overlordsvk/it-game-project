@@ -1,7 +1,7 @@
 ﻿@model BL.DTO.CharacterDto
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Postava";
 }
 
 <h2>@Model.Name</h2>
@@ -21,23 +21,13 @@
             @Html.DisplayNameFor(model => model.Score)
         </dt>
 
-
         <dd>
             @Html.DisplayFor(model => model.Score)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GroupId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Group.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Health)
         </dt>
-
 
         <dd>
            <div class="progress" style="width: 30%;">
@@ -120,7 +110,3 @@
 
     </dl>
 </div>
-<p>
-    <input type="button" value="Upraviť" class="btn btn-primary" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" />
-    <input type="button" value="Zmazať" class="btn btn-primary" onclick="location.href='@Url.Action("Remove", new { id = Model.Id })'" />
-</p>

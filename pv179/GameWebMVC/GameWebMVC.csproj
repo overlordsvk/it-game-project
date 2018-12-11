@@ -239,7 +239,8 @@
     <Content Include="Views\Admin\GroupEdit.cshtml" />
     <Content Include="Views\Group\Create.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Group\View.cshtml" />
+    <Content Include="Views\Character\Detail.cshtml" />
+    <Content Include="Views\Character\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
