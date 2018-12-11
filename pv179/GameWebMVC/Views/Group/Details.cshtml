@@ -5,7 +5,7 @@
 }
 
 <h2>Skupina</h2>
-<div style="width:50%;" class="pull-left">
+<div style="width:50%;float:left;" class="pull-left">
     <div>
         <h4>@Html.DisplayFor(model => model.Name)</h4>
         <hr />
@@ -63,8 +63,8 @@
     </table>
 </div>
 @if (ViewBag.GroupMember == true)
-{<div class="pull-left">
-    <div style="width:48%;margin-left:5px;box-shadow: #eaeaea 2px 5px 10px 1px;" class="pull-left">
+{<div style="float:left;" class="pull-left">
+    <div style="width:100%;margin-left:5px;box-shadow: #eaeaea 0 0 1px 0px; padding: 5px;" class="pull-left">
         <h3>Nástenka</h3>
         <table class="table">
             <tr>
