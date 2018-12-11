@@ -80,7 +80,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <div class="warn text-danger" >
-                    @Html.DisplayName("Rozdeľ všetkých 35 bodov skúseností")
+                    @Html.DisplayName("Rozdeľ všetkých 35 bodov skúseností") <span class="sum"></span><span>/35</span>
                 </div>
                 <input type="submit" value="Vytvoriť" class="btn btn-default" />
             </div>
@@ -105,7 +105,8 @@
     	    total += value;
             inputsCount++;
             }
-      });
+        });
+        $(".sum").text(total);
           if (total == 35 && inputsCount == 7) {
         warn.prop('hidden', true);
   	    submitButton.prop('disabled', false);
