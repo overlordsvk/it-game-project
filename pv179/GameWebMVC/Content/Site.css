@@ -28,11 +28,19 @@ img.clan-list-img {
     max-height: 100px;
 }
 
+li.public a{
+    color: grey;
+}
+
+.navbar-inverse {
+    background-color: #2e611b;
+}
+
 .wrapper {
-            overflow: hidden;
-            width: 970px;
-            margin: 40px auto;
-        }
+    overflow: hidden;
+    width: 970px;
+    margin: 40px auto;
+}
         .sign {
             width: 400px;
             height: 260px;

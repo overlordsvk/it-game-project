@@ -105,14 +105,15 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var group =_groupService.GetAsync(groupId).Result;
-                var character = _characterService.GetAsync(characterId).Result;
+                var group = await _groupService.GetAsync(groupId);
+                var character = await _characterService.GetAsync(characterId);
                 if (group == null || character == null)
                     return -1;
                 if (character.Group != null)
                     return -2;
                 group.Members.Add(character);
                 character.Group = group;
+                character.GroupId = group.Id;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
                 await uow.Commit();
@@ -124,18 +125,13 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                var group =_groupService.GetAsync(groupId).Result;
-                var character = _characterService.GetAsync(characterId).Result;
+                var group = await _groupService.GetAsync(groupId);
+                var character = await _characterService.GetAsync(characterId);
                 if (group == null || character == null)
                     return false;
-                if (character.Group != null)
-                    return false;
-                if (!group.Members.Contains(character))
-                {
-                    return false;
-                }
                 group.Members.Remove(character);
                 character.Group = null;
+                character.GroupId = null;
                 character.IsGroupAdmin = false;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
@@ -148,7 +144,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                var posts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto{ GroupId = id, PageSize = 20, SortAscending = false });
+                var posts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto{ GroupId = id, PageSize = 20, SortAscending = true, SortCriteria =  "Timestamp"});
                 return posts;
             }
             

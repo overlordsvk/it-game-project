@@ -35,15 +35,11 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Upraviť", "Edit", new { id = item.Id }) <span>|</span>
-                }
                 @Html.ActionLink("Detail", "Details", new { id = item.Id })
-                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                @if (ViewContext.HttpContext.User.Identity.IsAuthenticated && ViewBag.GroupMember == false)
                 {
                     <span>|</span>
-                    @Html.ActionLink("Zmazať", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Pridať sa", "Join", new { id = item.Id })
                 }
             </td>
         </tr>
