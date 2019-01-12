@@ -11,21 +11,21 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <div class="navbar-header">
-                @Html.ActionLink("Hra", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Hra", "Index", "Home", new { area = "Admin" }, new { @class = "navbar-brand" })
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Účty", "AccountList", "Admin", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Postavy", "UserList", "Admin", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Skupiny", "GroupList", "Admin", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Súboje", "FightList", "Admin", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Účty", "Index", "Users", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Postavy", "Index", "Characters", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Skupiny", "Index", "Groups", new { area = "Admin" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Súboje", "Index", "Fights", new { area = "Admin" }, new { @class = "nav-link" })</li>
                 </ul>
                 <ul class="navbar-nav pull-right">
-                    <li class="nav-item"><a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account")</a></li>
-                    <li class="nav-item">@Html.ActionLink("Odhlásiť", "Logout", "Account", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item"><a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account", new { area = "" })</a></li>
+                    <li class="nav-item">@Html.ActionLink("Odhlásiť", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>

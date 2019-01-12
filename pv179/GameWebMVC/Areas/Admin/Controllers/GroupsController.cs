@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace GameWebMVC.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class GroupController : Controller
+    public class GroupsController : Controller
     {
         #region SessionKey constants
 
@@ -30,7 +30,12 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         #endregion Facades
 
-        public async Task<ActionResult> Index(int page = 1)
+        public ActionResult Index()
+        {
+            return RedirectToAction("List", "Groups", new { area = "Admin" });
+        }
+
+        public async Task<ActionResult> List(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
 
@@ -38,41 +43,49 @@ namespace GameWebMVC.Areas.Admin.Controllers
             filter.RequestedPageNumber = page;
 
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
-
             var collection = result.Items;
             if (collection == null)
                 collection = new List<GroupDto>();
-            return View("Index", collection);
+
+            ViewBag.GroupMember = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+                if (user.GroupId.HasValue)
+                {
+                    ViewBag.GroupMember = true;
+                }
+            }
+            return View("List", collection);
         }
 
-        public async Task<ActionResult> GroupDetails(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
             var model = await GroupFacade.GetGroupAsync(id);
-            return View("GroupDetails", model);
-            //view members
+            return View("Details", model);
         }
 
-        public ActionResult GroupCreate()
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> GroupCreate(GroupDto group)
+        public async Task<ActionResult> Create(GroupDto group)
         {
             group.Picture = "/Img/default.jpg";
             var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
-            return RedirectToAction("GroupDetails", new { id = newGroupId });
+            return RedirectToAction("Details", new { area = "Admin", id = newGroupId});
         }
 
-        public async Task<ActionResult> GroupEdit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
             var group = await GroupFacade.GetGroupAsync(id);
-            return View("GroupEdit", new GroupImageModel { Group = group, File = null });
+            return View("Edit", new GroupImageModel { Group = group, File = null });
         }
 
         [HttpPost]
-        public async Task<ActionResult> GroupEdit(GroupImageModel model)
+        public async Task<ActionResult> Edit(GroupImageModel model)
         {
             try
             {
@@ -93,17 +106,17 @@ namespace GameWebMVC.Areas.Admin.Controllers
             {
                 ViewBag.Message = "ERROR: " + ex.Message.ToString();
             }
-            return View("GroupEdit", model);
+            return RedirectToAction("Details", new { area = "Admin", id = model.Group.Id });
         }
 
-        public async Task<ActionResult> GroupDelete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
 
             if ((user.IsGroupAdmin && user.GroupId != id) || User.IsInRole("Admin"))
             {
                 await GroupFacade.RemoveGroup(id);
-                return RedirectToAction("GroupList");
+                return RedirectToAction("Index", new { area = "Admin" });
             }
             return RedirectToAction("NotAuthorized", "Error");
         }

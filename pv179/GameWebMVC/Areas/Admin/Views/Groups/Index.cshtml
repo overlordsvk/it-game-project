@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Zoznam skupín";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Zoznam skupín</h2>
 
 <p>
-    <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("GroupCreate")'" />
+    <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("Create")'" />
 </p>
 <table class="table">
     <tr>

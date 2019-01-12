@@ -15,9 +15,10 @@ namespace GameWebMVC.Areas.Admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                name: "Admin_default",
+                url: "Admin/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new [] { "GameWebMVC.Areas.Admin.Controllers" }
             );
         }
     }

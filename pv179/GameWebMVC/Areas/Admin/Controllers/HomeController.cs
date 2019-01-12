@@ -4,21 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace GameWebMVC.Controllers
+namespace GameWebMVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
+        // GET: Admin/Home
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        public ActionResult Contact()
         {
             return View();
         }
