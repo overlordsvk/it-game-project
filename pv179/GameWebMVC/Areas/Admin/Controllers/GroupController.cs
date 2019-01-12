@@ -30,7 +30,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         #endregion Facades
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
 
