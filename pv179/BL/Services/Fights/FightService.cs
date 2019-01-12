@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
@@ -12,6 +7,8 @@ using BL.Services.Common;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Fights
 {
@@ -30,7 +27,5 @@ namespace BL.Services.Fights
         {
             return await Query.ExecuteQuery(filter);
         }
-
-
     }
 }

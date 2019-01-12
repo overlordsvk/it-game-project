@@ -1,19 +1,17 @@
-﻿using BL.Facades.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using BL.Facades.Common;
 using BL.Services.Accounts;
 using BL.Services.Characters;
 using BL.Services.Fights;
+using BL.Services.Groups;
 using BL.Services.Items;
 using Game.Infrastructure.UnitOfWork;
-using BL.Services.Groups;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BL.Facades
 {
@@ -69,7 +67,7 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await _characterService.GetAsync(id);
-            }          
+            }
         }
 
         public async Task<CharacterDto> GetCharacterAccordingToNameAsync(string name)
@@ -110,10 +108,9 @@ namespace BL.Facades
             }
         }
 
-
         public async Task<bool> RemoveCharacter(Guid CharacterId)
         {
-            using(var uow = UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 var character = await _characterService.GetAsync(CharacterId, withIncludes: false);
                 if (character == null)
@@ -204,11 +201,11 @@ namespace BL.Facades
                 {
                     return false;
                 }
-                if (character.Money < 500) 
+                if (character.Money < 500)
                     return false;
 
                 character.Money -= 500;
-                var item =_itemService.GetNewItem();
+                var item = _itemService.GetNewItem();
                 item.OwnerId = characterId;
                 _itemService.Create(item);
                 await _characterService.Update(character);
@@ -225,7 +222,7 @@ namespace BL.Facades
                 if (character == null)
                     return Guid.Empty;
                 if (item == null)
-                    item =_itemService.GetNewItem();
+                    item = _itemService.GetNewItem();
                 item.OwnerId = characterId;
                 var itemId = _itemService.Create(item);
                 character.Items.Add(item);
@@ -271,10 +268,9 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-            return await _fightService.GetAsync(id);
+                return await _fightService.GetAsync(id);
             }
         }
-
 
         public async Task<QueryResultDto<FightDto, FightFilterDto>> GetFightsHistory(FightFilterDto filter)
         {
@@ -305,22 +301,23 @@ namespace BL.Facades
                 var defenderWeapon = await GetEquippedWeapon(defenderId);
                 var attackSuccess = ResolveAttack(attacker, attackerWeapon, attackerArmor, defender, defenderWeapon, defenderArmor);
                 Guid fightId = _fightService.Create(new FightDto
-                    {
-                        Id = Guid.NewGuid(),
-                        AttackerId = attacker.Id,
-                        DefenderId = defender.Id,
-                        AttackerArmorId = attackerArmor?.Id,
-                        AttackerWeaponId = attackerWeapon?.Id,
-                        DefenderArmorId = defenderArmor?.Id,
-                        DefenderWeaponId = defenderWeapon?.Id,
-                        Timestamp = DateTime.Now,
-                        AttackSuccess = attackSuccess
-                    });
+                {
+                    Id = Guid.NewGuid(),
+                    AttackerId = attacker.Id,
+                    DefenderId = defender.Id,
+                    AttackerArmorId = attackerArmor?.Id,
+                    AttackerWeaponId = attackerWeapon?.Id,
+                    DefenderArmorId = defenderArmor?.Id,
+                    DefenderWeaponId = defenderWeapon?.Id,
+                    Timestamp = DateTime.Now,
+                    AttackSuccess = attackSuccess
+                });
                 if (attackSuccess)
                 {
                     attacker.Score += 30;
                     attacker.Money += 30;
-                } else
+                }
+                else
                 {
                     attacker.Score -= 17;
                 }
@@ -344,7 +341,7 @@ namespace BL.Facades
 
         public async Task<bool> JoinGroup(Guid characterId, Guid groupId)
         {
-            using(var uow = UnitOfWorkProvider.Create())
+            using (var uow = UnitOfWorkProvider.Create())
             {
                 var character = await _characterService.GetAsync(characterId, withIncludes: false);
                 var group = await _groupService.GetAsync(groupId);
@@ -379,9 +376,8 @@ namespace BL.Facades
             }
         }
 
-
         private bool ResolveAttack(CharacterDto attacker, ItemDto attackerWeapon, ItemDto attackerArmor, CharacterDto defender, ItemDto defenderWeapon, ItemDto defenderArmor)
-        {   
+        {
             var attackerHealth = attacker.Health * 10;
             var defenderHealth = defender.Health * 10;
 
@@ -425,11 +421,11 @@ namespace BL.Facades
 
             while (attackerHealth > 0 || defenderHealth > 0)
             {
-                if (_random.Next(0,100) < (50 + attacker.Luck - attackerWeight))
+                if (_random.Next(0, 100) < (50 + attacker.Luck - attackerWeight))
                     defenderHealth -= attDamage * (1 - (defDefense / 1500));
                 if (defenderHealth < 0)
                     return true;
-                if (_random.Next(0,100) < (50 + defender.Luck - defenderWeight))
+                if (_random.Next(0, 100) < (50 + defender.Luck - defenderWeight))
                     attackerHealth -= defDamage * (1 - (attDefense / 1500));
                 if (attackerHealth < 0)
                     return false;

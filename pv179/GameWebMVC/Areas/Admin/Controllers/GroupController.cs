@@ -8,10 +8,10 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace GameWebMVC.Controllers
+namespace GameWebMVC.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class GroupController : Controller
     {
         #region SessionKey constants
 
@@ -30,14 +30,7 @@ namespace GameWebMVC.Controllers
 
         #endregion Facades
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        #region Group
-
-        public async Task<ActionResult> GroupList(int page = 1)
+        public async Task<ActionResult> Index(int page = 1)
         {
             Session[pageNumberSessionKey] = page;
 
@@ -49,7 +42,7 @@ namespace GameWebMVC.Controllers
             var collection = result.Items;
             if (collection == null)
                 collection = new List<GroupDto>();
-            return View("GroupList", collection);
+            return View("Index", collection);
         }
 
         public async Task<ActionResult> GroupDetails(Guid id)
@@ -114,7 +107,5 @@ namespace GameWebMVC.Controllers
             }
             return RedirectToAction("NotAuthorized", "Error");
         }
-
-        #endregion Group
     }
 }
