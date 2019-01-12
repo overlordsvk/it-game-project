@@ -13,9 +13,11 @@ namespace GameWebMVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
+            /*routes.MapRoute(
                 name: "Admin",
-                url: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                url: "{area}/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );*/
 
             routes.MapRoute(
                 name: "Default",

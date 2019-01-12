@@ -190,7 +190,7 @@ namespace GameWebMVC.Controllers
             
             if (user != null && user.GroupId.HasValue)
             {
-                GroupFacade.CreatePost(new GroupPostDto{ GroupId = user.GroupId.Value, CharacterId = user.Id, Text = message, Timestamp = DateTime.Now});
+                await GroupFacade.CreatePost(new GroupPostDto{ GroupId = user.GroupId.Value, CharacterId = user.Id, Text = message, Timestamp = DateTime.Now});
                 return RedirectToAction("Index"); 
             }
             return RedirectToAction("NotAuthorized", "Error");

@@ -150,7 +150,7 @@ namespace BL.Facades
             
         }
 
-        public async void CreatePost(GroupPostDto groupPost)
+        public async Task CreatePost(GroupPostDto groupPost)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
