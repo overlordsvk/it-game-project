@@ -27,8 +27,8 @@ namespace GameWebMVC.App_Start.Windsor
         {
             if (controllerType == null)
             {
-                return (IController)kernel.Resolve(typeof(ErrorController));
-                //throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
+                //return (IController)kernel.Resolve(typeof(ErrorController));
+                throw new HttpException(404, $"The controller for path '{requestContext.HttpContext.Request.Path}' could not be found.");
             }
             return (IController)kernel.Resolve(controllerType);
         }
