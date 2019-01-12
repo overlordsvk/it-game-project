@@ -1,10 +1,5 @@
 ﻿using BL.DTO.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.DTO
 {
@@ -16,13 +11,12 @@ namespace BL.DTO
         [EmailAddress(ErrorMessage = "Neplatný formát")]
         public string Email { get; set; }
 
-        public string PasswordSalt { get; set; } 
+        public string PasswordSalt { get; set; }
 
         public string PasswordHash { get; set; }
 
         public string Roles { get; set; }
 
         public CharacterDto Character { get; set; }
-
     }
 }

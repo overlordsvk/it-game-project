@@ -2,11 +2,7 @@
 using BL.DTO.Filters;
 using BL.Facades;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -16,9 +12,11 @@ namespace GameWebMVC.Controllers
     public class CharacterController : Controller
     {
         #region Facades
+
         public CharacterFacade CharacterFacade { get; set; }
-        public AccountFacade AccountFacade{ get; set; }
-        #endregion
+        public AccountFacade AccountFacade { get; set; }
+
+        #endregion Facades
 
         public async Task<ActionResult> Index()
         {
@@ -41,6 +39,7 @@ namespace GameWebMVC.Controllers
         }
 
         #region Create
+
         public ActionResult Create()
         {
             return View();
@@ -67,13 +66,13 @@ namespace GameWebMVC.Controllers
                 return View();
             }
         }
-        #endregion
 
+        #endregion Create
 
         #region Edit
+
         public async Task<ActionResult> Edit()
         {
-
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             return View(character);
         }
@@ -90,18 +89,14 @@ namespace GameWebMVC.Controllers
             }
             catch
             {
-
                 return View();
             }
-
         }
-        #endregion
 
-
-
-
+        #endregion Edit
 
         #region Remove
+
         public async Task<ActionResult> Remove()
         {
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
@@ -122,15 +117,15 @@ namespace GameWebMVC.Controllers
 
             return RedirectToAction("Create");
         }
-        #endregion
+
+        #endregion Remove
 
         [AllowAnonymous]
         public async Task<ActionResult> List()
         {
-            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { SortCriteria = nameof(CharacterDto.Score)});
-            
+            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { SortCriteria = nameof(CharacterDto.Score) });
+
             return View(characters.Items);
         }
     }
-
 }

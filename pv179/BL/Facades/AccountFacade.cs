@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.Facades.Common;
 using BL.Services.Accounts;
 using BL.Services.Characters;
 using BL.Services.Chats;
-using BL.Services.Fights;
 using Game.Infrastructure.UnitOfWork;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Facades
 {
@@ -38,7 +34,7 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await _accountService.GetAccountAccordingToEmailAsync(email);
-            }          
+            }
         }
 
         /// <summary>
@@ -51,7 +47,7 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await _accountService.GetAccountAccordingToUsernameAsync(username);
-            }          
+            }
         }
 
         /// <summary>
@@ -64,7 +60,7 @@ namespace BL.Facades
             using (UnitOfWorkProvider.Create())
             {
                 return await _accountService.GetAsync(id);
-            }          
+            }
         }
 
         /// <summary>
@@ -88,9 +84,8 @@ namespace BL.Facades
                 {
                     throw;
                 }
-            }          
+            }
         }
-
 
         /// <summary>
         /// Gets all accounts according to page
@@ -127,7 +122,6 @@ namespace BL.Facades
             }
         }
 
-
         /// <summary>
         /// Performs account registration
         /// </summary>
@@ -142,13 +136,12 @@ namespace BL.Facades
                     var id = await _accountService.RegisterAccountAsync(registrationDto);
                     await uow.Commit();
                     return id;
-                } catch (ArgumentException)
+                }
+                catch (ArgumentException)
                 {
                     throw;
                 }
             }
-
-             
         }
 
         public async Task<(bool success, Guid id, string roles)> Login(string usernameOrEmail, string password)
@@ -158,7 +151,5 @@ namespace BL.Facades
                 return await _accountService.AuthorizeAccountAsync(usernameOrEmail, password);
             }
         }
-
-
     }
 }

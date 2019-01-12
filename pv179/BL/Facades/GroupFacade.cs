@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.Facades.Common;
@@ -11,6 +6,8 @@ using BL.Services.Characters;
 using BL.Services.GroupPosts;
 using BL.Services.Groups;
 using Game.Infrastructure.UnitOfWork;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Facades
 {
@@ -40,13 +37,13 @@ namespace BL.Facades
                 {
                     return Guid.Empty;
                 }
-                
+
                 founder.IsGroupAdmin = true;
                 var groupId = _groupService.Create(group);
                 founder.GroupId = groupId;
                 await _characterService.Update(founder);
                 await uow.Commit();
-                return groupId; 
+                return groupId;
             }
         }
 
@@ -86,7 +83,7 @@ namespace BL.Facades
         }
 
         public async Task<GroupDto> GetGroupAsync(Guid id)
-        { 
+        {
             using (UnitOfWorkProvider.Create())
             {
                 return await _groupService.GetAsync(id);
@@ -144,10 +141,9 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-                var posts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto{ GroupId = id, PageSize = 20, SortAscending = true, SortCriteria =  "Timestamp"});
+                var posts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto { GroupId = id, PageSize = 20, SortAscending = true, SortCriteria = "Timestamp" });
                 return posts;
             }
-            
         }
 
         public async Task CreatePost(GroupPostDto groupPost)
@@ -157,7 +153,6 @@ namespace BL.Facades
                 var post = _groupPostService.Create(groupPost);
                 await uow.Commit();
             }
-            
         }
 
         public async void EditPost(GroupPostDto groupPost)
@@ -168,7 +163,7 @@ namespace BL.Facades
                 await uow.Commit();
             }
         }
-        
+
         public async void DeletePost(Guid groupPostId)
         {
             using (var uow = UnitOfWorkProvider.Create())

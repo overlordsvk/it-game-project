@@ -6,9 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
@@ -24,20 +22,21 @@ namespace GameWebMVC.Controllers
 
         private readonly string filterSessionKey = "filter";
 
-        #endregion
+        #endregion SessionKey constants
 
         #region Facades
+
         public GroupFacade GroupFacade { get; set; }
         public CharacterFacade CharacterFacade { get; set; }
-        #endregion
 
+        #endregion Facades
 
         public async Task<ActionResult> Index()
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             if (user == null || !user.GroupId.HasValue)
                 return RedirectToAction("List");
-            return RedirectToAction("Details", new {id = user.GroupId});
+            return RedirectToAction("Details", new { id = user.GroupId });
         }
 
         public async Task<ActionResult> Details(Guid id)
@@ -61,7 +60,7 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Create()
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user.GroupId != null)
             {
                 return RedirectToAction("NotAuthorized", "Error");
@@ -73,7 +72,7 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Create(GroupDto group)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user.GroupId != null)
             {
                 return RedirectToAction("NotAuthorized", "Error");
@@ -86,11 +85,11 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Edit(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user.IsGroupAdmin && user.GroupId == id)
             {
                 var group = await GroupFacade.GetGroupAsync(id);
-                return View(new GroupImageModel{ Group = group, File = null });
+                return View(new GroupImageModel { Group = group, File = null });
             }
             return RedirectToAction("NotAuthorized", "Error");
         }
@@ -99,7 +98,7 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Edit(GroupImageModel model)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (!(user.IsGroupAdmin && user.GroupId == model.Group.Id))
             {
                 return RedirectToAction("NotAuthorized", "Error");
@@ -118,23 +117,22 @@ namespace GameWebMVC.Controllers
                 }
                 model.Group.Picture = relativePath;
                 await GroupFacade.Edit(model.Group);
-            }  
-            catch (Exception ex)  
-            {  
-                ViewBag.Message = "ERROR: " + ex.Message.ToString();  
-            }   
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "ERROR: " + ex.Message.ToString();
+            }
             return View(model);
         }
 
         public async Task<ActionResult> Delete(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user != null && user.IsGroupAdmin && user.GroupId == id)
             {
                 await GroupFacade.RemoveGroup(id);
                 return RedirectToAction("List");
-                
             }
             return RedirectToAction("NotAuthorized", "Error");
         }
@@ -142,7 +140,7 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> Join(Guid id)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user != null && !user.GroupId.HasValue)
             {
                 await GroupFacade.AddToGroup(user.Id, id);
@@ -163,7 +161,7 @@ namespace GameWebMVC.Controllers
         {
             Session[pageNumberSessionKey] = page;
 
-            var filter = Session[filterSessionKey] as GroupFilterDto ?? new GroupFilterDto{PageSize = PageSize};
+            var filter = Session[filterSessionKey] as GroupFilterDto ?? new GroupFilterDto { PageSize = PageSize };
             filter.RequestedPageNumber = page;
 
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
@@ -182,21 +180,18 @@ namespace GameWebMVC.Controllers
             }
             return View("List", collection);
         }
-        
+
         [HttpPost]
         public async Task<ActionResult> PostToGroup(string message)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            
+
             if (user != null && user.GroupId.HasValue)
             {
-                await GroupFacade.CreatePost(new GroupPostDto{ GroupId = user.GroupId.Value, CharacterId = user.Id, Text = message, Timestamp = DateTime.Now});
-                return RedirectToAction("Index"); 
+                await GroupFacade.CreatePost(new GroupPostDto { GroupId = user.GroupId.Value, CharacterId = user.Id, Text = message, Timestamp = DateTime.Now });
+                return RedirectToAction("Index");
             }
             return RedirectToAction("NotAuthorized", "Error");
         }
-        
-
-
     }
 }

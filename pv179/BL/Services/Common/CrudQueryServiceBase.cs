@@ -1,18 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO.Common;
 using BL.QueryObject;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Common
 {
-    public abstract class CrudQueryServiceBase<TEntity, TDto, TFilterDto> : ServiceBase 
+    public abstract class CrudQueryServiceBase<TEntity, TDto, TFilterDto> : ServiceBase
         where TFilterDto : FilterDtoBase, new()
-        where TEntity : class, IEntity, new() 
-        where TDto : DtoBase 
-    {       
+        where TEntity : class, IEntity, new()
+        where TDto : DtoBase
+    {
         protected readonly IRepository<TEntity> Repository;
 
         protected readonly QueryObjectBase<TDto, TEntity, TFilterDto, IQuery<TEntity>> Query;
