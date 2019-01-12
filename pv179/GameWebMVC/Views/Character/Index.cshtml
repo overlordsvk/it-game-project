@@ -31,7 +31,13 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Group.Name)
+            @if (Model.GroupId == null)
+            {
+                <span> žiadna</span>
+            } else
+            {
+            @Html.DisplayFor(model => model.Group.Name) 
+            }
         </dd>
 
         <dt>

@@ -25,7 +25,7 @@ namespace Game.Infrastructure.Entity.UnitOfWork
         /// </summary>
         protected override async Task CommitCore()
         {
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
         public override void Dispose()

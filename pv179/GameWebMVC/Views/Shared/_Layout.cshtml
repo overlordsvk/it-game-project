@@ -32,7 +32,7 @@
                 <ul class="navbar-nav pull-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item"> <a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account", null)</a></li>
+                        <!--<li class="nav-item"> <a class="nav-link" href="~/Account"> Html.Action("GetUserName", "Account", null)</a></li>-->
                     }
                     @if (!User.Identity.IsAuthenticated)
                     {
