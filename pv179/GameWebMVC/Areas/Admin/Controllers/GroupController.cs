@@ -108,3 +108,4 @@ namespace GameWebMVC.Areas.Admin.Controllers
             return RedirectToAction("NotAuthorized", "Error");
         }
     }
+}
