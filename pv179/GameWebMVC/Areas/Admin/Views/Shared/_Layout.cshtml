@@ -24,7 +24,7 @@
                     <li class="nav-item">@Html.ActionLink("Súboje", "Index", "Fights", new { area = "Admin" }, new { @class = "nav-link" })</li>
                 </ul>
                 <ul class="navbar-nav pull-right">
-                    <li class="nav-item"><a class="nav-link" href="~/Account"> ADMIN Html.Action("GetUserName", "Account")</a></li>
+                    <li class="nav-item"><a class="nav-link" href="~/Account"> @Html.Action("GetUserName", "Account", new { area = "" })</a></li>
                     <li class="nav-item">@Html.ActionLink("Odhlásiť", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
