@@ -97,6 +97,7 @@ namespace GameWebMVC.Controllers
                 {
                     return Redirect(decodedUrl);
                 }
+
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Wrong username or password!");
