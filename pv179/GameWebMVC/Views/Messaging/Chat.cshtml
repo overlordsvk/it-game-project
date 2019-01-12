@@ -4,40 +4,39 @@
     ViewBag.Title = "Chat";
 }
 
-<h2>@Model.Subject</h2>
-
 <div>
-    <input type="button" value="Odpovedať" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("Reply", new { chatId = Model.Id })'" />
+    <h2 style="float:left">@Model.Subject</h2>
+    <h5 style="float:right">@(Model.SenderId == Guid.Parse(User.Identity.Name) ? Model.Sender.Name : Model.Receiver.Name)</h5>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().Author.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().Timestamp)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model.Messages) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Timestamp)
-        </td>
-    </tr>
-}
+<table class="table" >
+
+    @foreach (var item in Model.Messages)
+    {
+        <tr >
+            <td style="border-top:none; padding:5px;" >
+                <span data-toggle="tooltip" data-placement="top" title="@Html.DisplayFor(modelItem => item.Timestamp)"  style="@(item.AuthorId == Guid.Parse(User.Identity.Name) ? "float: right; background-color:cadetblue" : "float: left; background-color:lightsalmon; color:black" ) ;   padding:7px; border-radius: 7px;" >
+                    @Html.DisplayFor(modelItem => item.Text)
+                </span>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div style="margin-top:20px">
+
+
+    @{
+        Html.RenderPartial("Reply", new BL.DTO.MessageDto
+        {
+            ChatId = Model.Id,
+            AuthorId = Guid.Parse(User.Identity.Name),
+        });
+    }
+
+</div>
+
 <div>
-    <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Mailbox")'" />
+    <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Mailbox")'"  />
 </div>
