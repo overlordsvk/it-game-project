@@ -16,13 +16,10 @@
             @Html.DisplayNameFor(model => model.Subject)
         </th>
         <th>
+            @Html.DisplayName("Adresát")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.LastMessageTimestamp)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SenderId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReceiverId)
         </th>
         <th></th>
     </tr>
@@ -34,13 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Subject)
             </td>
             <td>
+                @(item.ReceiverId == Guid.Parse(User.Identity.Name) ? item.Sender.Name : item.Receiver.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.LastMessageTimestamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sender.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receiver.Name)
             </td>
             <td>
                 @Html.ActionLink("Správy", "Chat", new { id = item.Id })
