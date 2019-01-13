@@ -16,7 +16,7 @@ namespace GameWebMVC.Controllers
     {
         #region SessionKey constants
 
-        public const int PageSize = 20;
+        public const int PageSize = 10;
 
         private readonly string pageNumberSessionKey = "pageNumber";
 
