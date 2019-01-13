@@ -46,3 +46,24 @@
         </tr>
     }
 </table>
+
+@{string disabled = "disabled";
+  string active = "active";
+  int prev = ViewBag.RequestedPageNumber - 1;
+  int next = ViewBag.RequestedPageNumber +1;
+}
+<nav aria-label="paging">
+    <ul class="pagination">
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber <= 1) { @disabled;} ">
+            <a class="page-link" href="?page=@prev">&laquo;</a>
+        </li>
+        @for (int page = 1; page <= ViewBag.PageCount; page++)
+        {
+            <li class="page-item @if (ViewBag.RequestedPageNumber == page){ @active } "><a class="page-link" href="?page=@page">@page</a></li>
+        }
+
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber >= ViewBag.PageCount) { @disabled;}">
+            <a class="page-link " href="?page=@next">&raquo;</a>
+        </li>
+    </ul>
+</nav>

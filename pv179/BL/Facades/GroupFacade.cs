@@ -24,10 +24,17 @@ namespace BL.Facades
             _characterService = characterService;
         }
 
-        public async Task<Guid> CreateGroup(Guid groupFounder, GroupDto group)
+        public async Task<Guid> CreateGroup(Guid groupFounder, GroupDto group, bool isAdmin = false)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
+                if (isAdmin) 
+                {
+                    var emptyGroup = _groupService.Create(group);
+                    await uow.Commit();
+                    return emptyGroup;
+                }
+
                 var founder = await _characterService.GetAsync(groupFounder);
                 if (founder == null)
                 {
