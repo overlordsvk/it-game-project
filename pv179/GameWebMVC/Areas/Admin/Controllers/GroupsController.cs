@@ -15,7 +15,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
     {
         #region SessionKey constants
 
-        public const int PageSize = 20;
+        public const int PageSize = 3;
 
         private readonly string pageNumberSessionKey = "pageNumber";
 
@@ -41,12 +41,19 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
             var filter = Session[filterSessionKey] as GroupFilterDto ?? new GroupFilterDto { PageSize = PageSize };
             filter.RequestedPageNumber = page;
-
+            
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
             var collection = result.Items;
+
+            // Paging
+            ViewBag.RequestedPageNumber = result.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)result.TotalItemsCount / (double)PageSize);
+            // Paging END
+
+            /*
             if (collection == null)
                 collection = new List<GroupDto>();
-
+            */
             ViewBag.GroupMember = false;
             if (User.Identity.IsAuthenticated)
             {
@@ -74,7 +81,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
         public async Task<ActionResult> Create(GroupDto group)
         {
             group.Picture = "/Img/default.jpg";
-            var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group);
+            var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group, true);
             return RedirectToAction("Details", new { area = "Admin", id = newGroupId});
         }
 
