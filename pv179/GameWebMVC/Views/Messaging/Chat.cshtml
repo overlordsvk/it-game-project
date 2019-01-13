@@ -4,25 +4,28 @@
     ViewBag.Title = "Chat";
 }
 
-<div>
+<div >
     <h2 style="float:left">@Model.Subject</h2>
     <h5 style="float:right">@(Model.SenderId == Guid.Parse(User.Identity.Name) ? Model.Sender.Name : Model.Receiver.Name)</h5>
 </div>
 
-<table class="table" >
+<div style="height:60vh; overflow:auto" class="chatwindow">
+    <table class="table" >
 
-    @foreach (var item in Model.Messages)
-    {
-        <tr >
-            <td style="border-top:none; padding:5px;" >
-                <span data-toggle="tooltip" data-placement="top" title="@Html.DisplayFor(modelItem => item.Timestamp)"  style="@(item.AuthorId == Guid.Parse(User.Identity.Name) ? "float: right; background-color:cadetblue" : "float: left; background-color:lightsalmon; color:black" ) ;   padding:7px; border-radius: 7px;" >
-                    @Html.DisplayFor(modelItem => item.Text)
-                </span>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model.Messages)
+        {
+            <tr>
+                <td style="border-top:none; padding:5px;">
+                    <span data-toggle="tooltip" data-placement="top" title="@Html.DisplayFor(modelItem => item.Timestamp)" class="@(item.AuthorId == Guid.Parse(User.Identity.Name) ? "float-right  border-success card" : "float-left border-danger    card" )" style=" padding:7px; ">
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </span>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
+
 
 <div style="margin-top:20px">
 
@@ -40,3 +43,9 @@
 <div>
     <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Mailbox")'"  />
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var d = $('.chatwindow');
+    d.scrollTop(d.prop("scrollHeight"));
+</script>

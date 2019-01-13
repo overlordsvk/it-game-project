@@ -76,7 +76,7 @@ namespace GameWebMVC.Controllers
             {
                 return RedirectToAction("Mailbox");
             }
-            chat.Messages = chat.Messages.OrderByDescending(m => m.Timestamp).ToList();
+            chat.Messages = chat.Messages.OrderBy(m => m.Timestamp).ToList();
             return View(chat);
 
         }
