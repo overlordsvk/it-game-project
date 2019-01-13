@@ -25,6 +25,10 @@ namespace GameWebMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/scroll").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.nicescroll.js"));
         }
     }
 }

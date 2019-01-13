@@ -3,10 +3,10 @@
     ViewBag.Title = "Odpoveď";
 }
 
-@using (Html.BeginForm("Reply", "Messaging")) 
+@using (Html.BeginForm("Reply", "Messaging"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal" style="clear:both">
         <hr />
 
@@ -16,26 +16,50 @@
             @Html.HiddenFor(model => model.ChatId)
         </div>
 
-        <div class="form-group" >
+        <div class="form-group">
             @Html.HiddenFor(model => model.AuthorId)
 
         </div>
 
-        <div class="form-group" >
+        <div class="form-group">
             <h5>Odpovedať</h5>
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+            <div>
+                <div class="warn text-danger" hidden>
+                    @Html.DisplayName("Text nesie mať viac ako 4096 znakov")
+                </div>
                 @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Text, new { @class = "form-control bg-dark text-white w-100 mw-100 nicescroll noresize reply", @rows = "3", @style = "resize:none" })
             </div>
         </div>
 
-        
 
 
-        <div class="form-group" >
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Poslať" class="btn btn-default" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 float-right ">
+                <input type="submit" value="Poslať" class="btn btn-success" />
             </div>
         </div>
     </div>
+    @Scripts.Render("~/bundles/scroll")
+
+    <script>
+        function checkReply() {
+            var input = $('.reply');
+            var submitButton = $('input[type=submit]');
+            var warn = $('.warn');
+
+            console.log(input.val().length);
+            if (input.val().length > 4096) {
+                warn.prop('hidden', false);
+                submitButton.prop('disabled', true);
+            } else {
+                submitButton.prop('disabled', false);
+                warn.prop('hidden', true);
+            }
+        }
+
+        checkReply();
+        $('.reply').on('input', checkReply);
+    </script>
 }

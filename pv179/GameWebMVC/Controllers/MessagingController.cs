@@ -24,7 +24,7 @@ namespace GameWebMVC.Controllers
             var chats = new List<ChatDto>();
             chats.AddRange(character.SenderChats);
             chats.AddRange(character.ReceiverChats);
-            chats = chats.OrderByDescending(x => x.LastMessageTimestamp).ToList();
+            chats = chats.OrderByDescending(x => x.LastMessageTimestamp).Distinct().ToList();
             return View(chats);
         }
 
@@ -68,7 +68,7 @@ namespace GameWebMVC.Controllers
         {
             var chat = await MessagingFacade.GetChatById(id);
             var characterId = Guid.Parse(User.Identity.Name);
-             if(characterId != chat.ReceiverId && characterId != chat.SenderId)
+            if(characterId != chat.ReceiverId && characterId != chat.SenderId)
             {
                 return RedirectToAction("NotAuthorized", "Error");
             }
@@ -110,7 +110,7 @@ namespace GameWebMVC.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Chat", new { id = message.ChatId });
             }
         }
     }
