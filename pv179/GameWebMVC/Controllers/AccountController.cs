@@ -77,12 +77,14 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(AccountLoginModel login, string returnUrl)
         {
-
+            
             (bool success, Guid id, string roles) = await AccountFacade.Login(login.usernameOrEmail, login.password);
+            var acc = await AccountFacade.GetAccountAsync(id);
+            
             if (success)
             {
                 var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
-                    DateTime.Now.AddMinutes(30), false, roles);
+                    DateTime.Now.AddMinutes(30), false, acc.Character == null ? roles : roles + ",HasCharacter");
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);

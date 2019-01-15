@@ -1,4 +1,4 @@
-﻿@model BL.DTO.FightDto
+﻿@model GameWebMVC.Models.FightModel
 
 @{
     ViewBag.Title = "Súboj";
@@ -9,18 +9,18 @@
     <div class="left">
         <div class="sign">
             <div class="position">Útočník</div>
-            <div class="name text-warning">&nbsp;@Html.DisplayFor(model => model.Attacker.Name) &nbsp;</div>
+            <div class="name text-warning">&nbsp;@Html.DisplayFor(model => model.Fight.Attacker.Name) &nbsp;</div>
             <div class="stats">
                 <span class="stat-label">Útočníkova zbraň: </span>
-                <span class="stat">@Html.DisplayFor(model => model.AttackerWeapon.Name)</span>
+                <span class="stat">@Html.DisplayFor(model => model.Fight.AttackerWeapon.Name)</span>
                 <br>
                 <span class="stat-label">Útočníkové brnenie: </span>
-                <span class="stat">@Html.DisplayFor(model => model.AttackerArmor.Name)</span>
+                <span class="stat">@Html.DisplayFor(model => model.Fight.AttackerArmor.Name)</span>
             </div>
         </div>
     </div>
     <div class="result">
-        @if (Model.AttackSuccess)
+        @if (Model.Fight.AttackSuccess)
         {
         <div class="text-success">@Html.DisplayName("Výhra")</div>
         }
@@ -32,17 +32,74 @@
     <div class="right">
         <div class="sign">
             <div class="position">Obranca</div>
-            <div class="name text-warning">&nbsp;@Html.DisplayFor(model => model.Defender.Name)&nbsp;</div>
+            <div class="name text-warning">&nbsp;@Html.DisplayFor(model => model.Fight.Defender.Name)&nbsp;</div>
             <div class="stats">
                 <span class="stat-label">Obrancova zbraň: </span>
-                <span class="stat">@Html.DisplayFor(model => model.DefenderWeapon.Name)</span>
+                <span class="stat">@Html.DisplayFor(model => model.Fight.DefenderWeapon.Name)</span>
                 <br>
                 <span class="stat-label">Obrancove brnenie: </span>
-                <span class="stat">@Html.DisplayFor(model => model.DefenderArmor.Name)</span>
+                <span class="stat">@Html.DisplayFor(model => model.Fight.DefenderArmor.Name)</span>
             </div>
         </div>
     </div>
 </div>
+
+@if(Model.Steps != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Kolo
+            </th>
+            <th>
+                HP Útočník
+            </th>
+            <th>
+                HP Obranca
+            </th>
+            <th>
+                Poškodenie Útočník
+            </th>
+            <th>
+                Poškodenie Obranca
+            </th>
+            <th>
+                Šťastie Útočník
+            </th>
+            <th>
+                Šťastie Obranca
+            </th>
+        </tr>
+
+    @foreach (var item in Model.Steps) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item5)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item6)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item7)
+            </td>
+        </tr>
+    }
+
+    </table>    
+}
+
 <div>
     <input type="button" value="Naspäť na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
     <input type="button" value="Naspäť na súboje" class="btn btn-primary" onclick="location.href='@Url.Action("List")'" />

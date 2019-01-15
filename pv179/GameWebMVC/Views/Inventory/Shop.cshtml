@@ -1,0 +1,86 @@
+﻿@model GameWebMVC.Models.InventoryModel
+@{
+    ViewBag.Title = "Obchod";
+}
+<h2>Obchod</h2>
+<div style="overflow:hidden; ">
+    <dl class="dl-horizontal float-right" >
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Money)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Money)
+        </dd>
+    </dl>
+
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Attack)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Defense)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().ItemType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items.FirstOrDefault().Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Defense)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            
+            @if (item.ItemType == Game.DAL.Enums.ItemType.Armor)
+            {
+                <td>Zbroj</td>
+            } else
+            {
+                <td>Zbraň</td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @if (item.Price > Model.Money)
+                {
+
+                    <input type="button" disabled value="Kúpiť" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy", item)'" />
+
+                }
+                else
+                {
+                    <input type="button" value="Kúpiť" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy", item)'" />
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
