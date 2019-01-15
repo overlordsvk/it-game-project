@@ -310,12 +310,12 @@ namespace BL.Facades
                     DefenderArmorId = defenderArmor?.Id,
                     DefenderWeaponId = defenderWeapon?.Id,
                     Timestamp = DateTime.Now,
-                    AttackSuccess = attackSuccess
+                    AttackSuccess = attackSuccess.Item1
                 });
-                if (attackSuccess)
+                if (attackSuccess.Item1)
                 {
                     attacker.Score += 30;
-                    attacker.Money += 30;
+                    attacker.Money += 30 + (_random.Next(1, 10) + attacker.Luck);
                 }
                 else
                 {
@@ -376,7 +376,7 @@ namespace BL.Facades
             }
         }
 
-        private bool ResolveAttack(CharacterDto attacker, ItemDto attackerWeapon, ItemDto attackerArmor, CharacterDto defender, ItemDto defenderWeapon, ItemDto defenderArmor)
+        private (bool, ICollection<(int Order, int HPAtt, int HPDef, int DmgAtt, int DmgDef, int LuckAtt, int LuckDef)>) ResolveAttack(CharacterDto attacker, ItemDto attackerWeapon, ItemDto attackerArmor, CharacterDto defender, ItemDto defenderWeapon, ItemDto defenderArmor)
         {
             var attackerHealth = attacker.Health * 10;
             var defenderHealth = defender.Health * 10;
@@ -419,18 +419,45 @@ namespace BL.Facades
             defDamage = ((defender.Strength + defender.Intelligence + defender.Charisma) * defDamage) / 12;
             defDefense = ((defender.Agility + defender.Endurance + defender.Perception) * defDefense) / 12;
 
+            var fight = new List<(int Order, int HPAtt, int HPDef, int DmgAtt, int DmgDef, int LuckAtt, int LuckDef)>();
+            int order = 0;
+            var attackerWin = false;
             while (attackerHealth > 0 || defenderHealth > 0)
             {
-                if (_random.Next(0, 100) < (50 + attacker.Luck - attackerWeight))
-                    defenderHealth -= attDamage * (1 - (defDefense / 1500));
+                order++;
+                var luckAtt = _random.Next(0, 100);
+                var damageAtt = 0;
+                var damageDef = 0;
+                if (luckAtt < (50 + attacker.Luck - attackerWeight))
+                {
+                    damageAtt = attDamage * (1 - (defDefense / 1500)) + _random.Next(0, attacker.Luck);
+                    defenderHealth -= damageAtt;
+
+                }
+                
                 if (defenderHealth < 0)
-                    return true;
+                {
+                    fight.Add((order, attackerHealth, 0, damageAtt, 0, luckAtt, 0));
+                    attackerWin = true;
+                    break;
+                }
+
+                var luckDef = _random.Next(0, 100);
                 if (_random.Next(0, 100) < (50 + defender.Luck - defenderWeight))
-                    attackerHealth -= defDamage * (1 - (attDefense / 1500));
+                {
+                    damageDef = defDamage * (1 - (attDefense / 1500)) + _random.Next(0, defender.Luck);
+                    attackerHealth -= damageDef;
+
+                }
                 if (attackerHealth < 0)
-                    return false;
+                {
+                    attackerWin = false;
+                    fight.Add((order, 0, defenderHealth, damageAtt, damageDef, luckAtt, luckDef));
+                    break;
+                }
+                fight.Add((order, attackerHealth, defenderHealth, damageAtt, damageDef, luckAtt, luckDef));
             }
-            return false;
+            return (attackerWin, fight);
         }
     }
 }
