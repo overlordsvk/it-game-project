@@ -36,6 +36,7 @@ namespace Game.DAL.Entity
         public GameDbContext(DbConnection connection) : base(connection, true)
         {
             Database.CreateIfNotExists();
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

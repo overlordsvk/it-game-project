@@ -4,9 +4,9 @@
     ViewBag.Title = "Chat";
 }
 
-<div class="mb-5">
+<div class="mb-3">
     <h2 style="float:left">@Model.Subject</h2>
-    <h5 style="float:right">@(Model.SenderId == Guid.Parse(User.Identity.Name) ? Model.Sender.Name : Model.Receiver.Name)</h5>
+    <h5 style="float:right">@(Model.SenderId == Guid.Parse(User.Identity.Name) ? Model.Receiver?.Name : Model.Sender?.Name)</h5>
 </div>
 
 <div style="height:60vh; overflow:auto" class="chatwindow nicescroll border border-dark p-2 float-left mw-100 w-100"
@@ -28,19 +28,18 @@
 </div>
 
 
-<div style="margin-top:20px">
+<div class="mt-2 mb-2 float-left w-100" style="clear:both" >
 
-    @{
+    @if (Model.SenderId.HasValue && Model.ReceiverId.HasValue){
         Html.RenderPartial("Reply", new BL.DTO.MessageDto
         {
             ChatId = Model.Id,
             AuthorId = Guid.Parse(User.Identity.Name),
         });
     }
-
 </div>
 
-<div>
+<div class="float-left" style="clear:both">
     <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Mailbox")'" />
 </div>
 

@@ -13,20 +13,30 @@ namespace GameWebMVC.Controllers
     [Authorize(Roles = "HasCharacter")]
     public class InventoryController : Controller
     {
+        #region Constants
+
+        public const int PageSize = 10;
+
+        #endregion Constants
 
         public CharacterFacade CharacterFacade { get; set; }
 
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
             var characterId = Guid.Parse(User.Identity.Name);
             var character = await CharacterFacade.GetCharacterById(characterId);
-            var items = await CharacterFacade.GetItemsByFilterAsync(new ItemFilterDto { OwnerId = characterId });
+            var items = await CharacterFacade.GetItemsByFilterAsync(new ItemFilterDto { OwnerId = characterId, PageSize = PageSize, RequestedPageNumber = page });
             var model = new InventoryModel { Money = character.Money, Items = items.Items };
             if(character.Money < 500)
             {
                 ModelState.AddModelError("Money", "nemáš dostatok peňazí");
             }
+
+            // Paging
+            ViewBag.RequestedPageNumber = items.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)items.TotalItemsCount / (double)PageSize);
+            // Paging END
             return View(model);
         }
 

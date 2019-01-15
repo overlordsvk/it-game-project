@@ -11,6 +11,12 @@ namespace GameWebMVC.Controllers
     [Authorize]
     public class CharacterController : Controller
     {
+        #region Constants
+
+        public const int PageSize = 10;
+
+        #endregion Constants
+
         #region Facades
 
         public CharacterFacade CharacterFacade { get; set; }
@@ -121,9 +127,14 @@ namespace GameWebMVC.Controllers
         #endregion Remove
 
         [AllowAnonymous]
-        public async Task<ActionResult> List()
+        public async Task<ActionResult> List(int page = 1)
         {
-            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { SortCriteria = nameof(CharacterDto.Score) });
+            var characters = await CharacterFacade.GetCharactersByFilterAsync(new CharacterFilterDto { PageSize = PageSize, RequestedPageNumber = page, SortCriteria = nameof(CharacterDto.Score) });
+
+            // Paging
+            ViewBag.RequestedPageNumber = characters.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)characters.TotalItemsCount / (double)PageSize);
+            // Paging END
 
             return View(characters.Items);
         }

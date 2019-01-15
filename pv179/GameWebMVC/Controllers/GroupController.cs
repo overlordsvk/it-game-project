@@ -178,6 +178,11 @@ namespace GameWebMVC.Controllers
                     ViewBag.GroupMember = true;
                 }
             }
+            // Paging
+            ViewBag.RequestedPageNumber = result.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)result.TotalItemsCount / (double)PageSize);
+            // Paging END
+
             return View("List", collection);
         }
 

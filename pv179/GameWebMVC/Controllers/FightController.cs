@@ -16,6 +16,13 @@ namespace GameWebMVC.Controllers
     [Authorize(Roles = "HasCharacter")]
     public class FightController : Controller
     {
+
+        #region Constants
+
+        public const int PageSize = 10;
+
+        #endregion Constants
+
         public CharacterFacade CharacterFacade { get; set; }
 
         public async Task<ActionResult> FightSelection()
@@ -57,18 +64,16 @@ namespace GameWebMVC.Controllers
             }
         }
 
-        public async Task<ActionResult> List()
+        public async Task<ActionResult> List(int page = 1)
         {
             var characterId = Guid.Parse(User.Identity.Name);
-            var character = await CharacterFacade.GetCharacterById(characterId);
-            var fights = new List<FightDto>();
-            var attackerFights = await CharacterFacade.GetFightsHistory(new FightFilterDto { AttackerId = characterId });
-            var defenderFights = await CharacterFacade.GetFightsHistory(new FightFilterDto { DefenderId = characterId });
-            fights.AddRange(attackerFights.Items);
-            fights.AddRange(defenderFights.Items);
-            fights = fights.OrderByDescending(x => x.Timestamp).ToList();
+            var fights = await CharacterFacade.GetFightsHistory(new FightFilterDto { FighterId = characterId, PageSize = PageSize, RequestedPageNumber = page, SortCriteria = nameof(FightDto.Timestamp) });
 
-            return View(fights);
+            // Paging
+            ViewBag.RequestedPageNumber = fights.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)fights.TotalItemsCount / (double)PageSize);
+            // Paging END
+            return View(fights.Items);
 
         }
     }

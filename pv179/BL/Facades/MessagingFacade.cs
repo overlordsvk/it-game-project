@@ -1,4 +1,6 @@
 ﻿using BL.DTO;
+using BL.DTO.Common;
+using BL.DTO.Filters;
 using BL.Facades.Common;
 using BL.Services.Characters;
 using BL.Services.Chats;
@@ -76,6 +78,15 @@ namespace BL.Facades
             return await _chatService.GetAsync(id);
             }
         }
+
+        public async Task<QueryResultDto<ChatDto, ChatFilterDto>> GetChatsByFilterAsync(ChatFilterDto filter)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _chatService.ListChatsAsync(filter);
+            }
+        }
+
     }
 
 

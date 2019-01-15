@@ -6,7 +6,7 @@
 <div style="overflow:hidden; ">
     <input type="button" value="Kúpiť (500 k)" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy")'" />
     <dl class="dl-horizontal" style="float: left; margin: 17px 10px 10px 20px ;">
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.Money)
         </dt>
@@ -46,35 +46,58 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.Items) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Attack)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Defense)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Weight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Equipped)
-        </td>
-        <td>
-            @Html.DisplayName(item.ItemType.ToString())
-        </td>
-        <td>
-            @Html.ActionLink("Nasadiť", "Equip", new { id = item.Id }) |
-            @Html.ActionLink("Predať", "Sell", new { id = item.Id }) |
-            @Html.ActionLink("Detail", "Details", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Defense)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Equipped)
+            </td>
+            <td>
+                @Html.DisplayName(item.ItemType.ToString())
+            </td>
+            <td>
+                @Html.ActionLink("Nasadiť", "Equip", new { id = item.Id }) |
+                @Html.ActionLink("Predať", "Sell", new { id = item.Id }) |
+                @Html.ActionLink("Detail", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@{string disabled = "disabled";
+    string active = "active";
+    int prev = ViewBag.RequestedPageNumber - 1;
+    int next = ViewBag.RequestedPageNumber + 1;
+}
+<nav aria-label="paging">
+    <ul class="pagination">
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber <= 1) { @disabled;} ">
+            <a class="page-link" href="?page=@prev">&laquo;</a>
+        </li>
+        @for (int page = 1; page <= ViewBag.PageCount; page++)
+        {
+            <li class="page-item @if (ViewBag.RequestedPageNumber == page){ @active } "><a class="page-link" href="?page=@page">@page</a></li>
+        }
+
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber >= ViewBag.PageCount) { @disabled;}">
+            <a class="page-link " href="?page=@next">&raquo;</a>
+        </li>
+    </ul>
+</nav>

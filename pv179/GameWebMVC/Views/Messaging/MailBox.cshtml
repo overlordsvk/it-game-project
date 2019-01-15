@@ -7,7 +7,7 @@
 <h2>Správy</h2>
 
 <div>
-<input type="button" value="Nová konverzácia" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("NewChat")'" />
+    <input type="button" value="Nová konverzácia" class="btn btn-success" style="margin: 10px 0;" onclick="location.href='@Url.Action("NewChat")'" />
 </div>
 
 <table class="table">
@@ -31,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Subject)
             </td>
             <td>
-                @(item.ReceiverId == Guid.Parse(User.Identity.Name) ? item.Sender.Name : item.Receiver.Name)
+                @(item.ReceiverId == Guid.Parse(User.Identity.Name) ? item.Sender?.Name : item.Receiver?.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastMessageTimestamp)
@@ -44,3 +44,23 @@
 
 </table>
 
+@{string disabled = "disabled";
+    string active = "active";
+    int prev = ViewBag.RequestedPageNumber - 1;
+    int next = ViewBag.RequestedPageNumber + 1;
+}
+<nav aria-label="paging">
+    <ul class="pagination">
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber <= 1) { @disabled;} ">
+            <a class="page-link" href="?page=@prev">&laquo;</a>
+        </li>
+        @for (int page = 1; page <= ViewBag.PageCount; page++)
+        {
+            <li class="page-item @if (ViewBag.RequestedPageNumber == page){ @active } "><a class="page-link" href="?page=@page">@page</a></li>
+        }
+
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber >= ViewBag.PageCount) { @disabled;}">
+            <a class="page-link " href="?page=@next">&raquo;</a>
+        </li>
+    </ul>
+</nav>

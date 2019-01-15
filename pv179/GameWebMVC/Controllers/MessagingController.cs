@@ -1,4 +1,5 @@
 ﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using BL.Services.Chats;
 using GameWebMVC.Models;
@@ -14,18 +15,30 @@ namespace GameWebMVC.Controllers
     [Authorize(Roles = "HasCharacter")]
     public class MessagingController : Controller
     {
+
+        #region Constants
+
+        public const int PageSize = 10;
+
+        #endregion Constants
+
+
         public MessagingFacade MessagingFacade { get; set; }
         public CharacterFacade CharacterFacade { get; set; }
 
 
-        public async Task<ActionResult> MailBox()
+        public async Task<ActionResult> MailBox(int page = 1)
         {
             var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            var chats = new List<ChatDto>();
-            chats.AddRange(character.SenderChats);
-            chats.AddRange(character.ReceiverChats);
-            chats = chats.OrderByDescending(x => x.LastMessageTimestamp).Distinct().ToList();
-            return View(chats);
+            var filter = new ChatFilterDto { CharacterId = character.Id, PageSize = PageSize, RequestedPageNumber = page, SortCriteria = nameof(ChatDto.LastMessageTimestamp) };
+            var chats = await MessagingFacade.GetChatsByFilterAsync(filter);
+
+            // Paging
+            ViewBag.RequestedPageNumber = chats.RequestedPageNumber;
+            ViewBag.PageCount = (int)Math.Ceiling((double)chats.TotalItemsCount / (double)PageSize);
+            // Paging END
+
+            return View(chats.Items.Distinct().ToList());
         }
 
         public ActionResult NewChat()

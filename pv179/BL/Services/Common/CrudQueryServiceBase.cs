@@ -29,7 +29,7 @@ namespace BL.Services.Common
         /// <param name="entityId">entity ID</param>
         /// <param name="withIncludes">include all entity complex types</param>
         /// <returns>The DTO representing the entity</returns>
-        public virtual async Task<TDto> GetAsync(Guid entityId, bool withIncludes = true)
+        public virtual async Task<TDto> GetAsync(Guid entityId, bool withIncludes = false)
         {
             TEntity entity;
             if (withIncludes)

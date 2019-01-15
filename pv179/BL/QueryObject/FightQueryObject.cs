@@ -23,6 +23,7 @@ namespace BL.QueryObject
             AddIfDefined(FilterAttackerId(filter), predicates);
             AddIfDefined(FilterDefenderId(filter), predicates);
             AddIfDefined(FilterSuccess(filter), predicates);
+            AddIfDefined(FilterFighterId(filter), predicates);
 
             if (predicates.Count == 0)
             {
@@ -53,6 +54,24 @@ namespace BL.QueryObject
                 : new SimplePredicate(nameof(Fight.DefenderId),
                     ValueComparingOperator.Equal,
                     filter.DefenderId.Value);
+        }
+
+        private IPredicate FilterFighterId(FightFilterDto filter)
+        {
+            if (!filter.FighterId.HasValue)
+            {
+                return null;
+            } else
+            {
+                var fights = new List<IPredicate>();
+                fights.Add(new SimplePredicate(nameof(Fight.DefenderId),
+                    ValueComparingOperator.Equal,
+                    filter.FighterId.Value));
+                fights.Add(new SimplePredicate(nameof(Fight.AttackerId),
+                    ValueComparingOperator.Equal,
+                    filter.FighterId.Value));
+                return new CompositePredicate(fights, LogicalOperator.OR);
+            }
         }
 
         private IPredicate FilterAttackerId(FightFilterDto filter)

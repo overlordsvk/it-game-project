@@ -10,22 +10,22 @@
 <table class="table">
     <tr>
         <th>
-            Útočník
+            Typ
         </th>
         <th>
-            Obranca
+            Protivník
         </th>
         <th>
-            Útočníkova zbraň
+            Tvoja zbraň
         </th>
         <th>
-            Útočníkové brnenie
+            Tvoje brnenie
         </th>
         <th>
-            Obrancova zbraň
+            Protivníkova zbraň
         </th>
         <th>
-            Obrancove brnenie
+            Protivníkove brnenie
         </th>
         <th>
             Výsledok
@@ -35,48 +35,94 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Attacker.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Defender.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
-        </td>
+        <tr>
+            @if(item.AttackerId == Guid.Parse(User.Identity.Name))
+            {
 
-        @if (item.AttackSuccess)
-        {
+                <td>
+                    Útok
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Defender.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
+                </td>
+            } else
+            {
+                <td>
+                    Obrana
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attacker.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefenderWeapon.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefenderArmor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttackerWeapon.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AttackerArmor.Name)
+                </td>
+            }
 
-            <td class="text-success">
-                @Html.DisplayName("Výhra")
+            @if (item.AttackSuccess && item.AttackerId == Guid.Parse(User.Identity.Name) || !item.AttackSuccess && item.DefenderId == Guid.Parse(User.Identity.Name))
+            {
+
+                <td class="text-success">
+                    @Html.DisplayName("Výhra")
+                </td>
+
+            }
+            else
+            {
+                <td class="text-danger">
+                    @Html.DisplayName("Porážka")
+                </td>
+
+            }
+            <td>
+                @Html.ActionLink("Detail", "Index", new { id = item.Id })
             </td>
-
-        }
-        else
-        {
-            <td class="text-danger">
-                @Html.DisplayName("Porážka")
-            </td>
-
-        }
-        <td>
-            @Html.ActionLink("Detail", "Index", new { id = item.Id })
-        </td>
-    </tr>
+        </tr>
     }
 
 </table>
+
+@{string disabled = "disabled";
+    string active = "active";
+    int prev = ViewBag.RequestedPageNumber - 1;
+    int next = ViewBag.RequestedPageNumber + 1;
+}
+<nav aria-label="paging">
+    <ul class="pagination">
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber <= 1) { @disabled;} ">
+            <a class="page-link" href="?page=@prev">&laquo;</a>
+        </li>
+        @for (int page = 1; page <= ViewBag.PageCount; page++)
+        {
+            <li class="page-item @if (ViewBag.RequestedPageNumber == page){ @active } "><a class="page-link" href="?page=@page">@page</a></li>
+        }
+
+        <li class="page-item @if (ViewBag.PageCount <= 1 || ViewBag.RequestedPageNumber >= ViewBag.PageCount) { @disabled;}">
+            <a class="page-link " href="?page=@next">&raquo;</a>
+        </li>
+    </ul>
+</nav>
+
 <div>
     <input type="button" value="Návrat na postavu" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Character")'" />
 </div>
