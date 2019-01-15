@@ -7,6 +7,7 @@ using BL.Services.Characters;
 using BL.Services.Fights;
 using BL.Services.Groups;
 using BL.Services.Items;
+using Game.DAL.Entity.Entities;
 using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -192,7 +193,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<bool> BuyItemAsync(Guid characterId)
+        public async Task<bool> BuyItemAsync(Guid characterId, ItemDto item)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -201,17 +202,28 @@ namespace BL.Facades
                 {
                     return false;
                 }
-                if (character.Money < 500)
+                
+                if (character.Money < item.Price)
                     return false;
 
-                character.Money -= 500;
-                var item = _itemService.GetNewItem();
+                character.Money -= item.Price;
                 item.OwnerId = characterId;
+                item.Price /= 2;
                 _itemService.Create(item);
                 await _characterService.Update(character);
                 await uow.Commit();
                 return true;
             }
+        }
+
+        public ICollection<ItemDto> GetItemsForShop()
+        {
+            var items = new List<ItemDto>();
+            for (int i = 0; i < 5; i++)
+            {
+                items.Add(_itemService.GetNewItem());
+            }
+            return items;
         }
 
         public async Task<Guid> GiveItemAsync(Guid characterId, ItemDto item = null)
@@ -280,7 +292,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<Guid> Attack(Guid attackerId, Guid defenderId)
+        public async Task<(Guid, ICollection<(int,int,int,int,int,int,int)>)> Attack(Guid attackerId, Guid defenderId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -289,11 +301,11 @@ namespace BL.Facades
 
                 if (attacker == null)
                 {
-                    return Guid.Empty;
+                    return (Guid.Empty, null);
                 }
                 if (defender == null)
                 {
-                    return Guid.Empty;
+                    return (Guid.Empty, null);
                 }
                 var attackerArmor = await GetEquippedArmor(attackerId);
                 var attackerWeapon = await GetEquippedWeapon(attackerId);
@@ -315,7 +327,7 @@ namespace BL.Facades
                 if (attackSuccess.Item1)
                 {
                     attacker.Score += 30;
-                    attacker.Money += 30 + (_random.Next(1, 10) + attacker.Luck);
+                    attacker.Money += 30 + (_random.Next(1, 7 * attacker.Luck));
                 }
                 else
                 {
@@ -323,7 +335,7 @@ namespace BL.Facades
                 }
                 await _characterService.Update(attacker);
                 await uow.Commit();
-                return fightId;
+                return (fightId, attackSuccess.Item2);
             }
         }
 

@@ -2,10 +2,10 @@
 @{
     ViewBag.Title = "Inventár";
 }
-
+<h2>Inventár</h2>
 <div style="overflow:hidden; ">
-    <input type="button" value="Kúpiť (500 k)" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy")'" />
-    <dl class="dl-horizontal" style="float: left; margin: 17px 10px 10px 20px ;">
+    <input type="button" value="Obchod" class="btn btn-success float-left ml-1" onclick="location.href='@Url.Action("Shop")'" />
+    <dl class="dl-horizontal float-right" >
 
         <dt>
             @Html.DisplayNameFor(model => model.Money)
@@ -13,7 +13,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Money)
-            @Html.ValidationMessageFor(model => model.Money, "", new { @class = "text-danger", @style = "margin-left:10px" })
         </dd>
     </dl>
 

@@ -42,21 +42,29 @@ namespace GameWebMVC.Controllers
 
         public async Task<ActionResult> Index(Guid id)
         {
+            if(id == null)
+            {
+                RedirectToAction("List");
+            }
             var fight = await CharacterFacade.GetFight(id);
             var characterId = Guid.Parse(User.Identity.Name);
             if (characterId != fight.AttackerId && characterId != fight.DefenderId)
             {
                 return RedirectToAction("NotAuthorized", "Error");
             }
-            return View(fight);
+            var st = Session["steps"] as ICollection<(int, int, int, int, int, int, int)>;
+            Session.Remove("steps");
+            var fightModel = new FightModel { Fight = fight, Steps = st };
+            return View(fightModel);
         }
 
         public async Task<ActionResult> Create(Guid id)
         {
             try
             {
-                var fightId = await CharacterFacade.Attack(Guid.Parse(User.Identity.Name), id);
-                return RedirectToAction("Index", new { id = fightId });
+                var fightResult = await CharacterFacade.Attack(Guid.Parse(User.Identity.Name), id);
+                Session["steps"] = fightResult.Item2;
+                return RedirectToAction("Index", new { id = fightResult.Item1 , steps = fightResult.Item2 });
             }
             catch
             {

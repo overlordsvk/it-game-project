@@ -1,4 +1,5 @@
-﻿using BL.DTO.Filters;
+﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using GameWebMVC.Models;
 using System;
@@ -28,10 +29,6 @@ namespace GameWebMVC.Controllers
             var character = await CharacterFacade.GetCharacterById(characterId);
             var items = await CharacterFacade.GetItemsByFilterAsync(new ItemFilterDto { OwnerId = characterId, PageSize = PageSize, RequestedPageNumber = page });
             var model = new InventoryModel { Money = character.Money, Items = items.Items };
-            if(character.Money < 500)
-            {
-                ModelState.AddModelError("Money", "nemáš dostatok peňazí");
-            }
 
             // Paging
             ViewBag.RequestedPageNumber = items.RequestedPageNumber;
@@ -47,12 +44,22 @@ namespace GameWebMVC.Controllers
             return View(item);
         }
 
-
-
-        public async Task<ActionResult> Buy()
+        public async Task<ActionResult> Shop()
         {
             var characterId = Guid.Parse(User.Identity.Name);
-            var res = await CharacterFacade.BuyItemAsync(characterId);
+            var character = await CharacterFacade.GetCharacterById(characterId);
+            var items = CharacterFacade.GetItemsForShop();
+            var model = new InventoryModel { Money = character.Money, Items = items };
+            return View(model);
+        }
+
+
+
+        public async Task<ActionResult> Buy(ItemDto item)
+        {
+            var characterId = Guid.Parse(User.Identity.Name);
+                
+            var res = await CharacterFacade.BuyItemAsync(characterId, item);
             return RedirectToAction("Index");
 
   
