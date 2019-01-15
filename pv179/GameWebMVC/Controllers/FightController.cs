@@ -39,7 +39,7 @@ namespace GameWebMVC.Controllers
             }
         }
 
-
+        
         public async Task<ActionResult> Index(Guid id)
         {
             if(id == null)
