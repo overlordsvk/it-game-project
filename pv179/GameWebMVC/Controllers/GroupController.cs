@@ -122,7 +122,7 @@ namespace GameWebMVC.Controllers
             {
                 ViewBag.Message = "ERROR: " + ex.Message.ToString();
             }
-            return View(model);
+            return RedirectToAction("Index");
         }
 
         public async Task<ActionResult> Delete(Guid id)

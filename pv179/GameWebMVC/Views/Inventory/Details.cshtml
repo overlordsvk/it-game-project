@@ -48,20 +48,33 @@
         </dd>
 
         <dt>
+            
             @Html.DisplayNameFor(model => model.Equipped)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Equipped)
-        </dd>
+
+            @if (Model.Equipped)
+            {
+            
+                <dd>Áno</dd>
+            }
+            else
+            {
+                <dd>Nie</dd>
+            }
 
         <dt>
             @Html.DisplayName("Typ")
         </dt>
 
-        <dd>
-            @Html.DisplayName(Model.ItemType.ToString())
-        </dd>
+        @if (Model.ItemType == Game.DAL.Enums.ItemType.Armor)
+        {
+            <dd>Zbroj</dd>
+        } else
+        {
+            <dd>Zbraň</dd>
+        }
+
 
     </dl>
 </div>

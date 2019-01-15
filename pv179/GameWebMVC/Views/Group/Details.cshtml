@@ -110,7 +110,7 @@
         @if (ViewBag.GroupAdmin == true)
         {
             @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) <span>|</span>
-            @Html.ActionLink("Odstrániť skupinu", "Edit", new { id = Model.Id }) <span>|</span>
+            @Html.ActionLink("Odstrániť skupinu", "Delete", new { id = Model.Id }) <span>|</span>
         }
         @if (ViewContext.HttpContext.User.Identity.IsAuthenticated && ViewBag.GroupMember == false)
         {

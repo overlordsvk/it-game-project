@@ -64,12 +64,23 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Equipped)
-            </td>
-            <td>
-                @Html.DisplayName(item.ItemType.ToString())
-            </td>
+            @if (item.Equipped)
+            {
+            
+                <td>Áno</td>
+            }
+            else
+            {
+                <td>Nie</td>
+            }
+            @if (item.ItemType == Game.DAL.Enums.ItemType.Armor)
+            {
+                <td>Zbroj</td>
+            } else
+            {
+                <td>Zbraň</td>
+            }
+
             <td>
                 @Html.ActionLink("Nasadiť", "Equip", new { id = item.Id }) |
                 @Html.ActionLink("Predať", "Sell", new { id = item.Id }) |
