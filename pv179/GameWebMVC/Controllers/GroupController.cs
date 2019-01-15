@@ -152,9 +152,10 @@ namespace GameWebMVC.Controllers
         public async Task<ActionResult> LeaveGroup(Guid characterId, Guid groupId)
         {
             var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            if (user != null && user.GroupId.HasValue && user.IsGroupAdmin && user.GroupId == groupId)
+            if (user != null && user.GroupId.HasValue && user.GroupId == groupId)
             {
-                await GroupFacade.RemoveFromGroup(characterId, groupId);
+                if (user.IsGroupAdmin || characterId == user.Id)
+                    await GroupFacade.RemoveFromGroup(characterId, groupId);
             }
             return RedirectToAction("Index");
         }

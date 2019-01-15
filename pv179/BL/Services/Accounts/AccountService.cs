@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BL.DTO;
+using BL.DTO.Common;
 using BL.DTO.Filters;
 using BL.QueryObject;
 using BL.Services.Common;
@@ -26,6 +27,11 @@ namespace BL.Services.Accounts
         protected override async Task<Account> GetWithIncludesAsync(Guid entityId)
         {
             return await Repository.GetAsync(entityId, nameof(Character));
+        }
+
+        public async Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAccountsAsync(AccountFilterDto filter)
+        {
+            return await Query.ExecuteQuery(filter);
         }
 
         public async Task<AccountDto> GetAccountAccordingToEmailAsync(string email)

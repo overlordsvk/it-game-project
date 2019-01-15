@@ -41,15 +41,6 @@ namespace GameWebMVC.Areas.Admin.Controllers
             ViewBag.PageCount = (int)Math.Ceiling((double)result.TotalItemsCount / (double)PageSize);
             // Paging END
 
-            ViewBag.GroupMember = false;
-            if (User.Identity.IsAuthenticated)
-            {
-                var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-                if (user.GroupId.HasValue)
-                {
-                    ViewBag.GroupMember = true;
-                }
-            }
             return View("List", result.Items);
         }
 
@@ -105,15 +96,8 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         public async Task<ActionResult> Delete(Guid id)
         {
-            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
             await GroupFacade.RemoveGroup(id);
-            return RedirectToAction("Index", new { area = "Admin" });
-        }
-
-        public async Task<ActionResult> LeaveGroup(Guid characterId, Guid groupId)
-        {
-            await GroupFacade.RemoveFromGroup(characterId, groupId);
-            return RedirectToAction("Index");
+            return RedirectToAction("List", new { area = "Admin" });
         }
     }
 }

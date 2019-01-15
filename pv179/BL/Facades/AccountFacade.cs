@@ -24,6 +24,14 @@ namespace BL.Facades
             this._characterService = characterService;
         }
 
+        public async Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAccountsAsync(AccountFilterDto filter)
+        {
+            using (UnitOfWorkProvider.Create())
+            {
+                return await _accountService.ListAccountsAsync(filter);
+            }
+        }
+
         /// <summary>
         /// Gets account according to email
         /// </summary>

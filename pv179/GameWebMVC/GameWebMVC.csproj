@@ -192,7 +192,10 @@
     <Content Include="Areas\Admin\Views\Home.cshtml" />
     <Content Include="Areas\Admin\Views\Groups\List.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Characters\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Characters\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Characters\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Characters\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Accounts\List.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -238,7 +241,6 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Groups\Index.cshtml" />
     <Content Include="Views\Fight\FightSelection.cshtml" />
     <Content Include="Views\Fight\Index.cshtml" />
     <Content Include="Views\Fight\List.cshtml" />
@@ -253,7 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Accounts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -47,54 +47,36 @@ namespace GameWebMVC.Areas.Admin.Controllers
             return View("Details", model);
         }
 
-        public ActionResult Create()
+        #region Edit
+
+        public async Task<ActionResult> Edit()
         {
-            return View();
+            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            return View(character);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateCharacter character)
-        {
-            var newGroupId = await CharacterFacade.CreateCharacter(character.AccountId, character.Character);
-            return RedirectToAction("Details", new { area = "Admin", id = character.Character.Id });
-        }
-
-        /*public async Task<ActionResult> Edit(Guid id)
-        {
-            var group = await GroupFacade.GetGroupAsync(id);
-            return View("Edit", new GroupImageModel { Group = group, File = null });
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Edit(GroupImageModel model)
+        public async Task<ActionResult> Edit(CharacterDto characterDto)
         {
             try
             {
-                var group = await GroupFacade.GetGroupAsync(model.Group.Id);
-                var relativePath = group.Picture;
-                if (model.File != null && model.File.ContentLength > 0)
-                {
-                    var fileType = Path.GetExtension(model.File.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Img/"), model.Group.Id + fileType);
-                    model.File.SaveAs(path);
-                    relativePath = "/Img/" + model.Group.Id + fileType;
-                    model.Group.Picture = relativePath;
-                }
-                model.Group.Picture = relativePath;
-                await GroupFacade.Edit(model.Group);
+                var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+                character.Name = characterDto.Name;
+                var res = await CharacterFacade.EditCharacter(character);
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
-                ViewBag.Message = "ERROR: " + ex.Message.ToString();
+                return View();
             }
-            return RedirectToAction("Details", new { area = "Admin", id = model.Group.Id });
         }
 
-        public async Task<ActionResult> Delete(Guid id)
+        #endregion Edit
+
+        public async Task<ActionResult> Remove(Guid id)
         {
-            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
-            await GroupFacade.RemoveGroup(id);
-            return RedirectToAction("Index", new { area = "Admin" });
-        }*/
+            await CharacterFacade.RemoveCharacter(id);
+            return RedirectToAction("List");
+        }
     }
 }

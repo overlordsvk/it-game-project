@@ -11,6 +11,13 @@ namespace BL.Services.Accounts
     public interface IAccountService
     {
         /// <summary>
+        /// Gets account with given filter
+        /// </summary>
+        /// <param name="filter">filter</param>
+        /// <returns>AccountDto with given username</returns>
+        Task<QueryResultDto<AccountDto, AccountFilterDto>> ListAccountsAsync(AccountFilterDto filter);
+
+        /// <summary>
         /// Gets account with given email address
         /// </summary>
         /// <param name="email">email</param>

@@ -17,33 +17,30 @@
         <th>
             Obrázok
         </th>
-        <th>
-            Popis
-        </th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <img class="clan-list-img" src="@Html.DisplayFor(modelItem => item.Picture)" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Detail", "Details", new { id = item.Id })
-                @if (ViewContext.HttpContext.User.Identity.IsAuthenticated && ViewBag.GroupMember == false)
-                {
-                    <span>|</span>
-                    @Html.ActionLink("Pridať sa", "Join", new { id = item.Id })
-                }
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <img class="clan-list-img" src="@Html.DisplayFor(modelItem => item.Picture)" />
+        </td>
+        <td>
+            @Html.ActionLink("Detail", "Details", new { id = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Upraviť", "Edit", new { id = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Odstrániť skupinu", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 </table>
 

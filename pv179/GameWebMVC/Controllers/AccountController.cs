@@ -150,12 +150,20 @@ namespace GameWebMVC.Controllers
         public ActionResult GetUserName()
         {
             var syncContext = SynchronizationContext.Current;
+            AccountDto account;
             SynchronizationContext.SetSynchronizationContext(null);
-
-            var account = AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name)).Result;
-
-            SynchronizationContext.SetSynchronizationContext(syncContext);
-
+            try
+            {
+                account = AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name)).Result;
+            }
+            catch (Exception)
+            {
+                account = null;
+            }
+            finally
+            {
+                SynchronizationContext.SetSynchronizationContext(syncContext);
+            }
             return Content(account?.Username);
         }
         #endregion Actions

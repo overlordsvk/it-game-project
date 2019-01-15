@@ -138,11 +138,11 @@ namespace BL.Facades
                 character.GroupId = null;
                 character.IsGroupAdmin = false;
                 await _characterService.Update(character);
+                await _groupService.Update(group);
                 if (group.Members.Count <= 1) 
                 {
                     _groupService.Delete(groupId);
                 }
-                await _groupService.Update(group);
                 await uow.Commit();
                 return true;
             }
