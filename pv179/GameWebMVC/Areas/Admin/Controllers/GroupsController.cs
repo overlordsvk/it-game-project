@@ -109,5 +109,11 @@ namespace GameWebMVC.Areas.Admin.Controllers
             await GroupFacade.RemoveGroup(id);
             return RedirectToAction("Index", new { area = "Admin" });
         }
+
+        public async Task<ActionResult> LeaveGroup(Guid characterId, Guid groupId)
+        {
+            await GroupFacade.RemoveFromGroup(characterId, groupId);
+            return RedirectToAction("Index");
+        }
     }
 }
