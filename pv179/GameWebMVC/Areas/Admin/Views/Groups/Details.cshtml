@@ -6,29 +6,103 @@
 }
 
 <h2>Skupina</h2>
+<div style="width:50%;float:left;" class="pull-left">
+    <div>
+        <h4>@Html.DisplayFor(model => model.Name)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Picture)
+            </dt>
 
-<div>
-    <h4>@Html.DisplayFor(model => model.Name)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
+            <dd>
+                <img class="clan-list-img" src="@Html.DisplayFor(model => model.Picture)" />
+            </dd>
 
-        <dd>
-            <img class="clan-list-img" src="@Html.DisplayFor(model => model.Picture)" />
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
+    <h3 style="margin-top:50px;">Členovia</h3>
+    <table class="table">
+        <tr>
+            <th>
+                Meno
+            </th>
+            <th>
+                Skóre
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Members)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @Html.ActionLink("Detail", "Detail", "Character", new { id = item.Id }, null)
+                    <span>|</span>
+                    @Html.ActionLink("Vyhodiť", "LeaveGroup", new { characterId = item.Id, groupId = Model.Id })
+                </td>
+            </tr>
+        }
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Späť na zoznam skupín", "List")
-</p>
+
+<div style="float:left;" class="pull-left">
+        <div style="width:100%;margin-left:5px;box-shadow: #eaeaea 0 0 1px 0px; padding: 5px;" class="pull-left">
+            <h3>Nástenka</h3>
+            <table class="table">
+                <tr>
+                    <th>
+                        Autor
+                    </th>
+                    <th>
+                        Text
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Wall)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div style="margin-top:20px;float:left;">
+            <form action="/Group/PostToGroup" method="post">
+                <div style="padding:5px;" class="pull-left">
+                    <label class="control-label" for="message">Správa:</label>
+                </div>
+                <div style="margin-left:8px;" class="pull-left">
+                    <input type="text" name="message" value="" placeholder="Správa pre skupinu" />
+                    <input type="submit" value="Poslať" class="btn btn-default">
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div style="clear:both;">
+    <p>
+        @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) <span>|</span>
+        @Html.ActionLink("Odstrániť skupinu", "Edit", new { id = Model.Id }) <span>|</span>
+        @Html.ActionLink("Späť na zoznam skupín", "List")
+    </p>
+</div>
