@@ -61,7 +61,7 @@ namespace BL.Config
             config.CreateMap<QueryResult<Character>, QueryResultDto<CharacterDto, CharacterFilterDto>>();
             config.CreateMap<QueryResult<Message>, QueryResultDto<MessageDto, MessageFilterDto>>();
             config.CreateMap<QueryResult<Chat>, QueryResultDto<ChatDto, ChatFilterDto>>();
-            config.CreateMap<QueryResult<GroupPost>, QueryResultDto<GroupPostDto, GroupFilterDto>>();
+            config.CreateMap<QueryResult<GroupPost>, QueryResultDto<GroupPostDto, GroupPostFilterDto>>();
         }
     }
 }
