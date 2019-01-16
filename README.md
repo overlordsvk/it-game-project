@@ -7,11 +7,11 @@ User stories:
 
   Personal options:
   
-    - správa vlastného účtu (informácie, fotka)
+    - správa vlastného účtu, postavy, skupiny
     - zobrazenie všetkých hráčov/poprípade top 50 (tabuľka so skóre)
     - pri vytváraní postavy si navolíš skills (s.p.e.c.i.a.l)
     - napádanie ostatných hráčov - získavanie bodov pre zlepšenie skills
-    - tréning (zvyšovanie stats)
+    - nakupovanie itemov v obchode
     - itemy možno získať z bitiek
     - direct chat (posielanie správ podla nicku)
 
@@ -19,11 +19,10 @@ User stories:
   
     - vytváranie skupín (klanov)
     - klanová nástenka + zákledné info 
-    - klan management (správa členov klanu, upravovanie práv členov, úprava popisu, zrušenie klanu)
-    - scóre list klanov
+    - klan management (správa členov klanu, úprava popisu, zrušenie klanu)
 
   Admin options:
   
-    - správa itemov (vytváranie nových itemov, mazanie, drop chance pri lootboxoch)
+    - správa itemov (vytváranie nových itemov, mazanie, drop chance)
     - správa užívateľov
     
