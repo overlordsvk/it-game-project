@@ -51,7 +51,7 @@
                     @Html.DisplayFor(modelItem => item.Score)
                 </td>
                 <td>
-                    @Html.ActionLink("Detail", "Details", "Characters", new { id = item.Id })
+                    <a href="/Admin/Characters/Details?id=@item.Id">Detail</a>
                     <span>|</span>
                     @Html.ActionLink("Vyhodiť", "LeaveGroup", new { characterId = item.Id, groupId = Model.Id })
                 </td>
