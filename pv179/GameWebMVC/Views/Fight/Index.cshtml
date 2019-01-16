@@ -3,7 +3,16 @@
 @{
     ViewBag.Title = "Súboj";
 }
-
+<style>
+    .tableFight {
+        width: 47.5%;
+        float: left;
+    }
+    .tableOrder {
+        width: 5%;
+        float: left;
+    }
+</style>
 <div class="wrapper">
     <div class="left">
         <div class="sign">
@@ -21,11 +30,11 @@
     <div class="result">
         @if (Model.Fight.AttackSuccess)
         {
-        <div class="text-success">@Html.DisplayName("Výhra")</div>
+            <div class="text-success">@Html.DisplayName("Výhra")</div>
         }
         else
         {
-        <div class="text-danger">@Html.DisplayName("Porážka")</div>
+            <div class="text-danger">@Html.DisplayName("Porážka")</div>
         }
     </div>
     <div class="right">
@@ -43,15 +52,29 @@
     </div>
 </div>
 
-@if(Model.Steps != null)
+@if (Model.Steps != null)
 {
-    <table class="table">
+    <table class="table tableOrder">
         <tr>
             <th>
                 <b>
                     Kolo
                 </b>
             </th>
+        </tr>
+
+        @foreach (var item in Model.Steps)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item1)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="table border-left tableFight">
+        <tr>
             <th>
                 HP Útočník
             </th>
@@ -61,6 +84,26 @@
             <th>
                 Šťastie Útočník
             </th>
+        </tr>
+
+        @foreach (var item in Model.Steps)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item6)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="table border-left tableFight">
+        <tr>
             <th>
                 HP Obranca
             </th>
@@ -72,31 +115,20 @@
             </th>
         </tr>
 
-    @foreach (var item in Model.Steps) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item6)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item5)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item7)
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model.Steps)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item7)
+                </td>
+            </tr>
+        }
     </table>
 }
 

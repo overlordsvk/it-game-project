@@ -443,6 +443,7 @@ namespace BL.Facades
 
             var fight = new List<(int Order, int HPAtt, int HPDef, int DmgAtt, int DmgDef, int LuckAtt, int LuckDef)>();
             int order = 0;
+            fight.Add((order, attackerHealth, defenderHealth,0,0,0,0));
             var attackerWin = false;
             while (attackerHealth > 0 || defenderHealth > 0)
             {
@@ -456,7 +457,7 @@ namespace BL.Facades
                     defenderHealth -= damageAtt;
                 }
 
-                if (defenderHealth < 0)
+                if (defenderHealth <= 0)
                 {
                     fight.Add((order, attackerHealth, 0, damageAtt, 0, 100 - luckAtt, 0));
                     attackerWin = true;
@@ -469,7 +470,7 @@ namespace BL.Facades
                     damageDef = defDamage * (1 - (attDefense / 1500)) + _random.Next(0, defender.Luck);
                     attackerHealth -= damageDef;
                 }
-                if (attackerHealth < 0)
+                if (attackerHealth <= 0)
                 {
                     attackerWin = false;
                     fight.Add((order, 0, defenderHealth, damageAtt, damageDef, 100 - luckAtt, 100 - luckDef));
