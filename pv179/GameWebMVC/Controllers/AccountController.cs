@@ -1,5 +1,6 @@
 ﻿using BL.DTO;
 using BL.Facades;
+using Castle.Core.Internal;
 using GameWebMVC.Models;
 using System;
 using System.Threading;
@@ -130,7 +131,8 @@ namespace GameWebMVC.Controllers
             {
                 Username = account.Username,
                 Email = account.Email,
-                Password = ""
+                Password = "",
+                Roles = account.Roles
             };
             return View(accountCreateDto);
         }
@@ -138,7 +140,7 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(AccountCreateDto account)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValidField(nameof(AccountCreateDto.Email)) && ModelState.IsValidField(nameof(AccountCreateDto.Username)) && (ModelState.IsValidField(nameof(AccountCreateDto.Password)) || account.Password.IsNullOrEmpty()))
             {
                 try
                 {
