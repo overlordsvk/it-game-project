@@ -1,8 +1,8 @@
 ﻿using Game.Infrastructure.Entity.UnitOfWork;
-using Game.Infrastructure.UnitOfWork;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
+using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -77,7 +77,6 @@ namespace Game.Infrastructure.Entity
             Debug.WriteLine(lambdaExpression.ToString());
             return queryable.Where(lambdaExpression);
         }
-
 
         private Expression CombineBinaryExpressions(CompositePredicate compositePredicate)
         {

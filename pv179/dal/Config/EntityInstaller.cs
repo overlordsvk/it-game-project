@@ -1,14 +1,14 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Game.Infrastructure;
+using Game.Infrastructure.Entity;
+using Game.Infrastructure.Entity.Repository;
+using Game.Infrastructure.Entity.UnitOfWork;
+using Game.Infrastructure.Query;
+using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Data.Entity;
-using Game.Infrastructure;
-using Game.Infrastructure.Entity.UnitOfWork;
-using Game.Infrastructure.UnitOfWork;
-using Game.Infrastructure.Entity.Repository;
-using Game.Infrastructure.Query;
-using Game.Infrastructure.Entity;
 
 namespace Game.DAL.Entity.Config
 {

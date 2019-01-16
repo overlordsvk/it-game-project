@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Filters;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BL.QueryObject
 {
     public class FightQueryObject : QueryObjectBase<FightDto, Fight, FightFilterDto, IQuery<Fight>>
     {
-        public FightQueryObject(IMapper mapper, IQuery<Fight> query) : base(mapper, query) { }
+        public FightQueryObject(IMapper mapper, IQuery<Fight> query) : base(mapper, query)
+        {
+        }
 
         protected override IQuery<Fight> ApplyWhereClause(IQuery<Fight> query, FightFilterDto filter)
         {
@@ -35,7 +34,6 @@ namespace BL.QueryObject
             }
             var wherePredicate = new CompositePredicate(predicates);
             return query.Where(wherePredicate);
-
         }
 
         private IPredicate FilterSuccess(FightFilterDto filter)
@@ -61,7 +59,8 @@ namespace BL.QueryObject
             if (!filter.FighterId.HasValue)
             {
                 return null;
-            } else
+            }
+            else
             {
                 var fights = new List<IPredicate>();
                 fights.Add(new SimplePredicate(nameof(Fight.DefenderId),

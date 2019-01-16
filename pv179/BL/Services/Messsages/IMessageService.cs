@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Messages
 {
@@ -36,7 +33,7 @@ namespace BL.Services.Messages
         /// </summary>
         /// <param name="entityId">Id of the entity to delete</param>
         void Delete(Guid entityId);
-        
+
         /// <summary>
         /// Gets messages according to given filter
         /// </summary>

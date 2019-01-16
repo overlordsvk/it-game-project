@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Game.DAL.Entity.Entities;
+﻿using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.UnitOfWork;
 using NUnit.Framework;
+using System;
+using System.Threading.Tasks;
 
 namespace DAL.EntityFrameWork.Tests
 {

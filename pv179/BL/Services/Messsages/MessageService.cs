@@ -8,7 +8,6 @@ using Game.DAL.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Services.Messages
@@ -28,6 +27,5 @@ namespace BL.Services.Messages
         {
             return await Repository.GetAsync(entityId, nameof(Message.Author), nameof(Message.Chat));
         }
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Game.Infrastructure.UnitOfWork;
+using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using Game.Infrastructure.UnitOfWork;
 
 namespace Game.Infrastructure.Entity.UnitOfWork
 {

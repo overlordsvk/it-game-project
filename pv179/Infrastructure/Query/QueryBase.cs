@@ -1,5 +1,5 @@
-﻿using Game.Infrastructure.UnitOfWork;
-using Game.Infrastructure.Query.Predicates;
+﻿using Game.Infrastructure.Query.Predicates;
+using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,7 @@ namespace Game.Infrastructure.Query
         public int? DesiredPage { get; private set; }
 
         private string sortAccordingTo;
+
         public string SortAccordingTo
         {
             get => sortAccordingTo;

@@ -1,25 +1,21 @@
 ﻿using AutoMapper;
-using BL.Config;
+using BL.DTO;
+using BL.DTO.Filters;
+using BL.Facades;
+using BL.QueryObject;
+using BL.Services.Items;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using Game.DAL.Entity;
+using Game.DAL.Entities;
+using Game.DAL.Entity.Entities;
+using Game.DAL.Entity.Initializers;
+using Game.DAL.Enums;
+using Game.Infrastructure;
+using Game.Infrastructure.Query;
+using Game.Infrastructure.UnitOfWork;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BL.DTO;
-using Game.DAL.Enums;
-using Game.DAL.Entity.Entities;
-using BL.Facades;
-using Game.Infrastructure.UnitOfWork;
-using BL.QueryObject;
-using BL.DTO.Filters;
-using Game.Infrastructure.Query;
-using Game.Infrastructure;
-using Game.DAL.Entities;
-using BL.Services.Items;
-using Game.Infrastructure.Entity.UnitOfWork;
-using Game.DAL.Entity.Initializers;
 
 namespace PV179Console
 {
@@ -33,16 +29,15 @@ namespace PV179Console
         private static readonly Guid guid9 = Guid.Parse("bc53f485-942d-4a41-9e9a-a9ca3b353c56");
         private static readonly Guid guid10 = Guid.Parse("fd4e4768-037f-4ed9-8520-dd1e5a38816c");
 
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             Console.WriteLine("Test");
             PrintDbContent().Wait();
 
             Console.ReadKey();
 
             #region Tests
+
             var dtoChar = new CharacterDto
             {
                 Name = "Harakter",
@@ -115,10 +110,6 @@ namespace PV179Console
                 Luck = 9
             };
 
-
-
-
-
             var acccrdto = new AccountCreateDto
             {
                 Email = "beliak@bugar.com",
@@ -150,10 +141,7 @@ namespace PV179Console
                 var itemService = container.Resolve<IItemService>();
                 var uowp = container.Resolve<IUnitOfWorkProvider>();
 
-                //var res = accFacade.GetAccountAccordingToEmailAsync("navi@ivan.com");
-                //var resew = accFacade.GetAccountAccordingToEmailAsync("naviasfa@ivan.com").Result == null;
-                //Console.WriteLine(resew);
-                //Console.WriteLine("AccFacUser: " + res.Result.Username);
+
                 var res2 = accFacade.RegisterAccount(acccrdto).Result;
                 Console.WriteLine("Reggg : " + res2);
                 var res22 = accFacade.RegisterAccount(acccrdto2).Result;
@@ -162,17 +150,11 @@ namespace PV179Console
                 Console.WriteLine("Reg : " + res23);
                 Console.WriteLine(accFacade.GetAccountAccordingToEmailAsync(acccrdto3.Email).Result.Email);
 
-
-
                 var res44 = accFacade.Login("Bela", "147852369").Result;
                 Console.WriteLine("Login: " + res44.success);
-                //var res4 = accFacade.RegisterAccount(acccrdto).Result;
-                //Console.WriteLine("Succ: ");
-                //var res3 = accFacade.GetAccountAccordingToUsernameAsync("Bela").Result;
-                //Console.WriteLine("====>>>>" + res3.Username);
+
                 var creationId = characterFacade.CreateCharacter(res2, characterBela).Result;
                 Console.WriteLine("CreationId====>>>>" + creationId);
-                //characterFacade.RemoveCharacter(creationId).Wait();
 
                 var res5 = accFacade.RemoveAccountAsync(Initializer._guid8).Result;
                 Console.WriteLine("Remove : " + res5);
@@ -197,7 +179,6 @@ namespace PV179Console
                     GroupId = res6,
                     Text = "Hi",
                     Timestamp = DateTime.Now,
-
                 };
                 grFacade.CreatePost(gpost);
 
@@ -213,41 +194,16 @@ namespace PV179Console
                     AuthorId = res2,
                     ChatId = chatId,
                     Text = "Ako sa mas?",
-
                 };
                 var messageId = messagingFacade.SendMessage(message);
-
-                //var b = characterFacade.GetCharacterById(3).Result;
-                //Console.WriteLine("Money:" + b.Money);
-                //var res8 = characterFacade.BuyItemAsync(3).Result;
-                //b = characterFacade.GetCharacterById(3).Result;
-                //Console.WriteLine("Money:" + b.Money);
-
-
-
-                //var ch = characterFacade.GetCharacterById(2).Result;
-                //Console.WriteLine("Money:" + ch.Money);
-                //characterFacade.AddMoneyToCharacter(2, 200).Wait();
-                //ch = characterFacade.GetCharacterById(2).Result;
-                //Console.WriteLine("Money:" + ch.Money);
-                //using(var uow = uowp.Create())
-                //{
-                //    var i = itemService.GetEquippedWeapon(2).Result;
-                //    Console.WriteLine("Equipped Weapon: " + i.Name);
-
-                //}
-                //var res9 = characterFacade.EquipItem(3, 3).Result;
-                //characterFacade.EquipItem(3, 4).Wait();
-
-                //}
             }
             Console.ReadKey();
             PrintDbContent().Wait();
             Console.ReadKey();
-            #endregion
 
-
+            #endregion Tests
         }
+
         public static async Task PrintDbContent()
         {
             using (var container = new WindsorContainer())
@@ -286,8 +242,6 @@ namespace PV179Console
                         Console.WriteLine($"{acc.Id} \t  {acc.Username}  \t  {acc.Email}  \t \t Character:   {acc.Character?.Name}");
                     }
 
-
-
                     Console.WriteLine("\nCharacters: ");
                     foreach (var ch in characters)
                     {
@@ -311,7 +265,6 @@ namespace PV179Console
                         Console.WriteLine("{0,-5}  {1,-20}{2,-20}{3,-20}{4,-20}", i.Id, i.Name, i.ItemType.ToString(), "Owner: " + i.Owner?.Name, "E: " + i.Equipped);
                     }
 
-
                     Console.WriteLine("\nGroups: ");
                     foreach (var g in groups)
                     {
@@ -331,7 +284,6 @@ namespace PV179Console
                     }
                 }
             }
-
         }
     }
 }

@@ -1,13 +1,8 @@
-﻿using BL.DTO.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using AutoMapper;
-using System.Threading.Tasks;
-using Game.Infrastructure.Query;
-using Game.DAL.Entity.Entities;
+﻿using AutoMapper;
+using BL.DTO.Common;
 using Game.Infrastructure;
+using Game.Infrastructure.Query;
+using System.Threading.Tasks;
 
 namespace BL.QueryObject
 {

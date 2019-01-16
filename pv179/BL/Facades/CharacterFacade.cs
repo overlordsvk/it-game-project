@@ -7,7 +7,6 @@ using BL.Services.Characters;
 using BL.Services.Fights;
 using BL.Services.Groups;
 using BL.Services.Items;
-using Game.DAL.Entity.Entities;
 using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -202,7 +201,7 @@ namespace BL.Facades
                 {
                     return false;
                 }
-                
+
                 if (character.Money < item.Price)
                     return false;
 
@@ -292,7 +291,7 @@ namespace BL.Facades
             }
         }
 
-        public async Task<(Guid, ICollection<(int,int,int,int,int,int,int)>)> Attack(Guid attackerId, Guid defenderId)
+        public async Task<(Guid, ICollection<(int, int, int, int, int, int, int)>)> Attack(Guid attackerId, Guid defenderId)
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
@@ -444,9 +443,8 @@ namespace BL.Facades
                 {
                     damageAtt = attDamage * (1 - (defDefense / 1500)) + _random.Next(0, attacker.Luck);
                     defenderHealth -= damageAtt;
-
                 }
-                
+
                 if (defenderHealth < 0)
                 {
                     fight.Add((order, attackerHealth, 0, damageAtt, 0, luckAtt, 0));
@@ -459,7 +457,6 @@ namespace BL.Facades
                 {
                     damageDef = defDamage * (1 - (attDefense / 1500)) + _random.Next(0, defender.Luck);
                     attackerHealth -= damageDef;
-
                 }
                 if (attackerHealth < 0)
                 {

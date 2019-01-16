@@ -3,10 +3,12 @@
     ViewBag.Title = "Zoznam skupín";
 }
 <h2>Zoznam skupín</h2>
-
-<p>
-    <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("Create")'" />
-</p>
+@if (ViewContext.HttpContext.User.Identity.IsAuthenticated && ViewBag.GroupMember == false)
+{
+    <p>
+        <input type="button" value="Vytvoriť skupinu" class="btn btn-success" onclick="location.href='@Url.Action("Create")'" />
+    </p>
+}
 
 <table class="table">
     <tr>
@@ -45,7 +47,6 @@
         </tr>
     }
 </table>
-
 
 @{string disabled = "disabled";
     string active = "active";

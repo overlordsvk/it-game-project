@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Filters;
 using Game.DAL.Entity.Entities;
@@ -21,9 +16,8 @@ namespace BL.QueryObject
 
         protected override IQuery<Group> ApplyWhereClause(IQuery<Group> query, GroupFilterDto filter)
         {
-
-            return string.IsNullOrWhiteSpace(filter.Name) 
-                ? query 
+            return string.IsNullOrWhiteSpace(filter.Name)
+                ? query
                 : query.Where(new SimplePredicate(nameof(Group.Name),
                                                 ValueComparingOperator.StringContains,
                                                 filter.Name));

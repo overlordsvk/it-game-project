@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Game.DAL.Entities;
+using Game.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Game.DAL.Entities;
-using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities
 {

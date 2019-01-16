@@ -2,10 +2,6 @@
 using Game.DAL.PetaPoco.Enums;
 using Game.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game.DAL.PetaPoco.Entities
 {
@@ -28,6 +24,7 @@ namespace Game.DAL.PetaPoco.Entities
         public bool Equipped { get; set; }
 
         public Guid? OwnerId { get; set; }
+
         [Ignore]
         public Character Owner { get; set; }
 

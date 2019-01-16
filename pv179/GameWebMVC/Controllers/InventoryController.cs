@@ -3,10 +3,7 @@ using BL.DTO.Filters;
 using BL.Facades;
 using GameWebMVC.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
@@ -22,7 +19,6 @@ namespace GameWebMVC.Controllers
 
         public CharacterFacade CharacterFacade { get; set; }
 
-
         public async Task<ActionResult> Index(int page = 1)
         {
             var characterId = Guid.Parse(User.Identity.Name);
@@ -36,7 +32,6 @@ namespace GameWebMVC.Controllers
             // Paging END
             return View(model);
         }
-
 
         public async Task<ActionResult> Details(Guid id)
         {
@@ -53,24 +48,19 @@ namespace GameWebMVC.Controllers
             return View(model);
         }
 
-
-
         public async Task<ActionResult> Buy(ItemDto item)
         {
             var characterId = Guid.Parse(User.Identity.Name);
-                
+
             var res = await CharacterFacade.BuyItemAsync(characterId, item);
             return RedirectToAction("Index");
-
-  
         }
-
 
         public async Task<ActionResult> Sell(Guid id)
         {
             var characterId = Guid.Parse(User.Identity.Name);
             var item = await CharacterFacade.GetItem(id);
-            if(item.OwnerId == characterId)
+            if (item.OwnerId == characterId)
             {
                 await CharacterFacade.SellItem(id);
             }
@@ -80,10 +70,7 @@ namespace GameWebMVC.Controllers
             }
 
             return RedirectToAction("Index");
-
         }
-
-
 
         public async Task<ActionResult> Equip(Guid id)
         {
@@ -92,13 +79,11 @@ namespace GameWebMVC.Controllers
             if (succ)
             {
                 return RedirectToAction("Index");
-
-            } else
+            }
+            else
             {
                 return View("Error");
             }
-            
         }
-
     }
 }

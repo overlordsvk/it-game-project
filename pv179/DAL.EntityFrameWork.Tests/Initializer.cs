@@ -1,14 +1,8 @@
 ﻿using Castle.Windsor;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.Windsor.Installer;
 using DAL.EntityFrameWork.Tests.Config;
 using Game.DAL.Entity;
 using NUnit.Framework;
+using System.Data.Entity;
 
 namespace DAL.EntityFrameWork.Tests
 {

@@ -2,8 +2,6 @@
 using BL.Facades;
 using GameWebMVC.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,18 +13,23 @@ namespace GameWebMVC.Controllers
     public class AccountController : Controller
     {
         #region Facades
+
         public AccountFacade AccountFacade { get; set; }
-        #endregion
+
+        #endregion Facades
 
         #region Index
+
         public async Task<ActionResult> Index()
         {
             var account = await AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name));
             return View(account);
         }
-        #endregion
+
+        #endregion Index
 
         #region Registration
+
         public ActionResult Register()
         {
             return View();
@@ -60,11 +63,12 @@ namespace GameWebMVC.Controllers
             {
                 return View();
             }
-
         }
-        #endregion
+
+        #endregion Registration
 
         #region Login
+
         public ActionResult Login()
         {
             if (!string.IsNullOrEmpty(User.Identity.Name))
@@ -77,10 +81,9 @@ namespace GameWebMVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(AccountLoginModel login, string returnUrl)
         {
-            
             (bool success, Guid id, string roles) = await AccountFacade.Login(login.usernameOrEmail, login.password);
             var acc = await AccountFacade.GetAccountAsync(id);
-            
+
             if (success)
             {
                 var authTicket = new FormsAuthenticationTicket(1, id.ToString(), DateTime.Now,
@@ -105,17 +108,21 @@ namespace GameWebMVC.Controllers
             ModelState.AddModelError("", "Wrong username or password!");
             return View();
         }
-        #endregion
+
+        #endregion Login
 
         #region Logout
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        #endregion
+
+        #endregion Logout
 
         #region Edit
+
         public async Task<ActionResult> Edit()
         {
             var account = await AccountFacade.GetAccountAsync(Guid.Parse(User.Identity.Name));
@@ -144,11 +151,12 @@ namespace GameWebMVC.Controllers
                 }
             }
             return View();
-            
         }
-        #endregion
+
+        #endregion Edit
 
         #region Actions
+
         public ActionResult GetUserName()
         {
             var syncContext = SynchronizationContext.Current;
@@ -168,6 +176,7 @@ namespace GameWebMVC.Controllers
             }
             return Content(account?.Username);
         }
+
         #endregion Actions
     }
 }

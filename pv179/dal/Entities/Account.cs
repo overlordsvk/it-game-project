@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Game.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities
 {
@@ -30,6 +30,5 @@ namespace Game.DAL.Entity.Entities
 
         [NotMapped]
         public string TableName { get; } = nameof(GameDbContext.Accounts);
-
     }
 }

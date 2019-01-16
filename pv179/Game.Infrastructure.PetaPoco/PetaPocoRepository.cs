@@ -1,12 +1,11 @@
-﻿using System;
+﻿using AsyncPoco;
+using Game.Infrastructure.PetaPoco.UnitOfWork;
+using Game.Infrastructure.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using AsyncPoco;
-using Game.Infrastructure.PetaPoco.UnitOfWork;
-using Game.Infrastructure.UnitOfWork;
 
 namespace Game.Infrastructure.PetaPoco
 {
@@ -48,7 +47,6 @@ namespace Game.Infrastructure.PetaPoco
             return res;
         }
 
-
         public Guid Create(TEntity entity)
         {
             entity.Id = Guid.NewGuid();
@@ -68,8 +66,6 @@ namespace Game.Infrastructure.PetaPoco
             var uow = provider.GetUnitOfWorkInstance() as PetaPocoUnitOfWork;
             uow.RegisterEntityToRemove<TEntity>(id);
         }
-
-
 
         private async Task SideLoadEntityAsync(TEntity entity, PropertyInfo propertyToLoad)
         {

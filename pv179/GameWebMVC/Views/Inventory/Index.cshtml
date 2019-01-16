@@ -5,7 +5,7 @@
 <h2>Inventár</h2>
 <div style="overflow:hidden; ">
     <input type="button" value="Obchod" class="btn btn-success float-left ml-1" onclick="location.href='@Url.Action("Shop")'" />
-    <dl class="dl-horizontal float-right" >
+    <dl class="dl-horizontal float-right">
 
         <dt>
             @Html.DisplayNameFor(model => model.Money)
@@ -15,8 +15,6 @@
             @Html.DisplayFor(model => model.Money)
         </dd>
     </dl>
-
-
 </div>
 
 <table class="table">
@@ -65,7 +63,7 @@
             </td>
             @if (item.Equipped)
             {
-            
+
                 <td>Áno</td>
             }
             else
@@ -87,9 +85,7 @@
             </td>
         </tr>
     }
-
 </table>
-
 
 @{string disabled = "disabled";
     string active = "active";

@@ -1,9 +1,7 @@
 ﻿using BL.DTO;
 using BL.DTO.Filters;
 using BL.Facades;
-using GameWebMVC.Areas.Admin.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 

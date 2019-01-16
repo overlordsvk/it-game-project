@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Game.DAL.Entity.Entities;
+﻿using AutoMapper;
 using BL.DTO;
-using BL.DTO.Filters;
-using BL.Services.Common;
 using BL.DTO.Common;
+using BL.DTO.Filters;
 using BL.QueryObject;
+using BL.Services.Common;
+using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.GroupPosts
 {
@@ -19,7 +16,6 @@ namespace BL.Services.GroupPosts
     {
         public GroupPostService(IMapper mapper, IRepository<GroupPost> repository, QueryObjectBase<GroupPostDto, GroupPost, GroupPostFilterDto, IQuery<GroupPost>> query) : base(mapper, repository, query)
         {
-
         }
 
         protected override async Task<GroupPost> GetWithIncludesAsync(Guid entityId)
@@ -31,7 +27,5 @@ namespace BL.Services.GroupPosts
         {
             return await Query.ExecuteQuery(filter);
         }
-
-
     }
 }

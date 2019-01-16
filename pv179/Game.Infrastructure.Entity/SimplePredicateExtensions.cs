@@ -24,7 +24,7 @@ namespace Game.Infrastructure.Entity
         public static Expression GetExpression(this SimplePredicate simplePredicate, ParameterExpression parameterExpression)
         {
             var memberExpression = Expression.PropertyOrField(parameterExpression, simplePredicate.TargetPropertyName);
-            // Ensure compared value has the same type as the accessed member 
+            // Ensure compared value has the same type as the accessed member
             var memberType = GetMemberType(simplePredicate, memberExpression);
             var constantExpression = Expression.Constant(simplePredicate.ComparedValue, memberType);
             return TransformToExpression(simplePredicate.ValueComparingOperator, memberExpression, constantExpression);

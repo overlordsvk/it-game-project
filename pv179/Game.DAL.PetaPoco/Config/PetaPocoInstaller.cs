@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AsyncPoco;
+﻿using AsyncPoco;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -12,6 +7,7 @@ using Game.Infrastructure.PetaPoco;
 using Game.Infrastructure.PetaPoco.UnitOfWork;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.UnitOfWork;
+using System;
 
 namespace Game.DAL.PetaPoco.Config
 {

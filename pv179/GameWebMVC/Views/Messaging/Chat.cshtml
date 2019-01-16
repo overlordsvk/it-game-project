@@ -9,8 +9,7 @@
     <h5 style="float:right">@(Model.SenderId == Guid.Parse(User.Identity.Name) ? Model.Receiver?.Name : Model.Sender?.Name)</h5>
 </div>
 
-<div style="height:60vh; overflow:auto" class="chatwindow nicescroll border border-dark p-2 float-left mw-100 w-100"
-     >
+<div style="height:60vh; overflow:auto" class="chatwindow nicescroll border border-dark p-2 float-left mw-100 w-100">
     <table class="table">
 
         @foreach (var item in Model.Messages)
@@ -23,12 +22,10 @@
                 </td>
             </tr>
         }
-
     </table>
 </div>
 
-
-<div class="mt-2 mb-2 float-left w-100" style="clear:both" >
+<div class="mt-2 mb-2 float-left w-100" style="clear:both">
 
     @if (Model.SenderId.HasValue && Model.ReceiverId.HasValue){
         Html.RenderPartial("Reply", new BL.DTO.MessageDto
@@ -49,6 +46,4 @@
     var d = $('.chatwindow');
     d.scrollTop(d.prop("scrollHeight"));
     $(".nicescroll").niceScroll();
-
-
 </script>

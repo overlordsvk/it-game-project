@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
 using BL.DTO;
-using Game.DAL.Entity.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BL.DTO.Common;
 using BL.DTO.Filters;
 using Game.DAL.Entities;
+using Game.DAL.Entity.Entities;
 using Game.Infrastructure.Query;
 
 namespace BL.Config

@@ -1,13 +1,8 @@
 ﻿using Game.DAL.Entities;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Enums;
-using Game.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegracneTesty.Config
 {
@@ -33,8 +28,6 @@ namespace IntegracneTesty.Config
         public static readonly Guid _guid18 = Guid.Parse("5fd2c0ea-f31d-482b-a1b7-4650495ad346");
         public static readonly Guid _guid19 = Guid.Parse("abb4f59a-8fed-4060-ac96-be827992054c");
         public static readonly Guid _guid20 = Guid.Parse("46f7bc5a-c043-4722-9438-6e6e7640fc71");
-
-
 
         public static readonly Item itemSekera = new Item
         {
@@ -87,7 +80,6 @@ namespace IntegracneTesty.Config
             }
         };
 
-
         public static readonly Character characterBela = new Character
         {
             Name = "BelaKing",
@@ -126,8 +118,6 @@ namespace IntegracneTesty.Config
             }
         };
 
-
-
         public static readonly Account accountPeter = new Account
         {
             Id = guidAccountPeter,
@@ -138,8 +128,6 @@ namespace IntegracneTesty.Config
             Roles = "Admin",
             Character = characterBela,
         };
-
-            
 
         public static readonly Account accountIvan = new Account
         {
@@ -174,8 +162,6 @@ namespace IntegracneTesty.Config
                 characterWalker
             }
         };
-
-
 
         public static readonly Fight fightSlayerWalker = new Fight
         {
@@ -212,7 +198,6 @@ namespace IntegracneTesty.Config
             Chat = chatSlayerWalker,
             Text = "This is war",
             Timestamp = DateTime.Now,
-
         };
 
         public static readonly Message messageWalkerSlayer = new Message
@@ -222,8 +207,6 @@ namespace IntegracneTesty.Config
             Chat = chatSlayerWalker,
             Text = "ok",
             Timestamp = DateTime.Now,
-
         };
-
     }
 }

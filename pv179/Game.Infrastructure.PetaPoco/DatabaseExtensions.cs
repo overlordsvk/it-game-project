@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AsyncPoco;
+using System;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using AsyncPoco;
 
 namespace Game.Infrastructure.PetaPoco
 {

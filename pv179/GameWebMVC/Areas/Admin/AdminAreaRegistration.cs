@@ -18,7 +18,7 @@ namespace GameWebMVC.Areas.Admin
                 name: "Admin_default",
                 url: "Admin/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new [] { "GameWebMVC.Areas.Admin.Controllers" }
+                namespaces: new[] { "GameWebMVC.Areas.Admin.Controllers" }
             );
         }
     }

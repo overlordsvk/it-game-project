@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO.Common;
+﻿using BL.DTO.Common;
 using Game.DAL.Enums;
+using System;
 
 namespace BL.DTO.Filters
 {

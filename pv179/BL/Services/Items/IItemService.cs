@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Items
 {
@@ -71,6 +68,5 @@ namespace BL.Services.Items
         /// <param name="itemId">Item id</param>
         /// <returns>True if item was equipped</returns>
         Task<bool> EquipItem(Guid characterId, Guid itemId);
-
     }
 }

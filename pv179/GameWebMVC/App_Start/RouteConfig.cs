@@ -13,7 +13,7 @@ namespace GameWebMVC
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new [] { "GameWebMVC.Controllers"}
+                namespaces: new[] { "GameWebMVC.Controllers" }
             );
         }
     }

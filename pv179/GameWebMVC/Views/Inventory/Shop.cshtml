@@ -4,7 +4,7 @@
 }
 <h2>Obchod</h2>
 <div style="overflow:hidden; ">
-    <dl class="dl-horizontal float-right" >
+    <dl class="dl-horizontal float-right">
 
         <dt>
             @Html.DisplayNameFor(model => model.Money)
@@ -14,8 +14,6 @@
             @Html.DisplayFor(model => model.Money)
         </dd>
     </dl>
-
-
 </div>
 
 <table class="table">
@@ -56,7 +54,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
-            
+
             @if (item.ItemType == Game.DAL.Enums.ItemType.Armor)
             {
                 <td>Zbroj</td>
@@ -78,9 +76,7 @@
                 {
                     <input type="button" value="Kúpiť" class="btn btn-success " style="margin: 10px 0; float: left;" onclick="location.href='@Url.Action("Buy", item)'" />
                 }
-
             </td>
         </tr>
     }
-
 </table>

@@ -2,7 +2,6 @@
 using Game.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Game.Infrastructure.PetaPoco.UnitOfWork
@@ -57,7 +56,9 @@ namespace Game.Infrastructure.PetaPoco.UnitOfWork
         }
 
         internal void RegisterEntityToInsert(object entity) => entitiesToInsert.Add(entity);
+
         internal void RegisterEntityToUpdate(object entity) => entitiesToUpdate.Add(entity);
+
         internal void RegisterEntityToRemove<TEntity>(Guid entityId) where TEntity : IEntity
            => entititiesToRemove.Add(entityId, typeof(TEntity));
 

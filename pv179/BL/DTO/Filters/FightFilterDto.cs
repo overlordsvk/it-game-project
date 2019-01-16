@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO.Common;
+﻿using BL.DTO.Common;
+using System;
 
 namespace BL.DTO.Filters
 {
@@ -16,6 +12,5 @@ namespace BL.DTO.Filters
         public Guid? FighterId { get; set; }
 
         public bool? AttackSuccess { get; set; }
-
     }
 }

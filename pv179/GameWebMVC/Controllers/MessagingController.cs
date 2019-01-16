@@ -1,13 +1,10 @@
 ﻿using BL.DTO;
 using BL.DTO.Filters;
 using BL.Facades;
-using BL.Services.Chats;
 using GameWebMVC.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
@@ -15,17 +12,14 @@ namespace GameWebMVC.Controllers
     [Authorize(Roles = "HasCharacter")]
     public class MessagingController : Controller
     {
-
         #region Constants
 
         public const int PageSize = 10;
 
         #endregion Constants
 
-
         public MessagingFacade MessagingFacade { get; set; }
         public CharacterFacade CharacterFacade { get; set; }
-
 
         public async Task<ActionResult> MailBox(int page = 1)
         {
@@ -43,7 +37,6 @@ namespace GameWebMVC.Controllers
 
         public ActionResult NewChat()
         {
-            
             return View();
         }
 
@@ -65,23 +58,21 @@ namespace GameWebMVC.Controllers
                     SenderId = id,
                     ReceiverId = receiver.Id,
                     Subject = chat.Subject,
-
                 };
                 var message = await MessagingFacade.CreateChat(chatDto);
                 if (message != Guid.Empty)
                 {
                     return RedirectToAction("Mailbox");
-                } 
+                }
             }
             return View();
         }
-
 
         public async Task<ActionResult> Chat(Guid id)
         {
             var chat = await MessagingFacade.GetChatById(id);
             var characterId = Guid.Parse(User.Identity.Name);
-            if(characterId != chat.ReceiverId && characterId != chat.SenderId)
+            if (characterId != chat.ReceiverId && characterId != chat.SenderId)
             {
                 return RedirectToAction("NotAuthorized", "Error");
             }
@@ -91,9 +82,7 @@ namespace GameWebMVC.Controllers
             }
             chat.Messages = chat.Messages.OrderBy(m => m.Timestamp).ToList();
             return View(chat);
-
         }
-
 
         public async Task<ActionResult> Reply(Guid chatId)
         {
@@ -119,7 +108,7 @@ namespace GameWebMVC.Controllers
             try
             {
                 await MessagingFacade.SendMessage(message);
-                return RedirectToAction("Chat", new {id = message.ChatId });
+                return RedirectToAction("Chat", new { id = message.ChatId });
             }
             catch
             {

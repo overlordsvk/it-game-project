@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Game.DAL.Entity.Entities;
+﻿using Game.DAL.Entity.Entities;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
 using Game.Infrastructure.UnitOfWork;
+
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DAL.EntityFrameWork.Tests
 {
@@ -24,7 +25,6 @@ namespace DAL.EntityFrameWork.Tests
             PasswordHash = "IvanJeBoh",
             PasswordSalt = "IvanJeBoh",
             Roles = "",
-
         };
 
         [Test]
@@ -33,7 +33,7 @@ namespace DAL.EntityFrameWork.Tests
             QueryResult<Account> acctualResult;
             var accountQuery = Initializer.Container.Resolve<IQuery<Account>>();
 
-            var expecterResult = new QueryResult<Account>(new List<Account>{accountIvan}, 1);
+            var expecterResult = new QueryResult<Account>(new List<Account> { accountIvan }, 1);
             var predicate = new SimplePredicate(nameof(Account.Email), ValueComparingOperator.Equal, accountIvan.Email);
 
             using (unitOfWorkProvider.Create())
@@ -43,7 +43,6 @@ namespace DAL.EntityFrameWork.Tests
 
             Assert.AreEqual(expecterResult, acctualResult);
         }
-
 
         [Test]
         public async Task QueryWithSimplePredicateWithStringSearch()
@@ -74,8 +73,8 @@ namespace DAL.EntityFrameWork.Tests
                     new SimplePredicate(nameof(Account.Email),
                         ValueComparingOperator.StringContains,
                         ".com"),
-                    new SimplePredicate(nameof(Account.Email), 
-                        ValueComparingOperator.StringContains, 
+                    new SimplePredicate(nameof(Account.Email),
+                        ValueComparingOperator.StringContains,
                         "@ivan"),
                     });
 

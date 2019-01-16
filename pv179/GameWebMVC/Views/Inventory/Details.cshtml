@@ -48,14 +48,13 @@
         </dd>
 
         <dt>
-            
+
             @Html.DisplayNameFor(model => model.Equipped)
         </dt>
 
-
             @if (Model.Equipped)
             {
-            
+
                 <dd>Áno</dd>
             }
             else
@@ -74,8 +73,6 @@
         {
             <dd>Zbraň</dd>
         }
-
-
     </dl>
 </div>
 <div>
@@ -83,4 +80,3 @@
     <input type="button" value="Predať" class="btn btn-danger" onclick="location.href='@Url.Action("Sell", new { id = Model.Id })'" />
     <input type="button" value="Naspäť" class="btn btn-primary" onclick="location.href='@Url.Action("Index")'" />
 </div>
-

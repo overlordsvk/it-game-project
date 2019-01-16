@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Characters
 {
@@ -64,7 +61,5 @@ namespace BL.Services.Characters
         /// <param name="name">Character name</param>
         /// <returns>CharacterDto if character was found</returns>
         Task<CharacterDto> GetCharacterAccordingToNameAsync(string name);
-
-
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Game.Infrastructure;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Game.Infrastructure;
 
 namespace Game.DAL.Entity.Entities
 {

@@ -4,9 +4,7 @@ using BL.Facades;
 using Game.DAL.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -28,11 +26,11 @@ namespace WebAPI.Controllers
         /// <param name="pageNumber">Page number</param>
         /// <returns>Collection of Items, satisfying given query parameters.</returns>
         [HttpGet]
-        public async Task<IEnumerable<ItemDto>> Get(string sort = null, 
-                                                        bool asc = true, 
-                                                        string characterId = null, 
-                                                        bool? isEquipped = null, 
-                                                        int pageSize = 50, 
+        public async Task<IEnumerable<ItemDto>> Get(string sort = null,
+                                                        bool asc = true,
+                                                        string characterId = null,
+                                                        bool? isEquipped = null,
+                                                        int pageSize = 50,
                                                         int pageNumber = 1)
         {
             var filter = new ItemFilterDto
@@ -52,7 +50,6 @@ namespace WebAPI.Controllers
             return characters;
         }
 
-
         /// <summary>
         /// Example URL call: http://localhost:62677/api/Item/?characterId=b49c2b2f-99b0-4f21-8655-70b0d2c7c5d2&attack=400&defense=121&price=6060&type=0&weight=100&randomItem=false&name=Special Rare Weapon
         /// Returns item created
@@ -61,7 +58,7 @@ namespace WebAPI.Controllers
         /// <params name="itemDto">Params of item dto given or default</params>
         /// <returns>ItemDto</returns>
         [HttpPost]
-        public async Task<ItemDto> Put(string characterId = null, bool randomItem = false , int attack = 10, int defense = 10, 
+        public async Task<ItemDto> Put(string characterId = null, bool randomItem = false, int attack = 10, int defense = 10,
                                         int type = 0, string name = "New Item", int price = 20, int weight = 1)
         {
             if (characterId == null)
@@ -72,11 +69,12 @@ namespace WebAPI.Controllers
             ItemDto item = null;
             if (!randomItem)
             {
-                type = Math.Abs(type)  % 2;
+                type = Math.Abs(type) % 2;
                 var itemType = ItemType.Weapon;
                 if (type > 0)
-                itemType = ItemType.Armor;
-                item = new ItemDto{ 
+                    itemType = ItemType.Armor;
+                item = new ItemDto
+                {
                     Attack = attack,
                     Defense = defense,
                     ItemType = itemType,

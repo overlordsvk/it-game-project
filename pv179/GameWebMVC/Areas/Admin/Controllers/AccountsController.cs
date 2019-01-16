@@ -1,10 +1,8 @@
-﻿using BL.DTO.Filters;
+﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GameWebMVC.Areas.Admin.Controllers
@@ -32,7 +30,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         public async Task<ActionResult> List(int page = 1)
         {
-            var filter = new AccountFilterDto { PageSize = PageSize, RequestedPageNumber = page};
+            var filter = new AccountFilterDto { PageSize = PageSize, RequestedPageNumber = page };
             var result = await AccountFacade.ListAccountsAsync(filter);
 
             // Paging
@@ -41,6 +39,42 @@ namespace GameWebMVC.Areas.Admin.Controllers
             // Paging END
 
             return View("List", result.Items);
+        }
+
+        public async Task<ActionResult> Details(Guid id)
+        {
+            var account = await AccountFacade.GetAccountAsync(id);
+            return View(account);
+        }
+
+        public async Task<ActionResult> Edit(Guid id)
+        {
+            var account = await AccountFacade.GetAccountAsync(id);
+            var accountCreateDto = new AccountCreateDto
+            {
+                Username = account.Username,
+                Email = account.Email,
+                Password = ""
+            };
+            return View(accountCreateDto);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AccountCreateDto account)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await AccountFacade.EditAccountAsync(Guid.Parse(User.Identity.Name), account);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+            return View();
         }
     }
 }

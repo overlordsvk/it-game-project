@@ -2,9 +2,7 @@
 using Game.DAL.Entity;
 using IntegracneTesty.Tests.Config;
 using NUnit.Framework;
-using System;
 using System.Data.Entity;
-using System.Linq;
 
 namespace IntegracneTesty.Tests
 {

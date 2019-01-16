@@ -7,7 +7,6 @@ using BL.Services.Chats;
 using BL.Services.Messages;
 using Game.Infrastructure.UnitOfWork;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Facades
@@ -18,14 +17,12 @@ namespace BL.Facades
         private readonly IChatService _chatService;
         private readonly IMessageService _messageService;
 
-
         public MessagingFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IChatService chatService, IMessageService messageService) : base(unitOfWorkProvider)
         {
             _characterService = characterService;
             _chatService = chatService;
             _messageService = messageService;
         }
-
 
         public async Task<Guid> CreateChat(ChatDto chat)
         {
@@ -75,7 +72,7 @@ namespace BL.Facades
         {
             using (UnitOfWorkProvider.Create())
             {
-            return await _chatService.GetAsync(id);
+                return await _chatService.GetAsync(id);
             }
         }
 
@@ -86,9 +83,5 @@ namespace BL.Facades
                 return await _chatService.ListChatsAsync(filter);
             }
         }
-
     }
-
-
-
 }

@@ -28,7 +28,7 @@ namespace BL.Facades
         {
             using (var uow = UnitOfWorkProvider.Create())
             {
-                if (isAdmin) 
+                if (isAdmin)
                 {
                     var emptyGroup = _groupService.Create(group);
                     await uow.Commit();
@@ -139,7 +139,7 @@ namespace BL.Facades
                 character.IsGroupAdmin = false;
                 await _characterService.Update(character);
                 await _groupService.Update(group);
-                if (group.Members.Count <= 1) 
+                if (group.Members.Count <= 1)
                 {
                     _groupService.Delete(groupId);
                 }

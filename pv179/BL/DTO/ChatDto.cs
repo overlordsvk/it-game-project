@@ -1,9 +1,9 @@
-﻿using System;
+﻿using BL.DTO.Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using BL.DTO.Common;
-using Newtonsoft.Json;
 
 namespace BL.DTO
 {
@@ -11,7 +11,7 @@ namespace BL.DTO
     {
         [Required]
         [MaxLength(256, ErrorMessage = "Predmet nesmie mať viac ako 256 znakov")]
-        [MinLength(4, ErrorMessage ="Predmet nesmie mať menej ako 4 znaky")]
+        [MinLength(4, ErrorMessage = "Predmet nesmie mať menej ako 4 znaky")]
         [DisplayName("Predmet")]
         public string Subject { get; set; }
 
@@ -23,10 +23,12 @@ namespace BL.DTO
 
         [DisplayName("Odosielateľ")]
         public Guid? SenderId { get; set; }
-        public CharacterDto Sender{ get; set; }
+
+        public CharacterDto Sender { get; set; }
 
         [DisplayName("Prijímateľ")]
         public Guid? ReceiverId { get; set; }
+
         public CharacterDto Receiver { get; set; }
     }
 }

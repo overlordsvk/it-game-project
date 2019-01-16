@@ -1,13 +1,9 @@
 ﻿using BL.DTO.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Game.DAL.Enums;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BL.DTO
 {
@@ -37,6 +33,7 @@ namespace BL.DTO
         public bool Equipped { get; set; }
 
         public Guid? OwnerId { get; set; }
+
         [JsonIgnore]
         public CharacterDto Owner { get; set; }
 

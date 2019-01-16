@@ -53,7 +53,7 @@ namespace BL.Services.Accounts
                 var hash = CreateHash(password);
                 account.PasswordHash = hash.Item1;
                 account.PasswordSalt = hash.Item2;
-            } 
+            }
             await Update(account);
         }
 
@@ -65,10 +65,9 @@ namespace BL.Services.Accounts
             if (usernameAccount != null)
             {
                 throw new ArgumentException("", "Username");
-
             }
 
-            if (emailAccount != null )
+            if (emailAccount != null)
             {
                 throw new ArgumentException("", "Email");
             }

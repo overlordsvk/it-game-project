@@ -4,19 +4,14 @@ using BL.Facades;
 using GameWebMVC.Models;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GameWebMVC.Controllers
 {
-
     [Authorize(Roles = "HasCharacter")]
     public class FightController : Controller
     {
-
         #region Constants
 
         public const int PageSize = 10;
@@ -39,10 +34,9 @@ namespace GameWebMVC.Controllers
             }
         }
 
-        
         public async Task<ActionResult> Index(Guid id)
         {
-            if(id == null)
+            if (id == null)
             {
                 RedirectToAction("List");
             }
@@ -64,7 +58,7 @@ namespace GameWebMVC.Controllers
             {
                 var fightResult = await CharacterFacade.Attack(Guid.Parse(User.Identity.Name), id);
                 Session["steps"] = fightResult.Item2;
-                return RedirectToAction("Index", new { id = fightResult.Item1 , steps = fightResult.Item2 });
+                return RedirectToAction("Index", new { id = fightResult.Item1, steps = fightResult.Item2 });
             }
             catch
             {
@@ -82,7 +76,6 @@ namespace GameWebMVC.Controllers
             ViewBag.PageCount = (int)Math.Ceiling((double)fights.TotalItemsCount / (double)PageSize);
             // Paging END
             return View(fights.Items);
-
         }
     }
 }

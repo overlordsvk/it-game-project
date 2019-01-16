@@ -12,7 +12,7 @@ namespace WebAPI.Models
     public class CharactersController : ApiController
     {
         public CharacterFacade CharacterFacade { get; set; }
-        
+
         /// <summary>
         /// Example URL call: http://localhost:62677/api/Characters/List?scoreMin=5&scoreMax=15&asc=true&sort=name&pageSize=10&pageNumber=1&groupId=e9c469c0-60e0-437e-ad8f-c9a742e551b0
         /// Returns KingSlayer (according to initial DB)
@@ -27,13 +27,13 @@ namespace WebAPI.Models
         /// <param name="pageNumber">Page number</param>
         /// <returns>Collection of products, satisfying given query parameters.</returns>
         [HttpGet]
-        public async Task<IEnumerable<CharacterDto>> List(string sort = null, 
-                                                        bool asc = true, 
-                                                        string groupId = null, 
-                                                        string name = null, 
-                                                        int scoreMin = int.MinValue, 
-                                                        int scoreMax = int.MaxValue, 
-                                                        int pageSize = 50, 
+        public async Task<IEnumerable<CharacterDto>> List(string sort = null,
+                                                        bool asc = true,
+                                                        string groupId = null,
+                                                        string name = null,
+                                                        int scoreMin = int.MinValue,
+                                                        int scoreMax = int.MaxValue,
+                                                        int pageSize = 50,
                                                         int pageNumber = 1)
         {
             var filter = new CharacterFilterDto
@@ -71,6 +71,5 @@ namespace WebAPI.Models
             await CharacterFacade.EditCharacter(character);
             return $"New name of character with id {character.Id} is {character.Name}";
         }
-
     }
 }

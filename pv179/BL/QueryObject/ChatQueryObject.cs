@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Filters;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
+using System.Collections.Generic;
 
 namespace BL.QueryObject
 {
@@ -29,7 +25,6 @@ namespace BL.QueryObject
             return !filter.CharacterId.HasValue
                 ? query
                 : query.Where(predicate);
-
         }
     }
 }

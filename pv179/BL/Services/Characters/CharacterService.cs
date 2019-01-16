@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
@@ -13,6 +7,9 @@ using BL.Services.Common;
 using Game.DAL.Entity.Entities;
 using Game.Infrastructure;
 using Game.Infrastructure.Query;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BL.Services.Characters
 {
@@ -34,7 +31,7 @@ namespace BL.Services.Characters
 
         public async Task<CharacterDto> GetCharacterAccordingToNameAsync(string name)
         {
-            var queryResult = await Query.ExecuteQuery(new CharacterFilterDto { Name = name});
+            var queryResult = await Query.ExecuteQuery(new CharacterFilterDto { Name = name });
             return queryResult.Items.SingleOrDefault();
         }
 

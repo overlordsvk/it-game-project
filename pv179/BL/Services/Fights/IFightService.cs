@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Fights
 {
@@ -49,6 +46,5 @@ namespace BL.Services.Fights
         /// </summary>
         /// <returns>all available dtos (for given type)</returns>
         Task<QueryResultDto<FightDto, FightFilterDto>> ListAllAsync();
-
     }
 }

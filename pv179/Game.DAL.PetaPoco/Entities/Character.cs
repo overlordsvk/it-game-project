@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AsyncPoco;
+﻿using AsyncPoco;
 using Game.Infrastructure;
+using System;
 
 namespace Game.DAL.PetaPoco.Entities
 {

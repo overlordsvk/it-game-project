@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Game.Infrastructure.Query.Predicates;
+﻿using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
+using System;
+using System.Collections.Generic;
 
 namespace Game.Infrastructure.PetaPoco
 {
@@ -21,7 +18,6 @@ namespace Game.Infrastructure.PetaPoco
                 {ValueComparingOperator.LessThanOrEqual, rightOperand => $" <= {rightOperand}" },
                 {ValueComparingOperator.StringContains, rightOperand => $" LIKE '%{rightOperand}%'"}
             };
-
 
         public static string GetWhereCondition(this SimplePredicate simplePredicate)
         {

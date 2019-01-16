@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AsyncPoco;
+﻿using AsyncPoco;
 using Game.Infrastructure.PetaPoco.UnitOfWork;
 using Game.Infrastructure.Query;
 using Game.Infrastructure.Query.Predicates;
 using Game.Infrastructure.Query.Predicates.Operators;
 using Game.Infrastructure.UnitOfWork;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Game.Infrastructure.PetaPoco
 {
     public class PetaPocoQuery<TEntity> : QueryBase<TEntity> where TEntity : class, IEntity, new()
     {
         #region SQLStatements
+
         private const string SelectFromClause = "SELECT * FROM ";
         private const string WhereClause = "WHERE ";
         private const string OrderByClause = "ORDER BY ";
@@ -25,14 +23,18 @@ namespace Game.Infrastructure.PetaPoco
         private const string And = " AND ";
         private const string OpenParenthesis = "(";
         private const string CloseParenthesis = ")";
-        #endregion       
+        #endregion SQLStatements
+
+
 
         /// <summary>
         /// Gets the <see cref="IDatabase"/>.
         /// </summary>
         protected IDatabase Database => ((PetaPocoUnitOfWork)Provider.GetUnitOfWorkInstance()).Database;
 
-        public PetaPocoQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public PetaPocoQuery(IUnitOfWorkProvider provider) : base(provider)
+        {
+        }
 
         public override async Task<QueryResult<TEntity>> ExecuteAsync()
         {
@@ -95,5 +97,4 @@ namespace Game.Infrastructure.PetaPoco
                 : BuildSimplePredicate(compositePredicate.Predicates[index]);
         }
     }
-
 }

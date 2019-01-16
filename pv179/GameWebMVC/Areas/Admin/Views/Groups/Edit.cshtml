@@ -10,7 +10,7 @@
 @using (Html.BeginForm("Edit", "Groups", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

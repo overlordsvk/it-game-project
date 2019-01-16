@@ -1,9 +1,7 @@
-﻿using BL.DTO;
-using BL.DTO.Filters;
+﻿using BL.DTO.Filters;
 using BL.Facades;
 using GameWebMVC.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -33,7 +31,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         public async Task<ActionResult> List(int page = 1)
         {
-            var filter = new GroupFilterDto { PageSize = PageSize, RequestedPageNumber = page};
+            var filter = new GroupFilterDto { PageSize = PageSize, RequestedPageNumber = page };
             var result = await GroupFacade.GetGroupsByFilterAsync(filter);
 
             // Paging
@@ -48,19 +46,6 @@ namespace GameWebMVC.Areas.Admin.Controllers
         {
             var model = await GroupFacade.GetGroupAsync(id);
             return View("Details", model);
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create(GroupDto group)
-        {
-            group.Picture = "/Img/default.jpg";
-            var newGroupId = await GroupFacade.CreateGroup(Guid.Parse(User.Identity.Name), group, true);
-            return RedirectToAction("Details", new { area = "Admin", id = newGroupId });
         }
 
         public async Task<ActionResult> Edit(Guid id)

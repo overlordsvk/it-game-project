@@ -1,10 +1,6 @@
 ﻿using AsyncPoco;
 using Game.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game.DAL.PetaPoco.Entities
 {
@@ -15,12 +11,14 @@ namespace Game.DAL.PetaPoco.Entities
         public Guid Id { get; set; }
 
         public Guid ChatId { get; set; }
+
         [Ignore]
         public Chat Chat { get; set; }
 
         public string Text { get; set; }
 
         public Guid? AuthorId { get; set; }
+
         [Ignore]
         public Character Author { get; set; }
 

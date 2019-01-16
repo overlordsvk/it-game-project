@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Game.Infrastructure.UnitOfWork;
-using Game.Infrastructure.Entity.UnitOfWork;
-using Game.Infrastructure;
-using Game.Infrastructure.Query;
-using System.Data.Entity;
+using Game.DAL.Entities;
 using Game.DAL.Entity;
-using Game.Infrastructure.Entity.Repository;
-using Game.Infrastructure.Entity;
 using Game.DAL.Entity.Entities;
 using Game.DAL.Enums;
-using Game.DAL.Entities;
+using Game.Infrastructure;
+using Game.Infrastructure.Entity;
+using Game.Infrastructure.Entity.Repository;
+using Game.Infrastructure.Entity.UnitOfWork;
+using Game.Infrastructure.Query;
+using Game.Infrastructure.UnitOfWork;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Cryptography;
 
 namespace DAL.EntityFrameWork.Tests.Config
 {
     public class EntityFrameworkInstaller : IWindsorInstaller
-    { 
+    {
         private const string TestDbConnectionString = "InMemoryEntityFrameworkTestDb";
         public static readonly Guid _guid1 = Guid.Parse("629fd444-0146-4b94-a928-e62a4ab51f42");
         public static readonly Guid _guid2 = Guid.Parse("84124fe7-e59b-411d-a76e-73b81bf233c2");
@@ -42,11 +42,9 @@ namespace DAL.EntityFrameWork.Tests.Config
         public static readonly Guid _guid19 = Guid.Parse("abb4f59a-8fed-4060-ac96-be827992054c");
         public static readonly Guid _guid20 = Guid.Parse("46f7bc5a-c043-4722-9438-6e6e7640fc71");
 
-
         private const int PBKDF2IterCount = 100000;
         private const int PBKDF2SubkeyLength = 160 / 8;
         private const int saltSize = 128 / 8;
-
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
@@ -66,10 +64,9 @@ namespace DAL.EntityFrameWork.Tests.Config
             );
         }
 
-
         private DbContext InitializeDatabase()
         {
-            var context =  new GameDbContext(Effort.DbConnectionFactory.CreateTransient());
+            var context = new GameDbContext(Effort.DbConnectionFactory.CreateTransient());
             context.Accounts.RemoveRange(context.Accounts);
             context.Chat.RemoveRange(context.Chat);
             context.Characters.RemoveRange(context.Characters);
@@ -79,8 +76,6 @@ namespace DAL.EntityFrameWork.Tests.Config
             context.Messages.RemoveRange(context.Messages);
             context.Items.RemoveRange(context.Items);
             context.SaveChanges();
-
-
 
             var itemAxe = new Item
             {
@@ -184,7 +179,6 @@ namespace DAL.EntityFrameWork.Tests.Config
                 Character = Ch,
             };
 
-
             var pass2 = CreateHash("IvanJeBoh");
             var accountIvan = new Account
             {
@@ -223,7 +217,6 @@ namespace DAL.EntityFrameWork.Tests.Config
                 characterWalker
             };
 
-
             var fight1 = new Fight
             {
                 Id = _guid11,
@@ -259,7 +252,6 @@ namespace DAL.EntityFrameWork.Tests.Config
                 Chat = chat,
                 Text = "This is war",
                 Timestamp = DateTime.Now,
-
             };
 
             var message2 = new Message
@@ -269,13 +261,12 @@ namespace DAL.EntityFrameWork.Tests.Config
                 Chat = chat,
                 Text = "ok",
                 Timestamp = DateTime.Now,
-
             };
 
             context.Items.Add(itemAxe);
             context.Items.Add(itemAxe2);
             context.Items.Add(itemBow);
-            
+
             context.Characters.Add(characterSlayer);
             context.Characters.Add(characterWalker);
             context.Characters.Add(Ch);
@@ -292,8 +283,6 @@ namespace DAL.EntityFrameWork.Tests.Config
             context.Groups.Add(group1);
 
             context.GroupPosts.Add(gpost);
-
-
 
             //var itemAxe = new Item
             //{
@@ -386,7 +375,6 @@ namespace DAL.EntityFrameWork.Tests.Config
             //    itemArmor2
             //};
 
-
             //Account accountPeter = new Account
             //{
             //    Username = "Pieter",
@@ -395,8 +383,6 @@ namespace DAL.EntityFrameWork.Tests.Config
             //    PasswordSalt = "12345678",
             //    Roles = ""
             //};
-
-
 
             //var accountIvan = new Account
             //{
@@ -429,7 +415,6 @@ namespace DAL.EntityFrameWork.Tests.Config
             //    characterSlayer,
             //    characterWalker
             //};
-
 
             //var fight1 = new Fight
             //{
@@ -512,6 +497,5 @@ namespace DAL.EntityFrameWork.Tests.Config
                 return Tuple.Create(Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
             }
         }
-
     }
 }

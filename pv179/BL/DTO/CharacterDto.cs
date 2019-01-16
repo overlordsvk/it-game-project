@@ -4,17 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Remoting.Messaging;
-using System.Web.Script.Serialization;
-using System.Xml.Serialization;
 
 namespace BL.DTO
 {
     public class CharacterDto : DtoBase
     {
-        [Required(ErrorMessage ="Meno nesmie byť prázdne")]
-        [MinLength(4, ErrorMessage ="Meno musí mať aspoň 4 znaky")]
-        [MaxLength(64, ErrorMessage ="Meno nesmie mať viac ako 64 znakov")]
+        [Required(ErrorMessage = "Meno nesmie byť prázdne")]
+        [MinLength(4, ErrorMessage = "Meno musí mať aspoň 4 znaky")]
+        [MaxLength(64, ErrorMessage = "Meno nesmie mať viac ako 64 znakov")]
         [DisplayName("Meno")]
         public string Name { get; set; }
 
@@ -22,10 +19,10 @@ namespace BL.DTO
 
         [Range(0, int.MaxValue)]
         [DisplayName("Peniaze")]
-        public int Money {
+        public int Money
+        {
             get { return money; }
             set { money = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
-                
         }
 
         [Range(0, 1000)]
@@ -33,9 +30,11 @@ namespace BL.DTO
         public int Health { get; set; } = 0;
 
         private int score = 0;
+
         [Range(0, int.MaxValue)]
         [DisplayName("Skóre")]
-        public int Score {
+        public int Score
+        {
             get { return score; }
             set { score = value < 0 || value > int.MaxValue ? value < 0 ? 0 : int.MaxValue : value; }
         }
@@ -73,16 +72,19 @@ namespace BL.DTO
 
         [JsonIgnore]
         public ICollection<ChatDto> SenderChats { get; set; } = new List<ChatDto>();
+
         [JsonIgnore]
         public ICollection<ChatDto> ReceiverChats { get; set; } = new List<ChatDto>();
 
         [JsonIgnore]
         public ICollection<FightDto> AttackerFights { get; set; } = new List<FightDto>();
+
         [JsonIgnore]
         public ICollection<FightDto> DefenderFights { get; set; } = new List<FightDto>();
-        
+
         [DisplayName("Názov skupiny")]
         public Guid? GroupId { get; set; }
+
         [JsonIgnore]
         public GroupDto Group { get; set; }
 

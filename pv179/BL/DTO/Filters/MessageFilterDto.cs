@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BL.DTO.Common;
+﻿using BL.DTO.Common;
+using System;
 
 namespace BL.DTO.Filters
 {
     public class MessageFilterDto : FilterDtoBase
     {
         public Guid? ChatId { get; set; }
-
     }
 }

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.Facades;
-using BL.Services.Accounts;
-using BL.Services.Common;
-using Game.DAL.Entity.Entities;
-using Game.Infrastructure;
-using Game.Infrastructure.UnitOfWork;
 using IntegracneTesty.Config;
 using IntegracneTesty.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace IntegracneTesty
 {
@@ -18,7 +11,6 @@ namespace IntegracneTesty
     public class AccountFacadeTests
     {
         private readonly AccountFacade accountFacade = Initializer.Container.Resolve<AccountFacade>();
-
 
         [TestMethod]
         public async Task GetAccountAccordingToEmailAsync()
@@ -28,7 +20,6 @@ namespace IntegracneTesty
             Peter = await accountFacade.GetAccountAccordingToEmailAsync(Konstanty.accountPeter.Email);
 
             Assert.AreEqual(Konstanty.guidAccountPeter, Peter.Id);
-
         }
 
         [TestMethod]
@@ -39,7 +30,6 @@ namespace IntegracneTesty
             Peter = await accountFacade.GetAccountAccordingToUsernameAsync(Konstanty.accountPeter.Username);
 
             Assert.AreEqual(Konstanty.guidAccountPeter, Peter.Id);
-
         }
 
         [TestMethod]
@@ -73,10 +63,6 @@ namespace IntegracneTesty
             Assert.AreEqual(result, true);
             Assert.AreEqual(afterReg.Username, accountToRegister.Username);
             Assert.AreEqual(res, null);
-            
-
         }
-
     }
-
 }

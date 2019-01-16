@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BL.DTO;
+﻿using BL.DTO;
 using BL.DTO.Common;
 using BL.DTO.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace BL.Services.Accounts
 {
@@ -30,7 +28,7 @@ namespace BL.Services.Accounts
         /// <param name="username">username</param>
         /// <returns>AccountDto with given username</returns>
         Task<AccountDto> GetAccountAccordingToUsernameAsync(string username);
-        
+
         /// <summary>
         /// Gets DTO representing the entity according to ID
         /// </summary>
@@ -85,8 +83,5 @@ namespace BL.Services.Accounts
         /// <param name="password">Password</param>
         /// <returns>Autorization success, guid of authorized account and account roles </returns>
         Task<(bool success, Guid id, string roles)> AuthorizeAccountAsync(string usernameOrEmail, string password);
-
-
-
     }
 }

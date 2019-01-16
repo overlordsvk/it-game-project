@@ -2,9 +2,6 @@
 using Game.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game.DAL.PetaPoco.Entities
 {
@@ -15,10 +12,12 @@ namespace Game.DAL.PetaPoco.Entities
         public Guid Id { get; set; }
 
         public Guid? SenderId { get; set; }
+
         [Ignore]
         public Character Sender { get; set; }
 
         public Guid? ReceiverId { get; set; }
+
         [Ignore]
         public Character Receiver { get; set; }
 
