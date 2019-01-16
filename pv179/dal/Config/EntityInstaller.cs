@@ -14,7 +14,7 @@ namespace Game.DAL.Entity.Config
 {
     public class EntityInstaller : IWindsorInstaller
     {
-        internal const string AzureDbConnection = "Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;";
+        internal const string AzureDbConnection = "Server=tcp:pv179-mol-bal.database.windows.net,1433;Initial Catalog=PV179DB;Persist Security Info=False;User ID=xbaltaz;Password=LinearneMB102;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=120;";
         internal const string LocalDbConnection = "Data source=(localdb)\\mssqllocaldb;Database=GameDb;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         public void Install(IWindsorContainer container, IConfigurationStore store)

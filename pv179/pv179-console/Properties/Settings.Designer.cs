@@ -26,7 +26,7 @@ namespace Game.DAL.Entity.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Server=tcp:baltazarovic-molcany.database.windows.net,1433;Initial Catalog=GameDb;Persist Security Info=False;User ID=gameacc;Password=***REMOVED***;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;molcany.database.windows.net,1433;Initial Catalog=GameDb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Server=tcp:baltazarovic-molcany.database.windows.net,1433;Initial Catalog=GameDb;Persist Security Info=False;User ID=gameacc;Password=LinearneMB102;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;molcany.database.windows.net,1433;Initial Catalog=GameDb;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")]
         public string Azure {
             get {
                 return ((string)(this["Azure"]));
