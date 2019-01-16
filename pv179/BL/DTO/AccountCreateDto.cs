@@ -24,5 +24,7 @@ namespace BL.DTO
         [MaxLength(64, ErrorMessage = "Heslo nesmie mať viac ako 64 znakov")]
         [DisplayName("Heslo")]
         public string Password { get; set; }
+
+        public string Roles { get; set; }
     }
 }

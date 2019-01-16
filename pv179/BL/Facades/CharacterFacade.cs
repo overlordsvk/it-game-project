@@ -5,6 +5,7 @@ using BL.Facades.Common;
 using BL.Services.Accounts;
 using BL.Services.Characters;
 using BL.Services.Fights;
+using BL.Services.GroupPosts;
 using BL.Services.Groups;
 using BL.Services.Items;
 using Game.Infrastructure.UnitOfWork;
@@ -20,15 +21,17 @@ namespace BL.Facades
         private readonly IAccountService _accountService;
         private readonly ICharacterService _characterService;
         private readonly IGroupService _groupService;
+        private readonly IGroupPostService _groupPostService;
         private readonly IItemService _itemService;
         private readonly IFightService _fightService;
         private readonly Random _random = new Random();
 
-        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
+        public CharacterFacade(IUnitOfWorkProvider unitOfWorkProvider, ICharacterService characterService, IAccountService accountService, IGroupService groupService, IGroupPostService groupPostService, IItemService itemService, IFightService fightService) : base(unitOfWorkProvider)
         {
             _accountService = accountService;
             _characterService = characterService;
             _groupService = groupService;
+            _groupPostService = groupPostService;
             _itemService = itemService;
             _fightService = fightService;
         }
@@ -116,6 +119,14 @@ namespace BL.Facades
                 if (character == null)
                 {
                     return false;
+                }
+                var gposts = await _groupPostService.ListGroupPostsAsync(new GroupPostFilterDto());
+                foreach (var gp in gposts.Items)
+                {
+                    if (gp.CharacterId == CharacterId)
+                    {
+                        _groupPostService.Delete(gp.Id);
+                    }
                 }
                 var acc = await _accountService.GetAsync(CharacterId);
                 acc.Roles = acc.Roles.Replace(",HasCharacter", "");

@@ -85,6 +85,7 @@ namespace BL.Facades
                     var acc = await _accountService.GetAsync(id);
                     acc.Username = updatedAccount.Username;
                     acc.Email = updatedAccount.Email;
+                    acc.Roles = updatedAccount.Roles;
                     await _accountService.UpdateAccount(acc, updatedAccount.Password);
                     await uow.Commit();
                 }
