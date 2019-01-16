@@ -436,7 +436,7 @@ namespace BL.Facades
             while (attackerHealth > 0 || defenderHealth > 0)
             {
                 order++;
-                var luckAtt = _random.Next(0, 100);
+                var luckAtt = _random.Next(1, 100);
                 var damageAtt = 0;
                 var damageDef = 0;
                 if (luckAtt < (50 + attacker.Luck - attackerWeight))
@@ -447,12 +447,12 @@ namespace BL.Facades
 
                 if (defenderHealth < 0)
                 {
-                    fight.Add((order, attackerHealth, 0, damageAtt, 0, luckAtt, 0));
+                    fight.Add((order, attackerHealth, 0, damageAtt, 0, 100 - luckAtt, 0));
                     attackerWin = true;
                     break;
                 }
 
-                var luckDef = _random.Next(0, 100);
+                var luckDef = _random.Next(1, 100);
                 if (_random.Next(0, 100) < (50 + defender.Luck - defenderWeight))
                 {
                     damageDef = defDamage * (1 - (attDefense / 1500)) + _random.Next(0, defender.Luck);
@@ -461,10 +461,10 @@ namespace BL.Facades
                 if (attackerHealth < 0)
                 {
                     attackerWin = false;
-                    fight.Add((order, 0, defenderHealth, damageAtt, damageDef, luckAtt, luckDef));
+                    fight.Add((order, 0, defenderHealth, damageAtt, damageDef, 100 - luckAtt, 100 - luckDef));
                     break;
                 }
-                fight.Add((order, attackerHealth, defenderHealth, damageAtt, damageDef, luckAtt, luckDef));
+                fight.Add((order, attackerHealth, defenderHealth, damageAtt, damageDef, 100 - luckAtt, 100 - luckDef));
             }
             return (attackerWin, fight);
         }
