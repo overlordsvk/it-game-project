@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace BL.DTO
 {
     public class AccountCreateDto
     {
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Meno nesmie byť prázdne")]
         [MinLength(4, ErrorMessage = "Meno musí mať aspoň 4 znaky")]
         [MaxLength(64, ErrorMessage = "Meno nesmie mať viac ako 64 znakov")]

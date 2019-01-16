@@ -47,9 +47,9 @@ namespace GameWebMVC.Areas.Admin.Controllers
 
         #region Edit
 
-        public async Task<ActionResult> Edit()
+        public async Task<ActionResult> Edit(Guid id)
         {
-            var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            var character = await CharacterFacade.GetCharacterById(id);
             return View(character);
         }
 
@@ -61,7 +61,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
                 var character = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
                 character.Name = characterDto.Name;
                 var res = await CharacterFacade.EditCharacter(character);
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
             catch
             {

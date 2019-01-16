@@ -52,6 +52,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
             var account = await AccountFacade.GetAccountAsync(id);
             var accountCreateDto = new AccountCreateDto
             {
+                Id = id,
                 Username = account.Username,
                 Email = account.Email,
                 Password = ""
@@ -66,7 +67,7 @@ namespace GameWebMVC.Areas.Admin.Controllers
             {
                 try
                 {
-                    await AccountFacade.EditAccountAsync(Guid.Parse(User.Identity.Name), account);
+                    await AccountFacade.EditAccountAsync(account.Id, account);
                     return RedirectToAction("Index");
                 }
                 catch

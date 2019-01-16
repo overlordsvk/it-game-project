@@ -1,4 +1,5 @@
-﻿using BL.DTO.Filters;
+﻿using BL.DTO;
+using BL.DTO.Filters;
 using BL.Facades;
 using GameWebMVC.Models;
 using System;
@@ -48,6 +49,19 @@ namespace GameWebMVC.Areas.Admin.Controllers
             return View("Details", model);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(GroupDto group)
+        {
+            group.Picture = "/Img/default.jpg";
+            var newGroupId = await GroupFacade.CreateGroup(Guid.Empty, group, true);
+            return RedirectToAction("Details", new { id = newGroupId });
+        }
+
         public async Task<ActionResult> Edit(Guid id)
         {
             var group = await GroupFacade.GetGroupAsync(id);
@@ -83,6 +97,17 @@ namespace GameWebMVC.Areas.Admin.Controllers
         {
             await GroupFacade.RemoveGroup(id);
             return RedirectToAction("List", new { area = "Admin" });
+        }
+
+        public async Task<ActionResult> LeaveGroup(Guid characterId, Guid groupId)
+        {
+            var user = await CharacterFacade.GetCharacterById(Guid.Parse(User.Identity.Name));
+            if (user != null && user.GroupId.HasValue && user.GroupId == groupId)
+            {
+                if (user.IsGroupAdmin || characterId == user.Id)
+                    await GroupFacade.RemoveFromGroup(characterId, groupId);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
