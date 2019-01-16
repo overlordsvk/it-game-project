@@ -59,46 +59,6 @@
         }
     </table>
 </div>
-
-<div style="float:left;" class="pull-left">
-    <div style="width:100%;margin-left:5px;box-shadow: #eaeaea 0 0 1px 0px; padding: 5px;" class="pull-left">
-        <h3>Nástenka</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Autor
-                </th>
-                <th>
-                    Text
-                </th>
-            </tr>
-
-            @foreach (var item in Model.Wall)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-    <div style="margin-top:20px;float:left;">
-        <form action="/Group/PostToGroup" method="post">
-            <div style="padding:5px;" class="pull-left">
-                <label class="control-label" for="message">Správa:</label>
-            </div>
-            <div style="margin-left:8px;" class="pull-left">
-                <input type="text" name="message" value="" placeholder="Správa pre skupinu" />
-                <input type="submit" value="Poslať" class="btn btn-default">
-            </div>
-        </form>
-    </div>
-</div>
-
 <div style="clear:both;">
     <p>
         @Html.ActionLink("Upraviť", "Edit", new { id = Model.Id }) <span>|</span>
