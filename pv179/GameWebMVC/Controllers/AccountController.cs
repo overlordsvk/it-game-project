@@ -57,7 +57,7 @@ namespace GameWebMVC.Controllers
             }
             catch (ArgumentException e)
             {
-                ModelState.AddModelError(e.ParamName, "Účet s daným nemom alebo emailom už existuje!");
+                ModelState.AddModelError(e.ParamName, "Účet s daným menom alebo emailom už existuje!");
                 return View();
             }
             catch
