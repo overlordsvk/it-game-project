@@ -1,4 +1,4 @@
-# PV179
+# MUNI FI Projekt ASP.NET - Browser game
 Authors: Márius Molčány 456350, Peter Baltazarovič 456213
 
 <b>Browser RPG hra s 1 postavou - IT game theme</b>
